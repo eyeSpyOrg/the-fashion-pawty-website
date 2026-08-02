@@ -1,0 +1,27 @@
+# The Fashion PAWty
+> A Jacksonville dog fashion show and community celebration — "A Navigation Celebration" — hosted by the Eye Spy Foundation, benefiting the blind and low vision community and Leader Dogs for the Blind.
+
+This file helps AI assistants and answer engines understand this site.
+Spec: https://llmstxt.org
+
+## Key pages
+- [Home](https://thefashionpawty.com/): What The Fashion PAWty is and how to join
+- [Tickets](https://thefashionpawty.com/tickets/): $30 PAWty Pass — show, food, and mocktails included
+- [Sponsors](https://thefashionpawty.com/sponsors/): Six sponsorship tiers from $50 to $500
+- [Beneficiaries](https://thefashionpawty.com/beneficiaries/): Eye Spy Foundation and Leader Dogs for the Blind
+- [Schedule](https://thefashionpawty.com/schedule/): Run of show, 4–7 PM
+- [Venue](https://thefashionpawty.com/venue/): Happy Brew — address, parking, accessibility
+- [Merch](https://thefashionpawty.com/merch/): Shop at shop.thefashionpawty.com
+- [FAQ](https://thefashionpawty.com/faq/): Common questions, answered directly
+- [Accessibility Statement](https://thefashionpawty.com/accessibility/): WCAG 2.2 AA conformance details
+
+## Facts
+- Event: The Fashion PAWty — "A Navigation Celebration"
+- Presented by: Eye Spy Foundation (nonprofit)
+- Also benefiting: Leader Dogs for the Blind (Eye Spy is sponsoring one Leader Dogs puppy)
+- Location: Happy Brew, 3200 Hendricks Ave, Jacksonville, FL 32207
+- Date/time: Saturday, September 26, 2026, 4:00–7:00 PM ET
+- Tickets: $30 (entry + food + mocktails)
+- Fundraising goal: $25,000 for the blind and low vision community
+- Contact: team@eyespy.org, (844) 222-8848
+- Merch: shop.thefashionpawty.com
