@@ -1,0 +1,6 @@
+# Robots policy — allow all crawlers including AI/answer engines (AEO).
+# If you need to block AI training crawlers, do it deliberately per-bot.
+User-agent: *
+Allow: /
+
+Sitemap: https://thefashionpawty.com/sitemap-index.xml
