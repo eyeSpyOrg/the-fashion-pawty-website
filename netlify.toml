@@ -1,0 +1,53 @@
+# Netlify configuration — The Fashion PAWty
+# Astro static build. Netlify auto-detects most of this, but pinning it
+# makes builds reproducible and lets us set security headers.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Deploy previews for every PR (accessibility review before merge)
+[context.deploy-preview]
+  command = "npm run build"
+
+# ── Security headers ──────────────────────────────────────────
+# Closes the header gap flagged in INTEGRATIONS.md.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# Long-cache immutable build assets
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# ── Redirects ─────────────────────────────────────────────────
+# The singular /sponsor is a natural thing to type or print on a flyer.
+# Point it at the canonical /sponsors/ page rather than duplicating content.
+[[redirects]]
+  from = "/sponsor"
+  to = "/sponsors/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sponsor/"
+  to = "/sponsors/"
+  status = 301
+  force = true
+
+# Astro emits /404.html — Netlify serves it automatically for 404s.

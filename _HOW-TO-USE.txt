@@ -1,0 +1,18 @@
+HOW TO USE THIS FOLDER
+======================
+Everything is already named correctly. You do NOT need to rename anything.
+
+From Terminal, run ONE command (replace the path with your repo path):
+
+  cp -R ~/Downloads/DROP-IN/. ~/path/to/thefashionpawty/
+
+That copies:
+  BRAND.md, PAGE_COPY.md, ASSET_INVENTORY.md, netlify.toml  -> repo root
+  public/logo.svg, public/logo-high-contrast.svg            -> repo public/
+  public/assets/logos/*.svg   (11 files)                    -> repo public/assets/logos/
+  public/assets/patterns/*.svg (8 files)                    -> repo public/assets/patterns/
+  brand-assets/*.ai                                          -> repo brand-assets/
+
+Then verify with:
+  ls BRAND.md PAGE_COPY.md netlify.toml && ls public/assets/patterns/ | wc -l
+(should print the files, and the number 8)
