@@ -1,0 +1,64 @@
+---
+/**
+ * SEO.astro — every meta tag a page needs, in one place.
+ * Used automatically by BaseLayout; pass props per page.
+ *
+ * Rules enforced by convention:
+ *  - title: ≤60 chars (before template suffix)
+ *  - description: 145–160 chars, primary keyword in first 50
+ *  - one canonical per page, always absolute
+ */
+import { SITE } from '../config/site.js';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Absolute or root-relative path to a 1200x630 image */
+  image?: string;
+  /** 'website' | 'article' */
+  type?: string;
+  /** Set true on thin/utility pages (404, thank-you) */
+  noindex?: boolean;
+  /** ISO date strings, for articles */
+  publishedTime?: string;
+  modifiedTime?: string;
+}
+
+const {
+  title,
+  description = SITE.description,
+  image = SITE.ogImage,
+  type = 'website',
+  noindex = false,
+  publishedTime,
+  modifiedTime,
+} = Astro.props;
+
+const fullTitle = SITE.titleTemplate.replace('%s', title);
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const imageURL = new URL(image, SITE.url).href;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content={SITE.locale} />
+{publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageURL} />

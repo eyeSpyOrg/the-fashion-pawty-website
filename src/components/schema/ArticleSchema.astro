@@ -1,0 +1,39 @@
+---
+/**
+ * Article schema for blog posts / news. Links author to the
+ * site Organization for E-E-A-T signals.
+ * Usage:
+ * <ArticleSchema headline="..." description="..." image="/img.jpg"
+ *   datePublished="2026-07-01" dateModified="2026-07-10" authorName="..." />
+ */
+import { SITE } from '../../config/site.js';
+import JsonLd from './JsonLd.astro';
+
+interface Props {
+  headline: string;
+  description: string;
+  image?: string;
+  datePublished: string;
+  dateModified?: string;
+  authorName?: string;
+}
+const {
+  headline, description, image = SITE.ogImage,
+  datePublished, dateModified = datePublished,
+  authorName = SITE.name,
+} = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  image: new URL(image, SITE.url).href,
+  datePublished,
+  dateModified,
+  mainEntityOfPage: new URL(Astro.url.pathname, SITE.url).href,
+  author: { '@type': 'Person', name: authorName },
+  publisher: { '@id': `${SITE.url}/#organization` },
+};
+---
+<JsonLd schema={schema} />

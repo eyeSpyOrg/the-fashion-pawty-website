@@ -1,0 +1,45 @@
+---
+/**
+ * Accessible FAQ accordion (native <details>/<summary> — zero JS,
+ * keyboard-operable by default) + FAQPage schema for AEO.
+ * The visible content and the schema are generated from the SAME
+ * array, so they can never drift apart (Google requirement).
+ *
+ * Usage:
+ *   <FAQ faqs={[{ question: '...', answer: '...' }]} />
+ * Answers are plain text; they render as a paragraph and feed schema.
+ */
+import FAQSchema from './schema/FAQSchema.astro';
+
+interface Item { question: string; answer: string }
+interface Props { faqs: Item[]; heading?: string }
+const { faqs, heading = 'Frequently asked questions' } = Astro.props;
+---
+
+<section class="faq" aria-labelledby="faq-heading">
+  <h2 id="faq-heading">{heading}</h2>
+  {faqs.map((f) => (
+    <details class="faq__item">
+      <summary>{f.question}</summary>
+      <p>{f.answer}</p>
+    </details>
+  ))}
+</section>
+<FAQSchema faqs={faqs} />
+
+<style>
+  .faq__item {
+    border: 2px solid var(--color-border);
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    background: var(--color-bg);
+  }
+  .faq__item summary {
+    padding: 1rem 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .faq__item summary:hover { background: var(--color-surface); }
+  .faq__item p { padding: 0 1.25rem 1rem; margin: 0; max-width: 70ch; }
+</style>

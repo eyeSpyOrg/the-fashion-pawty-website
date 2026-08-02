@@ -1,0 +1,49 @@
+---
+/**
+ * Accessibility Statement — legally and reputationally important,
+ * expected by ADA Title II / Section 504 reviewers, and an SEO
+ * trust signal. Update the "measures" list per project honestly.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE } from '../config/site.js';
+---
+
+<BaseLayout
+  title="Accessibility Statement"
+  description={`${SITE.name} is committed to WCAG 2.2 AA accessibility. Read our conformance status, measures taken, and how to report accessibility barriers.`}
+>
+  <div class="container">
+    <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Accessibility Statement', href: '/accessibility/' }]} />
+    <h1>Accessibility statement</h1>
+    <div class="prose">
+      <p>
+        {SITE.name} is committed to ensuring digital accessibility for everyone,
+        including the blind and low vision community at the heart of our mission.
+        We are continually improving the user experience for everyone and applying
+        the relevant accessibility standards.
+      </p>
+      <h2>Conformance status</h2>
+      <p>
+        This website aims to conform to the <a href="https://www.w3.org/TR/WCAG22/">Web
+        Content Accessibility Guidelines (WCAG) 2.2</a> level AA. Automated testing is run
+        on every deployment (axe-core via Pa11y, Lighthouse accessibility audits), and
+        pages are manually tested with keyboard-only navigation and screen readers.
+      </p>
+      <h2>Measures we take</h2>
+      <ul>
+        <li>Semantic HTML landmarks, skip links, and logical heading structure on every page</li>
+        <li>Color contrast of at least 4.5:1 for text and 3:1 for interface components</li>
+        <li>An on-page accessibility toolbar for text size, contrast, spacing, and motion preferences</li>
+        <li>Full keyboard operability with visible focus indicators</li>
+        <li>Respect for operating-system reduced-motion settings</li>
+      </ul>
+      <h2>Feedback</h2>
+      <p>
+        If you encounter an accessibility barrier on this site, please email
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. We aim to respond within two
+        business days.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

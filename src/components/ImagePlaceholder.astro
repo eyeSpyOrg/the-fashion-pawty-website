@@ -1,0 +1,93 @@
+---
+/**
+ * ImagePlaceholder.astro — a branded, accessible stand-in for a photo
+ * that isn't shot yet. Renders a solid tinted panel with a dashed brand
+ * border, an icon, a label naming the intended image, and a policy note.
+ *
+ * BRAND.md § 2.5 image policy is surfaced right on the block so nobody
+ * forgets it: AI is fine for atmosphere/objects; PEOPLE and GUIDE DOGS
+ * must be real Eye Spy photos. Every placeholder is marked
+ * data-placeholder="image" so they're trivial to grep before launch.
+ *
+ * Props:
+ *   label   — what image belongs here (required)
+ *   policy  — 'ai' | 'real'  (drives the note + color); default 'ai'
+ *   ratio   — CSS aspect-ratio, e.g. '4 / 3' (default), '16 / 9', '1 / 1'
+ *   icon    — emoji shown in the block (default 🐾)
+ *   tone    — 'teal' | 'gold' (background wash); default 'teal'
+ */
+interface Props {
+  label: string;
+  policy?: 'ai' | 'real';
+  ratio?: string;
+  icon?: string;
+  tone?: 'teal' | 'gold';
+}
+const { label, policy = 'ai', ratio = '4 / 3', icon = '🐾', tone = 'teal' } = Astro.props;
+const note =
+  policy === 'real'
+    ? 'Real Eye Spy photo — people & guide dogs are never AI-generated'
+    : 'AI atmosphere/object image OK — replace with real event photos after Sep 26';
+---
+
+<figure
+  class:list={['img-ph', `img-ph--${tone}`]}
+  data-ratio={ratio}
+  data-placeholder="image"
+  data-policy={policy}
+>
+  <span class="img-ph__icon" aria-hidden="true">{icon}</span>
+  <figcaption class="img-ph__cap">
+    <span class="img-ph__label">{label}</span>
+    <span class:list={['img-ph__note', `img-ph__note--${policy}`]}>
+      <span aria-hidden="true">{policy === 'real' ? '📷' : '✨'}</span> {note}
+    </span>
+  </figcaption>
+</figure>
+
+<style>
+  .img-ph {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-align: center;
+    padding: var(--space-m);
+    border: 3px dashed var(--color-accent);
+    border-radius: var(--radius);
+    color: var(--color-text);
+    background: var(--color-teal-tint);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;   /* default; overridden per ratio below */
+  }
+  .img-ph[data-ratio="4 / 5"] { aspect-ratio: 4 / 5; }
+  .img-ph[data-ratio="3 / 4"] { aspect-ratio: 3 / 4; }
+  .img-ph[data-ratio="16 / 9"] { aspect-ratio: 16 / 9; }
+  .img-ph[data-ratio="1 / 1"] { aspect-ratio: 1 / 1; }
+  .img-ph--gold { background: var(--color-gold-tint); border-color: #7a5200; }
+  .img-ph__icon { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1; }
+  .img-ph__cap { display: grid; gap: 0.5rem; max-width: 34ch; }
+  .img-ph__label { font-family: var(--font-display); font-weight: 700; font-size: var(--step-1); }
+  .img-ph__note {
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+  }
+  .img-ph__note--real { border-color: #7a5200; }
+
+  :global(html[data-a11y-contrast='high']) .img-ph {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+  }
+  :global(html[data-a11y-contrast='high']) .img-ph__note {
+    background: var(--color-bg);
+    border-color: var(--color-border);
+  }
+</style>

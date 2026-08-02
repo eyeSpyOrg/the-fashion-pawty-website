@@ -1,0 +1,48 @@
+---
+/**
+ * Organization + WebSite schema as a linked @graph.
+ * Included once, site-wide, by BaseLayout. Feeds Google's
+ * knowledge panel and AEO engines (Perplexity, ChatGPT, AI Overviews)
+ * a machine-readable identity for the org.
+ */
+import { SITE } from '../../config/site.js';
+import JsonLd from './JsonLd.astro';
+
+const orgId = `${SITE.url}/#organization`;
+const siteId = `${SITE.url}/#website`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': SITE.orgType,
+      '@id': orgId,
+      name: SITE.name,
+      legalName: SITE.legalName,
+      url: SITE.url,
+      logo: {
+        '@type': 'ImageObject',
+        url: new URL(SITE.logo, SITE.url).href,
+      },
+      foundingDate: SITE.foundingDate,
+      email: SITE.email,
+      telephone: SITE.telephone,
+      address: {
+        '@type': 'PostalAddress',
+        ...SITE.address,
+      },
+      ...(SITE.socials.length > 0 && { sameAs: SITE.socials.map((s) => s.url) }),
+    },
+    {
+      '@type': 'WebSite',
+      '@id': siteId,
+      url: SITE.url,
+      name: SITE.name,
+      description: SITE.description,
+      publisher: { '@id': orgId },
+      inLanguage: SITE.language,
+    },
+  ],
+};
+---
+<JsonLd schema={schema} />

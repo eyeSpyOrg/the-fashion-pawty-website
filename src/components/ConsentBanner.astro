@@ -1,0 +1,102 @@
+---
+/**
+ * ConsentBanner.astro — accessible cookie/analytics consent.
+ * - Non-blocking (page stays usable), keyboard operable
+ * - Choice persisted in localStorage ('granted' | 'denied')
+ * - Fires 'a11y-consent-granted' → Analytics.astro loads scripts
+ * - Re-openable via any element with [data-consent-reopen]
+ *   (a "Privacy choices" link is added to the footer nav in site.js)
+ * Only renders when analytics IDs are configured in site.js.
+ */
+import { SITE } from '../config/site.js';
+const enabled = Boolean(SITE.integrations?.ga4Id || SITE.integrations?.hubspotPortalId);
+---
+
+{enabled && (
+  <section
+    class="consent"
+    aria-label="Cookie consent"
+    data-consent-banner
+    hidden
+  >
+    <p class="consent__text">
+      We use analytics cookies to understand how visitors use this site.
+      No analytics load unless you accept.
+    </p>
+    <div class="consent__actions">
+      <button type="button" class="consent__btn consent__btn--accept" data-consent="granted">
+        Accept analytics
+      </button>
+      <button type="button" class="consent__btn" data-consent="denied">
+        Decline
+      </button>
+    </div>
+  </section>
+)}
+
+<style>
+  .consent {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 95;
+    max-width: 26rem;
+    width: calc(100vw - 2rem);
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.2);
+  }
+  .consent__text { margin: 0 0 0.75rem; }
+  .consent__actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .consent__btn {
+    border: 2px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-radius: 8px;
+    padding: 0.55rem 1rem;
+    font-weight: 700;
+  }
+  .consent__btn--accept {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #ffffff;
+  }
+  :global(html[data-a11y-contrast='high']) .consent__btn--accept { color: #000000; }
+</style>
+
+<script>
+  const KEY = 'analytics-consent';
+  const banner = document.querySelector<HTMLElement>('[data-consent-banner]');
+
+  function setConsent(value: 'granted' | 'denied') {
+    localStorage.setItem(KEY, value);
+    banner!.hidden = true;
+    if (value === 'granted') {
+      document.dispatchEvent(new CustomEvent('a11y-consent-granted'));
+    }
+  }
+
+  if (banner) {
+    // Show only if no prior choice
+    if (!localStorage.getItem(KEY)) banner.hidden = false;
+
+    banner.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((btn) => {
+      btn.addEventListener('click', () =>
+        setConsent(btn.dataset.consent as 'granted' | 'denied')
+      );
+    });
+
+    // "Privacy choices" re-opener (footer link etc.)
+    document.querySelectorAll('[data-consent-reopen]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem(KEY);
+        banner.hidden = false;
+        banner.querySelector<HTMLButtonElement>('button')?.focus();
+      });
+    });
+  }
+</script>

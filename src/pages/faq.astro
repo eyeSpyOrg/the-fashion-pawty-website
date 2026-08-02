@@ -1,0 +1,62 @@
+---
+/**
+ * FAQ — all eight questions from PAGE_COPY.md. The FAQ component
+ * generates the visible accordion AND FAQPage schema from one array.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { SITE } from '../config/site.js';
+
+const faqs = [
+  { question: 'What is The Fashion PAWty?', answer: 'It’s a doggie fashion show and community celebration — "A Navigation Celebration" — hosted by the Eye Spy Foundation. Dogs strut the orange carpet while the community enjoys mocktails, food, games, and music, all to support the blind and low vision community and Leader Dogs for the Blind.' },
+  { question: 'When and where is it?', answer: 'Saturday, September 26, 2026, from 4 to 7 PM at Happy Brew, 3200 Hendricks Ave, Jacksonville, FL 32207.' },
+  { question: "How much are tickets and what's included?", answer: 'Tickets are $30 and include entry to the show, food, and mocktails.' },
+  { question: 'Who does the event benefit?', answer: 'The Eye Spy Foundation and Leader Dogs for the Blind. Eye Spy is also sponsoring one Leader Dogs puppy this year.' },
+  { question: 'Can I bring my dog?', answer: "This year's fashion show features a curated lineup of dogs, so you don't need to bring your own — come enjoy the show, the mocktails, and the fun. It's a people-first celebration." },
+  { question: 'How do the dogs get in the fashion show?', answer: "The runway lineup is organized by our team for this year's event. Want to be part of a future PAWty? Email team@eyespy.org and say hello." },
+  { question: 'Is the event accessible?', answer: 'Yes — the entire venue is accessible, and accessibility is at the heart of everything we do. Park in the church lot next door on Hendricks Avenue (overflow behind the church). Questions about your visit? Email team@eyespy.org and we’ll help.' },
+  { question: 'How can I sponsor or get involved?', answer: 'Head to our Sponsors page to claim a named party area, or email team@eyespy.org. You can also grab merch at shop.thefashionpawty.com — every bit supports the cause.' },
+];
+---
+
+<BaseLayout
+  title="FAQ"
+  description="Fashion PAWty FAQ: tickets are $30 with food and mocktails included, Sep 26 at Happy Brew, Jacksonville — plus answers on parking, accessibility, dogs, and sponsorship."
+>
+  <section class="band band--teal band--tight">
+    <div class="container container--narrow">
+      <div class="section-head">
+        <p class="eyebrow">Good to Know</p>
+        <h1>Frequently Asked Questions</h1>
+        <p class="prose lead">
+          Everything about tickets, timing, parking, dogs, and accessibility.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container container--narrow">
+      <FAQ faqs={faqs} heading="PAWty questions, answered" />
+      <div class="card faq-help">
+        <span class="faq-help__icon" aria-hidden="true">💬</span>
+        <p>
+          Still have a question? Email
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a> — we greet everyone
+          with a hug or a handshake, and email works too.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .faq-help {
+    display: flex; gap: var(--space-s); align-items: center;
+    margin-top: var(--space-l); background: var(--color-teal-tint);
+  }
+  .faq-help__icon { font-size: 2rem; line-height: 1; }
+  .faq-help p { margin: 0; }
+  :global(html[data-a11y-contrast='high']) .faq-help { background: var(--color-surface); }
+</style>

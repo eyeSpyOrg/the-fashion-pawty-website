@@ -1,0 +1,89 @@
+---
+/**
+ * Beneficiaries — Eye Spy Foundation + Leader Dogs for the Blind.
+ * Leader Dogs copy is an original draft pending their sign-off.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+---
+
+<BaseLayout
+  title="Who the PAWty Helps"
+  description="The Fashion PAWty benefits the Eye Spy Foundation and Leader Dogs for the Blind — two organizations helping the blind and low vision community navigate the world with confidence."
+>
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Two Missions, One PAWty</p>
+        <h1>Who the PAWty Helps</h1>
+        <p class="prose lead">
+          Every wagging tail on the orange carpet supports two organizations
+          working to help people navigate the world with confidence.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="eyespy-h">
+    <div class="container split">
+      <div class="split__text">
+        <p class="eyebrow">Presented By</p>
+        <h2 id="eyespy-h">Eye Spy Foundation</h2>
+        <p class="prose">
+          At Eye Spy, we help the blind and low vision community navigate
+          community resources so they can live a better low vision lifestyle. We
+          greet everyone with a hug or a handshake — because connection comes
+          first — and we spend our days pointing people toward the programs,
+          services, and tools that make everyday life more accessible. The
+          Fashion PAWty is how we bring the whole community together to
+          celebrate that mission.
+        </p>
+      </div>
+      <ImagePlaceholder label="Eye Spy Foundation team welcoming guests" policy="real" ratio="4 / 3" icon="👁️" />
+    </div>
+  </section>
+
+  <section class="band band--gold" aria-labelledby="leaderdogs-h">
+    <div class="container split split--rev">
+      <ImagePlaceholder label="A Leader Dogs guide dog working in harness" policy="real" ratio="4 / 3" icon="🦮" tone="gold" />
+      <div class="split__text">
+        <p class="eyebrow">Also Benefiting</p>
+        <h2 id="leaderdogs-h">Leader Dogs for the Blind</h2>
+        {/* TODO: original draft copy — send to Leader Dogs partnerships contact
+            for sign-off and swap in any wording they prefer. */}
+        <p class="prose">
+          Leader Dogs for the Blind is a guide dog school that raises and trains
+          dogs to help people who are blind or low vision travel safely and
+          independently. From playful puppies to confident working guides, each
+          dog is prepared to become a trusted navigation partner — opening up
+          new freedom for the person at the other end of the harness. This year,
+          the Eye Spy Foundation is proud to sponsor one Leader Dogs puppy, and
+          a portion of every dollar raised at The Fashion PAWty goes directly to
+          their work. When you party with us, you help raise a future guide dog.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--dark">
+    <div class="container container--narrow cta-band">
+      <h2>Ready to Join the Mission?</h2>
+      <div class="cta-band__btns">
+        <a class="btn btn--onDark btn--lg" href="/tickets/">Get tickets — $30</a>
+        <a class="btn btn--onDark btn--lg" href="/sponsors/">Become a sponsor</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+    .split--rev .split__text { order: 2; }
+  }
+  .cta-band { text-align: center; }
+  .cta-band__btns { display: flex; gap: var(--space-s); flex-wrap: wrap; justify-content: center; margin-top: var(--space-m); }
+</style>

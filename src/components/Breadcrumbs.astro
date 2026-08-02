@@ -1,0 +1,43 @@
+---
+/**
+ * Visible breadcrumb trail + matching BreadcrumbList schema.
+ * Usage: <Breadcrumbs items={[{name:'Home',href:'/'},{name:'FAQ',href:'/faq/'}]} />
+ * Last item = current page (aria-current, not a link).
+ */
+import BreadcrumbSchema from './schema/BreadcrumbSchema.astro';
+
+interface Crumb { name: string; href: string }
+interface Props { items: Crumb[] }
+const { items } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+  <ol>
+    {items.map((item, i) => (
+      <li>
+        {i < items.length - 1 ? (
+          <>
+            <a href={item.href}>{item.name}</a>
+            <span aria-hidden="true"> / </span>
+          </>
+        ) : (
+          <span aria-current="page">{item.name}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+<BreadcrumbSchema items={items} />
+
+<style>
+  .breadcrumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    font-size: 0.95rem;
+  }
+  .breadcrumbs [aria-current='page'] { font-weight: 700; }
+</style>

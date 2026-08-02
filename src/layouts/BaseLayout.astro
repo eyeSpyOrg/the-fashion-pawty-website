@@ -1,0 +1,78 @@
+---
+/**
+ * BaseLayout.astro — every page uses this. It guarantees:
+ *   - lang attribute, viewport that allows zoom (never maximum-scale)
+ *   - skip link → <main id="main-content">
+ *   - one <h1> per page (pages provide it)
+ *   - SEO meta + Organization/WebSite schema on every page
+ *   - Header/Footer landmarks + Accessibility Bar
+ *   - a11y prefs applied PRE-PAINT (no flash) via inline script
+ */
+import '../styles/global.css';
+// Preload the primary font weights (body 400 + heading 700) so the
+// font-display:swap changeover is near-instant and the flash of fallback
+// text (FOUT) is minimised in production. Vite rewrites these to the
+// hashed, bundled URLs.
+import bodyFont from '@fontsource/nunito-sans/files/nunito-sans-latin-400-normal.woff2?url';
+import headingFont from '@fontsource/baloo-2/files/baloo-2-latin-700-normal.woff2?url';
+import { SITE } from '../config/site.js';
+import SEO from '../components/SEO.astro';
+import OrganizationSchema from '../components/schema/OrganizationSchema.astro';
+import SkipLink from '../components/SkipLink.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AccessibilityBar from '../components/AccessibilityBar.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+import Analytics from '../components/Analytics.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  noindex?: boolean;
+}
+const { title, description, image, type, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang={SITE.language}>
+  <head>
+    <meta charset="utf-8" />
+    <!-- NEVER add maximum-scale or user-scalable=no (WCAG 1.4.4) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Preload primary fonts to reduce FOUT (see import note above) -->
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
+
+    <SEO {title} {description} {image} {type} {noindex} />
+    <OrganizationSchema />
+    <Analytics />
+
+    <!-- Apply saved accessibility preferences before first paint -->
+    <script is:inline>
+      (function () {
+        try {
+          ['fontsize', 'contrast', 'spacing', 'motion', 'links'].forEach(function (k) {
+            var v = localStorage.getItem('a11y-pref-' + k);
+            if (v) document.documentElement.setAttribute('data-a11y-' + k, v);
+          });
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <SkipLink />
+    <Header />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <AccessibilityBar />
+    <ConsentBanner />
+  </body>
+</html>

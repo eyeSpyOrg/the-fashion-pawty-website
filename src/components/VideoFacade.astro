@@ -1,0 +1,134 @@
+---
+/**
+ * VideoFacade.astro — privacy- & performance-friendly video embed.
+ *
+ * Renders a lightweight "click to play" poster (the video's real cover image,
+ * fetched from Vimeo oEmbed at build time); the actual iframe is injected only
+ * when the visitor presses play. That means:
+ *   - no third-party cookies or player payload until the user opts in
+ *     (keeps Lighthouse best-practices clean, consent-friendly)
+ *   - autoplay is user-initiated (never autoplay-with-sound on load)
+ *   - the poster is a real <button> with a descriptive accessible name
+ *
+ * Props:
+ *   vimeoId — e.g. '995025963?h=cd5b44f7cf&dnt=1' (query already attached)
+ *   title   — accessible title for the loaded iframe
+ *   label   — visible button text
+ */
+interface Props {
+  vimeoId: string;
+  title: string;
+  label?: string;
+}
+const { vimeoId, title, label = 'Watch the film' } = Astro.props;
+
+// Build-time fetch of the official cover image via Vimeo oEmbed.
+// Falls back to a solid dark poster if the network/build can't reach Vimeo.
+let poster = '';
+try {
+  const numeric = vimeoId.split('?')[0].split('/')[0];
+  const hash = vimeoId.match(/h=([a-z0-9]+)/i)?.[1];
+  const canonical = hash
+    ? `https://vimeo.com/${numeric}/${hash}`
+    : `https://vimeo.com/${numeric}`;
+  const res = await fetch(
+    `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(canonical)}&width=1280`
+  );
+  if (res.ok) {
+    const data = await res.json();
+    poster = typeof data.thumbnail_url === 'string' ? data.thumbnail_url : '';
+  }
+} catch {
+  /* offline build — fall back to the solid poster */
+}
+---
+
+<div class="video-embed" data-video-facade data-vimeo={vimeoId} data-title={title}>
+  <button type="button" class="vf__btn" aria-label={`Play video: ${title}`}>
+    {poster && (
+      <img class="vf__poster" src={poster} alt="" width="1280" height="720" loading="lazy" />
+    )}
+    <span class="vf__play" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="30" height="30" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.4-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14Z"/></svg>
+    </span>
+    <span class="vf__label">{label}</span>
+  </button>
+</div>
+
+<style>
+  .vf__btn {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: var(--space-m);
+    cursor: pointer;
+    border: 0;
+    color: #ffffff;
+    background: var(--color-dark);
+  }
+  /* Cover image sits behind the play button + label */
+  .vf__poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  /* The play button and label carry their own solid backgrounds, so they
+     read clearly over any cover image without a translucent scrim (a scrim
+     would make the label's contrast indeterminate to checkers). */
+  .vf__play, .vf__label { position: relative; z-index: 2; }
+  .vf__play {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 999px;
+    color: var(--color-text);
+    background: var(--color-gold-highlight);
+    box-shadow: var(--shadow);
+    transition: transform 150ms ease;
+  }
+  .vf__play svg { margin-left: 3px; }
+  .vf__btn:hover .vf__play { transform: scale(1.06); }
+  html[data-a11y-motion='off'] .vf__btn:hover .vf__play { transform: none; }
+  @media (prefers-reduced-motion: reduce) { .vf__btn:hover .vf__play { transform: none; } }
+  /* Label rides on a solid chip so its contrast is always verifiable */
+  .vf__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-1);
+    background: var(--color-dark);
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+  }
+  :global(html[data-a11y-contrast='high']) .vf__btn { background: #000; }
+  :global(html[data-a11y-contrast='high']) .vf__label { background: #000; }
+  :global(html[data-a11y-contrast='high']) .vf__play { background: #ffd23f; color: #000; }
+</style>
+
+<script>
+  document.querySelectorAll('[data-video-facade]').forEach((el) => {
+    const btn = el.querySelector('button');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const id = el.getAttribute('data-vimeo');
+      const title = el.getAttribute('data-title') || 'Video';
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://player.vimeo.com/video/${id}&autoplay=1`;
+      iframe.title = title;
+      iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      el.replaceChildren(iframe);
+      iframe.focus();
+    });
+  });
+</script>

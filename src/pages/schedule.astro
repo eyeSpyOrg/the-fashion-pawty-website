@@ -1,0 +1,99 @@
+---
+/**
+ * Schedule — the six confirmed run-of-show blocks (BRAND.md).
+ * Rendered as a vertical timeline with a gold "orange carpet" connector.
+ * Event schema included.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EventSchema from '../components/schema/EventSchema.astro';
+
+const blocks = [
+  { time: '4:00 PM', name: 'PAWty Kickoff', detail: 'Doors open. Mocktails flowing, vendors, games, and photo ops.', icon: '🎉' },
+  { time: '4:30 PM', name: 'Live Music', detail: 'Settle in and enjoy the soundtrack to our tail-wagging celebration.', icon: '🎶' },
+  { time: '5:15 PM', name: 'Mission Moment', detail: 'A short, heartfelt spotlight on the Eye Spy Foundation and Leader Dogs for the Blind.', icon: '💛' },
+  { time: '5:30 PM', name: 'Runway Show', detail: 'Our four-legged models take the stage and strut for independence down the orange carpet.', icon: '🐾' },
+  { time: '6:45 PM', name: 'Best in Show Awards', detail: 'Crowd favorites, big applause, and a final celebration.', icon: '🏆' },
+  { time: '7:00 PM', name: 'PAWty Concludes', detail: 'Thank you for supporting accessibility, mobility, and freedom.', icon: '👋' },
+];
+---
+
+<BaseLayout
+  title="Schedule of Events"
+  description="The Fashion PAWty schedule: doors at 4 PM, live music, the Mission Moment, the runway show at 5:30, and Best in Show awards — Sep 26, 2026 at Happy Brew, Jacksonville."
+>
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Saturday, September 26 · 4–7 PM</p>
+        <h1>Schedule of Events</h1>
+        <p class="prose lead">
+          Here's how the afternoon unfolds — three hours of tail-wagging fun
+          with a heartfelt mission at its center.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container container--narrow">
+      <h2 class="sr-only">Run of show</h2>
+      <ol class="timeline">
+        {blocks.map((b) => (
+          <li class="tl">
+            <div class="tl__marker" aria-hidden="true"><span>{b.icon}</span></div>
+            <div class="tl__body card">
+              <p class="tl__time">{b.time}</p>
+              <h3 class="tl__name">{b.name}</h3>
+              <p class="tl__detail">{b.detail}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <EventSchema />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .tl {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: var(--space-m);
+    padding-bottom: var(--space-l);
+  }
+  .tl:last-child { padding-bottom: 0; }
+  .tl__marker {
+    position: relative;
+    width: 3.5rem; height: 3.5rem;
+    display: grid; place-items: center;
+    font-size: 1.5rem;
+    background: var(--color-surface);
+    border: 3px solid var(--color-gold-highlight);
+    border-radius: 999px;
+  }
+  /* Gold "orange carpet" connector — a pseudo on the MARKER, scoped to the
+     narrow gutter column so it never overlaps the card text region (keeps
+     automated contrast checks able to resolve the card background). */
+  .tl:not(:last-child) .tl__marker::after {
+    content: "";
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: calc(var(--space-l) + var(--space-m) - 0.7rem);
+    background: var(--color-gold-highlight);
+  }
+  .tl__body { padding: var(--space-s) var(--space-m); }
+  .tl__time {
+    margin: 0; font-family: var(--font-display); font-weight: 700;
+    color: var(--color-accent); font-size: var(--step-1);
+  }
+  .tl__name { margin: 0.15rem 0 0.35rem; }
+  .tl__detail { margin: 0; }
+  :global(html[data-a11y-contrast='high']) .tl__marker { border-color: var(--color-border); }
+  :global(html[data-a11y-contrast='high']) .tl__marker::after { background: var(--color-border); }
+</style>

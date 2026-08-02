@@ -1,0 +1,89 @@
+---
+/**
+ * Contact — NAP renders only from site.js (never drifts from footer
+ * or Organization schema). Inquiry form arrives with HubSpot in
+ * Phase 2 via HubSpotForm.astro — never the embedded widget.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config/site.js';
+
+// Non-breaking space + hyphen (U+00A0 / U+2011) so the number never wraps
+const telDisplay = '(844) 222‑8848';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact The Fashion PAWty team at team@eyespy.org or (844) 222-8848 with questions about tickets, sponsorship, or accessibility — we greet everyone with a hug or a handshake."
+>
+  <section class="band band--teal band--tight">
+    <div class="container container--narrow">
+      <div class="section-head">
+        <p class="eyebrow">We'd Love to Hear From You</p>
+        <h1>Say Hello</h1>
+        <p class="prose lead">
+          We greet everyone with a hug or a handshake — and email works too.
+          Have a question about tickets, sponsorship, or bringing your pup?
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container container--narrow">
+      <h2 class="sr-only">Ways to reach us</h2>
+      <div class="grid grid--2">
+        <a class="card card--accent card--link contact-card" href={`mailto:${SITE.email}`}>
+          <span class="contact-card__icon" aria-hidden="true">✉️</span>
+          <span class="contact-card__label">Email</span>
+          <span class="contact-card__value">{SITE.email}</span>
+        </a>
+        <a class="card card--accent card--link contact-card" href={`tel:${SITE.telephone}`}>
+          <span class="contact-card__icon" aria-hidden="true">📞</span>
+          <span class="contact-card__label">Phone</span>
+          <span class="contact-card__value">{telDisplay}</span>
+        </a>
+      </div>
+
+      <div class="card find-us">
+        <h3 class="find-us__h">Where is the PAWty?</h3>
+        <p>
+          {SITE.event.venueName}, {SITE.address.streetAddress},
+          {SITE.address.addressLocality}, {SITE.address.addressRegion}
+          {SITE.address.postalCode} — see the <a href="/venue/">Venue page</a>
+          for parking and accessibility details.
+        </p>
+      </div>
+
+      {/* TODO: inquiry form (name, email, message → team@eyespy.org) lands in
+          Phase 2 with the HubSpot portal + form GUID, rendered through
+          HubSpotForm.astro (see INTEGRATIONS.md §2). */}
+      <p class="prose form-soon">
+        <span aria-hidden="true">📝</span> A quick inquiry form is on its way.
+        For now, email or call us — we respond within two business days.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .contact-card {
+    display: grid; gap: 0.35rem; text-decoration: none; color: var(--color-text);
+  }
+  .contact-card__icon { font-size: 2rem; line-height: 1; }
+  .contact-card__label {
+    font-family: var(--font-display); font-weight: 700; font-size: 0.8rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent);
+  }
+  .contact-card__value { font-size: var(--step-1); font-weight: 700; word-break: break-word; }
+  .find-us { margin-top: var(--space-m); }
+  .find-us__h { margin: 0 0 0.35rem; }
+  .form-soon {
+    margin-top: var(--space-m);
+    color: var(--color-text-muted);
+    background: var(--color-gold-tint);
+    border-radius: var(--radius);
+    padding: var(--space-s) var(--space-m);
+  }
+  :global(html[data-a11y-contrast='high']) .form-soon { background: var(--color-surface); border: 1px solid var(--color-border); }
+</style>

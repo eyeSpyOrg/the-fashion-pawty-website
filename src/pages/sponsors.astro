@@ -1,0 +1,414 @@
+---
+/**
+ * Sponsors — sponsorship packages for The Fashion PAWty.
+ *
+ * Tier data lives in ONE array per group and feeds both the visible cards
+ * and SponsorshipSchema, so the structured data can never drift from what
+ * a visitor actually reads (same discipline as the FAQ component).
+ *
+ * Visual hierarchy is deliberate and descends with price:
+ *   Best in Show (featured, full width) > Top Dog (wide) >
+ *   PAWty Animal (5-up) > Kennel Club (compact) > Media (3-up, smallest)
+ *
+ * Card treatment is elevation + alpha-blended borders only — no colored
+ * side rules, no icons in colored circles, no gradients.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import SponsorshipSchema from '../components/schema/SponsorshipSchema.astro';
+import { SITE } from '../config/site.js';
+
+/* TODO: TEMPORARY — every tier currently points at one generic Stripe
+   donation link. Replace with a tier-specific Stripe Payment Link per
+   package (so amounts are pre-set and reporting is per-tier) before launch. */
+const STRIPE_URL = 'https://donate.stripe.com/dRmcN43H25Jng43eHAejK00';
+
+const bestInShow = {
+  name: 'Best in Show',
+  price: 5000,
+  qty: 1,
+  description:
+    'Become the presenting sponsor of The Fashion PAWty. Best in Show sponsors get exclusive runway naming rights, top billing across all event materials, and live mic mentions throughout the show.',
+  cta: 'Become Our Main Sponsor',
+};
+
+const topDog = {
+  name: 'Top Dog',
+  price: 2000,
+  qty: 3,
+  description:
+    'Sponsor a Signature Zone — Music, Food, or Mock-tails — with exclusive naming rights and branded area signage seen by every guest.',
+  cta: 'Claim a Signature Zone',
+  zones: ['Music Stage', 'Chow-Down Station', 'Mock-Tail Bar'],
+};
+
+const pawtyAnimal = {
+  name: 'PAWty Animal',
+  price: 1000,
+  qty: 5,
+  description:
+    'Sponsor an Activity Area — Photo Wall, Merch Shop, Bone Up Station, DJ PAWty, or Sensory Games — and get your brand woven into the fun.',
+  cta: 'Sponsor an Activity Area',
+  areas: [
+    { name: 'Photo Wall', icon: '📸' },
+    { name: 'Merch Shop', icon: '🧢' },
+    { name: 'Bone Up Station', icon: '🦴' },
+    { name: 'DJ PAWty', icon: '🎧' },
+    { name: 'Sensory Games', icon: '🧩' },
+  ],
+};
+
+const kennelClub = {
+  name: 'Kennel Club',
+  price: 250,
+  qty: 4,
+  description:
+    'Reserve a 10x10 vendor tent at The Fashion PAWty. Get featured on our event map and website so guests can find you.',
+  cta: 'Reserve a Vendor Tent',
+  icon: '⛺',
+};
+
+const mediaTiers = [
+  {
+    name: 'The Doggie Dispatch',
+    price: 200,
+    qty: 5,
+    icon: '📬',
+    description:
+      'Get featured in one of our official Fashion PAWty emails, sent straight to our full list of dog lovers and community supporters.',
+    cta: 'Sponsor an Email',
+  },
+  {
+    name: 'PAWty Post',
+    price: 150,
+    qty: 10,
+    icon: '📣',
+    description:
+      'Score a dedicated shout-out post on our social channels, tagging your brand in front of our engaged community.',
+    cta: 'Get a Social Shout-Out',
+  },
+  {
+    name: 'Doggie Bag Stuffer',
+    price: 75,
+    qty: 15,
+    icon: '🎁',
+    description:
+      "Put your item or insert directly into every guest's welcome bag — an easy, affordable way to get noticed.",
+    cta: 'Stuff the Doggie Bag',
+  },
+];
+
+/* One flat list drives the structured data — same objects rendered above. */
+const allTiers = [bestInShow, topDog, pawtyAnimal, kennelClub, ...mediaTiers];
+
+const money = (n: number) => `$${n.toLocaleString('en-US')}`;
+const availability = (n: number) =>
+  n === 1 ? 'Only 1 available' : `${n} available`;
+---
+
+<BaseLayout
+  title="Sponsor the PAWty"
+  description="Sponsor The Fashion PAWty — packages from $75 to $5,000 with runway naming rights, branded zones, and vendor tents, supporting the blind and low vision community."
+>
+  <!-- ══ INTRO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Put Your Name on the Fun</p>
+        <h1>Sponsor the PAWty</h1>
+        <p class="prose lead">
+          Every sponsorship helps fund The Fashion PAWty and supports the Eye
+          Spy Foundation's mission to create a more accessible world for the
+          blind and low vision community. Pick your package, put your brand at
+          the center of the orange carpet, and help us reach our $25,000 goal.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 1. MAIN SPONSOR — the marquee tier ══ -->
+  <section class="band" aria-labelledby="best-in-show-h">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">The Marquee Package</p>
+        <h2 id="best-in-show-h">Best in Show</h2>
+      </div>
+
+      <article class="featured">
+        <div class="featured__media">
+          <ImagePlaceholder
+            label="The orange carpet at full strut on show day"
+            policy="ai"
+            ratio="16 / 9"
+            icon="🏆"
+            tone="gold"
+          />
+        </div>
+        <div class="featured__body">
+          <p class="qty-badge qty-badge--scarce">{availability(bestInShow.qty)}</p>
+          <p class="price price--xl">
+            {money(bestInShow.price)}
+            <span class="price__unit">presenting sponsor</span>
+          </p>
+          <p class="featured__desc">{bestInShow.description}</p>
+          <a class="btn btn--primary btn--lg featured__cta" href={STRIPE_URL} rel="noopener">
+            {bestInShow.cta}
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Dark motif strip: strong separation between the white featured band
+       and the teal-tinted tier band below. -->
+  <div class="pattern-strip pattern-strip--dark" role="presentation"></div>
+
+  <!-- ══ 2. TOP DOG SPONSORSHIPS ══ -->
+  <section class="band band--teal" aria-labelledby="top-dog-h">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Signature Zones &amp; Areas</p>
+        <h2 id="top-dog-h">Top Dog Sponsorships</h2>
+        <p class="prose lead">
+          Own a signature zone at The Fashion PAWty and put your brand at the
+          center of the action.
+        </p>
+      </div>
+
+      <!-- Row A — Top Dog -->
+      <div class="row">
+        <div class="row__head">
+          <h3>{topDog.name}</h3>
+          <p class="price">{money(topDog.price)}</p>
+          <p class="qty-badge">{availability(topDog.qty)}</p>
+        </div>
+        <article class="tier-card tier-card--wide">
+          <p class="tier-card__desc">{topDog.description}</p>
+          <ul class="chips">
+            {topDog.zones.map((z) => <li class="chip">{z}</li>)}
+          </ul>
+          <a class="btn btn--primary" href={STRIPE_URL} rel="noopener">{topDog.cta}</a>
+        </article>
+      </div>
+
+      <!-- Row B — PAWty Animal (one card per activity area) -->
+      <div class="row">
+        <div class="row__head">
+          <h3>{pawtyAnimal.name}</h3>
+          <p class="price">{money(pawtyAnimal.price)}</p>
+          <p class="qty-badge">{availability(pawtyAnimal.qty)}</p>
+        </div>
+        <p class="prose row__desc">{pawtyAnimal.description}</p>
+        <ul class="grid-5">
+          {pawtyAnimal.areas.map((a) => (
+            <li class="tier-card tier-card--sm">
+              <span class="tier-card__icon" aria-hidden="true">{a.icon}</span>
+              <h4 class="tier-card__title">{a.name}</h4>
+              <a class="btn btn--primary btn--block" href={STRIPE_URL} rel="noopener">
+                Sponsor {a.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Row C — Kennel Club -->
+      <div class="row">
+        <div class="row__head">
+          <h3>{kennelClub.name}</h3>
+          <p class="price">{money(kennelClub.price)}</p>
+          <p class="qty-badge">{availability(kennelClub.qty)}</p>
+        </div>
+        <article class="tier-card tier-card--compact">
+          <span class="tier-card__icon" aria-hidden="true">{kennelClub.icon}</span>
+          <div class="tier-card__text">
+            <p class="tier-card__desc">{kennelClub.description}</p>
+          </div>
+          <a class="btn btn--primary" href={STRIPE_URL} rel="noopener">{kennelClub.cta}</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. MEDIA SPONSORSHIPS ══ -->
+  <section class="band" aria-labelledby="media-h">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Before, During &amp; After</p>
+        <h2 id="media-h">Media Sponsorships</h2>
+        <p class="prose lead">
+          Get your brand in front of our audience before, during, and after the
+          big day.
+        </p>
+      </div>
+
+      <ul class="grid-3">
+        {mediaTiers.map((t) => (
+          <li class="tier-card tier-card--media">
+            <span class="tier-card__icon" aria-hidden="true">{t.icon}</span>
+            <h3 class="tier-card__title">{t.name}</h3>
+            <p class="price price--sm">{money(t.price)}</p>
+            <p class="qty-badge">{availability(t.qty)}</p>
+            <p class="tier-card__desc">{t.description}</p>
+            <a class="btn btn--primary btn--block" href={STRIPE_URL} rel="noopener">{t.cta}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ THANK YOU + HELP ══ -->
+  <section class="band band--gold" aria-labelledby="thanks-h">
+    <div class="container container--narrow">
+      <div class="section-head">
+        <p class="eyebrow">Thank You</p>
+        <h2 id="thanks-h">Already on the Team</h2>
+      </div>
+      <article class="tier-card tier-card--compact">
+        <span class="tier-card__icon" aria-hidden="true">📸</span>
+        <div class="tier-card__text">
+          <h3 class="tier-card__title">Photo Booth</h3>
+          <p class="tier-card__desc">
+            Proudly sponsored by the <strong>Lions Club of Jacksonville
+            Beach</strong>. Thank you for helping the PAWty shine!
+          </p>
+        </div>
+      </article>
+      <p class="prose help">
+        Not sure which package fits? Email
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we'll help you
+        find the right spot on the orange carpet.
+      </p>
+    </div>
+  </section>
+
+  <SponsorshipSchema tiers={allTiers} url="/sponsors/" />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+
+  /* ── Shared card treatment: elevation + alpha border, no colored rules ── */
+  .tier-card {
+    background: var(--color-surface);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-m);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    transition: box-shadow 150ms ease, transform 150ms ease;
+  }
+  .tier-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+  html[data-a11y-motion='off'] .tier-card:hover { transform: none; }
+  @media (prefers-reduced-motion: reduce) { .tier-card:hover { transform: none; } }
+
+  .tier-card__icon { font-size: 1.9rem; line-height: 1; }
+  .tier-card__title { margin: 0; }
+  .tier-card__desc { margin: 0; }
+  .tier-card .btn { margin-top: auto; }
+  .btn--block { width: 100%; white-space: normal; }
+
+  /* ── 1. Featured Best in Show — biggest surface, deepest elevation ── */
+  .featured {
+    max-width: 62rem;
+    margin-inline: auto;
+    background: var(--color-surface);
+    border: 2px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: clamp(1.5rem, 1rem + 3vw, 3rem);
+    display: grid;
+    gap: var(--space-m);
+  }
+  .featured__body { display: flex; flex-direction: column; gap: var(--space-xs); }
+  .featured__desc { margin: 0; font-size: var(--step-1); max-width: 46ch; }
+  .featured__cta { align-self: flex-start; margin-top: var(--space-xs); }
+  @media (min-width: 60rem) {
+    .featured { grid-template-columns: 1fr 1fr; align-items: center; }
+  }
+
+  /* ── Price + availability ── */
+  .price {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-2);
+    color: var(--color-accent);
+    line-height: 1;
+  }
+  .price--xl { font-size: clamp(2.75rem, 2rem + 4vw, 4rem); }
+  .price--sm { font-size: var(--step-1); }
+  .price__unit {
+    display: block;
+    margin-top: 0.35rem;
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+  /* Availability reads as text, never colour alone (WCAG 1.4.1) */
+  .qty-badge {
+    align-self: flex-start;
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    background: var(--color-gold-tint);
+    border: 1px solid var(--border-hairline);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+  }
+  .qty-badge--scarce { background: var(--color-teal-tint); }
+  :global(html[data-a11y-contrast='high']) .qty-badge { background: var(--color-surface); }
+
+  /* ── Row scaffolding for the Top Dog group ── */
+  .row { margin-top: var(--space-l); }
+  .row__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-xs) var(--space-s);
+    margin-bottom: var(--space-s);
+  }
+  .row__head h3 { margin: 0; }
+  .row__desc { margin: 0 0 var(--space-s); }
+
+  .tier-card--wide { max-width: 48rem; }
+  .tier-card--wide .btn { align-self: flex-start; margin-top: var(--space-xs); }
+
+  .tier-card--compact { max-width: 42rem; }
+  .tier-card--compact .btn { align-self: flex-start; margin-top: var(--space-xs); }
+
+  .tier-card--sm { padding: var(--space-s); gap: 0.6rem; }
+  .tier-card--sm .tier-card__title { font-size: var(--step-0); }
+
+  /* Zone chips inside the Top Dog card */
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+  .chip {
+    font-weight: 600;
+    font-size: 0.95rem;
+    background: var(--color-teal-tint);
+    border: 1px solid var(--border-hairline);
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+  }
+  :global(html[data-a11y-contrast='high']) .chip { background: var(--color-surface); }
+
+  /* ── Grids: single column under 768px, then step up ── */
+  .grid-5, .grid-3 { display: grid; gap: var(--space-s); list-style: none; margin: 0; padding: 0; grid-template-columns: 1fr; }
+  @media (min-width: 48rem) {
+    .grid-5 { grid-template-columns: repeat(3, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); gap: var(--space-m); }
+  }
+  @media (min-width: 68rem) {
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  .tier-card--media { padding: var(--space-m); }
+  .help { margin-top: var(--space-m); }
+</style>

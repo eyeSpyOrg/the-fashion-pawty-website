@@ -1,0 +1,95 @@
+---
+/**
+ * SizzleReel.astro — the homepage video slot.
+ *
+ * Pass `youtubeId` to render the real embed; leave it empty to show the
+ * branded "coming soon" placeholder. Either way the 16:9 frame is
+ * identical, so dropping the ID in later doesn't shift the layout.
+ *
+ * Accessibility (CLAUDE.md § 9 + BRAND.md § 2.7):
+ *   - privacy-enhanced youtube-nocookie domain
+ *   - no autoplay (autoplay-with-sound is never allowed)
+ *   - iframe has a descriptive title; captions available in-player
+ *   - TODO: add VideoObject schema when the real URL exists
+ */
+interface Props {
+  youtubeId?: string;
+  title?: string;
+}
+const { youtubeId = '', title = 'The Fashion PAWty sizzle reel' } = Astro.props;
+---
+
+<div class="reel">
+  {youtubeId ? (
+    <iframe
+      class="reel__frame"
+      src={`https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0&cc_load_policy=1`}
+      title={title}
+      loading="lazy"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  ) : (
+    <div class="reel__ph" data-placeholder="video" role="img" aria-label={`${title} — coming soon`}>
+      <span class="reel__play" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="34" height="34" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.4-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14Z"/></svg>
+      </span>
+      <p class="reel__kicker">🎬 Sizzle reel</p>
+      <p class="reel__msg">Coming soon — a first look at the orange carpet.</p>
+    </div>
+  )}
+</div>
+
+<style>
+  .reel {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--color-dark);
+  }
+  .reel__frame { width: 100%; height: 100%; border: 0; display: block; }
+  .reel__ph {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    text-align: center;
+    padding: var(--space-m);
+    color: #ffffff;
+    /* Solid dark so the white text keeps full, checkable contrast.
+       The play button + gold kicker carry the personality here. */
+    background-color: var(--color-dark);
+  }
+  .reel__play {
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 999px;
+    color: var(--color-dark);
+    background: var(--color-gold-highlight);
+    box-shadow: var(--shadow);
+  }
+  .reel__play svg { margin-left: 4px; }  /* optically centre the triangle */
+  .reel__kicker {
+    margin: 0.4rem 0 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--color-gold-highlight);
+  }
+  .reel__msg { margin: 0; font-size: var(--step-1); font-weight: 600; max-width: 30ch; }
+
+  :global(html[data-a11y-contrast='high']) .reel { background: #000; border: 2px solid #fff; }
+  :global(html[data-a11y-contrast='high']) .reel__ph {
+    background: #000;
+  }
+  :global(html[data-a11y-contrast='high']) .reel__play { background: #ffd23f; color: #000; }
+</style>

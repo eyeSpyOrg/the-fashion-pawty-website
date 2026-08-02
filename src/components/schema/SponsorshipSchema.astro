@@ -1,0 +1,77 @@
+---
+/**
+ * SponsorshipSchema.astro — structured data for the sponsorship tiers.
+ *
+ * Modelled as an ItemList of Offers, each pointing at the Event, rather
+ * than Product. Two reasons:
+ *   1. BRAND.md § 2.7 explicitly rules Product schema off this site
+ *      (merch lives on the Printify subdomain with its own markup).
+ *   2. Google's Product guidelines expect a purchasable good with
+ *      product-level attributes; a sponsorship package is an Offer
+ *      against an Event, which is what this actually is. Offer +
+ *      ItemList is valid, honest, and safe from a manual action.
+ *
+ * The tiers array is the SAME array the page renders visibly, so the
+ * markup can never drift from the visible content (Google requirement,
+ * and the discipline CLAUDE.md sets for FAQ/Breadcrumb schema too).
+ */
+import { SITE } from '../../config/site.js';
+import JsonLd from './JsonLd.astro';
+
+interface Tier {
+  name: string;
+  price: number;
+  qty: number;
+  description: string;
+}
+interface Props {
+  tiers: Tier[];
+  url: string;
+}
+const { tiers, url } = Astro.props;
+
+const e = SITE.event;
+const eventRef = {
+  '@type': 'Event',
+  name: e.name,
+  startDate: e.startDate,
+  endDate: e.endDate,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  location: {
+    '@type': 'Place',
+    name: e.venueName,
+    address: { '@type': 'PostalAddress', ...SITE.address },
+  },
+  organizer: { '@type': 'Organization', name: SITE.legalName, url: SITE.url },
+};
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${SITE.name} sponsorship packages`,
+  description: `Sponsorship packages for ${e.name}, benefiting the blind and low vision community.`,
+  numberOfItems: tiers.length,
+  itemListElement: tiers.map((t, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Offer',
+      name: `${t.name} sponsorship`,
+      description: t.description,
+      price: String(t.price),
+      priceCurrency: 'USD',
+      availability:
+        t.qty > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+      inventoryLevel: {
+        '@type': 'QuantitativeValue',
+        value: t.qty,
+      },
+      url: new URL(url, SITE.url).href,
+      seller: { '@type': 'Organization', name: SITE.legalName, url: SITE.url },
+      itemOffered: eventRef,
+    },
+  })),
+};
+---
+<JsonLd schema={schema} />

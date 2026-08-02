@@ -1,0 +1,27 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "runners": ["axe", "htmlcs"],
+    "timeout": 30000,
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--disable-dev-shm-usage"]
+    },
+    "//": "frame-tested is an axe limitation (it cannot run inside cross-origin",
+    "//2": "embeds like the Vimeo player) — not a defect on our page. Our iframe",
+    "//3": "has a descriptive title; Vimeo's player carries its own accessibility.",
+    "ignore": ["frame-tested"]
+  },
+  "urls": [
+    "http://localhost:4321/",
+    "http://localhost:4321/tickets/",
+    "http://localhost:4321/sponsors/",
+    "http://localhost:4321/beneficiaries/",
+    "http://localhost:4321/schedule/",
+    "http://localhost:4321/venue/",
+    "http://localhost:4321/faq/",
+    "http://localhost:4321/contact/",
+    "http://localhost:4321/accessibility/",
+    "http://localhost:4321/privacy/",
+    "http://localhost:4321/404.html"
+  ]
+}

@@ -1,0 +1,101 @@
+---
+/**
+ * Tickets — $30 PAWty Pass. Copy from PAGE_COPY.md; Event schema.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import EventSchema from '../components/schema/EventSchema.astro';
+
+const included = [
+  'Entry to the doggie fashion show on the orange carpet',
+  'Food',
+  'Mocktails',
+  'Games, music, and a whole lot of tail wags',
+];
+---
+
+<BaseLayout
+  title="Tickets — $30 PAWty Pass"
+  description="Fashion PAWty tickets are $30 and include the doggie fashion show, food, and mocktails on Sep 26 at Happy Brew, Jacksonville — supporting the blind and low vision community."
+>
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">One PAWty Pass</p>
+        <h1>Get Your Tickets</h1>
+        <p class="prose lead">
+          One ticket, one great afternoon, one very good cause. Your $30 gets
+          you into the show, food, and mocktails — and helps the blind and low
+          vision community navigate life with more confidence.
+        </p>
+      </div>
+
+      <div class="ticket-grid">
+        <!-- Price card -->
+        <div class="panel ticket-card">
+          <p class="eyebrow">PAWty Pass</p>
+          <p class="ticket-card__price"><span class="ticket-card__amt">$30</span></p>
+          <h2 class="ticket-card__h">What's included</h2>
+          <ul class="ticket-list">
+            {included.map((i) => <li>{i}</li>)}
+          </ul>
+          {/* TODO: replace with real Stripe Payment Link */}
+          <a class="btn btn--primary btn--lg ticket-card__cta" href="https://stripe.com">
+            Buy Tickets — $30
+          </a>
+          <p class="ticket-card__note">
+            Processed securely through the Eye Spy Foundation's Stripe account.
+            Proceeds support the blind and low vision community and Leader Dogs
+            for the Blind.
+          </p>
+        </div>
+
+        <ImagePlaceholder
+          label="Guests toasting with mocktails as a dog struts past"
+          policy="ai"
+          ratio="3 / 4"
+          icon="🥂"
+          tone="gold"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container container--narrow">
+      <div class="section-head">
+        <p class="eyebrow">Good to Know</p>
+        <h2>About the dogs</h2>
+      </div>
+      <p class="prose">
+        The runway features a curated lineup of dogs for the show — so you can
+        relax and enjoy the strut. We love pups, but this is a people-first
+        celebration (we're hoping to welcome around 100 guests).
+      </p>
+    </div>
+  </section>
+
+  <EventSchema />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .ticket-grid { display: grid; gap: var(--space-l); align-items: start; }
+  @media (min-width: 52rem) {
+    .ticket-grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-xl); }
+  }
+  .ticket-card > * + * { margin-top: var(--space-s); }
+  .ticket-card__price { margin: 0; }
+  .ticket-card__amt {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 2rem + 6vw, 4.5rem);
+    color: var(--color-accent);
+    line-height: 1;
+  }
+  .ticket-card__h { margin-top: var(--space-m); }
+  .ticket-list { margin: 0; padding-left: 1.25rem; }
+  .ticket-list li { margin-bottom: 0.5rem; }
+  .ticket-card__cta { width: 100%; margin-top: var(--space-m); }
+  .ticket-card__note { font-size: 0.9rem; color: var(--color-text-muted); }
+</style>

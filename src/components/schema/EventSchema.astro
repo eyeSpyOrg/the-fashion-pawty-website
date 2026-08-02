@@ -1,0 +1,46 @@
+---
+/**
+ * Event schema for The Fashion PAWty. Facts come from SITE.event and
+ * SITE.address (single source — BRAND.md § 2.7), so the schema can never
+ * drift from the visible dates, venue, and price.
+ * Used on: /, /tickets/, /schedule/, /venue/.
+ */
+import { SITE } from '../../config/site.js';
+import JsonLd from './JsonLd.astro';
+
+const e = SITE.event;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: e.name,
+  description: e.description,
+  startDate: e.startDate,
+  endDate: e.endDate,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  location: {
+    '@type': 'Place',
+    name: e.venueName,
+    address: {
+      '@type': 'PostalAddress',
+      ...SITE.address,
+    },
+  },
+  image: [new URL(SITE.ogImage, SITE.url).href],
+  offers: {
+    '@type': 'Offer',
+    name: 'PAWty Pass',
+    price: e.ticketPrice,
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: e.ticketUrl,
+    validFrom: '2026-08-01T00:00:00-04:00',
+  },
+  organizer: {
+    '@type': 'Organization',
+    name: SITE.legalName,
+    url: SITE.url,
+  },
+};
+---
+<JsonLd schema={schema} />

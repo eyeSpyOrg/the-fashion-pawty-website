@@ -1,0 +1,55 @@
+---
+/**
+ * Analytics.astro — consent-gated loader for GA4 + HubSpot.
+ * Nothing third-party touches the page until consent is granted,
+ * which protects both privacy compliance and Lighthouse scores.
+ * Google Consent Mode v2 defaults are set to 'denied' up front.
+ * Configure IDs in site.js → integrations.
+ */
+import { SITE } from '../config/site.js';
+const ga4Id = SITE.integrations?.ga4Id ?? '';
+const hubspotId = SITE.integrations?.hubspotPortalId ?? '';
+---
+
+{(ga4Id || hubspotId) && (
+  <script is:inline define:vars={{ ga4Id, hubspotId }}>
+    // Consent Mode v2 defaults BEFORE any tag can load
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+    });
+
+    function loadAnalytics() {
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+
+      if (ga4Id) {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga4Id;
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', ga4Id, { anonymize_ip: true });
+      }
+
+      if (hubspotId) {
+        var h = document.createElement('script');
+        h.async = true;
+        h.defer = true;
+        h.id = 'hs-script-loader';
+        h.src = 'https://js.hs-scripts.com/' + hubspotId + '.js';
+        document.head.appendChild(h);
+      }
+    }
+
+    if (localStorage.getItem('analytics-consent') === 'granted') {
+      loadAnalytics();
+    } else {
+      document.addEventListener('a11y-consent-granted', loadAnalytics, { once: true });
+    }
+  </script>
+)}

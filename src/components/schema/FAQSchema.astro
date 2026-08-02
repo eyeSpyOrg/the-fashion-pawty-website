@@ -1,0 +1,25 @@
+---
+/**
+ * FAQPage schema — the single highest-leverage AEO block.
+ * Answer engines quote these Q&A pairs directly.
+ * Only use for questions/answers VISIBLE on the page (Google policy).
+ * Usage: <FAQSchema faqs={[{question:'...', answer:'...'}]} />
+ * Answers here must be plain text (no HTML).
+ */
+import JsonLd from './JsonLd.astro';
+
+interface FAQ { question: string; answer: string }
+interface Props { faqs: FAQ[] }
+const { faqs } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+---
+<JsonLd schema={schema} />

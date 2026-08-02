@@ -1,0 +1,238 @@
+---
+/**
+ * Homepage — designed layout: hero with imagery, alternating pattern
+ * bands, sizzle-reel slot, dark goal band, beneficiary teaser, FAQ.
+ * Copy from PAGE_COPY.md; Event + FAQPage schema. All imagery is
+ * placeholder (see BRAND.md § 2.5 policy, surfaced on each block).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import SizzleReel from '../components/SizzleReel.astro';
+import EventSchema from '../components/schema/EventSchema.astro';
+import { SITE } from '../config/site.js';
+
+const facts = [
+  { icon: '📅', label: 'When', value: 'Sat, Sep 26, 2026 · 4–7 PM' },
+  { icon: '📍', label: 'Where', value: 'Happy Brew, Jacksonville' },
+  { icon: '🎟️', label: 'Tickets', value: '$30 · show + food + mocktails' },
+  { icon: '🐾', label: 'Benefiting', value: 'Eye Spy & Leader Dogs for the Blind' },
+];
+
+const faqs = [
+  {
+    question: 'What is The Fashion PAWty?',
+    answer:
+      'The Fashion PAWty is a doggie fashion show and community celebration — "A Navigation Celebration" — hosted by the Eye Spy Foundation in Jacksonville, Florida. Dogs strut the orange carpet while the community enjoys mocktails, food, games, and music, all to support the blind and low vision community and Leader Dogs for the Blind.',
+  },
+  {
+    question: 'When and where is The Fashion PAWty?',
+    answer:
+      'Saturday, September 26, 2026, from 4 to 7 PM at Happy Brew, 3200 Hendricks Ave, Jacksonville, FL 32207.',
+  },
+  {
+    question: 'How much are tickets and what is included?',
+    answer: 'Tickets are $30 and include entry to the show, food, and mocktails.',
+  },
+  {
+    question: 'Who does the event benefit?',
+    answer:
+      'The Eye Spy Foundation and Leader Dogs for the Blind. Eye Spy is also sponsoring one Leader Dogs puppy this year.',
+  },
+];
+---
+
+<BaseLayout title="Home" description={SITE.description}>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container hero">
+      <div class="hero__copy panel">
+        <p class="eyebrow">A Navigation Celebration</p>
+        <h1>Strut for a More Accessible World</h1>
+        <p class="prose lead">
+          Saturday, September 26 at Happy Brew — a doggie fashion show down the
+          orange carpet, plus mocktails, games, and music, all benefiting the
+          blind and low vision community.
+        </p>
+        <div class="hero__ctas">
+          <a class="btn btn--primary btn--lg" href="/tickets/">Get Tickets — $30</a>
+          <a class="btn btn--secondary btn--lg" href="/sponsors/">Become a Sponsor</a>
+        </div>
+      </div>
+      <div class="hero__media">
+        <ImagePlaceholder
+          label="A dog striking a pose on the orange carpet"
+          policy="real"
+          ratio="4 / 5"
+          icon="🐕‍🦺"
+        />
+      </div>
+    </div>
+  </section>
+
+  <div class="carpet-divider" role="presentation"></div>
+
+  <!-- ══ QUICK FACTS ══ -->
+  <section class="band" aria-labelledby="facts-heading">
+    <div class="container">
+      <h2 id="facts-heading" class="sr-only">Event at a glance</h2>
+      <ul class="facts grid grid--3">
+        {facts.map((f) => (
+          <li class="card fact">
+            <span class="fact__icon" aria-hidden="true">{f.icon}</span>
+            <span class="fact__label">{f.label}</span>
+            <span class="fact__value">{f.value}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <div class="pattern-strip" role="presentation"></div>
+
+  <!-- ══ OVERVIEW (answer-first) ══ -->
+  <section class="band band--teal" aria-labelledby="about-heading">
+    <div class="container split">
+      <div class="split__text">
+        <p class="eyebrow">Style. Paws. Purpose.</p>
+        <h2 id="about-heading">A Runway with Real Impact</h2>
+        <p class="prose">
+          The Fashion PAWty is a Navigation Celebration hosted by the Eye Spy
+          Foundation, supporting the blind and low vision community and Leader
+          Dogs for the Blind — helping people navigate the world with
+          confidence, online and on the street. Dogs strut the orange carpet,
+          the community comes together, and tickets are $30 including the show,
+          food, and mocktails.
+        </p>
+        <p><a class="btn btn--primary" href="/tickets/">Grab your PAWty Pass</a></p>
+      </div>
+      <ImagePlaceholder
+        label="Orange carpet lined with tailgate chairs, mocktails in hand"
+        policy="ai"
+        ratio="4 / 3"
+        icon="🎉"
+        tone="gold"
+      />
+    </div>
+  </section>
+
+  <!-- ══ SIZZLE REEL ══ -->
+  <section class="band" aria-labelledby="video-heading">
+    <div class="container container--narrow stack">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Take a Look</p>
+        <h2 id="video-heading">Take a Look at the PAWty</h2>
+        <p class="prose mx-auto">
+          Our sizzle reel is on its way. Here's where you'll press play.
+        </p>
+      </div>
+      {/* TODO: pass youtubeId="VIDEO_ID" once the real reel is uploaded.
+          TODO: add VideoObject schema when the real YouTube URL exists. */}
+      <SizzleReel />
+    </div>
+  </section>
+
+  <!-- ══ GOAL (dark band) ══ -->
+  <section class="band band--dark" aria-labelledby="goal-heading">
+    <div class="container split split--center">
+      <div class="split__text">
+        <p class="eyebrow">Our $25,000 Goal</p>
+        <h2 id="goal-heading">Help Us Reach $25,000</h2>
+        <p class="prose">
+          Together we're raising $25,000 to help the blind and low vision
+          community navigate the resources that make for a better low vision
+          lifestyle. Every ticket, sponsor, and wagging tail gets us closer.
+        </p>
+        <div class="hero__ctas">
+          <a class="btn btn--onDark btn--lg" href="/sponsors/">See sponsorship tiers</a>
+          <a class="btn btn--onDark btn--lg" href="/tickets/">Get tickets</a>
+        </div>
+      </div>
+      <ImagePlaceholder
+        label="Community moment — handlers and dogs pausing on the runway"
+        policy="real"
+        ratio="4 / 3"
+        icon="🤝"
+      />
+    </div>
+  </section>
+
+  <div class="pattern-strip pattern-strip--gold" role="presentation"></div>
+
+  <!-- ══ BENEFICIARIES TEASER ══ -->
+  <section class="band band--gold" aria-labelledby="benef-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Who the PAWty Helps</p>
+        <h2 id="benef-heading">Every Wagging Tail Supports Two Missions</h2>
+      </div>
+      <div class="grid grid--2">
+        <article class="card card--accent card--link stack">
+          <ImagePlaceholder label="Eye Spy Foundation in the community" policy="real" ratio="16 / 9" icon="👁️" />
+          <h3>Eye Spy Foundation</h3>
+          <p>
+            We help the blind and low vision community navigate community
+            resources so they can live a better low vision lifestyle — greeting
+            everyone with a hug or a handshake.
+          </p>
+          <p><a href="/beneficiaries/">Meet Eye Spy Foundation</a></p>
+        </article>
+        <article class="card card--accent card--link stack">
+          <ImagePlaceholder label="A Leader Dogs guide dog in harness" policy="real" ratio="16 / 9" icon="🦮" />
+          <h3>Leader Dogs for the Blind</h3>
+          <p>
+            A guide dog school raising and training dogs to help people travel
+            safely and independently. This year Eye Spy is sponsoring one Leader
+            Dogs puppy.
+          </p>
+          <p><a href="/beneficiaries/">Learn about Leader Dogs</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FAQ ══ -->
+  <section class="band">
+    <div class="container container--narrow">
+      <p class="eyebrow">Good to Know</p>
+      <FAQ faqs={faqs} heading="Frequently Asked Questions" />
+      <p class="prose">
+        More questions? Visit the <a href="/faq/">full FAQ page</a> or email
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+      </p>
+    </div>
+  </section>
+
+  <EventSchema />
+</BaseLayout>
+
+<style>
+  /* Hero: two-column on wide screens, stacked on small */
+  .hero { display: grid; gap: var(--space-m); align-items: center; }
+  .hero__copy > * + * { margin-top: var(--space-s); }
+  .hero .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .hero__ctas { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-m); }
+  @media (min-width: 52rem) {
+    .hero { grid-template-columns: 1.15fr 0.85fr; gap: var(--space-l); }
+    .hero__media { max-width: 17rem; margin-inline: auto; }
+  }
+
+  /* Facts: icon + label + value cards */
+  .facts { list-style: none; margin: 0; padding: 0; }
+  .fact { display: grid; gap: 0.35rem; }
+  .fact__icon { font-size: 2rem; line-height: 1; }
+  .fact__label {
+    font-family: var(--font-display);
+    font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--color-accent);
+  }
+  .fact__value { font-weight: 600; }
+
+  /* Split: text beside media */
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+    .split--center { align-items: center; }
+  }
+</style>

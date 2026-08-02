@@ -1,0 +1,54 @@
+---
+/**
+ * Privacy Policy — describes what this site actually does today:
+ * consent-gated GA4, Stripe-hosted payments, email contact.
+ * Not legal advice; have counsel review before launch.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE } from '../config/site.js';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="The Fashion PAWty privacy policy: we collect no personal data unless you email us or accept analytics cookies, and ticket payments are handled entirely by Stripe."
+>
+  <div class="container">
+    <Breadcrumbs
+      items={[{ name: 'Home', href: '/' }, { name: 'Privacy Policy', href: '/privacy/' }]}
+    />
+    <h1>Privacy Policy</h1>
+    <div class="prose">
+      <p>
+        {SITE.name} collects as little personal information as possible: nothing
+        at all unless you email us, buy a ticket through Stripe, or accept
+        analytics cookies.
+      </p>
+
+      <h2>What information do we collect?</h2>
+      <p>
+        If you email us at <a href={`mailto:${SITE.email}`}>{SITE.email}</a>, we
+        receive your email address and whatever you choose to share. Ticket and
+        sponsorship payments are processed entirely by Stripe on Stripe's
+        servers — we never see or store your card details. With your consent, we
+        use Google Analytics to understand how visitors use the site.
+      </p>
+
+      <h2>How do we use cookies and analytics?</h2>
+      <p>
+        Analytics scripts load only after you accept the consent banner.
+        Declining loads zero third-party scripts. You can change your choice
+        anytime by clearing this site's data in your browser and revisiting.
+      </p>
+
+      <h2>How can you contact us about privacy?</h2>
+      <p>
+        Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> with any privacy
+        question or request (access, correction, deletion). We aim to respond
+        within two business days.
+      </p>
+
+      <p><em>Last updated: July 20, 2026.</em></p>
+    </div>
+  </div>
+</BaseLayout>

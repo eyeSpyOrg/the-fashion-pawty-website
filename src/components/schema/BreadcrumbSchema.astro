@@ -1,0 +1,25 @@
+---
+/**
+ * BreadcrumbList schema. Pair with the visible <Breadcrumbs /> component —
+ * Google requires the markup to reflect visible page content.
+ * Usage: <BreadcrumbSchema items={[{name:'Home',href:'/'},{name:'About',href:'/about/'}]} />
+ */
+import { SITE } from '../../config/site.js';
+import JsonLd from './JsonLd.astro';
+
+interface Crumb { name: string; href: string }
+interface Props { items: Crumb[] }
+const { items } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.name,
+    item: new URL(item.href, SITE.url).href,
+  })),
+};
+---
+<JsonLd schema={schema} />

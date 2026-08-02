@@ -1,0 +1,132 @@
+---
+/**
+ * Venue — Happy Brew: address, parking, accessibility, map link.
+ * Event schema included.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import VideoFacade from '../components/VideoFacade.astro';
+import EventSchema from '../components/schema/EventSchema.astro';
+import { SITE } from '../config/site.js';
+
+const mapsUrl =
+  'https://www.google.com/maps/search/?api=1&query=Happy+Brew+3200+Hendricks+Ave+Jacksonville+FL+32207';
+---
+
+<BaseLayout
+  title="Venue — Happy Brew, Jacksonville"
+  description="The Fashion PAWty happens at Happy Brew, 3200 Hendricks Ave, Jacksonville, FL 32207 — a fully accessible venue with parking in the church lot next door on Hendricks Avenue."
+>
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Right on Hendricks Ave</p>
+          <h1>Where the PAWty Happens</h1>
+          <p class="venue-address">
+            <strong>Happy Brew</strong><br />
+            3200 Hendricks Ave, Jacksonville, FL 32207
+          </p>
+          <p class="prose">
+            The Fashion PAWty takes over Happy Brew — a welcoming Jacksonville
+            spot right on Hendricks Avenue. Come thirsty, come with your best
+            outfit on, and come ready to celebrate.
+          </p>
+          <p>
+            <a class="btn btn--primary btn--lg" href={mapsUrl} rel="noopener">
+              Get directions to Happy Brew
+            </a>
+          </p>
+        </div>
+        {/* TODO: optionally swap this placeholder for an accessible embedded
+            map once the team picks an embed approach (keyboard-friendly,
+            consent-aware). */}
+        <ImagePlaceholder label="Map / photo of Happy Brew on Hendricks Ave" policy="ai" ratio="4 / 3" icon="🗺️" />
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Plan Your Visit</p>
+        <h2>Getting There and Good to Know</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card card--accent stack">
+          <span class="info__icon" aria-hidden="true">🅿️</span>
+          <h3>Where do I park?</h3>
+          <p>Park in the church lot next door on Hendricks Avenue, with overflow parking behind the church.</p>
+        </div>
+        <div class="card card--accent stack">
+          <span class="info__icon" aria-hidden="true">♿</span>
+          <h3>Is the venue accessible?</h3>
+          <p>
+            The entire venue is accessible. Questions about your visit? Email
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we'll make sure
+            you have what you need.
+          </p>
+        </div>
+        <div class="card card--accent stack">
+          <span class="info__icon" aria-hidden="true">🚗</span>
+          <h3>Rideshare</h3>
+          {/* TODO: rideshare drop-off note — optional, confirm with the team. */}
+          <p>Dropping off by rideshare? Use the Hendricks Avenue entrance. We'll confirm a dedicated drop-off spot closer to the event.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About the host venue — concise Happy Brew mission + their film -->
+  <section class="band band--gold" aria-labelledby="hb-heading">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">About Our Host</p>
+        <h2 id="hb-heading">More Than a Coffee Shop: Meet Happy Brew</h2>
+        <p class="prose">
+          The Fashion PAWty is hosted at Happy Brew, a nonprofit community café
+          in Jacksonville with a mission close to our own: meaningful
+          employment, job training, and belonging for people with intellectual
+          and developmental disabilities. Their motto says it all —
+          "We Brew Possabilities."
+        </p>
+      </div>
+
+      <div class="split hb">
+        <div class="split__text">
+          <p class="prose">
+            A ministry first and a business second, Happy Brew builds an
+            inclusive community where people of all abilities work, connect, and
+            share hope — one cup of coffee at a time. Only about 13% of
+            Floridians with intellectual disabilities are employed, and Happy
+            Brew is changing that with every hire.
+          </p>
+          <p class="prose">
+            It's the perfect home for a celebration of accessibility — and the
+            reason the orange carpet rolls out here.
+          </p>
+          <p>
+            <a class="btn btn--primary" href="https://happybrew.org" rel="noopener">
+              Learn more about Happy Brew
+            </a>
+          </p>
+        </div>
+        <VideoFacade
+          vimeoId="995025963?h=cd5b44f7cf&dnt=1"
+          title="Happy Brew — We Brew Possabilities (film)"
+          label="Watch the Happy Brew film"
+        />
+      </div>
+    </div>
+  </section>
+
+  <EventSchema />
+</BaseLayout>
+
+<style>
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) { .split { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-xl); } }
+  .venue-address { font-size: var(--step-1); }
+  .info__icon { font-size: 2rem; line-height: 1; }
+</style>

@@ -1,0 +1,429 @@
+@import "tailwindcss";
+/* Self-hosted fonts (font-display: swap is built into @fontsource CSS) */
+@import "@fontsource/baloo-2/600.css";
+@import "@fontsource/baloo-2/700.css";
+@import "@fontsource/nunito-sans/400.css";
+@import "@fontsource/nunito-sans/600.css";
+@import "@fontsource/nunito-sans/700.css";
+
+/* ============================================================
+   A11Y WEB FOUNDATION — GLOBAL STYLES
+   WCAG 2.2 AA is enforced here as CSS defaults, so pages
+   inherit compliance instead of having to remember it.
+   ============================================================ */
+
+/* ── Design tokens ─────────────────────────────────────────
+   All color pairs below meet WCAG contrast:
+   text/bg = 12.6:1 · muted/bg = 7.0:1 · accent/bg = 5.9:1
+   Rebrand per project by changing values ONLY — never drop
+   a pair below 4.5:1 (normal text) or 3:1 (large text/UI). */
+:root {
+  /* Fashion PAWty palette — BRAND.md § 2.1, WCAG-verified (see scripts/check-contrast.mjs) */
+  --color-bg: #FBFAF7;          /* warm white */
+  --color-surface: #FFFFFF;
+  --color-text: #141414;        /* 17.65:1 on bg */
+  --color-text-muted: #4A4A4A;  /* 8.49:1 on bg  */
+  --color-accent: #0E5C6E;      /* deep teal, 7.25:1 on bg — links, buttons */
+  --color-accent-hover: #0A4653;
+  --color-focus: #B47800;       /* deep gold focus ring — 3.58:1 */
+  --color-border: #828F98;      /* 3.18:1 — meets non-text contrast */
+  /* Bright logo gold #E0A82E: decorative highlight ONLY (2.05:1) — never text */
+  --color-gold-highlight: #E0A82E;
+
+  --font-body: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Baloo 2', var(--font-body);
+
+  /* Soft brand tints (derived from teal/gold — used for section
+     backgrounds and card accents; all text placed on them is verified). */
+  --color-teal-tint: #EAF1F2;   /* very soft teal wash */
+  --color-gold-tint: #FBF3E1;   /* very soft gold wash  */
+  --color-dark: #0A4653;        /* deep teal for dark bands */
+  --color-dark-2: #063843;      /* deeper teal, band gradients */
+
+  /* Elevation + radius scale for a consistent, designed feel */
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 1px 2px rgba(6, 56, 67, 0.06), 0 2px 6px rgba(6, 56, 67, 0.06);
+  --shadow: 0 4px 12px rgba(6, 56, 67, 0.08), 0 12px 28px rgba(6, 56, 67, 0.10);
+  --shadow-lg: 0 8px 20px rgba(6, 56, 67, 0.10), 0 24px 56px rgba(6, 56, 67, 0.14);
+
+  /* Alpha-blended borders — composite against whatever band sits behind
+     them, so cards read consistently on white, teal-tint and gold-tint.
+     Alphas are chosen so the blended edge still clears 3:1 (WCAG 1.4.11
+     non-text contrast) on every band we use — verified in
+     scripts/check-contrast.mjs, never eyeballed. */
+  --border-hairline: rgba(6, 56, 67, 0.55);
+  --border-strong: rgba(6, 56, 67, 0.72);
+
+  /* Fluid type scale, rem-based so browser/user zoom works (WCAG 1.4.4) */
+  --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --step-1: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.563rem, 1.4rem + 0.8vw, 2rem);
+  --step-3: clamp(2.1rem, 1.7rem + 1.9vw, 3.1rem);
+
+  /* Fluid spacing scale — one vertical rhythm for the whole site */
+  --space-2xs: clamp(0.5rem, 0.45rem + 0.25vw, 0.75rem);
+  --space-xs: clamp(0.75rem, 0.65rem + 0.5vw, 1rem);
+  --space-s: clamp(1rem, 0.85rem + 0.75vw, 1.5rem);
+  --space-m: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+  --space-l: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+  --space-xl: clamp(3.5rem, 2.8rem + 3.5vw, 6rem);
+
+  --a11y-font-scale: 1;         /* controlled by Accessibility Bar */
+}
+
+/* ── Accessibility Bar theme states (set on <html>) ───────── */
+html[data-a11y-contrast='high'] {
+  --color-bg: #000000;
+  --color-surface: #121212;
+  --color-text: #ffffff;
+  --color-text-muted: #e8e8e8;
+  --color-accent: #ffd23f;
+  --color-accent-hover: #ffe27a;
+  --color-focus: #00e5ff;
+  --color-border: #ffffff;
+  /* Flatten brand tints/tones to the high-contrast surface */
+  --color-teal-tint: #121212;
+  --color-gold-tint: #121212;
+  --color-dark: #000000;
+  --color-dark-2: #000000;
+  --shadow-sm: none;
+  --shadow: none;
+  --shadow-lg: none;
+  /* Elevation carries no meaning in high contrast — borders do all the work */
+  --border-hairline: #ffffff;
+  --border-strong: #ffffff;
+}
+html[data-a11y-fontsize='lg'] { --a11y-font-scale: 1.125; }
+html[data-a11y-fontsize='xl'] { --a11y-font-scale: 1.25; }
+html[data-a11y-spacing='on'] body {
+  /* WCAG 1.4.12 text spacing, applied site-wide on demand */
+  line-height: 1.8 !important;
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+}
+html[data-a11y-spacing='on'] p { margin-bottom: 2em !important; }
+html[data-a11y-motion='off'] *,
+html[data-a11y-motion='off'] *::before,
+html[data-a11y-motion='off'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+html[data-a11y-links='underline'] main a { text-decoration: underline !important; }
+
+/* ── Base document ─────────────────────────────────────────── */
+html {
+  font-size: calc(100% * var(--a11y-font-scale));
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;               /* readable default, dyslexia-friendly */
+  color: var(--color-text);
+  background: var(--color-bg);
+  margin: 0;
+}
+main { display: block; }
+
+/* Readable measure — long lines hurt low-vision and dyslexic readers */
+.prose { max-width: 70ch; }
+.prose > * + * { margin-top: var(--space-s); }
+
+/* Standard page container — use on every page's top-level wrapper */
+.container {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: var(--space-l) clamp(1rem, 4vw, 2rem);
+}
+.container--narrow { max-width: 54rem; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  text-wrap: balance;
+  color: var(--color-text);
+}
+h1 { font-size: var(--step-3); letter-spacing: -0.01em; }
+h2 { font-size: var(--step-2); }
+h3 { font-size: var(--step-1); }
+
+/* ── Vertical rhythm: predictable, generous spacing ─────────
+   Sections breathe; nothing is cramped. Uses the spacing scale. */
+.container > * + * { margin-top: var(--space-m); }
+.container > h2 { margin-top: var(--space-l); }
+.container > h2 + * { margin-top: var(--space-s); }
+.stack > * + * { margin-top: var(--space-s); }
+.stack-l > * + * { margin-top: var(--space-l); }
+.mx-auto { margin-inline: auto; }
+
+/* Section eyebrow / kicker — small uppercase label above a heading */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 var(--space-2xs);
+}
+.eyebrow::before {
+  content: "";
+  width: 1.75rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-gold-highlight);
+}
+.band--dark .eyebrow { color: var(--color-gold-highlight); }
+.band--dark .eyebrow::before { background: var(--color-gold-highlight); }
+
+/* ── Links: perceivable without color alone (WCAG 1.4.1) ──── */
+main a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+main a:hover { color: var(--color-accent-hover); }
+
+/* ── Focus visibility (WCAG 2.4.7 / 2.4.11 focus-not-obscured) ─
+   One global rule. Never remove. Never outline:none without replacement. */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+/* Keep focused elements out from under sticky headers */
+:target, :focus-visible { scroll-margin-top: 6rem; }
+
+/* ── Target size (WCAG 2.5.8 AA: 24px min; we default 44px) ── */
+button, [role='button'], input[type='submit'], .btn, nav a {
+  min-height: 44px;
+  min-width: 44px;
+}
+button, .btn { cursor: pointer; }
+
+/* ── Skip link (WCAG 2.4.1 bypass blocks) ─────────────────── */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-weight: 600;
+  border-radius: 0 0 6px 6px;
+  transition: top 150ms ease;
+}
+.skip-link:focus-visible { top: 0; }
+
+/* ── Screen-reader-only utility ───────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Reduced motion: respect the OS setting by default ────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Forms: visible labels, clear error states ────────────── */
+label { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+input, select, textarea {
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: 6px;
+  padding: 0.625rem 0.75rem;
+  width: 100%;
+  max-width: 32rem;
+}
+[aria-invalid='true'] { border-color: #b3261e; }
+.field-error { color: #b3261e; font-weight: 600; }
+html[data-a11y-contrast='high'] [aria-invalid='true'] { border-color: #ff8a80; }
+html[data-a11y-contrast='high'] .field-error { color: #ff8a80; }
+
+/* ── Buttons (shared) ──────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-0);
+  line-height: 1.1;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;          /* pill — friendly, on-brand */
+  white-space: nowrap;           /* CTAs never wrap mid-label */
+  border: 2px solid transparent;
+  transition: background-color 150ms ease, border-color 150ms ease,
+              transform 150ms ease, box-shadow 150ms ease;
+}
+.btn--primary { background: var(--color-accent); color: #ffffff; box-shadow: var(--shadow-sm); }
+.btn--primary:hover { background: var(--color-accent-hover); color: #ffffff; transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn--secondary {
+  background: var(--color-surface);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.btn--secondary:hover { color: var(--color-accent-hover); border-color: var(--color-accent-hover); transform: translateY(-2px); }
+/* Ticket CTA — teal background, WHITE letters (per request). White on teal
+   is 7.57:1 (AA). White letters need this dark teal background; white on the
+   bright gold would be only 2.14:1 and fail, so the gold stays a background
+   accent elsewhere, not behind white text. */
+.btn--ticket {
+  background: var(--color-accent);
+  color: #ffffff;
+  font-weight: 700;
+}
+.btn--ticket:hover { background: var(--color-accent-hover); color: #ffffff; transform: translateY(-2px); box-shadow: var(--shadow); }
+html[data-a11y-contrast='high'] .btn--ticket { background: var(--color-accent); color: #000000; }
+
+/* On dark bands: white pill reading as the CTA */
+.btn--onDark { background: #ffffff; color: var(--color-dark); }
+.btn--onDark:hover { background: var(--color-gold-tint); color: var(--color-dark-2); transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn--lg { padding: 1rem 2rem; font-size: var(--step-1); }
+html[data-a11y-contrast='high'] .btn--primary,
+html[data-a11y-contrast='high'] .btn--onDark { color: #000000; background: var(--color-accent); }
+html[data-a11y-motion='off'] .btn:hover { transform: none; }
+@media (prefers-reduced-motion: reduce) { .btn:hover { transform: none; } }
+
+/* ── Panels & cards — solid content surfaces on pattern bands ── */
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: clamp(1.5rem, 1rem + 3vw, 3rem);
+}
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-m);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.card--link:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+html[data-a11y-motion='off'] .card--link:hover,
+.card--accent { transform: none; }
+@media (prefers-reduced-motion: reduce) { .card--link:hover { transform: none; } }
+/* Gold top-rule accent for cards that want extra personality */
+.card--accent { border-top: 5px solid var(--color-gold-highlight); }
+
+/* Responsive 16:9 video embed (YouTube/Vimeo iframes) */
+.video-embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--color-dark);
+}
+.video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* Responsive auto-grid used by card collections */
+.grid { display: grid; gap: var(--space-m); }
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
+
+/* ── Brand pattern bands ───────────────────────────────────
+   Full-width sections. Each band has a SOLID background-color
+   (what contrast checkers read) with the signature motif painted
+   on a low-opacity ::before layer BEHIND the content. Text keeps
+   full, verifiable contrast against the solid color while the
+   pattern still shows through — best of both. */
+.band {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--space-xl);
+  background-color: var(--color-bg);
+}
+.band > * { position: relative; z-index: 1; }
+.band > .container { padding-block: 0; }
+/* Compact band — used for page heroes so they sit above the fold */
+.band--tight { padding-block: var(--space-l); }
+
+/* Solid tinted bands — text sits directly on a solid color (verifiable
+   contrast). The motif appears via .pattern-strip dividers & framed
+   panels, never as an image behind live text. */
+.band--teal { background-color: var(--color-teal-tint); }
+.band--gold { background-color: var(--color-gold-tint); }
+.band--dark { background-color: var(--color-dark); color: #ffffff; }
+.band--dark h1, .band--dark h2, .band--dark h3 { color: #ffffff; }
+.band--dark .prose { color: #ffffff; }
+
+/* Decorative full-pattern strip — a slim band of pure motif with NO text.
+   This is where the pattern reads boldly; safe because nothing sits on it.
+
+   ⚠ The pattern SVG filenames in /public/assets/patterns/ are MISLABELLED —
+   every "-light" export actually has a dark/black canvas and vice versa, the
+   same bad export that affected the logo SVGs. Verified by rendering each
+   file and sampling its dominant colour. The mapping below is by ACTUAL
+   appearance, not by filename, so these class names mean what they say:
+       pattern-teal-on-gold.svg  = teal motif on WHITE
+       pattern-gold-on-teal.svg  = gold motif on WHITE
+       pattern-gold-light.svg    = gold motif on TEAL  (the genuinely dark one)
+   Do not "correct" these paths to match their filenames without re-rendering
+   and checking the artwork first. background-color is only the pre-load
+   fallback — each SVG paints its own opaque canvas. */
+.pattern-strip {
+  height: clamp(3.5rem, 8vw, 5.5rem);
+  background: #ffffff url('/assets/patterns/pattern-teal-on-gold.svg') center / 15rem repeat;
+  border-block: 1px solid var(--color-border);
+}
+.pattern-strip--teal { background-color: #ffffff; background-image: url('/assets/patterns/pattern-teal-on-gold.svg'); }
+.pattern-strip--gold { background-color: #ffffff; background-image: url('/assets/patterns/pattern-gold-on-teal.svg'); }
+.pattern-strip--dark { background-color: #006275; background-image: url('/assets/patterns/pattern-gold-light.svg'); }
+
+/* High-contrast theme flattens every band + hides decorative motif */
+html[data-a11y-contrast='high'] .pattern-strip { display: none; }
+html[data-a11y-contrast='high'] .band {
+  background-color: var(--color-bg) !important;
+  color: var(--color-text) !important;
+}
+html[data-a11y-contrast='high'] .band--dark h1,
+html[data-a11y-contrast='high'] .band--dark h2,
+html[data-a11y-contrast='high'] .band--dark h3,
+html[data-a11y-contrast='high'] .band--dark .prose { color: var(--color-text) !important; }
+
+/* ── "Orange carpet" divider — decorative gold runway trail ── */
+.carpet-divider {
+  border: 0;
+  height: 8px;
+  margin: 0;
+  background:
+    repeating-linear-gradient(90deg,
+      var(--color-gold-highlight) 0 2rem, transparent 2rem 3.2rem);
+}
+.carpet-divider--spaced { margin-block: var(--space-l); }
+html[data-a11y-contrast='high'] .carpet-divider { background: var(--color-border); height: 3px; }
+
+/* Section heading cluster (eyebrow + title + intro), centered option */
+.section-head { max-width: 46rem; margin-bottom: var(--space-m); }
+.section-head--center { margin-inline: auto; text-align: center; }
+.section-head--center .eyebrow { justify-content: center; }
+
+/* ── Media defaults ───────────────────────────────────────── */
+img, video { max-width: 100%; height: auto; }

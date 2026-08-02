@@ -1,0 +1,172 @@
+---
+/**
+ * HubSpotForm.astro — accessible native form → HubSpot Forms
+ * Submission API (no embed widget, no secret, works on static hosting).
+ *
+ * Usage:
+ *   <HubSpotForm
+ *     formGuid="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+ *     heading="Stay in the loop"
+ *     fields={[
+ *       { name: 'firstname', label: 'First name', type: 'text', required: true },
+ *       { name: 'email', label: 'Email address', type: 'email', required: true },
+ *     ]}
+ *   />
+ * Field `name` must equal the HubSpot property internal name.
+ * Portal ID comes from site.js → integrations.hubspotPortalId.
+ */
+import { SITE } from '../config/site.js';
+
+interface Field {
+  name: string;
+  label: string;
+  type?: string;       // text | email | tel | textarea
+  required?: boolean;
+  autocomplete?: string;
+}
+interface Props {
+  formGuid: string;
+  heading?: string;
+  fields: Field[];
+  submitLabel?: string;
+}
+const { formGuid, heading = 'Contact us', fields, submitLabel = 'Send' } = Astro.props;
+const portalId = SITE.integrations?.hubspotPortalId ?? '';
+const formId = `hsf-${formGuid.slice(0, 8)}`;
+---
+
+<form
+  class="hs-form"
+  data-hs-form
+  data-portal={portalId}
+  data-guid={formGuid}
+  novalidate
+  aria-labelledby={`${formId}-heading`}
+>
+  <h2 id={`${formId}-heading`}>{heading}</h2>
+
+  <!-- Announced to screen readers on success/failure -->
+  <p class="hs-form__status" role="status" aria-live="polite" data-hs-status></p>
+
+  {fields.map((f) => {
+    const id = `${formId}-${f.name}`;
+    const errId = `${id}-error`;
+    return (
+      <div class="hs-form__field">
+        <label for={id}>
+          {f.label}{f.required && <span aria-hidden="true"> *</span>}
+          {f.required && <span class="sr-only"> (required)</span>}
+        </label>
+        {f.type === 'textarea' ? (
+          <textarea
+            id={id}
+            name={f.name}
+            rows="4"
+            required={f.required}
+            aria-describedby={errId}
+          />
+        ) : (
+          <input
+            id={id}
+            name={f.name}
+            type={f.type ?? 'text'}
+            required={f.required}
+            autocomplete={f.autocomplete ?? (f.type === 'email' ? 'email' : undefined)}
+            aria-describedby={errId}
+          />
+        )}
+        <p class="field-error" id={errId} data-error-for={f.name} hidden></p>
+      </div>
+    );
+  })}
+
+  <button type="submit" class="hs-form__submit">{submitLabel}</button>
+</form>
+
+<style>
+  .hs-form { max-width: 32rem; }
+  .hs-form__field { margin-bottom: 1.25rem; }
+  .hs-form__submit {
+    background: var(--color-accent);
+    color: #ffffff;
+    border: 2px solid var(--color-accent);
+    border-radius: 10px;
+    padding: 0.75rem 1.75rem;
+    font-weight: 700;
+  }
+  .hs-form__submit:hover { background: var(--color-accent-hover); }
+  :global(html[data-a11y-contrast='high']) .hs-form__submit { color: #000000; }
+  .hs-form__status:empty { display: none; }
+  .hs-form__status { font-weight: 700; margin: 0 0 1rem; }
+</style>
+
+<script>
+  function getCookie(name: string): string {
+    const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+
+  document.querySelectorAll<HTMLFormElement>('[data-hs-form]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('[data-hs-status]')!;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Client validation with accessible errors
+      let firstInvalid: HTMLElement | null = null;
+      form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach((input) => {
+        const err = form.querySelector<HTMLElement>(`[data-error-for="${input.name}"]`)!;
+        if (!input.checkValidity()) {
+          input.setAttribute('aria-invalid', 'true');
+          err.textContent = input.validity.valueMissing
+            ? 'This field is required.'
+            : 'Please enter a valid ' + (input.type === 'email' ? 'email address.' : 'value.');
+          err.hidden = false;
+          firstInvalid ??= input;
+        } else {
+          input.removeAttribute('aria-invalid');
+          err.hidden = true;
+        }
+      });
+      if (firstInvalid) { firstInvalid.focus(); return; }
+
+      const portalId = form.dataset.portal;
+      const formGuid = form.dataset.guid;
+      const payload = {
+        fields: Array.from(new FormData(form).entries()).map(([name, value]) => ({
+          name,
+          value: String(value),
+        })),
+        context: {
+          hutk: getCookie('hubspotutk') || undefined,
+          pageUri: location.href,
+          pageName: document.title,
+        },
+      };
+
+      const submitBtn = form.querySelector<HTMLButtonElement>('[type="submit"]')!;
+      submitBtn.disabled = true;
+
+      try {
+        const res = await fetch(
+          `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          }
+        );
+        if (!res.ok) throw new Error(String(res.status));
+        status.textContent = 'Thank you — your submission was received.';
+        form.reset();
+        // Forward to GA4 if loaded
+        (window as any).gtag?.('event', 'form_submit', { form_guid: formGuid });
+      } catch {
+        status.textContent =
+          'Something went wrong sending the form. Please try again or email us directly.';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  });
+</script>

@@ -1,0 +1,11 @@
+---
+/**
+ * JsonLd.astro — safe JSON-LD injector.
+ * All schema components render through this so output is always
+ * valid, escaped, and consistent. Validate with:
+ * https://search.google.com/test/rich-results
+ */
+interface Props { schema: Record<string, any> }
+const { schema } = Astro.props;
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
