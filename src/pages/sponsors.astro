@@ -119,7 +119,7 @@ const sponsorshipTiers = [
     name: 'Doggie Bag Stuffer',
     subtitle: 'Welcome Bag Insert',
     price: 75,
-    shortCopy: 'Place your item in every guest's welcome bag for easy brand visibility.',
+    shortCopy: "Place your item in every guest's welcome bag for easy brand visibility.",
     stripeUrl: 'https://buy.stripe.com/7sYdR81yU2xb4ll9ngejK0e',
     icon: '🎁',
   },
@@ -173,11 +173,12 @@ const availability = (n: number) =>
         {allTiers.map((tier) => (
           <li class="sponsor-card">
             <div class="sponsor-card__image">
-              <ImagePlaceholder
-                label={tier.subtitle || tier.name}
-                policy="ai"
-                ratio="4 / 3"
-                icon={tier.icon}
+              <img
+                src="/images/sponsors/sponsor-placeholder.jpg"
+                alt={`Placeholder — ${tier.name} sponsor logo goes here`}
+                width="600"
+                height="600"
+                loading="lazy"
               />
             </div>
             <div class="sponsor-card__content">
@@ -197,23 +198,13 @@ const availability = (n: number) =>
     </div>
   </section>
 
-  <!-- ══ THANK YOU + HELP ══ -->
-  <section class="band band--gold" aria-labelledby="thanks-h">
+  <!-- ══ HELP ══ -->
+  <section class="band band--gold" aria-labelledby="help-h">
     <div class="container container--narrow">
       <div class="section-head">
-        <p class="eyebrow">Thank You</p>
-        <h2 id="thanks-h">Already on the Team</h2>
+        <p class="eyebrow">Need Help Deciding</p>
+        <h2 id="help-h">Find Your Perfect Package</h2>
       </div>
-      <article class="tier-card tier-card--compact">
-        <span class="tier-card__icon" aria-hidden="true">📸</span>
-        <div class="tier-card__text">
-          <h3 class="tier-card__title">Photo Booth</h3>
-          <p class="tier-card__desc">
-            Proudly sponsored by the <strong>Lions Club of Jacksonville
-            Beach</strong>. Thank you for helping the PAWty shine!
-          </p>
-        </div>
-      </article>
       <p class="prose help">
         Not sure which package fits? Email
         <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we'll help you
