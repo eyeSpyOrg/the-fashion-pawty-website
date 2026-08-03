@@ -5,6 +5,7 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FAQ from '../components/FAQ.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import { SITE } from '../config/site.js';
 
 const faqs = [
@@ -24,13 +25,22 @@ const faqs = [
   description="Fashion PAWty FAQ: tickets are $30 with food and mocktails included, Sep 26 at Happy Brew, Jacksonville — plus answers on parking, accessibility, dogs, and sponsorship."
 >
   <section class="band band--teal band--tight">
-    <div class="container container--narrow">
-      <div class="section-head">
-        <p class="eyebrow">Good to Know</p>
-        <h1>Frequently Asked Questions</h1>
-        <p class="prose lead">
-          Everything about tickets, timing, parking, dogs, and accessibility.
-        </p>
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Good to Know</p>
+          <h1>Frequently Asked Questions</h1>
+          <p class="prose lead">
+            Everything about tickets, timing, parking, dogs, and accessibility.
+          </p>
+        </div>
+        <ImagePlaceholder
+          label="Curious minds with questions"
+          policy="ai"
+          ratio="4 / 3"
+          icon="🤔"
+          tone="teal"
+        />
       </div>
     </div>
   </section>
@@ -59,4 +69,11 @@ const faqs = [
   .faq-help__icon { font-size: 2rem; line-height: 1; }
   .faq-help p { margin: 0; }
   :global(html[data-a11y-contrast='high']) .faq-help { background: var(--color-surface); }
+
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
 </style>

@@ -5,6 +5,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import EventSchema from '../components/schema/EventSchema.astro';
+import { SITE } from '../config/site.js';
 
 const included = [
   'Entry to the doggie fashion show on the orange carpet',
@@ -20,36 +21,32 @@ const included = [
 >
   <section class="band band--teal band--tight">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">One PAWty Pass</p>
-        <h1>Get Your Tickets</h1>
-        <p class="prose lead">
-          One ticket, one great afternoon, one very good cause. Your $30 gets
-          you into the show, food, and mocktails — and helps the blind and low
-          vision community navigate life with more confidence.
-        </p>
-      </div>
-
-      <div class="ticket-grid">
-        <!-- Price card -->
-        <div class="panel ticket-card">
-          <p class="eyebrow">PAWty Pass</p>
-          <p class="ticket-card__price"><span class="ticket-card__amt">$30</span></p>
-          <h2 class="ticket-card__h">What's included</h2>
-          <ul class="ticket-list">
-            {included.map((i) => <li>{i}</li>)}
-          </ul>
-          {/* TODO: replace with real Stripe Payment Link */}
-          <a class="btn btn--primary btn--lg ticket-card__cta" href="https://stripe.com">
-            Buy Tickets — $30
-          </a>
-          <p class="ticket-card__note">
-            Processed securely through the Eye Spy Foundation's Stripe account.
-            Proceeds support the blind and low vision community and Leader Dogs
-            for the Blind.
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">One PAWty Pass</p>
+          <h1>Get Your Tickets</h1>
+          <p class="prose lead">
+            One ticket, one great afternoon, one very good cause. Your $30 gets
+            you into the show, food, and mocktails — and helps the blind and low
+            vision community navigate life with more confidence.
           </p>
+          <div class="panel ticket-card ticket-card--hero">
+            <p class="eyebrow">PAWty Pass</p>
+            <p class="ticket-card__price"><span class="ticket-card__amt">$30</span></p>
+            <h2 class="ticket-card__h">What's included</h2>
+            <ul class="ticket-list">
+              {included.map((i) => <li>{i}</li>)}
+            </ul>
+            <a class="btn btn--primary btn--lg ticket-card__cta" href={SITE.event.ticketUrl} rel="noopener">
+              Buy Tickets — $30
+            </a>
+            <p class="ticket-card__note">
+              Processed securely through the Eye Spy Foundation's Stripe account.
+              Proceeds support the blind and low vision community and Leader Dogs
+              for the Blind.
+            </p>
+          </div>
         </div>
-
         <ImagePlaceholder
           label="Guests toasting with mocktails as a dog struts past"
           policy="ai"
@@ -80,16 +77,25 @@ const included = [
 
 <style>
   .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+
+  .split { display: grid; gap: var(--space-l); align-items: flex-start; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
+
   .ticket-grid { display: grid; gap: var(--space-l); align-items: start; }
   @media (min-width: 52rem) {
     .ticket-grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-xl); }
   }
+  .ticket-card { max-width: 32rem; margin-top: var(--space-m); }
   .ticket-card > * + * { margin-top: var(--space-s); }
   .ticket-card__price { margin: 0; }
   .ticket-card__amt {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(3rem, 2rem + 6vw, 4.5rem);
+    font-size: clamp(2.5rem, 1.5rem + 5vw, 3.5rem);
     color: var(--color-accent);
     line-height: 1;
   }

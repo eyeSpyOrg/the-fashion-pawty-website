@@ -5,6 +5,7 @@
  * Event schema included.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import EventSchema from '../components/schema/EventSchema.astro';
 
 const blocks = [
@@ -23,13 +24,22 @@ const blocks = [
 >
   <section class="band band--teal band--tight">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Saturday, September 26 · 4–7 PM</p>
-        <h1>Schedule of Events</h1>
-        <p class="prose lead">
-          Here's how the afternoon unfolds — three hours of tail-wagging fun
-          with a heartfelt mission at its center.
-        </p>
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Saturday, September 26 · 4–7 PM</p>
+          <h1>Schedule of Events</h1>
+          <p class="prose lead">
+            Here's how the afternoon unfolds — three hours of tail-wagging fun
+            with a heartfelt mission at its center.
+          </p>
+        </div>
+        <ImagePlaceholder
+          label="The Fashion PAWty timeline"
+          policy="ai"
+          ratio="4 / 3"
+          icon="⏰"
+          tone="teal"
+        />
       </div>
     </div>
   </section>
@@ -96,4 +106,12 @@ const blocks = [
   .tl__detail { margin: 0; }
   :global(html[data-a11y-contrast='high']) .tl__marker { border-color: var(--color-border); }
   :global(html[data-a11y-contrast='high']) .tl__marker::after { background: var(--color-border); }
+
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
 </style>

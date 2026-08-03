@@ -113,15 +113,24 @@ const availability = (n: number) =>
   <!-- ══ INTRO ══ -->
   <section class="band band--teal band--tight">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Put Your Name on the Fun</p>
-        <h1>Sponsor the PAWty</h1>
-        <p class="prose lead">
-          Every sponsorship helps fund The Fashion PAWty and supports the Eye
-          Spy Foundation's mission to create a more accessible world for the
-          blind and low vision community. Pick your package, put your brand at
-          the center of the orange carpet, and help us reach our $25,000 goal.
-        </p>
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Put Your Name on the Fun</p>
+          <h1>Sponsor the PAWty</h1>
+          <p class="prose lead">
+            Every sponsorship helps fund The Fashion PAWty and supports the Eye
+            Spy Foundation's mission to create a more accessible world for the
+            blind and low vision community. Pick your package, put your brand at
+            the center of the orange carpet, and help us reach our $25,000 goal.
+          </p>
+        </div>
+        <ImagePlaceholder
+          label="Sponsorship opportunities at The Fashion PAWty"
+          policy="ai"
+          ratio="4 / 3"
+          icon="💰"
+          tone="teal"
+        />
       </div>
     </div>
   </section>
@@ -287,6 +296,13 @@ const availability = (n: number) =>
 
 <style>
   .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
 
   /* ── Shared card treatment: elevation + alpha border, no colored rules ── */
   .tier-card {

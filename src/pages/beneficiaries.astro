@@ -5,6 +5,7 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import { SITE } from '../config/site.js';
 ---
 
 <BaseLayout
@@ -13,13 +14,22 @@ import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 >
   <section class="band band--teal band--tight">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Two Missions, One PAWty</p>
-        <h1>Who the PAWty Helps</h1>
-        <p class="prose lead">
-          Every wagging tail on the orange carpet supports two organizations
-          working to help people navigate the world with confidence.
-        </p>
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Two Missions, One PAWty</p>
+          <h1>Who the PAWty Helps</h1>
+          <p class="prose lead">
+            Every wagging tail on the orange carpet supports two organizations
+            working to help people navigate the world with confidence.
+          </p>
+        </div>
+        <ImagePlaceholder
+          label="The blind and low vision community coming together"
+          policy="ai"
+          ratio="4 / 3"
+          icon="🤝"
+          tone="teal"
+        />
       </div>
     </div>
   </section>
@@ -69,7 +79,7 @@ import ImagePlaceholder from '../components/ImagePlaceholder.astro';
     <div class="container container--narrow cta-band">
       <h2>Ready to Join the Mission?</h2>
       <div class="cta-band__btns">
-        <a class="btn btn--onDark btn--lg" href="/tickets/">Get tickets — $30</a>
+        <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} rel="noopener">Get tickets — $30</a>
         <a class="btn btn--onDark btn--lg" href="/sponsors/">Become a sponsor</a>
       </div>
     </div>
@@ -81,9 +91,10 @@ import ImagePlaceholder from '../components/ImagePlaceholder.astro';
   .split { display: grid; gap: var(--space-l); align-items: center; }
   .split__text > * + * { margin-top: var(--space-s); }
   @media (min-width: 52rem) {
-    .split { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
     .split--rev .split__text { order: 2; }
   }
+  h1 { text-wrap: balance; }
   .cta-band { text-align: center; }
   .cta-band__btns { display: flex; gap: var(--space-s); flex-wrap: wrap; justify-content: center; margin-top: var(--space-m); }
 </style>

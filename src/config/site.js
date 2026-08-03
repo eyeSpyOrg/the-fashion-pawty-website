@@ -54,7 +54,7 @@ export const SITE = {
     endDate: '2026-09-26T19:00:00-04:00',
     venueName: 'Happy Brew',
     ticketPrice: '30',
-    ticketUrl: 'https://thefashionpawty.com/tickets/',
+    ticketUrl: 'https://buy.stripe.com/7sY3cugtO6NrdVV8jcejK01',
     description:
       'A doggie fashion show down the orange carpet with mocktails, games, music, and merch — benefiting the blind and low vision community and Leader Dogs for the Blind.',
   },

@@ -5,6 +5,7 @@
  * Phase 2 via HubSpotForm.astro — never the embedded widget.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import { SITE } from '../config/site.js';
 
 // Non-breaking space + hyphen (U+00A0 / U+2011) so the number never wraps
@@ -16,14 +17,23 @@ const telDisplay = '(844) 222‑8848';
   description="Contact The Fashion PAWty team at team@eyespy.org or (844) 222-8848 with questions about tickets, sponsorship, or accessibility — we greet everyone with a hug or a handshake."
 >
   <section class="band band--teal band--tight">
-    <div class="container container--narrow">
-      <div class="section-head">
-        <p class="eyebrow">We'd Love to Hear From You</p>
-        <h1>Say Hello</h1>
-        <p class="prose lead">
-          We greet everyone with a hug or a handshake — and email works too.
-          Have a question about tickets, sponsorship, or bringing your pup?
-        </p>
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">We'd Love to Hear From You</p>
+          <h1>Say Hello</h1>
+          <p class="prose lead">
+            We greet everyone with a hug or a handshake — and email works too.
+            Have a question about tickets, sponsorship, or bringing your pup?
+          </p>
+        </div>
+        <ImagePlaceholder
+          label="The Fashion PAWty team ready to help"
+          policy="ai"
+          ratio="4 / 3"
+          icon="👋"
+          tone="teal"
+        />
       </div>
     </div>
   </section>
@@ -86,4 +96,12 @@ const telDisplay = '(844) 222‑8848';
     padding: var(--space-s) var(--space-m);
   }
   :global(html[data-a11y-contrast='high']) .form-soon { background: var(--color-surface); border: 1px solid var(--color-border); }
+
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
 </style>
