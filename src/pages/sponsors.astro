@@ -18,83 +18,114 @@ import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import SponsorshipSchema from '../components/schema/SponsorshipSchema.astro';
 import { SITE } from '../config/site.js';
 
-/* TODO: TEMPORARY — every tier currently points at one generic Stripe
-   donation link. Replace with a tier-specific Stripe Payment Link per
-   package (so amounts are pre-set and reporting is per-tier) before launch. */
-const STRIPE_URL = 'https://donate.stripe.com/dRmcN43H25Jng43eHAejK00';
-
-const bestInShow = {
-  name: 'Best in Show',
-  price: 5000,
-  qty: 1,
-  shortCopy: 'Become the presenting sponsor with runway naming rights and live mentions.',
-  fullDescription:
-    'Become the presenting sponsor of The Fashion PAWty. Best in Show sponsors get exclusive runway naming rights, top billing across all event materials, and live mic mentions throughout the show.',
-  icon: '🏆',
-};
-
-const topDog = {
-  name: 'Top Dog',
-  price: 2000,
-  qty: 3,
-  shortCopy: 'Sponsor a signature zone with exclusive naming rights and signage.',
-  fullDescription:
-    'Sponsor a Signature Zone — Music, Food, or Mock-tails — with exclusive naming rights and branded area signage seen by every guest.',
-  icon: '🐕',
-};
-
-const pawtyAnimal = {
-  name: 'PAWty Animal',
-  price: 1000,
-  qty: 5,
-  shortCopy: 'Sponsor an activity area and get your brand woven into the fun.',
-  fullDescription:
-    'Sponsor an Activity Area — Photo Wall, Merch Shop, Bone Up Station, DJ PAWty, or Sensory Games — and get your brand woven into the fun.',
-  icon: '🎉',
-};
-
-const kennelClub = {
-  name: 'Kennel Club',
-  price: 250,
-  qty: 4,
-  shortCopy: 'Reserve a vendor tent and get featured on our event map.',
-  fullDescription:
-    'Reserve a 10x10 vendor tent at The Fashion PAWty. Get featured on our event map and website so guests can find you.',
-  icon: '⛺',
-};
-
-const mediaTiers = [
+const sponsorshipTiers = [
+  {
+    name: 'Best in Show Sponsorship',
+    subtitle: 'Main Sponsor',
+    price: 5000,
+    shortCopy: 'Become the presenting sponsor with runway naming rights and live mentions.',
+    stripeUrl: 'https://buy.stripe.com/8x2dR85Pa1t72dd2YSejK02',
+    icon: '🏆',
+  },
+  {
+    name: 'Top Dog',
+    subtitle: 'Music Stage Sponsor',
+    price: 2000,
+    shortCopy: 'Sponsor the Music Stage with exclusive naming rights and branded signage.',
+    stripeUrl: 'https://buy.stripe.com/cNibJ0cdy1t7g430QKejK03',
+    icon: '🎵',
+  },
+  {
+    name: 'Top Dog',
+    subtitle: 'Chow Down Station Sponsor',
+    price: 2000,
+    shortCopy: 'Sponsor the Chow Down Station with exclusive naming rights and signage.',
+    stripeUrl: 'https://buy.stripe.com/4gM4gy3H21t79FFgPIejK04',
+    icon: '🍔',
+  },
+  {
+    name: 'Top Dog',
+    subtitle: 'MockTAIL Bar Sponsor',
+    price: 2000,
+    shortCopy: 'Sponsor the MockTAIL Bar with exclusive naming rights and branded signage.',
+    stripeUrl: 'https://buy.stripe.com/aFa4gy6Te2xbcRRdDwejK05',
+    icon: '🍹',
+  },
+  {
+    name: 'PAWty Animal',
+    subtitle: 'Photo Wall Sponsor',
+    price: 1000,
+    shortCopy: 'Sponsor the Photo Wall and get your brand woven into guest memories.',
+    stripeUrl: 'https://buy.stripe.com/7sYeVc6Te1t7g436b4ejK06',
+    icon: '📸',
+  },
+  {
+    name: 'PAWty Animal',
+    subtitle: 'Merch Shop Sponsor',
+    price: 1000,
+    shortCopy: 'Sponsor the Merch Shop and get your brand in front of every guest.',
+    stripeUrl: 'https://buy.stripe.com/9B614m91m9ZD7xx2YSejK07',
+    icon: '🧢',
+  },
+  {
+    name: 'PAWty Animal',
+    subtitle: 'Bone Up Station Sponsor',
+    price: 1000,
+    shortCopy: 'Sponsor the Bone Up Station and support guest engagement and fun.',
+    stripeUrl: 'https://buy.stripe.com/dRm7sKfpKfjX4ll6b4ejK08',
+    icon: '🦴',
+  },
+  {
+    name: 'PAWty Animal',
+    subtitle: 'DJ PAWty Sponsor',
+    price: 1000,
+    shortCopy: 'Sponsor the DJ PAWty and keep the music and energy going all day.',
+    stripeUrl: 'https://buy.stripe.com/8x28wO0uQfjX3hh570ejK09',
+    icon: '🎧',
+  },
+  {
+    name: 'PAWty Animal',
+    subtitle: 'Sensory Games Sponsor',
+    price: 1000,
+    shortCopy: 'Sponsor Sensory Games and create inclusive fun for all guests.',
+    stripeUrl: 'https://buy.stripe.com/9B628q91m6Nr5pp0QKejK0a',
+    icon: '🧩',
+  },
+  {
+    name: 'Kennel Club',
+    subtitle: 'Vendor Tent',
+    price: 250,
+    shortCopy: 'Reserve a 10x10 vendor tent and get featured on our event map.',
+    stripeUrl: 'https://buy.stripe.com/dRm8wOcdy8Vz8BBczsejK0b',
+    icon: '⛺',
+  },
   {
     name: 'The Doggie Dispatch',
+    subtitle: 'Email Sponsor',
     price: 200,
-    qty: 5,
+    shortCopy: 'Get featured in our official PAWty email to dog lovers and supporters.',
+    stripeUrl: 'https://buy.stripe.com/eVqdR8fpK7Rv8BBbvoejK0c',
     icon: '📬',
-    shortCopy: 'Get featured in our official PAWty email to the community.',
-    fullDescription:
-      'Get featured in one of our official Fashion PAWty emails, sent straight to our full list of dog lovers and community supporters.',
   },
   {
     name: 'PAWty Post',
+    subtitle: 'Social Media Sponsor',
     price: 150,
-    qty: 10,
+    shortCopy: 'Score a dedicated shout-out post on our social channels to engaged followers.',
+    stripeUrl: 'https://buy.stripe.com/dRmfZga5q4FjdVV0QKejK0d',
     icon: '📣',
-    shortCopy: 'Score a dedicated shout-out post on our social channels.',
-    fullDescription:
-      'Score a dedicated shout-out post on our social channels, tagging your brand in front of our engaged community.',
   },
   {
     name: 'Doggie Bag Stuffer',
+    subtitle: 'Welcome Bag Insert',
     price: 75,
-    qty: 15,
+    shortCopy: 'Place your item in every guest's welcome bag for easy brand visibility.',
+    stripeUrl: 'https://buy.stripe.com/7sYdR81yU2xb4ll9ngejK0e',
     icon: '🎁',
-    shortCopy: 'Place your item directly into every guest's welcome bag.',
-    fullDescription:
-      "Put your item or insert directly into every guest's welcome bag — an easy, affordable way to get noticed.",
   },
 ];
 
-/* One flat list drives the structured data — same objects rendered above. */
-const allTiers = [bestInShow, topDog, pawtyAnimal, kennelClub, ...mediaTiers];
+const allTiers = sponsorshipTiers;
 
 const money = (n: number) => `$${n.toLocaleString('en-US')}`;
 const availability = (n: number) =>
@@ -143,7 +174,7 @@ const availability = (n: number) =>
           <li class="sponsor-card">
             <div class="sponsor-card__image">
               <ImagePlaceholder
-                label={tier.name}
+                label={tier.subtitle || tier.name}
                 policy="ai"
                 ratio="4 / 3"
                 icon={tier.icon}
@@ -151,14 +182,14 @@ const availability = (n: number) =>
             </div>
             <div class="sponsor-card__content">
               <h3 class="sponsor-card__title">{tier.name}</h3>
+              {tier.subtitle && <p class="sponsor-card__subtitle">{tier.subtitle}</p>}
               <p class="sponsor-card__copy">{tier.shortCopy}</p>
               <div class="sponsor-card__footer">
                 <p class="sponsor-card__price">{money(tier.price)}</p>
-                <p class="sponsor-card__qty">{availability(tier.qty)}</p>
               </div>
             </div>
-            <a class="btn btn--primary btn--block" href={SITE.event.ticketUrl} rel="noopener">
-              Get Tickets
+            <a class="btn btn--primary btn--block" href={tier.stripeUrl} rel="noopener">
+              Become a Sponsor
             </a>
           </li>
         ))}
@@ -253,6 +284,13 @@ const availability = (n: number) =>
     margin: 0;
     font-size: var(--step-1);
     font-weight: 700;
+  }
+
+  .sponsor-card__subtitle {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    font-weight: 600;
   }
 
   .sponsor-card__copy {
