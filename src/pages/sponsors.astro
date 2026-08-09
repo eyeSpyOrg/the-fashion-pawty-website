@@ -13,7 +13,6 @@
  * (same discipline as the FAQ component).
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import SponsorCard from '../components/SponsorCard.astro';
 import SponsorshipSchema from '../components/schema/SponsorshipSchema.astro';
 
@@ -261,12 +260,13 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
             the center of the orange carpet, and help us reach our $25,000 goal.
           </p>
         </div>
-        <ImagePlaceholder
-          label="Sponsorship opportunities at The Fashion PAWty"
-          policy="ai"
-          ratio="4 / 3"
-          icon="💰"
-          tone="teal"
+        <img
+          class="hero-photo"
+          src="/images/sponsors/sponsorship-hero.webp"
+          alt="The Fashion PAWty — A Navigation Celebration! Presented by: your company logo here"
+          width="1600"
+          height="1200"
+          fetchpriority="high"
         />
       </div>
     </div>
@@ -287,19 +287,19 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
           <a class="btn btn--secondary" href="/beneficiaries/">View Our Beneficiaries</a>
         </div>
         <div class="logo-stack">
-          <ImagePlaceholder
-            label="Eye Spy Foundation logo"
-            policy="real"
-            ratio="1 / 1"
-            icon="👁️"
-            tone="teal"
+          <img
+            src="/images/sponsors/eyespy-logo-card.webp"
+            alt="Eye Spy Foundation logo"
+            width="1600"
+            height="1200"
+            loading="lazy"
           />
-          <ImagePlaceholder
-            label="Leader Dogs for the Blind logo"
-            policy="real"
-            ratio="1 / 1"
-            icon="🦮"
-            tone="gold"
+          <img
+            src="/images/sponsors/leaderdogs-logo-card.webp"
+            alt="Leader Dogs for the Blind logo"
+            width="1600"
+            height="1200"
+            loading="lazy"
           />
         </div>
       </div>
@@ -402,21 +402,36 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
   @media (min-width: 52rem) {
     .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
   }
+
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
   h1 { text-wrap: balance; }
 
   .section-head--center .prose { margin-top: var(--space-xs); }
 
-  /* Eye Spy + Leader Dogs logos, stacked, same size, centered to the copy. */
+  /* Eye Spy + Leader Dogs logo cards, stacked, same size, centered to the
+     copy. Real 4:3 cards (not square), so they're wider than the old
+     placeholder squares. */
   .logo-stack {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-m);
     width: 100%;
-    max-width: 14rem;
+    max-width: 22rem;
     margin-inline: auto;
   }
-  .logo-stack > * { width: 100%; }
+  .logo-stack > img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    border-radius: var(--radius);
+  }
 
   /* ── Tier list — one column, stacked, 80% of the container width ── */
   .tier-grid {
