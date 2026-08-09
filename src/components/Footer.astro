@@ -51,7 +51,7 @@ const ICONS: Record<string, string> = {
         <ul>
           {SITE.socials.map((s) => (
             <li>
-              <a class="social-icon" href={s.url} rel="me noopener" aria-label={`${s.label} (opens Eye Spy Foundation profile)`}>
+              <a class="social-icon" href={s.url} target="_blank" rel="me noopener" aria-label={`${s.label} (opens Eye Spy Foundation profile)`}>
                 <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
                   <path fill="currentColor" d={ICONS[s.icon]} />
                 </svg>

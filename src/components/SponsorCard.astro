@@ -53,7 +53,7 @@ const money = (n: number) => `$${n.toLocaleString('en-US')}`;
 
     <div class="sponsor-card__action">
       <p class="sponsor-card__price">{money(price)}</p>
-      <a class="btn btn--primary" href={stripeUrl} rel="noopener">
+      <a class="btn btn--primary" href={stripeUrl} target="_blank" rel="noopener">
         {buttonText}
       </a>
     </div>
