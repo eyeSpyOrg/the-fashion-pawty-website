@@ -130,12 +130,14 @@ import { SITE } from '../config/site.js';
   </section>
 
   <section class="band band--dark band--pattern">
-    <div class="container container--narrow cta-band">
-      <h2>Support Blind &amp; Low Vision Navigation</h2>
-      <div class="cta-band__btns">
-        <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Join the PAWty</a>
-        <a class="btn btn--onDark btn--lg" href="/sponsors/">Become a Sponsor</a>
-        <a class="btn btn--onDark btn--lg" href={SITE.shopUrl} target="_blank" rel="noopener">Buy Merch</a>
+    <div class="container">
+      <div class="cta-box">
+        <h2>Support Blind &amp; Low Vision Navigation</h2>
+        <div class="cta-band__btns">
+          <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Join the PAWty</a>
+          <a class="btn btn--onDark btn--lg" href="/sponsors/">Become a Sponsor</a>
+          <a class="btn btn--onDark btn--lg" href={SITE.shopUrl} target="_blank" rel="noopener">Buy Merch</a>
+        </div>
       </div>
     </div>
   </section>
@@ -167,20 +169,35 @@ import { SITE } from '../config/site.js';
     border-radius: var(--radius);
     box-shadow: var(--shadow);
   }
-  .cta-band { text-align: center; }
   .cta-band__btns { display: flex; gap: var(--space-s); flex-wrap: wrap; justify-content: center; margin-top: var(--space-m); }
 
-  /* Low-opacity brand motif behind the solid dark background — text keeps
-     full contrast against --color-dark; the pattern is a texture, not a
-     contrast-bearing surface. pattern-gold-light.svg is gold-on-teal (see
-     global.css's verified filename mapping), so it blends into this band. */
-  .band--pattern::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: url('/assets/patterns/pattern-gold-light.svg') center / 12rem repeat;
-    opacity: 0.1;
+  /* Full brand pattern (black canvas, full-color icons) as the actual band
+     background — bold, not a faint texture. The CTA copy + buttons live in
+     their own solid card on top, so contrast never depends on the busy
+     pattern behind it; the card is centered in the strip via margin-inline
+     auto rather than relying on text-align alone. */
+  .band--pattern {
+    background-color: #000000;
+    background-image: url('/assets/patterns/pattern-fullcolordark.png');
+    background-size: 14rem;
+    background-repeat: repeat;
   }
-  html[data-a11y-contrast='high'] .band--pattern::before { display: none; }
+  html[data-a11y-contrast='high'] .band--pattern { background-image: none; }
+
+  .cta-box {
+    background: var(--color-dark);
+    color: #ffffff;
+    text-align: center;
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: var(--space-l) var(--space-m);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+  .cta-box h2 { margin: 0; }
+  html[data-a11y-contrast='high'] .cta-box {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 2px solid var(--color-border);
+  }
 </style>
