@@ -55,10 +55,27 @@ import { SITE } from '../config/site.js';
           lifestyle — connecting people to the programs, services, and tools
           that make everyday life more accessible.
         </p>
+        <p>
+          <a class="btn btn--primary" href="https://eyespy.org" target="_blank" rel="noopener">
+            Visit EyeSpy.org
+          </a>
+        </p>
       </div>
       <div class="photo-stack">
-        <ImagePlaceholder label="Eye Spy Foundation team welcoming guests" policy="real" ratio="4 / 3" icon="👁️" />
-        <ImagePlaceholder label="Eye Spy Foundation staff connecting a guest to resources" policy="real" ratio="4 / 3" icon="🤗" />
+        <img
+          src="/images/beneficiaries/eyespy-website-mockup.webp"
+          alt="The Eye Spy Foundation website homepage displayed on a desktop monitor"
+          width="1600"
+          height="1200"
+          loading="lazy"
+        />
+        <img
+          src="/images/beneficiaries/guide-dog-navigation.webp"
+          alt="A woman using a guide dog in harness to navigate near a fountain in downtown Jacksonville"
+          width="1600"
+          height="1200"
+          loading="lazy"
+        />
       </div>
     </div>
   </section>
@@ -87,10 +104,27 @@ import { SITE } from '../config/site.js';
           safely and independently. The Fashion PAWty supports their mission
           every year.
         </p>
+        <p>
+          <a class="btn btn--primary" href="https://www.leaderdog.org/" target="_blank" rel="noopener">
+            Visit Leader Dogs Website
+          </a>
+        </p>
       </div>
       <div class="photo-stack">
-        <ImagePlaceholder label="A Leader Dogs guide dog working in harness" policy="real" ratio="4 / 3" icon="🦮" tone="gold" />
-        <ImagePlaceholder label="A Leader Dogs puppy in training" policy="real" ratio="4 / 3" icon="🐕" tone="gold" />
+        <img
+          src="/images/beneficiaries/leader-dogs-puppy.webp"
+          alt="A golden retriever puppy wearing a 'Future Leader Dog' bandana"
+          width="1600"
+          height="1200"
+          loading="lazy"
+        />
+        <img
+          src="/images/beneficiaries/leader-dogs-staff.webp"
+          alt="Leader Dogs for the Blind staff and trainers posing outdoors with their guide dogs"
+          width="1600"
+          height="1200"
+          loading="lazy"
+        />
       </div>
     </div>
   </section>
@@ -126,6 +160,13 @@ import { SITE } from '../config/site.js';
     .split--balanced { grid-template-columns: 1fr 1fr; }
   }
   .photo-stack { display: grid; gap: var(--space-m); }
+  .photo-stack img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
   .cta-band { text-align: center; }
   .cta-band__btns { display: flex; gap: var(--space-s); flex-wrap: wrap; justify-content: center; margin-top: var(--space-m); }
 
