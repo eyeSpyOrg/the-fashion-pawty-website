@@ -274,34 +274,30 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
 
   <!-- ══ WHY SPONSOR (AEO) ══ -->
   <section class="band band--tight">
-    <div class="container">
-      <div class="split">
-        <div class="split__text">
-          <h2>Why Sponsor The Fashion PAWty?</h2>
-          <p class="prose">
-            Sponsorship dollars fund the Eye Spy Foundation and Leader Dogs for
-            the Blind, helping the blind and low vision community navigate the
-            world with more confidence — while putting your brand in front of
-            an engaged Jacksonville audience.
-          </p>
-          <a class="btn btn--secondary" href="/beneficiaries/">View Our Beneficiaries</a>
-        </div>
-        <div class="logo-stack">
-          <img
-            src="/images/sponsors/eyespy-logo-card.webp"
-            alt="Eye Spy Foundation logo"
-            width="1600"
-            height="1200"
-            loading="lazy"
-          />
-          <img
-            src="/images/sponsors/leaderdogs-logo-card.webp"
-            alt="Leader Dogs for the Blind logo"
-            width="1600"
-            height="1200"
-            loading="lazy"
-          />
-        </div>
+    <div class="container container--narrow why-sponsor">
+      <h2>Why Sponsor The Fashion PAWty?</h2>
+      <p class="prose">
+        Sponsorship dollars fund the Eye Spy Foundation and Leader Dogs for
+        the Blind, helping the blind and low vision community navigate the
+        world with more confidence — while putting your brand in front of
+        an engaged Jacksonville audience.
+      </p>
+      <a class="btn btn--secondary" href="/beneficiaries/">View Our Beneficiaries</a>
+      <div class="logo-row">
+        <img
+          src="/images/sponsors/eyespy-logo-card.webp"
+          alt="Eye Spy Foundation logo"
+          width="1600"
+          height="1200"
+          loading="lazy"
+        />
+        <img
+          src="/images/sponsors/leaderdogs-logo-card.webp"
+          alt="Leader Dogs for the Blind logo"
+          width="1600"
+          height="1200"
+          loading="lazy"
+        />
       </div>
     </div>
   </section>
@@ -414,19 +410,20 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
 
   .section-head--center .prose { margin-top: var(--space-xs); }
 
-  /* Eye Spy + Leader Dogs logo cards, stacked, same size, centered to the
-     copy. Real 4:3 cards (not square), so they're wider than the old
-     placeholder squares. */
-  .logo-stack {
+  /* "Why Sponsor" section — one column: heading, copy, button, then the
+     two logo cards side by side below (Eye Spy left, Leader Dogs right). */
+  .why-sponsor > .btn { display: inline-flex; margin-top: var(--space-m); }
+  .logo-row {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: var(--space-m);
-    width: 100%;
-    max-width: 22rem;
-    margin-inline: auto;
+    margin-top: var(--space-m);
   }
-  .logo-stack > img {
+  @media (max-width: 34rem) {
+    .logo-row { flex-direction: column; }
+  }
+  .logo-row > img {
+    flex: 1;
+    min-width: 0;
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: contain;

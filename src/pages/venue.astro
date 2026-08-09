@@ -149,12 +149,12 @@ const mapsUrl =
      (before the footer) stays at the normal band spacing. */
   .hb-band { padding-top: var(--space-l); }
 
-  /* Happy Brew "About Our Host" section: text blocks sit at 80% width,
-     flush left; the video is also 80% width but centered instead.
-     max-width: none overrides .section-head's global 46rem cap AND
-     .prose's global 70ch cap — both would otherwise win over this 80%
-     and wrap the paragraph text short, leaving dead space on the right. */
-  .hb-text { width: 80%; max-width: none; margin-inline: 0; }
+  /* Happy Brew "About Our Host" section: text blocks and the video both
+     stretch to the full container width. max-width: none overrides
+     .section-head's global 46rem cap AND .prose's global 70ch cap — both
+     would otherwise cap the paragraph text short, leaving dead space on
+     the right. */
+  .hb-text { width: 100%; max-width: none; margin-inline: 0; }
   .hb-text .prose { max-width: none; }
-  .hb-video { width: 80%; margin-inline: auto; }
+  .hb-video { width: 100%; }
 </style>
