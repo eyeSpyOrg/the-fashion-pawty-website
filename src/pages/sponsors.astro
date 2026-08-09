@@ -2,11 +2,11 @@
 /**
  * Sponsor — sponsorship packages for The Fashion PAWty.
  *
- * Tiers are grouped into four sections that mirror the physical packages:
+ * Tiers are grouped into five sections that mirror the physical packages:
  *   Main Sponsor (1, full-width) > Top Dog Sponsorships (3, signature zones) >
- *   PAWty Animal (6 — five activity areas + Kennel Club vendor tent,
- *   styled differently since it's a space rental, not an activity naming
- *   right) > Media Sponsorships (3).
+ *   PAWty Animal Sponsorships (5 activity areas) > Kennel Club (vendor tent —
+ *   a space rental, not an activity naming right, so it gets its own section
+ *   rather than sitting inside PAWty Animal) > Media Sponsorships (2).
  *
  * Each group feeds both the visible cards and SponsorshipSchema, so the
  * structured data can never drift from what a visitor actually reads
@@ -14,6 +14,7 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import SponsorCard from '../components/SponsorCard.astro';
 import SponsorshipSchema from '../components/schema/SponsorshipSchema.astro';
 import { SITE } from '../config/site.js';
 
@@ -23,7 +24,14 @@ const mainSponsor = [
     fullName: 'Best in Show Sponsorship (Main Sponsor)',
     price: 5000,
     qty: 1,
-    shortCopy: 'Become the presenting sponsor with runway naming rights and live mentions.',
+    shortCopy: 'Take center stage as our presenting sponsor, with runway naming rights, live shoutouts, and top billing all night.',
+    benefits: [
+      'Presenting sponsorship logo on all collateral, emails, social media, and website',
+      'Exclusive Fashion PAWty Runway Sponsor',
+      '4 PAWty Passes & VIP runway seats',
+      'Food, MockTAILS, and a tote bag for 4',
+    ],
+    buttonText: 'Become a Sponsor',
     stripeUrl: 'https://buy.stripe.com/8x2dR85Pa1t72dd2YSejK02',
     icon: '🏆',
   },
@@ -31,29 +39,53 @@ const mainSponsor = [
 
 const topDog = [
   {
-    title: 'Music',
+    title: 'Music Stage',
     fullName: 'Top Dog: Music Stage Sponsor',
     price: 2000,
     qty: 1,
-    shortCopy: 'Sponsor the Music Stage with exclusive naming rights and branded signage.',
+    shortCopy: 'Keep the tunes rolling all afternoon as sponsor of the Music Stage, with your name in lights on every playlist.',
+    benefits: [
+      'Exclusive sponsor for the Happy Brew Music Stage',
+      'Social media shout-out, email inclusion, and website placement',
+      'Exclusive Fashion PAWty Runway Sponsor',
+      'PAWty Passes & VIP runway seats (2)',
+      'Food, MockTAILS, and a tote bag (2)',
+    ],
+    buttonText: 'Sponsor the Jams',
     stripeUrl: 'https://buy.stripe.com/cNibJ0cdy1t7g430QKejK03',
     icon: '🎵',
   },
   {
-    title: 'Chow Down',
+    title: 'Chow Down Station',
     fullName: 'Top Dog: Chow Down Station Sponsor',
     price: 2000,
     qty: 1,
-    shortCopy: 'Sponsor the Chow Down Station with exclusive naming rights and signage.',
+    shortCopy: 'Feed the fun as exclusive sponsor of the Chow Down Station, where every bite comes with your brand front and center.',
+    benefits: [
+      'Exclusive sponsor for the Chow Down Station',
+      'Social media shout-out, email inclusion, and website placement',
+      'Exclusive Fashion PAWty Runway Sponsor',
+      'PAWty Passes & VIP runway seats (2)',
+      'Food, MockTAILS, and a tote bag (2)',
+    ],
+    buttonText: 'Sponsor the Treats',
     stripeUrl: 'https://buy.stripe.com/4gM4gy3H21t79FFgPIejK04',
     icon: '🍔',
   },
   {
-    title: 'Mocktails',
+    title: 'MockTAIL Bar',
     fullName: 'Top Dog: MockTAIL Bar Sponsor',
     price: 2000,
     qty: 1,
-    shortCopy: 'Sponsor the MockTAIL Bar with exclusive naming rights and branded signage.',
+    shortCopy: 'Shake things up as exclusive sponsor of the MockTAIL Bar, pouring your brand into every mocktail we serve.',
+    benefits: [
+      'Exclusive sponsor for the MockTAIL Bar',
+      'Social media shout-out, email inclusion, and website placement',
+      'Exclusive Fashion PAWty Runway Sponsor',
+      'PAWty Passes & VIP runway seats (2)',
+      'Food, MockTAILS, and a tote bag (2)',
+    ],
+    buttonText: 'Sponsor the Drinks',
     stripeUrl: 'https://buy.stripe.com/aFa4gy6Te2xbcRRdDwejK05',
     icon: '🍹',
   },
@@ -65,7 +97,15 @@ const pawtyAnimal = [
     fullName: 'PAWty Animal: Photo Wall Sponsor',
     price: 1000,
     qty: 1,
-    shortCopy: 'Sponsor the Photo Wall and get your brand woven into guest memories.',
+    shortCopy: "Strike a pose as sponsor of the Photo Wall, where your brand gets woven into every guest's favorite PAWty memory.",
+    benefits: [
+      'Exclusive sponsor for the Fashion PAWty Photo Wall',
+      'Social media shout-out, email inclusion, and website placement',
+      'Exclusive Fashion PAWty Runway Sponsor',
+      'PAWty Passes (2)',
+      'Food, MockTAILS, and a tote bag (2)',
+    ],
+    buttonText: 'Sponsor the Snaps',
     stripeUrl: 'https://buy.stripe.com/7sYeVc6Te1t7g436b4ejK06',
     icon: '📸',
   },
@@ -74,16 +114,32 @@ const pawtyAnimal = [
     fullName: 'PAWty Animal: Merch Shop Sponsor',
     price: 1000,
     qty: 1,
-    shortCopy: 'Sponsor the Merch Shop and get your brand in front of every guest.',
+    shortCopy: 'Dress the part as sponsor of the Merch Shop, putting your brand on everything guests take home from the PAWty.',
+    benefits: [
+      'Exclusive sponsor for the Fashion PAWty Merch Shop',
+      'Social media shout-out, email inclusion, and website placement',
+      'Exclusive Fashion PAWty Runway Sponsor',
+      'PAWty Passes (2)',
+      'Food, MockTAILS, and a tote bag (2)',
+    ],
+    buttonText: 'Sponsor the Merch',
     stripeUrl: 'https://buy.stripe.com/9B614m91m9ZD7xx2YSejK07',
     icon: '🧢',
   },
   {
-    title: 'Bone Up',
+    title: 'Bone Up Station',
     fullName: 'PAWty Animal: Bone Up Station Sponsor',
     price: 1000,
     qty: 1,
-    shortCopy: 'Sponsor the Bone Up Station and support guest engagement and fun.',
+    shortCopy: 'Get tails wagging as sponsor of the Bone Up Station, our hands-on hub for playful guest engagement and fun.',
+    benefits: [
+      'Exclusive sponsor for the Fashion PAWty Bone Up Station',
+      'Social media shout-out, email inclusion, and website placement',
+      'Exclusive Fashion PAWty Runway Sponsor',
+      'PAWty Passes (2)',
+      'Food, MockTAILS, and a tote bag (2)',
+    ],
+    buttonText: 'Sponsor the Knowledge',
     stripeUrl: 'https://buy.stripe.com/dRm7sKfpKfjX4ll6b4ejK08',
     icon: '🦴',
   },
@@ -92,7 +148,15 @@ const pawtyAnimal = [
     fullName: 'PAWty Animal: DJ PAWty Sponsor',
     price: 1000,
     qty: 1,
-    shortCopy: 'Sponsor the DJ PAWty and keep the music and energy going all day.',
+    shortCopy: 'Keep the energy up all day as sponsor of the DJ PAWty, powering the beats that keep every tail wagging.',
+    benefits: [
+      'Exclusive sponsor for the DJ PAWty station',
+      'Social media shout-out, email inclusion, and website placement',
+      'Exclusive Fashion PAWty Runway Sponsor',
+      'PAWty Passes (2)',
+      'Food, MockTAILS, and a tote bag (2)',
+    ],
+    buttonText: 'Sponsor the DJ',
     stripeUrl: 'https://buy.stripe.com/8x28wO0uQfjX3hh570ejK09',
     icon: '🎧',
   },
@@ -101,20 +165,37 @@ const pawtyAnimal = [
     fullName: 'PAWty Animal: Sensory Games Sponsor',
     price: 1000,
     qty: 1,
-    shortCopy: 'Sponsor Sensory Games and create inclusive fun for all guests.',
+    shortCopy: 'Spark some fun as sponsor of Sensory Games, our inclusive activity zone built for every guest to enjoy.',
+    benefits: [
+      'Exclusive sponsor for the Sensory Games station',
+      'Social media shout-out, email inclusion, and website placement',
+      'PAWty Passes (2)',
+      'Food, MockTAILS, and a tote bag (2)',
+    ],
+    buttonText: 'Sponsor the Games',
     stripeUrl: 'https://buy.stripe.com/9B628q91m6Nr5pp0QKejK0a',
     icon: '🧩',
   },
+];
+
+const kennelClub = [
   {
     title: 'Kennel Club',
     subtitle: 'Vendor Tent',
     fullName: 'Kennel Club: Vendor Tent',
     price: 250,
     qty: 4,
-    shortCopy: 'Reserve a 10x10 vendor tent and get featured on our event map.',
+    shortCopy: 'Set up shop on the orange carpet with a 10x10 vendor tent — four spaces available, first come, first served.',
+    benefits: [
+      '10x10 turfed area for tent setup',
+      'Featured placement on our event map',
+      'Social media shout-out, email inclusion, and website placement',
+      'PAWty Passes (2)',
+      'Food, MockTAILS, and a tote bag (2)',
+    ],
+    buttonText: 'Join the Club',
     stripeUrl: 'https://buy.stripe.com/dRm8wOcdy8Vz8BBczsejK0b',
     icon: '⛺',
-    variant: 'alt',
   },
 ];
 
@@ -125,7 +206,14 @@ const media = [
     fullName: 'The Doggie Dispatch: Email Sponsor',
     price: 200,
     qty: 5,
-    shortCopy: 'Get featured in our official PAWty email to dog lovers and supporters.',
+    shortCopy: 'Land your brand straight in inboxes as sponsor of the Doggie Dispatch, our official PAWty email to supporters.',
+    benefits: [
+      'Inclusion in an official Fashion PAWty email',
+      'Website placement',
+      'PAWty Passes (2)',
+      'Food, MockTAILS, and a tote bag (2)',
+    ],
+    buttonText: 'Sponsor an Email',
     stripeUrl: 'https://buy.stripe.com/eVqdR8fpK7Rv8BBbvoejK0c',
     icon: '📬',
   },
@@ -135,31 +223,25 @@ const media = [
     fullName: 'PAWty Post: Social Media Sponsor',
     price: 150,
     qty: 10,
-    shortCopy: 'Score a dedicated shout-out post on our social channels to engaged followers.',
+    shortCopy: 'Get tails wagging on social as sponsor of the PAWty Post, a dedicated shoutout to our most engaged followers.',
+    benefits: [
+      'Inclusion in an Eye Spy Foundation social media post (Facebook, Instagram, X, TikTok)',
+      'PAWty Passes (2)',
+      'Food, MockTAILS, and a tote bag (2)',
+    ],
+    buttonText: 'Sponsor a Post',
     stripeUrl: 'https://buy.stripe.com/dRmfZga5q4FjdVV0QKejK0d',
     icon: '📣',
-  },
-  {
-    title: 'Doggie Bag Stuffer',
-    subtitle: 'Welcome Bag Insert',
-    fullName: 'Doggie Bag Stuffer: Welcome Bag Insert',
-    price: 75,
-    qty: 15,
-    shortCopy: "Place your item in every guest's welcome bag for easy brand visibility.",
-    stripeUrl: 'https://buy.stripe.com/7sYdR81yU2xb4ll9ngejK0e',
-    icon: '🎁',
   },
 ];
 
 /* One flat list drives the structured data — same tiers rendered above. */
-const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...media].map((t) => ({
+const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...media].map((t) => ({
   name: t.fullName,
   price: t.price,
   qty: t.qty,
   description: t.shortCopy,
 }));
-
-const money = (n: number) => `$${n.toLocaleString('en-US')}`;
 ---
 
 <BaseLayout
@@ -193,14 +275,35 @@ const money = (n: number) => `$${n.toLocaleString('en-US')}`;
 
   <!-- ══ WHY SPONSOR (AEO) ══ -->
   <section class="band band--tight">
-    <div class="container container--narrow">
-      <h2>Why Sponsor The Fashion PAWty?</h2>
-      <p class="prose">
-        Sponsorship dollars fund the Eye Spy Foundation and Leader Dogs for
-        the Blind, helping the blind and low vision community navigate the
-        world with more confidence — while putting your brand in front of an
-        engaged Jacksonville audience.
-      </p>
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <h2>Why Sponsor The Fashion PAWty?</h2>
+          <p class="prose">
+            Sponsorship dollars fund the Eye Spy Foundation and Leader Dogs for
+            the Blind, helping the blind and low vision community navigate the
+            world with more confidence — while putting your brand in front of
+            an engaged Jacksonville audience.
+          </p>
+          <a class="btn btn--secondary" href="/beneficiaries/">View Our Beneficiaries</a>
+        </div>
+        <div class="logo-stack">
+          <ImagePlaceholder
+            label="Eye Spy Foundation logo"
+            policy="real"
+            ratio="1 / 1"
+            icon="👁️"
+            tone="teal"
+          />
+          <ImagePlaceholder
+            label="Leader Dogs for the Blind logo"
+            policy="real"
+            ratio="1 / 1"
+            icon="🦮"
+            tone="gold"
+          />
+        </div>
+      </div>
     </div>
   </section>
 
@@ -212,30 +315,8 @@ const money = (n: number) => `$${n.toLocaleString('en-US')}`;
         <h2 id="main-sponsor-h">Main Sponsor</h2>
       </div>
 
-      <ul class="tier-grid tier-grid--1">
-        {mainSponsor.map((tier) => (
-          <li class="sponsor-card">
-            <div class="sponsor-card__image">
-              <img
-                src="/images/sponsors/sponsor-placeholder.jpg"
-                alt={`Placeholder — ${tier.title} sponsor logo goes here`}
-                width="600"
-                height="600"
-                loading="lazy"
-              />
-            </div>
-            <div class="sponsor-card__content">
-              <h3 class="sponsor-card__title">{tier.title}</h3>
-              <p class="sponsor-card__copy">{tier.shortCopy}</p>
-              <div class="sponsor-card__footer">
-                <p class="sponsor-card__price">{money(tier.price)}</p>
-              </div>
-            </div>
-            <a class="btn btn--primary btn--block" href={tier.stripeUrl} rel="noopener">
-              Become a Sponsor
-            </a>
-          </li>
-        ))}
+      <ul class="tier-grid">
+        {mainSponsor.map((tier) => <SponsorCard {...tier} />)}
       </ul>
     </div>
   </section>
@@ -246,106 +327,68 @@ const money = (n: number) => `$${n.toLocaleString('en-US')}`;
       <div class="section-head section-head--center">
         <p class="eyebrow">Signature Zones</p>
         <h2 id="top-dog-h">Top Dog Sponsorships</h2>
+        <p class="prose">
+          Claim naming rights over one of the PAWty's three signature zones.
+          Every Top Dog package includes runway sponsor recognition, social
+          media and email shout-outs, VIP runway seating, and food, mocktails,
+          and a tote bag for two.
+        </p>
       </div>
 
-      <ul class="tier-grid tier-grid--3">
-        {topDog.map((tier) => (
-          <li class="sponsor-card">
-            <div class="sponsor-card__image">
-              <img
-                src="/images/sponsors/sponsor-placeholder.jpg"
-                alt={`Placeholder — ${tier.title} sponsor logo goes here`}
-                width="600"
-                height="600"
-                loading="lazy"
-              />
-            </div>
-            <div class="sponsor-card__content">
-              <h3 class="sponsor-card__title">{tier.title}</h3>
-              <p class="sponsor-card__copy">{tier.shortCopy}</p>
-              <div class="sponsor-card__footer">
-                <p class="sponsor-card__price">{money(tier.price)}</p>
-              </div>
-            </div>
-            <a class="btn btn--primary btn--block" href={tier.stripeUrl} rel="noopener">
-              Become a Sponsor
-            </a>
-          </li>
-        ))}
+      <ul class="tier-grid">
+        {topDog.map((tier) => <SponsorCard {...tier} />)}
       </ul>
     </div>
   </section>
 
-  <!-- ══ 3. PAWTY ANIMAL ══ -->
+  <!-- ══ 3. PAWTY ANIMAL SPONSORSHIPS ══ -->
   <section class="band" aria-labelledby="pawty-animal-h">
     <div class="container">
       <div class="section-head section-head--center">
-        <p class="eyebrow">Activity Areas</p>
-        <h2 id="pawty-animal-h">PAWty Animal</h2>
+        <p class="eyebrow">Activity Zones</p>
+        <h2 id="pawty-animal-h">PAWty Animal Sponsorships</h2>
+        <p class="prose">
+          Put your brand at the center of a hands-on guest activity. Every
+          PAWty Animal package includes social media and email shout-outs
+          plus PAWty Passes with food, mocktails, and a tote bag for two.
+        </p>
       </div>
 
-      <ul class="tier-grid tier-grid--3">
-        {pawtyAnimal.map((tier) => (
-          <li class:list={['sponsor-card', tier.variant === 'alt' && 'sponsor-card--alt']}>
-            <div class="sponsor-card__image">
-              <img
-                src="/images/sponsors/sponsor-placeholder.jpg"
-                alt={`Placeholder — ${tier.title} sponsor logo goes here`}
-                width="600"
-                height="600"
-                loading="lazy"
-              />
-            </div>
-            <div class="sponsor-card__content">
-              <h3 class="sponsor-card__title">{tier.title}</h3>
-              {tier.subtitle && <p class="sponsor-card__subtitle">{tier.subtitle}</p>}
-              <p class="sponsor-card__copy">{tier.shortCopy}</p>
-              <div class="sponsor-card__footer">
-                <p class="sponsor-card__price">{money(tier.price)}</p>
-              </div>
-            </div>
-            <a class="btn btn--primary btn--block" href={tier.stripeUrl} rel="noopener">
-              Become a Sponsor
-            </a>
-          </li>
-        ))}
+      <ul class="tier-grid">
+        {pawtyAnimal.map((tier) => <SponsorCard {...tier} />)}
       </ul>
     </div>
   </section>
 
-  <!-- ══ 4. MEDIA SPONSORSHIPS ══ -->
+  <!-- ══ 4. KENNEL CLUB ══ -->
+  <section class="band band--gold" aria-labelledby="kennel-club-h">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Vendor Tents</p>
+        <h2 id="kennel-club-h">Kennel Club Sponsorship</h2>
+      </div>
+
+      <ul class="tier-grid">
+        {kennelClub.map((tier) => <SponsorCard {...tier} />)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ 5. MEDIA SPONSORSHIPS ══ -->
   <section class="band band--teal" aria-labelledby="media-h">
     <div class="container">
       <div class="section-head section-head--center">
         <p class="eyebrow">Before, During &amp; After</p>
         <h2 id="media-h">Media Sponsorships</h2>
+        <p class="prose">
+          Reach our audience before, during, and after the PAWty. Every Media
+          package includes placement across our official channels plus
+          PAWty Passes with food, mocktails, and a tote bag for two.
+        </p>
       </div>
 
-      <ul class="tier-grid tier-grid--3">
-        {media.map((tier) => (
-          <li class="sponsor-card">
-            <div class="sponsor-card__image">
-              <img
-                src="/images/sponsors/sponsor-placeholder.jpg"
-                alt={`Placeholder — ${tier.title} sponsor logo goes here`}
-                width="600"
-                height="600"
-                loading="lazy"
-              />
-            </div>
-            <div class="sponsor-card__content">
-              <h3 class="sponsor-card__title">{tier.title}</h3>
-              {tier.subtitle && <p class="sponsor-card__subtitle">{tier.subtitle}</p>}
-              <p class="sponsor-card__copy">{tier.shortCopy}</p>
-              <div class="sponsor-card__footer">
-                <p class="sponsor-card__price">{money(tier.price)}</p>
-              </div>
-            </div>
-            <a class="btn btn--primary btn--block" href={tier.stripeUrl} rel="noopener">
-              Become a Sponsor
-            </a>
-          </li>
-        ))}
+      <ul class="tier-grid">
+        {media.map((tier) => <SponsorCard {...tier} />)}
       </ul>
     </div>
   </section>
@@ -378,111 +421,30 @@ const money = (n: number) => `$${n.toLocaleString('en-US')}`;
   }
   h1 { text-wrap: balance; }
 
-  /* ── Tier Grid ── */
+  .section-head--center .prose { margin-top: var(--space-xs); }
+
+  /* Eye Spy + Leader Dogs logos, stacked, same size, centered to the copy. */
+  .logo-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-m);
+    width: 100%;
+    max-width: 14rem;
+    margin-inline: auto;
+  }
+  .logo-stack > * { width: 100%; }
+
+  /* ── Tier list — one column, stacked, 80% of the container width ── */
   .tier-grid {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-m);
     list-style: none;
     margin: 0;
     padding: 0;
-    grid-template-columns: 1fr;
-  }
-  .tier-grid--1 {
-    max-width: 28rem;
+    width: 80%;
     margin-inline: auto;
-  }
-  @media (min-width: 48rem) {
-    .tier-grid--3 { grid-template-columns: repeat(2, 1fr); gap: var(--space-l); }
-  }
-  @media (min-width: 68rem) {
-    .tier-grid--3 { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  /* ── Sponsor Card ── */
-  .sponsor-card {
-    background: var(--color-surface);
-    border: 1px solid var(--border-hairline);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-s);
-    overflow: hidden;
-    transition: box-shadow 150ms ease, transform 150ms ease;
-  }
-  .sponsor-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
-  html[data-a11y-motion='off'] .sponsor-card:hover { transform: none; }
-  @media (prefers-reduced-motion: reduce) { .sponsor-card:hover { transform: none; } }
-
-  /* Kennel Club — a space rental, not an activity naming right, so it
-     gets a visually distinct treatment (gold vs. teal) inside the
-     PAWty Animal grid rather than its own section. */
-  .sponsor-card--alt {
-    background: var(--color-gold-tint);
-    border: 2px solid var(--color-gold-highlight);
-  }
-  :global(html[data-a11y-contrast='high']) .sponsor-card--alt {
-    background: var(--color-surface);
-    border-color: var(--color-border);
-  }
-
-  .sponsor-card__image {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .sponsor-card__content {
-    padding: var(--space-m);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-    flex-grow: 1;
-  }
-
-  .sponsor-card__title {
-    margin: 0;
-    font-size: var(--step-1);
-    font-weight: 700;
-  }
-
-  .sponsor-card__subtitle {
-    margin: 0;
-    font-size: 0.85rem;
-    color: var(--color-accent);
-    font-weight: 600;
-  }
-
-  .sponsor-card__copy {
-    margin: 0;
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
-    min-height: 3.5rem;
-    display: flex;
-    align-items: center;
-  }
-
-  .sponsor-card__footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--space-s);
-    padding-top: var(--space-xs);
-    border-top: 1px solid var(--border-hairline);
-  }
-
-  .sponsor-card__price {
-    margin: 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--step-2);
-    color: var(--color-accent);
-  }
-
-  .sponsor-card .btn {
-    margin-top: auto;
-    margin-left: var(--space-m);
-    margin-right: var(--space-m);
-    margin-bottom: var(--space-m);
   }
 
   .help { margin-top: var(--space-m); }

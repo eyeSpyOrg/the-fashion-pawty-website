@@ -1,0 +1,196 @@
+---
+/**
+ * SponsorCard.astro — one sponsorship tier card on /sponsors/.
+ *
+ * Layout: a header row with the logo placeholder on the left and the
+ * title/subtitle/short copy to its right — kept compact so the row below
+ * (Sponsorship Benefits bullets + price/CTA) gets most of the card's width.
+ * Extracted from sponsors.astro because this markup repeated across five
+ * sections.
+ */
+interface Props {
+  title: string;
+  subtitle?: string;
+  shortCopy: string;
+  benefits: string[];
+  price: number;
+  buttonText: string;
+  stripeUrl: string;
+}
+const { title, subtitle, shortCopy, benefits, price, buttonText, stripeUrl } = Astro.props;
+const money = (n: number) => `$${n.toLocaleString('en-US')}`;
+---
+
+<li class="sponsor-card">
+  <div class="sponsor-card__header">
+    <div class="sponsor-card__image">
+      <img
+        src="/images/sponsors/sponsor-placeholder.jpg"
+        alt={`Placeholder — ${title} sponsor logo goes here`}
+        width="600"
+        height="600"
+        loading="lazy"
+      />
+    </div>
+    <div class="sponsor-card__intro">
+      <h3 class="sponsor-card__title">{title}</h3>
+      {subtitle && <p class="sponsor-card__subtitle">{subtitle}</p>}
+      <p class="sponsor-card__copy">{shortCopy}</p>
+    </div>
+  </div>
+
+  <div class="sponsor-card__body">
+    <div class="sponsor-card__benefits-wrap">
+      {benefits.length > 0 && (
+        <>
+          <p class="sponsor-card__benefits-label">Sponsorship Benefits:</p>
+          <ul class="sponsor-card__benefits">
+            {benefits.map((b) => <li>{b}</li>)}
+          </ul>
+        </>
+      )}
+    </div>
+
+    <div class="sponsor-card__action">
+      <p class="sponsor-card__price">{money(price)}</p>
+      <a class="btn btn--primary" href={stripeUrl} rel="noopener">
+        {buttonText}
+      </a>
+    </div>
+  </div>
+</li>
+
+<style>
+  .sponsor-card {
+    background: var(--color-surface);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    padding: var(--space-m);
+    transition: box-shadow 150ms ease, transform 150ms ease;
+  }
+  .sponsor-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+  html[data-a11y-motion='off'] .sponsor-card:hover { transform: none; }
+  @media (prefers-reduced-motion: reduce) { .sponsor-card:hover { transform: none; } }
+
+  /* ── Header: logo (left) + title/subtitle/copy (right) ── */
+  .sponsor-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+  }
+
+  .sponsor-card__image {
+    flex-shrink: 0;
+    width: 5.5rem;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .sponsor-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .sponsor-card__intro {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .sponsor-card__title {
+    margin: 0;
+    font-size: var(--step-1);
+    font-weight: 700;
+  }
+
+  .sponsor-card__subtitle {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .sponsor-card__copy {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Body: benefits (left, most of the width) | price+button (right) ── */
+  .sponsor-card__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-s);
+    padding-top: var(--space-s);
+    border-top: 1px solid var(--border-hairline);
+  }
+  @media (min-width: 40rem) {
+    .sponsor-card__body { flex-direction: row; align-items: flex-start; justify-content: space-between; }
+  }
+
+  .sponsor-card__benefits-wrap {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+  @media (min-width: 40rem) {
+    .sponsor-card__benefits-wrap { width: auto; }
+  }
+
+  .sponsor-card__benefits-label {
+    margin: 0 0 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-text-muted);
+  }
+
+  .sponsor-card__benefits {
+    list-style: disc;
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Price centered above the button. */
+  .sponsor-card__action {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2xs);
+    width: 100%;
+  }
+  @media (min-width: 40rem) {
+    .sponsor-card__action { width: auto; min-width: 11rem; }
+  }
+
+  .sponsor-card__price {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-2);
+    color: var(--color-accent);
+  }
+
+  .sponsor-card__action .btn {
+    width: 100%;
+  }
+  @media (min-width: 40rem) {
+    .sponsor-card__action .btn { width: auto; }
+  }
+</style>

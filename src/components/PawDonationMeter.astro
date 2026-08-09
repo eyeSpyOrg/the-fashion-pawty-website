@@ -1,0 +1,109 @@
+---
+/**
+ * PawDonationMeter.astro — a paw-print "thermometer" for the $25,000 goal.
+ *
+ * The paw is drawn twice, stacked: an outline (always fully visible) and a
+ * filled copy clipped to a bottom-anchored rect sized by `raised / goal`.
+ * Because the paw's five pads sit at different heights (heel pad lowest,
+ * toes highest), the clip fills the heel pad first and climbs into the
+ * toes as the percentage grows — the same visual language as a fundraising
+ * thermometer, just paw-shaped.
+ *
+ * UPDATE `raised` HERE as sponsorships/donations come in — that's the only
+ * value that needs to change to move the meter.
+ */
+interface Props {
+  goal: number;
+  raised: number;
+}
+const { goal, raised } = Astro.props;
+const percent = Math.min(100, Math.max(0, (raised / goal) * 100));
+
+/* Paw bounding box (viewBox coords): toe tips at y≈23, heel base at y≈207. */
+const PAW_TOP = 23;
+const PAW_BOTTOM = 207;
+const fillY = PAW_BOTTOM - (percent / 100) * (PAW_BOTTOM - PAW_TOP);
+
+const money = (n: number) => `$${n.toLocaleString('en-US')}`;
+---
+
+<div class="paw-meter" role="img" aria-label={`Donation progress: ${money(raised)} raised toward our ${money(goal)} goal, about ${Math.round(percent)}%.`}>
+  <p class="paw-meter__goal">
+    <span class="paw-meter__goal-amount">{money(goal)}</span>
+    <span class="paw-meter__goal-label">Goal</span>
+  </p>
+
+  <svg class="paw-meter__svg" viewBox="0 0 200 220" aria-hidden="true" focusable="false">
+    <clipPath id="paw-fill-clip">
+      <rect x="0" y={fillY} width="200" height={220 - fillY} />
+    </clipPath>
+
+    <!-- Outline — always fully visible -->
+    <g class="paw-meter__outline" fill="none" stroke-width="6" stroke-linejoin="round">
+      <ellipse cx="100" cy="165" rx="55" ry="42" />
+      <ellipse cx="40" cy="95" rx="24" ry="30" />
+      <ellipse cx="78" cy="55" rx="24" ry="32" />
+      <ellipse cx="122" cy="55" rx="24" ry="32" />
+      <ellipse cx="160" cy="95" rx="24" ry="30" />
+    </g>
+
+    <!-- Fill — clipped to the current progress level -->
+    <g class="paw-meter__fill" clip-path="url(#paw-fill-clip)">
+      <ellipse cx="100" cy="165" rx="55" ry="42" />
+      <ellipse cx="40" cy="95" rx="24" ry="30" />
+      <ellipse cx="78" cy="55" rx="24" ry="32" />
+      <ellipse cx="122" cy="55" rx="24" ry="32" />
+      <ellipse cx="160" cy="95" rx="24" ry="30" />
+    </g>
+  </svg>
+
+  <p class="paw-meter__raised">{money(raised)} raised so far</p>
+</div>
+
+<style>
+  .paw-meter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    text-align: center;
+  }
+
+  .paw-meter__goal {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+  }
+  .paw-meter__goal-amount {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--step-3);
+    color: #ffffff;
+  }
+  .paw-meter__goal-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-gold-highlight);
+  }
+
+  .paw-meter__svg {
+    width: 100%;
+    max-width: 12rem;
+    height: auto;
+  }
+  .paw-meter__outline { stroke: #ffffff; }
+  .paw-meter__fill { fill: var(--color-gold-highlight); }
+  html[data-a11y-contrast='high'] .paw-meter__goal-amount,
+  html[data-a11y-contrast='high'] .paw-meter__raised { color: var(--color-text); }
+
+  .paw-meter__raised {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #ffffff;
+    opacity: 0.85;
+  }
+</style>

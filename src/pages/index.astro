@@ -8,6 +8,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FAQ from '../components/FAQ.astro';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import PawDonationMeter from '../components/PawDonationMeter.astro';
 import SizzleReel from '../components/SizzleReel.astro';
 import EventSchema from '../components/schema/EventSchema.astro';
 import { SITE } from '../config/site.js';
@@ -144,12 +145,9 @@ const faqs = [
           <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} rel="noopener">Get tickets</a>
         </div>
       </div>
-      <ImagePlaceholder
-        label="Community moment — handlers and dogs pausing on the runway"
-        policy="real"
-        ratio="4 / 3"
-        icon="🤝"
-      />
+      {/* TODO: update `raised` as sponsorships/donations come in — that's
+          the only value that needs to change to move the meter. */}
+      <PawDonationMeter goal={25000} raised={1250} />
     </div>
   </section>
 
