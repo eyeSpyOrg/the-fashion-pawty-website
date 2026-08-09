@@ -84,8 +84,8 @@ const mapsUrl =
 
   <!-- About the host venue — concise Happy Brew mission + their film -->
   <section class="band band--gold hb-band" aria-labelledby="hb-heading">
-    <div class="container container--narrow stack">
-      <div class="section-head">
+    <div class="container stack">
+      <div class="section-head hb-text">
         <p class="eyebrow">About Our Host</p>
         <h2 id="hb-heading">More Than a Coffee Shop: Meet Happy Brew</h2>
         <p class="prose">
@@ -97,13 +97,15 @@ const mapsUrl =
         </p>
       </div>
 
-      <VideoFacade
-        vimeoId="995025963?h=cd5b44f7cf&dnt=1"
-        title="Happy Brew — We Brew Possabilities (film)"
-        label="Watch the Happy Brew film"
-      />
+      <div class="hb-video">
+        <VideoFacade
+          vimeoId="995025963?h=cd5b44f7cf&dnt=1"
+          title="Happy Brew — We Brew Possabilities (film)"
+          label="Watch the Happy Brew film"
+        />
+      </div>
 
-      <div class="stack">
+      <div class="stack hb-text">
         <p class="prose">
           A ministry first and a business second, Happy Brew builds an
           inclusive community where people of all abilities work, connect, and
@@ -146,4 +148,11 @@ const mapsUrl =
   /* Tighter gap to the "Plan Your Visit" cards above — bottom padding
      (before the footer) stays at the normal band spacing. */
   .hb-band { padding-top: var(--space-l); }
+
+  /* Happy Brew "About Our Host" section: text blocks sit at 80% width,
+     flush left; the video is also 80% width but centered instead.
+     max-width: none overrides .section-head's global 46rem cap, which
+     would otherwise win over this 80% on the intro block. */
+  .hb-text { width: 80%; max-width: none; margin-inline: 0; }
+  .hb-video { width: 80%; margin-inline: auto; }
 </style>

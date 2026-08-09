@@ -5,7 +5,6 @@
  * Phase 2 via HubSpotForm.astro — never the embedded widget.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import { SITE } from '../config/site.js';
 
 // Non-breaking space + hyphen (U+00A0 / U+2011) so the number never wraps
@@ -28,12 +27,13 @@ const telDisplay = '(844) 222‑8848';
             Foundation supports the blind and low vision community?
           </p>
         </div>
-        <ImagePlaceholder
-          label="The Fashion PAWty team ready to help"
-          policy="ai"
-          ratio="4 / 3"
-          icon="👋"
-          tone="teal"
+        <img
+          class="hero-photo"
+          src="/images/contact/lets-pawty.webp"
+          alt="'Let's PAWty' graphic on a pattern of palm trees, sunglasses, bow ties, and paw prints"
+          width="1600"
+          height="1200"
+          fetchpriority="high"
         />
       </div>
     </div>
@@ -105,4 +105,12 @@ const telDisplay = '(844) 222‑8848';
     .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
   }
   h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
 </style>
