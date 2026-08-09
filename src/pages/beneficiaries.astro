@@ -35,7 +35,7 @@ import { SITE } from '../config/site.js';
   </section>
 
   <section class="band" aria-labelledby="eyespy-h">
-    <div class="container split">
+    <div class="container split split--balanced">
       <div class="split__text">
         <p class="eyebrow">Presented By</p>
         <h2 id="eyespy-h">Eye Spy Foundation</h2>
@@ -56,13 +56,15 @@ import { SITE } from '../config/site.js';
           that make everyday life more accessible.
         </p>
       </div>
-      <ImagePlaceholder label="Eye Spy Foundation team welcoming guests" policy="real" ratio="4 / 3" icon="👁️" />
+      <div class="photo-stack">
+        <ImagePlaceholder label="Eye Spy Foundation team welcoming guests" policy="real" ratio="4 / 3" icon="👁️" />
+        <ImagePlaceholder label="Eye Spy Foundation staff connecting a guest to resources" policy="real" ratio="4 / 3" icon="🤗" />
+      </div>
     </div>
   </section>
 
   <section class="band band--gold" aria-labelledby="leaderdogs-h">
-    <div class="container split split--rev">
-      <ImagePlaceholder label="A Leader Dogs guide dog working in harness" policy="real" ratio="4 / 3" icon="🦮" tone="gold" />
+    <div class="container split split--balanced">
       <div class="split__text">
         <p class="eyebrow">Also Benefiting</p>
         <h2 id="leaderdogs-h">Leader Dogs for the Blind</h2>
@@ -86,15 +88,20 @@ import { SITE } from '../config/site.js';
           every year.
         </p>
       </div>
+      <div class="photo-stack">
+        <ImagePlaceholder label="A Leader Dogs guide dog working in harness" policy="real" ratio="4 / 3" icon="🦮" tone="gold" />
+        <ImagePlaceholder label="A Leader Dogs puppy in training" policy="real" ratio="4 / 3" icon="🐕" tone="gold" />
+      </div>
     </div>
   </section>
 
-  <section class="band band--dark">
+  <section class="band band--dark band--pattern">
     <div class="container container--narrow cta-band">
-      <h2>Ready to Join the Mission?</h2>
+      <h2>Support Blind &amp; Low Vision Navigation</h2>
       <div class="cta-band__btns">
-        <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Get tickets — $30</a>
-        <a class="btn btn--onDark btn--lg" href="/sponsors/">Become a sponsor</a>
+        <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Join the PAWty</a>
+        <a class="btn btn--onDark btn--lg" href="/sponsors/">Become a Sponsor</a>
+        <a class="btn btn--onDark btn--lg" href={SITE.shopUrl} target="_blank" rel="noopener">Buy Merch</a>
       </div>
     </div>
   </section>
@@ -106,9 +113,33 @@ import { SITE } from '../config/site.js';
   .split__text > * + * { margin-top: var(--space-s); }
   @media (min-width: 52rem) {
     .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
-    .split--rev .split__text { order: 2; }
   }
   h1 { text-wrap: balance; }
+
+  /* Eye Spy Foundation and Leader Dogs sections share this exact layout —
+     text on the left, two stacked photos on the right — so the two causes
+     read as equally weighted. Even 1fr/1fr columns (rather than the
+     Intro band's 1.5fr/1fr) keep the section visually balanced now that
+     the image side carries two photos instead of one. */
+  .split--balanced { align-items: start; }
+  @media (min-width: 52rem) {
+    .split--balanced { grid-template-columns: 1fr 1fr; }
+  }
+  .photo-stack { display: grid; gap: var(--space-m); }
   .cta-band { text-align: center; }
   .cta-band__btns { display: flex; gap: var(--space-s); flex-wrap: wrap; justify-content: center; margin-top: var(--space-m); }
+
+  /* Low-opacity brand motif behind the solid dark background — text keeps
+     full contrast against --color-dark; the pattern is a texture, not a
+     contrast-bearing surface. pattern-gold-light.svg is gold-on-teal (see
+     global.css's verified filename mapping), so it blends into this band. */
+  .band--pattern::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: url('/assets/patterns/pattern-gold-light.svg') center / 12rem repeat;
+    opacity: 0.1;
+  }
+  html[data-a11y-contrast='high'] .band--pattern::before { display: none; }
 </style>

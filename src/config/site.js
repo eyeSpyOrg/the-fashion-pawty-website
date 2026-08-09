@@ -12,7 +12,7 @@ export const SITE = {
   url: 'https://thefashionpawty.com',
   titleTemplate: '%s | The Fashion PAWty',
   description:
-    'The Fashion PAWty is a Jacksonville dog fashion show and community celebration on Sep 26 at Happy Brew, benefiting the blind and low vision community and Leader Dogs.',
+    'The Fashion PAWty is a Jacksonville dog fashion show and community celebration on Sep 26 at Happy Brew, benefiting the blind and low vision community and Leader Dogs for the Blind.',
   locale: 'en_US',
   language: 'en',
 
