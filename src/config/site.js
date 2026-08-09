@@ -18,9 +18,10 @@ export const SITE = {
 
   // ── Organization schema (schema.org/Organization) ─────────
   orgType: 'Organization',
-  // PNG, not SVG: the vector exports from the .ai file were unusable
-  // (mislabeled colorways / a brand sheet) — see the build report.
-  logo: '/logo.png',
+  // WebP (not SVG): the vector exports from the .ai file were unusable
+  // (mislabeled colorways / a brand sheet) — see the build report. Lossless
+  // WebP keeps the transparency the raster export needs, smaller than PNG.
+  logo: '/logo.webp',
   foundingDate: '2025',
   email: 'team@eyespy.org',
   telephone: '+1-844-222-8848',

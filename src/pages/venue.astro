@@ -4,7 +4,6 @@
  * Event schema included.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import VideoFacade from '../components/VideoFacade.astro';
 import EventSchema from '../components/schema/EventSchema.astro';
 import { SITE } from '../config/site.js';
@@ -38,10 +37,14 @@ const mapsUrl =
             </a>
           </p>
         </div>
-        {/* TODO: optionally swap this placeholder for an accessible embedded
-            map once the team picks an embed approach (keyboard-friendly,
-            consent-aware). */}
-        <ImagePlaceholder label="Map / photo of Happy Brew on Hendricks Ave" policy="ai" ratio="4 / 3" icon="🗺️" />
+        <img
+          class="hero-photo"
+          src="/images/venue/happy-brew-team.webp"
+          alt="The Happy Brew team gathered outside the café on Hendricks Avenue"
+          width="1600"
+          height="1200"
+          fetchpriority="high"
+        />
       </div>
     </div>
   </section>
@@ -80,8 +83,8 @@ const mapsUrl =
   </section>
 
   <!-- About the host venue — concise Happy Brew mission + their film -->
-  <section class="band band--gold" aria-labelledby="hb-heading">
-    <div class="container">
+  <section class="band band--gold hb-band" aria-labelledby="hb-heading">
+    <div class="container container--narrow stack">
       <div class="section-head">
         <p class="eyebrow">About Our Host</p>
         <h2 id="hb-heading">More Than a Coffee Shop: Meet Happy Brew</h2>
@@ -94,32 +97,29 @@ const mapsUrl =
         </p>
       </div>
 
-      <div class="split hb">
-        <div class="split__text">
-          <p class="prose">
-            A ministry first and a business second, Happy Brew builds an
-            inclusive community where people of all abilities work, connect, and
-            share hope — one cup of coffee at a time. Only about 13% of
-            Floridians with intellectual disabilities are employed, and Happy
-            Brew is changing that with every hire.
-          </p>
-          <p class="prose">
-            It's the perfect home for a celebration of accessibility —
-            matching the Eye Spy Foundation's mission to help the blind and
-            low vision community navigate the world with confidence, and the
-            reason the orange carpet rolls out here.
-          </p>
-          <p>
-            <a class="btn btn--primary" href="https://happybrew.org" rel="noopener">
-              Learn more about Happy Brew
-            </a>
-          </p>
-        </div>
-        <VideoFacade
-          vimeoId="995025963?h=cd5b44f7cf&dnt=1"
-          title="Happy Brew — We Brew Possabilities (film)"
-          label="Watch the Happy Brew film"
-        />
+      <VideoFacade
+        vimeoId="995025963?h=cd5b44f7cf&dnt=1"
+        title="Happy Brew — We Brew Possabilities (film)"
+        label="Watch the Happy Brew film"
+      />
+
+      <div class="stack">
+        <p class="prose">
+          A ministry first and a business second, Happy Brew builds an
+          inclusive community where people of all abilities work, connect, and
+          share hope — one cup of coffee at a time. Only about 13% of
+          Floridians with intellectual disabilities are employed, and Happy
+          Brew is changing that with every hire. It's the perfect home for a
+          celebration of accessibility — matching the Eye Spy Foundation's
+          mission to help the blind and low vision community navigate the
+          world with confidence, and the reason the orange carpet rolls out
+          here.
+        </p>
+        <p>
+          <a class="btn btn--primary" href="https://happybrew.org" rel="noopener">
+            Visit the Happy Brew Website
+          </a>
+        </p>
       </div>
     </div>
   </section>
@@ -134,4 +134,16 @@ const mapsUrl =
   h1 { text-wrap: balance; }
   .venue-address { font-size: var(--step-1); }
   .info__icon { font-size: 2rem; line-height: 1; }
+
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  /* Tighter gap to the "Plan Your Visit" cards above — bottom padding
+     (before the footer) stays at the normal band spacing. */
+  .hb-band { padding-top: var(--space-l); }
 </style>
