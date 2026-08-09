@@ -5,7 +5,6 @@
  * Event schema included.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import EventSchema from '../components/schema/EventSchema.astro';
 
 const blocks = [
@@ -33,12 +32,13 @@ const blocks = [
             with a heartfelt mission at its center.
           </p>
         </div>
-        <ImagePlaceholder
-          label="The Fashion PAWty timeline"
-          policy="ai"
-          ratio="4 / 3"
-          icon="⏰"
-          tone="teal"
+        <img
+          class="hero-photo"
+          src="/images/schedule/runway-hero.webp"
+          alt="The Fashion PAWty runway backdrop with a puppy in glasses and a Future Leader Dog bandana"
+          width="1600"
+          height="1200"
+          fetchpriority="high"
         />
       </div>
     </div>
@@ -59,17 +59,6 @@ const blocks = [
           </li>
         ))}
       </ol>
-    </div>
-  </section>
-
-  <section class="band band--tight">
-    <div class="container container--narrow">
-      <h2>How Long Does The Fashion PAWty Run?</h2>
-      <p class="prose">
-        The Fashion PAWty runs three hours, from 4 to 7 PM on Saturday,
-        September 26, 2026, at Happy Brew in Jacksonville — hosted by the Eye
-        Spy Foundation.
-      </p>
     </div>
   </section>
 
@@ -125,4 +114,12 @@ const blocks = [
     .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
   }
   h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
 </style>

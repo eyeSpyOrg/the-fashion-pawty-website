@@ -28,6 +28,7 @@ const { faqs, heading = 'Frequently asked questions' } = Astro.props;
 <FAQSchema faqs={faqs} />
 
 <style>
+  .faq h2 { margin: 0 0 var(--space-m); }
   .faq__item {
     border: 2px solid var(--color-border);
     border-radius: 10px;

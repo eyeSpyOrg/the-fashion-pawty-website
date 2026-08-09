@@ -16,7 +16,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import SponsorCard from '../components/SponsorCard.astro';
 import SponsorshipSchema from '../components/schema/SponsorshipSchema.astro';
-import { SITE } from '../config/site.js';
 
 const mainSponsor = [
   {
@@ -328,10 +327,9 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
         <p class="eyebrow">Signature Zones</p>
         <h2 id="top-dog-h">Top Dog Sponsorships</h2>
         <p class="prose">
-          Claim naming rights over one of the PAWty's three signature zones.
-          Every Top Dog package includes runway sponsor recognition, social
-          media and email shout-outs, VIP runway seating, and food, mocktails,
-          and a tote bag for two.
+          Claim naming rights over one of our three signature zones. Every
+          package includes runway recognition, social shout-outs, and food
+          and mocktails for two.
         </p>
       </div>
 
@@ -349,8 +347,8 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
         <h2 id="pawty-animal-h">PAWty Animal Sponsorships</h2>
         <p class="prose">
           Put your brand at the center of a hands-on guest activity. Every
-          PAWty Animal package includes social media and email shout-outs
-          plus PAWty Passes with food, mocktails, and a tote bag for two.
+          package includes social shout-outs plus PAWty Passes with food and
+          mocktails included.
         </p>
       </div>
 
@@ -381,30 +379,15 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
         <p class="eyebrow">Before, During &amp; After</p>
         <h2 id="media-h">Media Sponsorships</h2>
         <p class="prose">
-          Reach our audience before, during, and after the PAWty. Every Media
-          package includes placement across our official channels plus
-          PAWty Passes with food, mocktails, and a tote bag for two.
+          Reach our audience before, during, and after the PAWty. Every
+          package includes channel placement plus PAWty Passes with food and
+          mocktails included.
         </p>
       </div>
 
       <ul class="tier-grid">
         {media.map((tier) => <SponsorCard {...tier} />)}
       </ul>
-    </div>
-  </section>
-
-  <!-- ══ HELP ══ -->
-  <section class="band band--gold" aria-labelledby="help-h">
-    <div class="container container--narrow">
-      <div class="section-head">
-        <p class="eyebrow">Need Help Deciding</p>
-        <h2 id="help-h">Find Your Perfect Package</h2>
-      </div>
-      <p class="prose help">
-        Not sure which package fits? Email
-        <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we'll help you
-        find the right spot on the orange carpet.
-      </p>
     </div>
   </section>
 
@@ -446,6 +429,4 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
     width: 80%;
     margin-inline: auto;
   }
-
-  .help { margin-top: var(--space-m); }
 </style>
