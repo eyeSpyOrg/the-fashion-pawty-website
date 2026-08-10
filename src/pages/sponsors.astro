@@ -304,7 +304,7 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
 
   <!-- ══ 1. MAIN SPONSOR ══ -->
   <section class="band" aria-labelledby="main-sponsor-h">
-    <div class="container">
+    <div class="container container--narrow">
       <div class="section-head section-head--center">
         <p class="eyebrow">Presenting Sponsor</p>
         <h2 id="main-sponsor-h">Main Sponsor</h2>
@@ -318,7 +318,7 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
 
   <!-- ══ 2. TOP DOG SPONSORSHIPS ══ -->
   <section class="band band--teal" aria-labelledby="top-dog-h">
-    <div class="container">
+    <div class="container container--narrow">
       <div class="section-head section-head--center">
         <p class="eyebrow">Signature Zones</p>
         <h2 id="top-dog-h">Top Dog Sponsorships</h2>
@@ -337,7 +337,7 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
 
   <!-- ══ 3. PAWTY ANIMAL SPONSORSHIPS ══ -->
   <section class="band" aria-labelledby="pawty-animal-h">
-    <div class="container">
+    <div class="container container--narrow">
       <div class="section-head section-head--center">
         <p class="eyebrow">Activity Zones</p>
         <h2 id="pawty-animal-h">PAWty Animal Sponsorships</h2>
@@ -356,7 +356,7 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
 
   <!-- ══ 4. KENNEL CLUB ══ -->
   <section class="band band--gold" aria-labelledby="kennel-club-h">
-    <div class="container">
+    <div class="container container--narrow">
       <div class="section-head section-head--center">
         <p class="eyebrow">Vendor Tents</p>
         <h2 id="kennel-club-h">Kennel Club Sponsorship</h2>
@@ -370,7 +370,7 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
 
   <!-- ══ 5. MEDIA SPONSORSHIPS ══ -->
   <section class="band band--teal" aria-labelledby="media-h">
-    <div class="container">
+    <div class="container container--narrow">
       <div class="section-head section-head--center">
         <p class="eyebrow">Before, During &amp; After</p>
         <h2 id="media-h">Media Sponsorships</h2>
@@ -430,7 +430,9 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
     border-radius: var(--radius);
   }
 
-  /* ── Tier list — one column, stacked, 80% of the container width ── */
+  /* ── Tier list — one column, stacked, full width of its (narrow)
+     container — same container--narrow convention used sitewide for
+     single-column content, instead of a one-off percentage. ── */
   .tier-grid {
     display: flex;
     flex-direction: column;
@@ -438,7 +440,5 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 80%;
-    margin-inline: auto;
   }
 </style>
