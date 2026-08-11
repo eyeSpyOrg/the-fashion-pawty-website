@@ -65,7 +65,7 @@ export const SITE = {
   // buttons, so they are not repeated as nav links.
   nav: [
     { label: 'Home', href: '/' },
-    { label: 'Sponsor', href: '/sponsors/' },
+    { label: 'Sponsor', href: '/sponsor/' },
     { label: 'Beneficiaries', href: '/beneficiaries/' },
     { label: 'Schedule', href: '/schedule/' },
     { label: 'Venue', href: '/venue/' },

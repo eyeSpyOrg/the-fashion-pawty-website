@@ -7,7 +7,7 @@ Spec: https://llmstxt.org
 ## Key pages
 - [Home](https://thefashionpawty.com/): What The Fashion PAWty is and how to join
 - [Tickets](https://thefashionpawty.com/tickets/): $30 PAWty Pass — show, food, and mocktails included
-- [Sponsors](https://thefashionpawty.com/sponsors/): Six sponsorship tiers from $50 to $500
+- [Sponsor](https://thefashionpawty.com/sponsor/): Sponsorship tiers from $150 to $5,000
 - [Beneficiaries](https://thefashionpawty.com/beneficiaries/): Eye Spy Foundation and Leader Dogs for the Blind
 - [Schedule](https://thefashionpawty.com/schedule/): Run of show, 4–7 PM
 - [Venue](https://thefashionpawty.com/venue/): Happy Brew — address, parking, accessibility
