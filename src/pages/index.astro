@@ -7,7 +7,6 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FAQ from '../components/FAQ.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import PawDonationMeter from '../components/PawDonationMeter.astro';
 import SizzleReel from '../components/SizzleReel.astro';
 import EventSchema from '../components/schema/EventSchema.astro';
@@ -17,7 +16,6 @@ const facts = [
   { icon: '📅', label: 'When', value: 'Sat, Sep 26, 2026 · 4–7 PM' },
   { icon: '📍', label: 'Where', value: 'Happy Brew, Jacksonville' },
   { icon: '🎟️', label: 'Tickets', value: '$30 · show + food + mocktails' },
-  { icon: '🐾', label: 'Benefiting', value: 'Eye Spy & Leader Dogs for the Blind' },
 ];
 
 const faqs = [
@@ -49,7 +47,7 @@ const faqs = [
     <div class="container hero">
       <div class="hero__copy panel">
         <p class="eyebrow">About the Event</p>
-        <h1>Strut for a More Accessible World</h1>
+        <h1>A Navigation Celebration</h1>
         <p class="prose lead">
           Saturday, September 26 at Happy Brew — a doggie fashion show down the
           orange carpet, hosted by the Eye Spy Foundation, with mocktails,
@@ -61,11 +59,13 @@ const faqs = [
         </div>
       </div>
       <div class="hero__media">
-        <ImagePlaceholder
-          label="A dog striking a pose on the orange carpet"
-          policy="real"
-          ratio="4 / 5"
-          icon="🐕‍🦺"
+        <img
+          class="hero-photo"
+          src="/images/schedule/runway-hero.webp"
+          alt="The Fashion PAWty runway backdrop with a puppy in glasses and a Future Leader Dog bandana"
+          width="1600"
+          height="1200"
+          fetchpriority="high"
         />
       </div>
     </div>
@@ -103,17 +103,18 @@ const faqs = [
         </p>
         <p><a class="btn btn--primary" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Grab your PAWty Pass</a></p>
       </div>
-      <ImagePlaceholder
-        label="Orange carpet lined with tailgate chairs, mocktails in hand"
-        policy="ai"
-        ratio="4 / 3"
-        icon="🎉"
-        tone="gold"
+      <img
+        class="hero-photo"
+        src="/images/beneficiaries/leader-dogs-puppy.webp"
+        alt="A golden retriever puppy wearing a 'Future Leader Dog' bandana"
+        width="1600"
+        height="1200"
+        loading="lazy"
       />
     </div>
   </section>
 
-  <!-- ══ SIZZLE REEL ══ -->
+  {/* ══ SIZZLE REEL — inactive for now, keep for when the real reel lands ══
   <section class="band" aria-labelledby="video-heading">
     <div class="container container--narrow stack">
       <div class="section-head section-head--center">
@@ -123,11 +124,12 @@ const faqs = [
           Our sizzle reel is on its way. Here's where you'll press play.
         </p>
       </div>
-      {/* TODO: pass youtubeId="VIDEO_ID" once the real reel is uploaded.
-          TODO: add VideoObject schema when the real YouTube URL exists. */}
+      TODO: pass youtubeId="VIDEO_ID" once the real reel is uploaded.
+      TODO: add VideoObject schema when the real YouTube URL exists.
       <SizzleReel />
     </div>
   </section>
+  */}
 
   <!-- ══ GOAL (dark band) ══ -->
   <section class="band band--dark" aria-labelledby="goal-heading">
@@ -160,7 +162,14 @@ const faqs = [
       </div>
       <div class="grid grid--2">
         <article class="card card--accent card--link stack">
-          <ImagePlaceholder label="Eye Spy Foundation in the community" policy="real" ratio="16 / 9" icon="👁️" />
+          <img
+            class="card-photo"
+            src="/images/sponsors/eyespy-logo-card.webp"
+            alt="Eye Spy Foundation logo"
+            width="1600"
+            height="1200"
+            loading="lazy"
+          />
           <h3>Eye Spy Foundation</h3>
           <p>
             We help the blind and low vision community navigate community
@@ -170,7 +179,14 @@ const faqs = [
           <p><a href="/beneficiaries/">Meet Eye Spy Foundation</a></p>
         </article>
         <article class="card card--accent card--link stack">
-          <ImagePlaceholder label="A Leader Dogs guide dog in harness" policy="real" ratio="16 / 9" icon="🦮" />
+          <img
+            class="card-photo"
+            src="/images/sponsors/leaderdogs-logo-card.webp"
+            alt="Leader Dogs for the Blind logo"
+            width="1600"
+            height="1200"
+            loading="lazy"
+          />
           <h3>Leader Dogs for the Blind</h3>
           <p>
             A guide dog school raising and training dogs to help people travel
@@ -206,7 +222,21 @@ const faqs = [
   .hero__ctas { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-m); }
   @media (min-width: 52rem) {
     .hero { grid-template-columns: 1.15fr 0.85fr; gap: var(--space-l); }
-    .hero__media { max-width: 17rem; margin-inline: auto; }
+  }
+
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .card-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
   }
 
   /* Facts: icon + label + value cards */
