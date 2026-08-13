@@ -114,6 +114,18 @@ const faqs = [
     </div>
   </section>
 
+  <!-- ══ FAQ ══ -->
+  <section class="band">
+    <div class="container container--narrow">
+      <p class="eyebrow">Good to Know</p>
+      <FAQ faqs={faqs} heading="Frequently Asked Questions" />
+      <p class="prose">
+        More questions? Visit the <a href="/faq/">full FAQ page</a> or email
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+      </p>
+    </div>
+  </section>
+
   {/* ══ SIZZLE REEL — inactive for now, keep for when the real reel lands ══
   <section class="band" aria-labelledby="video-heading">
     <div class="container container--narrow stack">
@@ -150,6 +162,19 @@ const faqs = [
       {/* TODO: update `raised` as sponsorships/donations come in — that's
           the only value that needs to change to move the meter. */}
       <PawDonationMeter goal={25000} raised={1250} />
+    </div>
+  </section>
+
+  <!-- ══ SWAG CTA ══ -->
+  <section class="band band--teal" aria-labelledby="swag-heading">
+    <div class="container container--narrow swag-cta">
+      <p class="eyebrow">Shop the Collection</p>
+      <h2 id="swag-heading">Fashion PAWty Swag</h2>
+      <p class="prose mx-auto">
+        Take The Fashion PAWty home with you — hats, tees, and more from our
+        official shop.
+      </p>
+      <a class="btn btn--primary btn--lg" href={SITE.shopUrl} target="_blank" rel="noopener">Shop Merch</a>
     </div>
   </section>
 
@@ -199,18 +224,6 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ FAQ ══ -->
-  <section class="band">
-    <div class="container container--narrow">
-      <p class="eyebrow">Good to Know</p>
-      <FAQ faqs={faqs} heading="Frequently Asked Questions" />
-      <p class="prose">
-        More questions? Visit the <a href="/faq/">full FAQ page</a> or email
-        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
-      </p>
-    </div>
-  </section>
-
   <EventSchema />
 </BaseLayout>
 
@@ -222,6 +235,15 @@ const faqs = [
   .hero__ctas { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-m); }
   @media (min-width: 52rem) {
     .hero { grid-template-columns: 1.15fr 0.85fr; gap: var(--space-l); }
+    /* Tighter than the shared .panel padding/spacing so the whole hero
+       (picture, copy, buttons) fits above the fold on common desktop
+       viewport heights — only scoped to the hero, other bands keep the
+       standard .panel look. */
+    .hero__copy { padding: var(--space-s) var(--space-m); }
+    .hero__copy > * + * { margin-top: var(--space-xs); }
+    .hero h1 { font-size: var(--step-2); }
+    .hero .lead { font-size: var(--step-0); }
+    .hero__ctas { margin-top: var(--space-s); }
   }
 
   .hero-photo {
@@ -257,4 +279,8 @@ const faqs = [
     .split { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
     .split--center { align-items: center; }
   }
+
+  .swag-cta { text-align: center; }
+  .swag-cta .eyebrow { justify-content: center; }
+  .swag-cta .btn { margin-top: var(--space-m); }
 </style>

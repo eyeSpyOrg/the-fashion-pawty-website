@@ -72,8 +72,10 @@ export const SITE = {
     { label: 'FAQ', href: '/faq/' },
     { label: 'Contact', href: '/contact/' },
   ],
-  // Shop URL reused by the header "Buy Merch" button
+  // Shop URL — used by the homepage Swag CTA and other "Buy Merch" links
   shopUrl: 'https://shop.thefashionpawty.com',
+  // Donate URL reused by the header "Donate" button
+  donateUrl: 'https://donate.stripe.com/dRmcN43H25Jng43eHAejK00',
   footerNav: [
     { label: 'Accessibility Statement', href: '/accessibility/' },
     { label: 'Privacy Policy', href: '/privacy/' },
