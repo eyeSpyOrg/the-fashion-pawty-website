@@ -16,19 +16,30 @@ interface Props {
   price: number;
   buttonText: string;
   stripeUrl: string;
+  image?: string;
 }
-const { title, subtitle, shortCopy, benefits, price, buttonText, stripeUrl } = Astro.props;
+const {
+  title,
+  subtitle,
+  shortCopy,
+  benefits,
+  price,
+  buttonText,
+  stripeUrl,
+  image = '/images/sponsors/sponsor-placeholder.webp',
+} = Astro.props;
 const money = (n: number) => `$${n.toLocaleString('en-US')}`;
+const isPlaceholder = image === '/images/sponsors/sponsor-placeholder.webp';
 ---
 
 <li class="sponsor-card">
   <div class="sponsor-card__header">
     <div class="sponsor-card__image">
       <img
-        src="/images/sponsors/sponsor-placeholder.webp"
-        alt={`Placeholder — ${title} sponsor logo goes here`}
-        width="600"
-        height="600"
+        src={image}
+        alt={isPlaceholder ? `Placeholder — ${title} sponsor logo goes here` : `${title} sponsorship`}
+        width="1000"
+        height="1000"
         loading="lazy"
       />
     </div>
@@ -76,19 +87,27 @@ const money = (n: number) => `$${n.toLocaleString('en-US')}`;
   html[data-a11y-motion='off'] .sponsor-card:hover { transform: none; }
   @media (prefers-reduced-motion: reduce) { .sponsor-card:hover { transform: none; } }
 
-  /* ── Header: logo (left) + title/subtitle/copy (right) ── */
+  /* ── Header: stacked (image above title) on mobile, like a standard
+     card — a small side-by-side logo squeezed the copy too narrow on
+     small screens. Reverts to a compact row (logo left) at tablet+. ── */
   .sponsor-card__header {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: var(--space-s);
+  }
+  @media (min-width: 40rem) {
+    .sponsor-card__header { flex-direction: row; align-items: center; }
   }
 
   .sponsor-card__image {
     flex-shrink: 0;
-    width: 5.5rem;
+    width: 100%;
     aspect-ratio: 1 / 1;
     border-radius: var(--radius-sm);
     overflow: hidden;
+  }
+  @media (min-width: 40rem) {
+    .sponsor-card__image { width: 5.5rem; }
   }
   .sponsor-card__image img {
     width: 100%;
