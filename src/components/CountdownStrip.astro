@@ -1,0 +1,123 @@
+---
+/**
+ * CountdownStrip.astro — thin sitewide bar under the header counting down
+ * to The Fashion PAWty, with a Get Tickets CTA.
+ *
+ * Accessibility: the ticking numbers are aria-hidden and update at most
+ * once a minute (never per-second) — a fast-ticking live region would spam
+ * screen readers and count as the kind of distracting auto-updating
+ * content WCAG 2.2.2 asks you to let people stop. Screen reader users get
+ * the actual date/time instead via a static .sr-only string. Update
+ * frequency drops further (or stops) under reduced-motion.
+ */
+import { SITE } from '../config/site.js';
+
+const eventDate = new Date(SITE.event.startDate);
+const now = new Date();
+const diffMs = Math.max(0, eventDate.getTime() - now.getTime());
+const days = Math.floor(diffMs / 86_400_000);
+const hours = Math.floor((diffMs % 86_400_000) / 3_600_000);
+const minutes = Math.floor((diffMs % 3_600_000) / 60_000);
+const initialText =
+  diffMs <= 0
+    ? "It's PAWty time!"
+    : `${days}d ${hours}h ${minutes}m`;
+
+const readableDate = eventDate.toLocaleDateString('en-US', {
+  weekday: 'long',
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+const readableTime = eventDate.toLocaleTimeString('en-US', {
+  hour: 'numeric',
+  minute: '2-digit',
+  timeZoneName: 'short',
+});
+---
+
+<div class="countdown-strip">
+  <div class="countdown-strip__inner">
+    <p class="countdown-strip__timer">
+      <span class="countdown-strip__icon" aria-hidden="true">⏰</span>
+      <span data-countdown-value aria-hidden="true">{initialText}</span>
+      <span aria-hidden="true">until PAWty Time</span>
+      <span class="sr-only">
+        The Fashion PAWty is {readableDate} at {readableTime}.
+      </span>
+    </p>
+    <a class="btn btn--ticket" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Get Tickets</a>
+  </div>
+</div>
+
+<script define:vars={{ eventDateISO: SITE.event.startDate }}>
+  const el = document.querySelector('[data-countdown-value]');
+  if (el) {
+    const eventTime = new Date(eventDateISO).getTime();
+    const reduceMotion =
+      document.documentElement.getAttribute('data-a11y-motion') === 'off' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const render = () => {
+      const diff = eventTime - Date.now();
+      if (diff <= 0) {
+        el.textContent = "It's PAWty time!";
+        return false;
+      }
+      const d = Math.floor(diff / 86_400_000);
+      const h = Math.floor((diff % 86_400_000) / 3_600_000);
+      const m = Math.floor((diff % 3_600_000) / 60_000);
+      el.textContent = `${d}d ${h}h ${m}m`;
+      return true;
+    };
+
+    // A minutes-resolution countdown never needs per-second updates; a
+    // slower cadence under reduced motion keeps it from feeling like
+    // auto-updating content someone can't get away from.
+    const intervalMs = reduceMotion ? 5 * 60_000 : 60_000;
+    const tick = () => { if (!render()) clearInterval(id); };
+    const id = setInterval(tick, intervalMs);
+  }
+</script>
+
+<style>
+  .countdown-strip {
+    background: var(--color-dark);
+    color: #ffffff;
+    border-bottom: 2px solid var(--color-gold-highlight);
+  }
+  .countdown-strip__inner {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .countdown-strip__timer {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-weight: 700;
+  }
+  .countdown-strip__icon { font-size: 1.1rem; }
+  [data-countdown-value] { color: var(--color-gold-highlight); }
+  /* Slightly tighter horizontal padding to keep the strip slim — the
+     global 44px min-height (WCAG 2.5.8) still applies and must not be
+     overridden here. */
+  .countdown-strip .btn {
+    padding: 0.5rem 1rem;
+  }
+  html[data-a11y-contrast='high'] .countdown-strip {
+    background: var(--color-bg);
+    color: var(--color-text);
+    border-bottom-color: var(--color-border);
+  }
+  html[data-a11y-contrast='high'] [data-countdown-value] { color: var(--color-accent); }
+</style>

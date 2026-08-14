@@ -2,11 +2,9 @@
 /**
  * Sponsor — sponsorship packages for The Fashion PAWty.
  *
- * Tiers are grouped into five sections that mirror the physical packages:
+ * Tiers are grouped into four sections that mirror the physical packages:
  *   Main Sponsor (1, full-width) > Top Dog Sponsorships (3, signature zones) >
- *   PAWty Animal Sponsorships (5 activity areas) > Kennel Club (vendor tent —
- *   a space rental, not an activity naming right, so it gets its own section
- *   rather than sitting inside PAWty Animal) > Media Sponsorships (2).
+ *   PAWty Animal Sponsorships (5 activity areas) > Media Sponsorships (2).
  *
  * Each group feeds both the visible cards and SponsorshipSchema, so the
  * structured data can never drift from what a visitor actually reads
@@ -185,27 +183,6 @@ const pawtyAnimal = [
   },
 ];
 
-const kennelClub = [
-  {
-    title: 'Kennel Club',
-    subtitle: 'Vendor Tent',
-    fullName: 'Kennel Club: Vendor Tent',
-    price: 250,
-    qty: 4,
-    shortCopy: 'Set up shop on the orange carpet with a 10x10 vendor tent — four spaces available, first come, first served.',
-    benefits: [
-      '10x10 turfed area for tent setup',
-      'Featured placement on our event map',
-      'Social media shout-out, email inclusion, and website placement',
-      'PAWty Passes (2)',
-      'Food, MockTAILS, and a tote bag (2)',
-    ],
-    buttonText: 'Join the Club',
-    stripeUrl: 'https://buy.stripe.com/dRm8wOcdy8Vz8BBczsejK0b',
-    icon: '⛺',
-  },
-];
-
 const media = [
   {
     title: 'The Doggie Dispatch',
@@ -243,7 +220,7 @@ const media = [
 ];
 
 /* One flat list drives the structured data — same tiers rendered above. */
-const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...media].map((t) => ({
+const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...media].map((t) => ({
   name: t.fullName,
   price: t.price,
   qty: t.qty,
@@ -363,22 +340,8 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...kennelClub, ...m
     </div>
   </section>
 
-  <!-- ══ 4. KENNEL CLUB ══ -->
-  <section class="band band--gold" aria-labelledby="kennel-club-h">
-    <div class="container container--narrow">
-      <div class="section-head section-head--center">
-        <p class="eyebrow">Vendor Tents</p>
-        <h2 id="kennel-club-h">Kennel Club Sponsorship</h2>
-      </div>
-
-      <ul class="tier-grid">
-        {kennelClub.map((tier) => <SponsorCard {...tier} />)}
-      </ul>
-    </div>
-  </section>
-
-  <!-- ══ 5. MEDIA SPONSORSHIPS ══ -->
-  <section class="band band--teal" aria-labelledby="media-h">
+  <!-- ══ 4. MEDIA SPONSORSHIPS ══ -->
+  <section class="band band--gold" aria-labelledby="media-h">
     <div class="container container--narrow">
       <div class="section-head section-head--center">
         <p class="eyebrow">Before, During &amp; After</p>
