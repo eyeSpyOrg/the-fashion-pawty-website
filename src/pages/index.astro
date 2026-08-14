@@ -1,9 +1,8 @@
 ---
 /**
- * Homepage — designed layout: hero with imagery, alternating pattern
- * bands, sizzle-reel slot, dark goal band, beneficiary teaser, FAQ.
- * Copy from PAGE_COPY.md; Event + FAQPage schema. All imagery is
- * placeholder (see BRAND.md § 2.5 policy, surfaced on each block).
+ * Homepage — hero, quick facts, impact, fundraising goal, feature
+ * sections, FAQ, email signup, closing CTA, sponsor callout.
+ * Event + FAQPage schema generated from the same data rendered below.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FAQ from '../components/FAQ.astro';
@@ -13,49 +12,116 @@ import EventSchema from '../components/schema/EventSchema.astro';
 import { SITE } from '../config/site.js';
 
 const facts = [
-  { icon: '📅', label: 'When', value: 'Sat, Sep 26, 2026 · 4–7 PM' },
   { icon: '📍', label: 'Where', value: 'Happy Brew, Jacksonville' },
-  { icon: '🎟️', label: 'Tickets', value: '$30 · show + food + mocktails' },
+  { icon: '📅', label: 'When', value: 'September 26' },
+  { icon: '🕓', label: 'Time', value: '4 – 7 PM' },
+  { icon: '🎟️', label: 'Tickets', value: '$30 · food, mocktails & the show' },
+];
+
+const loveReasons = [
+  {
+    icon: '🎉',
+    title: 'A Day of Fun',
+    text: 'Watch local dogs show off their style on the orange carpet while enjoying music, games, food, and mocktails.',
+  },
+  {
+    icon: '💛',
+    title: 'A Meaningful Mission',
+    text: 'Your attendance helps support Eye Spy Foundation and Leader Dogs for the Blind.',
+  },
+  {
+    icon: '🤝',
+    title: 'A Community Event',
+    text: 'Meet local businesses, nonprofits, dog lovers, and families from across Jacksonville.',
+  },
+];
+
+const awards = [
+  'Best Dressed',
+  'Most Creative Costume',
+  'Crowd Favorite',
+  'Best Dog & Human Duo',
+  'Top Secret Style Award',
+];
+
+const requirements = [
+  'Represent a local nonprofit, business, or community cause',
+  'Friendly and comfortable around people',
+  'Up to date on vaccinations',
+  'Ready to work the orange carpet',
 ];
 
 const faqs = [
   {
     question: 'What is The Fashion PAWty?',
     answer:
-      'The Fashion PAWty is a doggie fashion show and community celebration — "A Navigation Celebration" — hosted by the Eye Spy Foundation in Jacksonville, Florida. Dogs strut the orange carpet while the community enjoys mocktails, food, games, and music, all to support the blind and low vision community and Leader Dogs for the Blind.',
+      'The Fashion PAWty is a community dog fashion show hosted by Eye Spy Foundation where local pups walk the orange carpet to help raise support for Eye Spy Foundation and Leader Dogs for the Blind.',
   },
   {
-    question: 'When and where is The Fashion PAWty?',
+    question: 'When and where is the event?',
+    answer: 'Saturday, September 26 at Happy Brew, 3200 Hendricks Ave, Jacksonville, FL 32207.',
+  },
+  {
+    question: 'How much are tickets?',
     answer:
-      'Saturday, September 26, 2026, from 4 to 7 PM at Happy Brew, 3200 Hendricks Ave, Jacksonville, FL 32207.',
+      'PAWty Passes are $30 and include admission, food, mocktails, music, and the fashion show.',
   },
   {
-    question: 'How much are tickets and what is included?',
-    answer: 'Tickets are $30 and include entry to the show, food, and mocktails.',
-  },
-  {
-    question: 'Who does the event benefit?',
+    question: 'Are kids allowed?',
     answer:
-      'The Eye Spy Foundation and Leader Dogs for the Blind. Eye Spy is also sponsoring one Leader Dogs puppy this year.',
+      'Absolutely. Children under 12 attend free when accompanied by an adult. Guests 12 and older should purchase a PAWty Pass.',
+  },
+  {
+    question: 'Will there be food?',
+    answer:
+      'Yes. Your PAWty Pass includes food from Ole Mexican Restaurant. Vegetarian and gluten-free options will also be available.',
+  },
+  {
+    question: 'Can I bring my dog?',
+    answer:
+      'To ensure a safe and enjoyable event for everyone, only dogs participating in the fashion show may attend. We love all pups, but space and safety considerations require us to limit attendance to registered runway participants.',
+  },
+  {
+    question: 'Can my dog be in the show?',
+    answer:
+      "Maybe! We're looking for 10–15 amazing dogs to walk the runway. Participants should represent a local organization, business, or community cause; be comfortable around crowds; be current on vaccinations; and be ready to show off their style. Use our contact form to inquire about participating.",
+  },
+  {
+    question: 'Can I volunteer?',
+    answer:
+      "Yes. We're always looking for friendly volunteers to help with setup, check-in, activities, and event support. Visit our Contact page to get involved.",
+  },
+  {
+    question: 'Who benefits from the event?',
+    answer:
+      'The Fashion PAWty supports Eye Spy Foundation and Leader Dogs for the Blind. Funds raised help support community resources, accessibility initiatives, and guide dog programs.',
+  },
+  {
+    question: 'Do I need to dress up?',
+    answer: 'Not at all. Come as you are, or have fun dressing in your best orange-carpet style.',
   },
 ];
+
+const pageDescription =
+  "The Fashion PAWty is Jacksonville's dog fashion show benefiting Eye Spy Foundation & Leader Dogs for the Blind — a family-friendly event, Sep 26 at Happy Brew.";
 ---
 
-<BaseLayout title="Home" description={SITE.description}>
+<BaseLayout title="Jacksonville Dog Fashion Show" description={pageDescription}>
   <!-- ══ HERO ══ -->
   <section class="band band--teal band--tight">
     <div class="container hero">
       <div class="hero__copy panel">
         <p class="eyebrow">About the Event</p>
-        <h1>A Navigation Celebration</h1>
+        <h1>Jacksonville's Most Stylish Dog Event</h1>
+        <p class="hero__tagline">Dogs. Mocktails. Music. Community.</p>
         <p class="prose lead">
-          Saturday, September 26 at Happy Brew — a doggie fashion show down the
-          orange carpet, hosted by the Eye Spy Foundation, with mocktails,
-          games, and music, all benefiting the blind and low vision community.
+          Join us September 26 at Happy Brew as local pups strut the orange
+          carpet for a family-friendly Jacksonville event supporting Eye Spy
+          Foundation and Leader Dogs for the Blind.
         </p>
         <div class="hero__ctas">
-          <a class="btn btn--primary btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Get Tickets</a>
-          <a class="btn btn--secondary btn--lg" href={SITE.donateUrl} target="_blank" rel="noopener">Donate</a>
+          <a class="btn btn--primary btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Get Your PAWty Pass</a>
+          <a class="btn btn--secondary btn--lg" href="/sponsor/">Become a Sponsor</a>
         </div>
       </div>
       <div class="hero__media">
@@ -87,19 +153,17 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ OVERVIEW (answer-first) ══ -->
+  <!-- ══ IMPACT ══ -->
   <section class="band band--teal" aria-labelledby="about-heading">
     <div class="container split">
       <div class="split__text">
         <p class="eyebrow">Style. Paws. Purpose.</p>
-        <h2 id="about-heading">A Runway with Real Impact</h2>
+        <h2 id="about-heading">Every Pawstep Makes a Difference</h2>
         <p class="prose">
-          The Fashion PAWty is a Navigation Celebration hosted by the Eye Spy
-          Foundation, supporting the blind and low vision community and Leader
-          Dogs for the Blind — helping people navigate the world with
-          confidence, online and on the street. Dogs strut the orange carpet,
-          the community comes together, and tickets are $30 including the show,
-          food, and mocktails.
+          Every ticket, sponsorship, and tail wag helps support programs that
+          connect the blind and low vision community with resources,
+          technology, and opportunities — while also helping train future
+          guide dogs through Leader Dogs for the Blind.
         </p>
         <p><a class="btn btn--primary" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Grab your PAWty Pass</a></p>
       </div>
@@ -114,15 +178,43 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ FAQ ══ -->
-  <section class="band">
-    <div class="container container--narrow">
-      <p class="eyebrow">Good to Know</p>
-      <FAQ faqs={faqs} heading="Frequently Asked Questions" />
-      <p class="prose">
-        More questions? Visit the <a href="/faq/">full FAQ page</a> or email
-        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
-      </p>
+  <!-- ══ GOAL (dark band) ══ -->
+  <section class="band band--dark" aria-labelledby="goal-heading">
+    <div class="container split split--center">
+      <div class="split__text">
+        <p class="eyebrow">Our $25,000 Goal</p>
+        <h2 id="goal-heading">Help Us Reach $25,000</h2>
+        <p class="prose">
+          Every ticket, sponsorship, and wagging tail brings this Jacksonville
+          dog fashion show closer to $25,000 for programs that matter.
+        </p>
+        <div class="hero__ctas">
+          <a class="btn btn--onDark btn--lg" href="/sponsor/">See sponsorship tiers</a>
+          <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Get tickets</a>
+        </div>
+      </div>
+      {/* TODO: update `raised` as sponsorships/donations come in — that's
+          the only value that needs to change to move the meter. */}
+      <PawDonationMeter goal={25000} raised={1250} />
+    </div>
+  </section>
+
+  <!-- ══ WHY PEOPLE LOVE THE PAWTY ══ -->
+  <section class="band" aria-labelledby="love-heading">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Why People Love It</p>
+        <h2 id="love-heading">A Jacksonville Dog Event Like No Other</h2>
+      </div>
+      <ul class="grid grid--3 love-list">
+        {loveReasons.map((r) => (
+          <li class="card love-card">
+            <span class="love-card__icon" aria-hidden="true">{r.icon}</span>
+            <h3>{r.title}</h3>
+            <p>{r.text}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -143,25 +235,49 @@ const faqs = [
   </section>
   */}
 
-  <!-- ══ GOAL (dark band) ══ -->
-  <section class="band band--dark" aria-labelledby="goal-heading">
-    <div class="container split split--center">
-      <div class="split__text">
-        <p class="eyebrow">Our $25,000 Goal</p>
-        <h2 id="goal-heading">Help Us Reach $25,000</h2>
-        <p class="prose">
-          Together we're raising $25,000 to help the blind and low vision
-          community navigate the resources that make for a better low vision
-          lifestyle. Every ticket, sponsor, and wagging tail gets us closer.
-        </p>
-        <div class="hero__ctas">
-          <a class="btn btn--onDark btn--lg" href="/sponsor/">See sponsorship tiers</a>
-          <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Get tickets</a>
-        </div>
+  <!-- ══ RUNWAY AWARDS ══ -->
+  <section class="band band--teal" aria-labelledby="awards-heading">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Runway Awards</p>
+        <h2 id="awards-heading">What Are the Dogs Competing For?</h2>
+        <p class="prose mx-auto">Every pup has a chance to steal the spotlight.</p>
       </div>
-      {/* TODO: update `raised` as sponsorships/donations come in — that's
-          the only value that needs to change to move the meter. */}
-      <PawDonationMeter goal={25000} raised={1250} />
+      <ul class="grid grid--3 award-list">
+        {awards.map((a) => (
+          <li class="card award-card">
+            <span aria-hidden="true">🏆</span> {a}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ WANT YOUR DOG TO STRUT ══ -->
+  <section class="band" aria-labelledby="strut-heading">
+    <div class="container split">
+      <div class="split__text">
+        <p class="eyebrow">Runway Casting</p>
+        <h2 id="strut-heading">Think Your Pup Has What It Takes?</h2>
+        <p class="prose">
+          We're looking for 10–15 amazing dogs to participate in this year's
+          show.
+        </p>
+        <ul class="req-list">
+          {requirements.map((r) => (
+            <li><span aria-hidden="true">✓</span> {r}</li>
+          ))}
+        </ul>
+        <p><a class="btn btn--primary btn--lg" href="/contact/">Apply for the Runway</a></p>
+      </div>
+      <div class="card card--accent stack">
+        <h3>A Dog-Friendly Community Fundraiser</h3>
+        <p class="prose">
+          This Jacksonville pet event is built around real dogs and real
+          neighbors — the runway is the heart of the show, and every
+          applicant helps make it possible.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -197,9 +313,9 @@ const faqs = [
           />
           <h3>Eye Spy Foundation</h3>
           <p>
-            We help the blind and low vision community navigate community
-            resources so they can live a better low vision lifestyle — greeting
-            everyone with a hug or a handshake.
+            We help the blind and low vision community find resources,
+            connection, and confidence — greeting everyone with a hug or a
+            handshake.
           </p>
           <p><a href="/beneficiaries/">Meet Eye Spy Foundation</a></p>
         </article>
@@ -224,6 +340,69 @@ const faqs = [
     </div>
   </section>
 
+  <!-- ══ FAQ ══ -->
+  <section class="band">
+    <div class="container container--narrow">
+      <p class="eyebrow">Good to Know</p>
+      <FAQ faqs={faqs} heading="Frequently Asked Questions" />
+      <p class="prose">
+        More questions? Visit the <a href="/faq/">full FAQ page</a> or email
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ EMAIL SIGNUP ══ -->
+  <section class="band band--teal" aria-labelledby="dispatch-heading">
+    <div class="container container--narrow signup-cta">
+      <p class="eyebrow">Stay Connected</p>
+      <h2 id="dispatch-heading">Join the Doggie Dispatch</h2>
+      <p class="prose mx-auto">
+        Get event updates, dog spotlights, sponsor announcements, and PAWty
+        news delivered to your inbox.
+      </p>
+      {/* TODO: swap this mailto CTA for <HubSpotForm> once
+          SITE.integrations.hubspotPortalId and a real form GUID are live
+          (see INTEGRATIONS.md §2.4). */}
+      <a
+        class="btn btn--primary btn--lg"
+        href={`mailto:${SITE.email}?subject=${encodeURIComponent('Join the Doggie Dispatch')}`}
+      >
+        Join the List
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ CLOSING CTA ══ -->
+  <section class="band band--dark" aria-labelledby="closing-heading">
+    <div class="container container--narrow swag-cta">
+      <p class="eyebrow">One Last Thing</p>
+      <h2 id="closing-heading">Ready to Strut for a Cause?</h2>
+      <p class="prose mx-auto">
+        Spend an afternoon with great people, incredible dogs, delicious
+        food, and a mission that matters.
+      </p>
+      <div class="hero__ctas closing-ctas">
+        <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Get Tickets</a>
+        <a class="btn btn--onDark btn--lg" href="/sponsor/">Become a Sponsor</a>
+        <a class="btn btn--onDark btn--lg" href="/contact/">Volunteer</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SPONSORS ══ -->
+  <section class="band" aria-labelledby="sponsors-heading">
+    <div class="container container--narrow swag-cta">
+      <p class="eyebrow">With Thanks To</p>
+      <h2 id="sponsors-heading">Our Sponsors Make It Possible</h2>
+      <p class="prose mx-auto">
+        This year's sponsor lineup is coming together — logos will land here
+        as partners join. Want to see your business on the orange carpet?
+      </p>
+      <a class="btn btn--primary btn--lg" href="/sponsor/">Become a Sponsor</a>
+    </div>
+  </section>
+
   <EventSchema />
 </BaseLayout>
 
@@ -231,6 +410,12 @@ const faqs = [
   /* Hero: two-column on wide screens, stacked on small */
   .hero { display: grid; gap: var(--space-m); align-items: center; }
   .hero__copy > * + * { margin-top: var(--space-s); }
+  .hero__tagline {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-0);
+    color: var(--color-accent);
+  }
   .hero .lead { font-size: var(--step-1); color: var(--color-text-muted); }
   .hero__ctas { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-m); }
   @media (min-width: 52rem) {
@@ -283,4 +468,26 @@ const faqs = [
   .swag-cta { text-align: center; }
   .swag-cta .eyebrow { justify-content: center; }
   .swag-cta .btn { margin-top: var(--space-m); }
+  .closing-ctas { justify-content: center; }
+
+  /* Why People Love / Runway Awards card lists */
+  .love-list, .award-list { list-style: none; margin: 0; padding: 0; }
+  .love-card { display: grid; gap: 0.5rem; text-align: center; justify-items: center; }
+  .love-card__icon { font-size: 2.25rem; line-height: 1; }
+  .award-card {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+    font-family: var(--font-display);
+  }
+
+  /* Requirements list on the runway-casting section */
+  .req-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+  .req-list li { display: flex; align-items: flex-start; gap: 0.5rem; }
+  .req-list span[aria-hidden] { color: var(--color-accent); font-weight: 700; }
+
+  .signup-cta { text-align: center; }
+  .signup-cta .eyebrow { justify-content: center; }
+  .signup-cta .btn { margin-top: var(--space-m); }
 </style>
