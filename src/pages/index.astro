@@ -12,10 +12,9 @@ import EventSchema from '../components/schema/EventSchema.astro';
 import { SITE } from '../config/site.js';
 
 const facts = [
-  { icon: '📍', label: 'Where', value: 'Happy Brew, Jacksonville' },
-  { icon: '📅', label: 'When', value: 'September 26' },
-  { icon: '🕓', label: 'Time', value: '4 – 7 PM' },
-  { icon: '🎟️', label: 'Tickets', value: '$30 · food, mocktails & the show' },
+  { icon: '📍', label: 'Where', value: 'Happy Brew Coffee Shop, Jacksonville, FL' },
+  { icon: '📅', label: 'When', value: 'September 26 · 4 – 7 PM' },
+  { icon: '🎟️', label: 'Tickets', value: '$30 · Runway show, food, mocktails, music, family fun' },
 ];
 
 const loveReasons = [
@@ -36,19 +35,20 @@ const loveReasons = [
   },
 ];
 
-const awards = [
-  'Best Dressed',
-  'Most Creative Costume',
-  'Crowd Favorite',
-  'Best Dog & Human Duo',
-  'Top Secret Style Award',
-];
-
 const requirements = [
-  'Represent a local nonprofit, business, or community cause',
+  'Represent a local cause or business',
   'Friendly and comfortable around people',
   'Up to date on vaccinations',
   'Ready to work the orange carpet',
+];
+
+const shopCategories = [
+  { image: '/images/shop/men.webp', label: 'Men', alt: 'A man wearing a Fashion PAWty print polo shirt' },
+  { image: '/images/shop/women.webp', label: 'Women', alt: 'A woman wearing a black Fashion PAWty T-shirt' },
+  { image: '/images/shop/kids.webp', label: 'Kids', alt: "White kids' clogs with a Fashion PAWty dog and bow-tie print" },
+  { image: '/images/shop/dogs.webp', label: 'Pets', alt: 'A golden retriever wearing a Fashion PAWty trucker hat' },
+  { image: '/images/shop/gifts.webp', label: 'Gifts', alt: 'Fashion PAWty branded dog-print gift socks' },
+  { image: '/images/shop/pawty.webp', label: 'PAWty Collections', alt: "Two 'Let's PAWty' pickleball paddles and balls" },
 ];
 
 const faqs = [
@@ -59,12 +59,18 @@ const faqs = [
   },
   {
     question: 'When and where is the event?',
-    answer: 'Saturday, September 26 at Happy Brew, 3200 Hendricks Ave, Jacksonville, FL 32207.',
+    answer: [
+      'Saturday, September 26 from 4 – 7 PM at Happy Brew Coffee Shop, 3200 Hendricks Ave, Jacksonville, FL 32207. ',
+      { text: 'View the Venue Page', href: '/venue/' },
+      '.',
+    ],
   },
   {
     question: 'How much are tickets?',
-    answer:
-      'PAWty Passes are $30 and include admission, food, mocktails, music, and the fashion show.',
+    answer: [
+      'PAWty Passes are $30 and include admission, food, mocktails, music, family fun, and the fashion show. ',
+      { text: 'Join the PAWty', href: SITE.event.ticketUrl, external: true },
+    ],
   },
   {
     question: 'Are kids allowed?',
@@ -73,8 +79,11 @@ const faqs = [
   },
   {
     question: 'Will there be food?',
-    answer:
-      'Yes. Your PAWty Pass includes food from Ole Mexican Restaurant. Vegetarian and gluten-free options will also be available.',
+    answer: [
+      'Yes. Your PAWty Pass includes food from ',
+      { text: 'Ole Mexican Restaurant', href: 'https://olemexjax.com/', external: true },
+      '. Vegetarian and gluten-free options will also be available.',
+    ],
   },
   {
     question: 'Can I bring my dog?',
@@ -84,21 +93,28 @@ const faqs = [
   {
     question: 'Can my dog be in the show?',
     answer:
-      "Maybe! We're looking for 10–15 amazing dogs to walk the runway. Participants should represent a local organization, business, or community cause; be comfortable around crowds; be current on vaccinations; and be ready to show off their style. Use our contact form to inquire about participating.",
+      "Maybe! We're looking for 10–15 amazing dogs to walk the runway. Participants should represent a local cause or business, be comfortable around crowds, be current on vaccinations, and be ready to show off their style. Use our contact form to inquire about participating.",
   },
   {
     question: 'Can I volunteer?',
-    answer:
-      "Yes. We're always looking for friendly volunteers to help with setup, check-in, activities, and event support. Visit our Contact page to get involved.",
+    answer: [
+      "Yes. We're always looking for friendly volunteers to help with setup, check-in, activities, and event support. View our ",
+      { text: 'Contact page', href: '/contact/' },
+      ' to get involved.',
+    ],
   },
   {
     question: 'Who benefits from the event?',
-    answer:
-      'The Fashion PAWty supports Eye Spy Foundation and Leader Dogs for the Blind. Funds raised help support community resources, accessibility initiatives, and guide dog programs.',
+    answer: [
+      'The Fashion PAWty supports Eye Spy Foundation and Leader Dogs for the Blind. Funds raised help support community resources, accessibility initiatives, and guide dog programs. View our ',
+      { text: 'Beneficiaries page', href: '/beneficiaries/' },
+      ' to learn more.',
+    ],
   },
   {
     question: 'Do I need to dress up?',
-    answer: 'Not at all. Come as you are, or have fun dressing in your best orange-carpet style.',
+    answer:
+      "Not at all. Come as you are, or have fun dressing in your best orange-carpet style. But if you're feeling the vibe, costumes are more than welcome.",
   },
 ];
 
@@ -165,7 +181,7 @@ const pageDescription =
           technology, and opportunities — while also helping train future
           guide dogs through Leader Dogs for the Blind.
         </p>
-        <p><a class="btn btn--primary" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Grab your PAWty Pass</a></p>
+        <p><a class="btn btn--primary" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Grab a PAWty Pass</a></p>
       </div>
       <img
         class="hero-photo"
@@ -235,26 +251,8 @@ const pageDescription =
   </section>
   */}
 
-  <!-- ══ RUNWAY AWARDS ══ -->
-  <section class="band band--teal" aria-labelledby="awards-heading">
-    <div class="container">
-      <div class="section-head section-head--center">
-        <p class="eyebrow">Runway Awards</p>
-        <h2 id="awards-heading">What Are the Dogs Competing For?</h2>
-        <p class="prose mx-auto">Every pup has a chance to steal the spotlight.</p>
-      </div>
-      <ul class="grid grid--3 award-list">
-        {awards.map((a) => (
-          <li class="card award-card">
-            <span aria-hidden="true">🏆</span> {a}
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
   <!-- ══ WANT YOUR DOG TO STRUT ══ -->
-  <section class="band" aria-labelledby="strut-heading">
+  <section class="band band--teal" aria-labelledby="strut-heading">
     <div class="container split">
       <div class="split__text">
         <p class="eyebrow">Runway Casting</p>
@@ -281,16 +279,41 @@ const pageDescription =
     </div>
   </section>
 
-  <!-- ══ SWAG CTA ══ -->
-  <section class="band band--teal" aria-labelledby="swag-heading">
-    <div class="container container--narrow swag-cta">
-      <p class="eyebrow">Shop the Collection</p>
-      <h2 id="swag-heading">Fashion PAWty Swag</h2>
-      <p class="prose mx-auto">
-        Take The Fashion PAWty home with you — hats, tees, and more from our
-        official shop.
-      </p>
-      <a class="btn btn--primary btn--lg" href={SITE.shopUrl} target="_blank" rel="noopener">Shop Merch</a>
+  <!-- ══ SHOP ══ -->
+  <section class="band" aria-labelledby="shop-heading">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Shop the Collection</p>
+        <h2 id="shop-heading">The Fashion PAWty Store</h2>
+        <p class="prose mx-auto">
+          Discover exclusive apparel, accessories, gifts, and pet gear
+          inspired by Jacksonville's most stylish fundraiser for dogs and
+          their humans.
+        </p>
+      </div>
+      {/* TODO: point each tile at its own shop collection URL once
+          shop.thefashionpawty.com has per-category collection pages. */}
+      <ul class="grid grid--3 shop-grid">
+        {shopCategories.map((c) => (
+          <li class="shop-card">
+            <a href={SITE.shopUrl} target="_blank" rel="noopener">
+              <img
+                class="shop-card__photo"
+                src={c.image}
+                alt={c.alt}
+                width="1000"
+                height="1000"
+                loading="lazy"
+              />
+              <span class="shop-card__label">{c.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="shop-cta">
+        <a class="btn btn--primary btn--lg" href={SITE.shopUrl} target="_blank" rel="noopener">Shop the Collections</a>
+        <p class="shop-cta__categories">Men • Women • Kids • Pets • Gifts • PAWty Collections</p>
+      </div>
     </div>
   </section>
 
@@ -313,9 +336,11 @@ const pageDescription =
           />
           <h3>Eye Spy Foundation</h3>
           <p>
-            We help the blind and low vision community find resources,
-            connection, and confidence — greeting everyone with a hug or a
-            handshake.
+            Eye Spy Foundation helps the blind and low vision community
+            discover resources, build connections, and grow confidence
+            through technology, education, and support. We're creating a
+            more connected future while welcoming everyone with a hug, a
+            handshake, and a sense of belonging.
           </p>
           <p><a href="/beneficiaries/">Meet Eye Spy Foundation</a></p>
         </article>
@@ -330,9 +355,10 @@ const pageDescription =
           />
           <h3>Leader Dogs for the Blind</h3>
           <p>
-            A guide dog school raising and training dogs to help people travel
-            safely and independently. This year Eye Spy is sponsoring one Leader
-            Dogs puppy.
+            A portion of every purchase helps support a future Leader Dog
+            puppy on its journey to becoming a guide dog. Through expert
+            training and care, these remarkable dogs help people travel
+            with greater confidence, independence, and freedom.
           </p>
           <p><a href="/beneficiaries/">Learn about Leader Dogs for the Blind</a></p>
         </article>
@@ -387,19 +413,6 @@ const pageDescription =
         <a class="btn btn--onDark btn--lg" href="/sponsor/">Become a Sponsor</a>
         <a class="btn btn--onDark btn--lg" href="/contact/">Volunteer</a>
       </div>
-    </div>
-  </section>
-
-  <!-- ══ SPONSORS ══ -->
-  <section class="band" aria-labelledby="sponsors-heading">
-    <div class="container container--narrow swag-cta">
-      <p class="eyebrow">With Thanks To</p>
-      <h2 id="sponsors-heading">Our Sponsors Make It Possible</h2>
-      <p class="prose mx-auto">
-        This year's sponsor lineup is coming together — logos will land here
-        as partners join. Want to see your business on the orange carpet?
-      </p>
-      <a class="btn btn--primary btn--lg" href="/sponsor/">Become a Sponsor</a>
     </div>
   </section>
 
@@ -470,17 +483,10 @@ const pageDescription =
   .swag-cta .btn { margin-top: var(--space-m); }
   .closing-ctas { justify-content: center; }
 
-  /* Why People Love / Runway Awards card lists */
-  .love-list, .award-list { list-style: none; margin: 0; padding: 0; }
+  /* Why People Love card list */
+  .love-list { list-style: none; margin: 0; padding: 0; }
   .love-card { display: grid; gap: 0.5rem; text-align: center; justify-items: center; }
   .love-card__icon { font-size: 2.25rem; line-height: 1; }
-  .award-card {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-weight: 700;
-    font-family: var(--font-display);
-  }
 
   /* Requirements list on the runway-casting section */
   .req-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
@@ -490,4 +496,36 @@ const pageDescription =
   .signup-cta { text-align: center; }
   .signup-cta .eyebrow { justify-content: center; }
   .signup-cta .btn { margin-top: var(--space-m); }
+
+  /* Shop category tiles */
+  .shop-grid { list-style: none; margin: 0; padding: 0; margin-top: var(--space-l); }
+  .shop-card a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+  }
+  .shop-card a:hover { border-color: var(--color-accent); }
+  .shop-card__photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+  .shop-card__label {
+    display: block;
+    text-align: center;
+    padding: 0.75rem 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+  .shop-cta { text-align: center; margin-top: var(--space-l); }
+  .shop-cta__categories {
+    margin-top: var(--space-s);
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
 </style>
