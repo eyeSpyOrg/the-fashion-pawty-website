@@ -329,7 +329,7 @@ const pageDescription =
     </div>
   </section>
 
-  <!-- ══ SHOP ══ -->
+{/* ══ SHOP — hidden for now, the merch store isn't live yet ══
   <section class="band band--teal" aria-labelledby="shop-heading">
     <div class="container">
       <div class="section-head section-head--center shop-intro">
@@ -342,8 +342,8 @@ const pageDescription =
         </p>
         <a class="btn btn--primary btn--lg" href={SITE.shopUrl} target="_blank" rel="noopener">Shop the Collections</a>
       </div>
-      {/* TODO: point each tile at its own shop collection URL once
-          shop.thefashionpawty.com has per-category collection pages. */}
+      TODO: point each tile at its own shop collection URL once
+      shop.thefashionpawty.com has per-category collection pages.
       <ul class="grid grid--3 shop-grid">
         {shopCategories.map((c) => (
           <li class="shop-card">
@@ -362,6 +362,7 @@ const pageDescription =
       </ul>
     </div>
   </section>
+  */}
 
   <!-- ══ FAQ ══ -->
   <section class="band">
@@ -375,26 +376,27 @@ const pageDescription =
     </div>
   </section>
 
-  <!-- ══ EMAIL SIGNUP ══ -->
+{/* ══ EMAIL SIGNUP — hidden: the footer now has a real, sitewide
+    HubSpot-powered signup, so this page-level duplicate (and its mailto
+    fallback) is redundant. Keep for reference in case the footer strip
+    ever goes away. ══
   <section class="band band--teal" aria-labelledby="dispatch-heading">
     <div class="container container--narrow signup-cta">
       <p class="eyebrow">Stay Connected</p>
-      <h2 id="dispatch-heading">Join the Doggie Dispatch</h2>
+      <h2 id="dispatch-heading">The Fashion PAWty Newsletter</h2>
       <p class="prose mx-auto">
         Get event updates, dog spotlights, sponsor announcements, and PAWty
         news delivered to your inbox.
       </p>
-      {/* TODO: swap this mailto CTA for <HubSpotForm> once
-          SITE.integrations.hubspotPortalId and a real form GUID are live
-          (see INTEGRATIONS.md §2.4). */}
       <a
         class="btn btn--primary btn--lg"
-        href={`mailto:${SITE.email}?subject=${encodeURIComponent('Join the Doggie Dispatch')}`}
+        href={`mailto:${SITE.email}?subject=${encodeURIComponent('The Fashion PAWty Newsletter')}`}
       >
         Join the List
       </a>
     </div>
   </section>
+  */}
 
   <!-- ══ CLOSING CTA ══ -->
   <section class="band band--dark" aria-labelledby="closing-heading">

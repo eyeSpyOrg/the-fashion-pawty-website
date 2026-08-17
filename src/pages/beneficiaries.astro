@@ -4,7 +4,6 @@
  * Leader Dogs copy is an original draft pending their sign-off.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import { SITE } from '../config/site.js';
 ---
 
@@ -25,12 +24,13 @@ import { SITE } from '../config/site.js';
             changing lives, and proving that every look has a mission.
           </p>
         </div>
-        <ImagePlaceholder
-          label="The blind and low vision community coming together"
-          policy="ai"
-          ratio="4 / 3"
-          icon="🤝"
-          tone="teal"
+        <img
+          class="hero-photo"
+          src="/images/sponsors/eyespy-logo-card.webp"
+          alt="Eye Spy Foundation logo"
+          width="1600"
+          height="1200"
+          fetchpriority="high"
         />
       </div>
     </div>
@@ -138,7 +138,9 @@ import { SITE } from '../config/site.js';
         <div class="cta-band__btns">
           <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Join the PAWty</a>
           <a class="btn btn--onDark btn--lg" href="/sponsor/">Become a Sponsor</a>
+          {/* Buy Merch — hidden for now, the merch store isn't live yet
           <a class="btn btn--onDark btn--lg" href={SITE.shopUrl} target="_blank" rel="noopener">Buy Merch</a>
+          */}
         </div>
       </div>
     </div>
@@ -153,6 +155,16 @@ import { SITE } from '../config/site.js';
     .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
   }
   h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    background: var(--color-surface);
+    padding: var(--space-l);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
 
   /* Eye Spy Foundation and Leader Dogs sections share this exact layout —
      text on the left, two stacked photos on the right — so the two causes

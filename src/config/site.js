@@ -61,7 +61,7 @@ export const SITE = {
   },
 
   // ── Navigation (drives Header + Footer) ────────────────────
-  // Tickets & Merch are surfaced as the header "Get Tickets" / "Buy Merch"
+  // Tickets are surfaced as the header "Buy Tickets" / "Get Tickets"
   // buttons, so they are not repeated as nav links.
   nav: [
     { label: 'Home', href: '/' },
@@ -72,7 +72,9 @@ export const SITE = {
     { label: 'FAQ', href: '/faq/' },
     { label: 'Contact', href: '/contact/' },
   ],
-  // Shop URL — used by the homepage Swag CTA and other "Buy Merch" links
+  // Shop URL — the merch store isn't live yet; every reference to it is
+  // currently hidden (commented out) rather than deleted. Kept here so
+  // those sections are a one-line uncomment once the store launches.
   shopUrl: 'https://shop.thefashionpawty.com',
   // Donate URL reused by the header "Donate" button
   donateUrl: 'https://donate.stripe.com/dRmcN43H25Jng43eHAejK00',

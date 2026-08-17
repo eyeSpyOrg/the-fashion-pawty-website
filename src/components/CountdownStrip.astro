@@ -1,7 +1,8 @@
 ---
 /**
  * CountdownStrip.astro — thin sitewide bar under the header counting down
- * to The Fashion PAWty, with a Get Tickets CTA.
+ * to The Fashion PAWty. Text-only (no CTA button) and not sticky — it
+ * scrolls away with the page like any other content.
  *
  * Accessibility: the ticking numbers are aria-hidden and update at most
  * once a minute (never per-second) — a fast-ticking live region would spam
@@ -37,17 +38,14 @@ const readableTime = eventDate.toLocaleTimeString('en-US', {
 ---
 
 <div class="countdown-strip">
-  <div class="countdown-strip__inner">
-    <p class="countdown-strip__timer">
-      <span class="countdown-strip__icon" aria-hidden="true">⏰</span>
-      <span data-countdown-value aria-hidden="true">{initialText}</span>
-      <span aria-hidden="true">until PAWty Time</span>
-      <span class="sr-only">
-        The Fashion PAWty is {readableDate} at {readableTime}.
-      </span>
-    </p>
-    <a class="btn btn--ticket" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Get Tickets</a>
-  </div>
+  <p class="countdown-strip__timer">
+    <span class="countdown-strip__icon" aria-hidden="true">⏰</span>
+    <span data-countdown-value aria-hidden="true">{initialText}</span>
+    <span aria-hidden="true">until PAWty Time</span>
+    <span class="sr-only">
+      The Fashion PAWty is {readableDate} at {readableTime}.
+    </span>
+  </p>
 </div>
 
 <script define:vars={{ eventDateISO: SITE.event.startDate }}>
@@ -85,56 +83,26 @@ const readableTime = eventDate.toLocaleTimeString('en-US', {
     background: var(--color-dark);
     color: #ffffff;
     border-bottom: 2px solid var(--color-gold-highlight);
-  }
-  .countdown-strip__inner {
-    max-width: 72rem;
-    margin-inline: auto;
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-s);
-    flex-wrap: wrap;
+    padding: 0.3rem 1rem;
     text-align: center;
   }
   .countdown-strip__timer {
-    margin: 0;
+    max-width: 72rem;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     gap: 0.4rem;
     flex-wrap: wrap;
     justify-content: center;
     font-weight: 700;
+    font-size: 0.9rem;
   }
-  .countdown-strip__icon { font-size: 1.1rem; }
+  .countdown-strip__icon { font-size: 1rem; }
   [data-countdown-value] { color: var(--color-gold-highlight); }
-  /* Slightly tighter horizontal padding to keep the strip slim — the
-     global 44px min-height (WCAG 2.5.8) still applies and must not be
-     overridden here. */
-  .countdown-strip .btn {
-    padding: 0.5rem 1rem;
-  }
-  /* Gold CTA, scoped to this strip only (the shared .btn--ticket class
-     stays teal/white everywhere else, e.g. the header). White text on
-     this gold fails contrast (~2.1:1) — --color-text on gold is 8.6:1,
-     so the button uses dark text instead of the usual white. */
-  .countdown-strip .btn--ticket {
-    background: var(--color-gold-highlight);
-    color: var(--color-text);
-  }
-  .countdown-strip .btn--ticket:hover {
-    color: var(--color-text);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-  }
   html[data-a11y-contrast='high'] .countdown-strip {
     background: var(--color-bg);
     color: var(--color-text);
     border-bottom-color: var(--color-border);
   }
   html[data-a11y-contrast='high'] [data-countdown-value] { color: var(--color-accent); }
-  html[data-a11y-contrast='high'] .countdown-strip .btn--ticket {
-    background: var(--color-accent);
-    color: #ffffff;
-  }
 </style>

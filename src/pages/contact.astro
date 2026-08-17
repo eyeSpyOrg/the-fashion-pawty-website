@@ -67,7 +67,8 @@ const telDisplay = '(844) 222‑8848';
         </p>
       </div>
 
-      <div class="card contact-form">
+      <div class="contact-form">
+        <p class="eyebrow">Have a Question?</p>
         <HubSpotForm
           formGuid="887b5e29-d7e8-41a0-8c30-cd7928ce81cc"
           heading="Send Us a Message"
@@ -96,7 +97,21 @@ const telDisplay = '(844) 222‑8848';
   .contact-card__value { font-size: var(--step-1); font-weight: 700; word-break: break-word; }
   .find-us { margin-top: var(--space-m); }
   .find-us__h { margin: 0 0 0.35rem; }
-  .contact-form { margin-top: var(--space-m); }
+
+  /* Same card language as the footer newsletter strip (teal-tint,
+     radius-lg, shadow-sm) so the two HubSpot-powered forms on the site
+     read as one consistent pattern rather than two different styles. */
+  .contact-form {
+    margin-top: var(--space-m);
+    padding: var(--space-l);
+    background: var(--color-teal-tint);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .contact-form :global(.hs-form) { max-width: none; }
+  .contact-form :global(.hs-form h2) { margin-top: 0; }
+  html[data-a11y-contrast='high'] .contact-form { background: var(--color-surface); }
 
   .lead { font-size: var(--step-1); color: var(--color-text-muted); }
   .split { display: grid; gap: var(--space-l); align-items: center; }

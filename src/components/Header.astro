@@ -48,10 +48,10 @@ const isActive = (href: string) =>
     </nav>
 
     <div class="site-header__actions">
-      <a class="btn btn--secondary site-header__buy" href={SITE.shopUrl} target="_blank" rel="noopener">
-        Buy Merch
+      <a class="btn btn--secondary site-header__donate" href={SITE.donateUrl} target="_blank" rel="noopener">
+        Donate
       </a>
-      <a class="btn btn--ticket site-header__donate" href={SITE.donateUrl} target="_blank" rel="noopener">Donate</a>
+      <a class="btn btn--ticket site-header__tickets" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Buy Tickets</a>
       <a class="btn btn--ticket site-header__tickets-mobile" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Get Tickets</a>
 
       <button
@@ -72,6 +72,9 @@ const isActive = (href: string) =>
   .site-header {
     background: var(--color-bg);
     border-bottom: 2px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
   }
   .site-header__inner {
     max-width: 72rem;
@@ -96,7 +99,7 @@ const isActive = (href: string) =>
   :global(html[data-a11y-contrast='high']) .site-header__logo--color { display: none; }
   :global(html[data-a11y-contrast='high']) .site-header__logo--hc { display: inline; }
 
-  /* Right-hand action cluster: Buy Merch + Donate on desktop, a single
+  /* Right-hand action cluster: Donate + Buy Tickets on desktop, a single
      Get Tickets button on mobile (+ the mobile menu toggle). */
   .site-header__actions {
     display: flex;
@@ -147,8 +150,8 @@ const isActive = (href: string) =>
   }
 
   /* Collapse to the hamburger only once the full nav can't fit comfortably
-     (tablet / narrow windows). Desktop keeps the full inline nav with Buy
-     Merch + Donate; below this width those two swap for a single Get
+     (tablet / narrow windows). Desktop keeps the full inline nav with
+     Donate + Buy Tickets; below this width those two swap for a single Get
      Tickets button, keeping the compact header from getting crowded. */
   @media (max-width: 60rem) {
     .site-header__inner { flex-wrap: wrap; }
@@ -157,7 +160,7 @@ const isActive = (href: string) =>
     .site-header__nav.is-open { display: block; }
     .site-header__nav ul { flex-direction: column; }
     .site-header__nav a { width: 100%; }
-    .site-header__buy, .site-header__donate { display: none; }
+    .site-header__donate, .site-header__tickets { display: none; }
     .site-header__tickets-mobile { display: inline-flex; }
   }
   @media (max-width: 30rem) {
