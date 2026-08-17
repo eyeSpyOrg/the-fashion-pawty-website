@@ -114,10 +114,27 @@ const readableTime = eventDate.toLocaleTimeString('en-US', {
   .countdown-strip .btn {
     padding: 0.5rem 1rem;
   }
+  /* Gold CTA, scoped to this strip only (the shared .btn--ticket class
+     stays teal/white everywhere else, e.g. the header). White text on
+     this gold fails contrast (~2.1:1) — --color-text on gold is 8.6:1,
+     so the button uses dark text instead of the usual white. */
+  .countdown-strip .btn--ticket {
+    background: var(--color-gold-highlight);
+    color: var(--color-text);
+  }
+  .countdown-strip .btn--ticket:hover {
+    color: var(--color-text);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
   html[data-a11y-contrast='high'] .countdown-strip {
     background: var(--color-bg);
     color: var(--color-text);
     border-bottom-color: var(--color-border);
   }
   html[data-a11y-contrast='high'] [data-countdown-value] { color: var(--color-accent); }
+  html[data-a11y-contrast='high'] .countdown-strip .btn--ticket {
+    background: var(--color-accent);
+    color: #ffffff;
+  }
 </style>

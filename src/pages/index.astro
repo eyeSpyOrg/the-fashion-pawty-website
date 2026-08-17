@@ -251,7 +251,7 @@ const pageDescription =
   </section>
   */}
 
-  <!-- ══ WANT YOUR DOG TO STRUT ══ -->
+  {/* ══ WANT YOUR DOG TO STRUT — hidden for now, keep for when casting reopens ══
   <section class="band band--teal" aria-labelledby="strut-heading">
     <div class="container split">
       <div class="split__text">
@@ -278,44 +278,7 @@ const pageDescription =
       </div>
     </div>
   </section>
-
-  <!-- ══ SHOP ══ -->
-  <section class="band" aria-labelledby="shop-heading">
-    <div class="container">
-      <div class="section-head section-head--center">
-        <p class="eyebrow">Shop the Collection</p>
-        <h2 id="shop-heading">The Fashion PAWty Store</h2>
-        <p class="prose mx-auto">
-          Discover exclusive apparel, accessories, gifts, and pet gear
-          inspired by Jacksonville's most stylish fundraiser for dogs and
-          their humans.
-        </p>
-      </div>
-      {/* TODO: point each tile at its own shop collection URL once
-          shop.thefashionpawty.com has per-category collection pages. */}
-      <ul class="grid grid--3 shop-grid">
-        {shopCategories.map((c) => (
-          <li class="shop-card">
-            <a href={SITE.shopUrl} target="_blank" rel="noopener">
-              <img
-                class="shop-card__photo"
-                src={c.image}
-                alt={c.alt}
-                width="1000"
-                height="1000"
-                loading="lazy"
-              />
-              <span class="shop-card__label">{c.label}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-      <div class="shop-cta">
-        <a class="btn btn--primary btn--lg" href={SITE.shopUrl} target="_blank" rel="noopener">Shop the Collections</a>
-        <p class="shop-cta__categories">Men • Women • Kids • Pets • Gifts • PAWty Collections</p>
-      </div>
-    </div>
-  </section>
+  */}
 
   <!-- ══ BENEFICIARIES TEASER ══ -->
   <section class="band band--gold" aria-labelledby="benef-heading">
@@ -363,6 +326,40 @@ const pageDescription =
           <p><a href="/beneficiaries/">Learn about Leader Dogs for the Blind</a></p>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- ══ SHOP ══ -->
+  <section class="band band--teal" aria-labelledby="shop-heading">
+    <div class="container">
+      <div class="section-head section-head--center shop-intro">
+        <p class="eyebrow">Shop the Collection</p>
+        <h2 id="shop-heading">The Fashion PAWty Store</h2>
+        <p class="prose mx-auto">
+          Discover exclusive apparel, accessories, gifts, and pet gear
+          inspired by Jacksonville's most stylish fundraiser for dogs and
+          their humans.
+        </p>
+        <a class="btn btn--primary btn--lg" href={SITE.shopUrl} target="_blank" rel="noopener">Shop the Collections</a>
+      </div>
+      {/* TODO: point each tile at its own shop collection URL once
+          shop.thefashionpawty.com has per-category collection pages. */}
+      <ul class="grid grid--3 shop-grid">
+        {shopCategories.map((c) => (
+          <li class="shop-card">
+            <a href={SITE.shopUrl} target="_blank" rel="noopener">
+              <img
+                class="shop-card__photo"
+                src={c.image}
+                alt={c.alt}
+                width="1000"
+                height="1000"
+                loading="lazy"
+              />
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -515,17 +512,5 @@ const pageDescription =
     object-fit: cover;
     display: block;
   }
-  .shop-card__label {
-    display: block;
-    text-align: center;
-    padding: 0.75rem 0.5rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-  }
-  .shop-cta { text-align: center; margin-top: var(--space-l); }
-  .shop-cta__categories {
-    margin-top: var(--space-s);
-    color: var(--color-text-muted);
-    font-weight: 600;
-  }
+  .shop-intro .btn { margin-top: var(--space-m); }
 </style>

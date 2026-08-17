@@ -8,16 +8,92 @@ import FAQ from '../components/FAQ.astro';
 import { SITE } from '../config/site.js';
 
 const faqs = [
-  { question: 'What is The Fashion PAWty?', answer: 'It’s a doggie fashion show and community celebration — "A Navigation Celebration" — hosted by the Eye Spy Foundation. Dogs strut the orange carpet while the community enjoys mocktails, food, games, and music, all to support the blind and low vision community and Leader Dogs for the Blind.' },
-  { question: 'When and where is it?', answer: 'Saturday, September 26, 2026, from 4 to 7 PM at Happy Brew, 3200 Hendricks Ave, Jacksonville, FL 32207.' },
-  { question: "How much are tickets and what's included?", answer: 'Tickets are $30 and include entry to the show, food, and mocktails.' },
-  { question: 'Who does the event benefit?', answer: 'The Eye Spy Foundation and Leader Dogs for the Blind. Eye Spy is also sponsoring one Leader Dogs puppy this year.' },
-  { question: 'What is Eye Spy Foundation?', answer: 'Eye Spy Foundation helps the blind and low vision community navigate community resources so they can live a better low vision lifestyle — greeting everyone with a hug or a handshake along the way.' },
-  { question: 'What is Leader Dogs for the Blind?', answer: 'Leader Dogs for the Blind is a guide dog school that raises and trains dogs to help people who are blind or low vision travel safely and independently. This year, the Eye Spy Foundation is sponsoring one Leader Dogs puppy.' },
-  { question: 'Can I bring my dog?', answer: "This year's fashion show features a curated lineup of dogs, so you don't need to bring your own — come enjoy the show, the mocktails, and the fun. It's a people-first celebration." },
-  { question: 'How do the dogs get in the fashion show?', answer: "The runway lineup is organized by our team for this year's event. Want to be part of a future PAWty? Email team@eyespy.org and say hello." },
-  { question: 'Is the event accessible?', answer: 'Yes — the entire venue is accessible, and accessibility is at the heart of everything we do. Park in the church lot next door on Hendricks Avenue (overflow behind the church). Questions about your visit? Email team@eyespy.org and we’ll help.' },
-  { question: 'How can I sponsor or get involved?', answer: 'Head to our Sponsor page to claim a named party area, or email team@eyespy.org. You can also grab merch at shop.thefashionpawty.com — every bit supports the cause.' },
+  {
+    question: 'What is The Fashion PAWty?',
+    answer: [
+      'It’s a doggie fashion show and community celebration — "A Navigation Celebration" — hosted by the Eye Spy Foundation. Dogs strut the orange carpet while the community enjoys mocktails, food, games, and music, all to support ',
+      { text: 'the blind and low vision community and Leader Dogs for the Blind', href: '/beneficiaries/' },
+      '.',
+    ],
+  },
+  {
+    question: 'When and where is it?',
+    answer: [
+      'Saturday, September 26, 2026, from 4 to 7 PM at ',
+      { text: 'Happy Brew', href: '/venue/' },
+      ', 3200 Hendricks Ave, Jacksonville, FL 32207.',
+    ],
+  },
+  {
+    question: "How much are tickets and what's included?",
+    answer: [
+      'Tickets are $30 and include entry to the show, food, and mocktails. ',
+      { text: 'Get Your PAWty Pass', href: SITE.event.ticketUrl, external: true },
+    ],
+  },
+  {
+    question: 'Who does the event benefit?',
+    answer: [
+      { text: 'The Eye Spy Foundation and Leader Dogs for the Blind', href: '/beneficiaries/' },
+      '. Eye Spy is also sponsoring one Leader Dogs puppy this year.',
+    ],
+  },
+  {
+    question: 'What is Eye Spy Foundation?',
+    answer: [
+      { text: 'Eye Spy Foundation', href: 'https://eyespy.org', external: true },
+      ' helps the blind and low vision community navigate community resources so they can live a better low vision lifestyle — greeting everyone with a hug or a handshake along the way.',
+    ],
+  },
+  {
+    question: 'What is Leader Dogs for the Blind?',
+    answer: [
+      { text: 'Leader Dogs for the Blind', href: 'https://www.leaderdog.org/', external: true },
+      ' is a guide dog school that raises and trains dogs to help people who are blind or low vision travel safely and independently. This year, the Eye Spy Foundation is sponsoring one Leader Dogs puppy.',
+    ],
+  },
+  {
+    question: 'Can I bring my dog?',
+    answer: [
+      "This year's ",
+      { text: 'fashion show', href: '/schedule/' },
+      " features a curated lineup of dogs, so you don't need to bring your own — come enjoy the show, the mocktails, and the fun. It's a people-first celebration.",
+    ],
+  },
+  {
+    question: 'How do the dogs get in the fashion show?',
+    answer: [
+      "The runway lineup is organized by our team for this year's event. Want to be part of a future PAWty? Email ",
+      { text: SITE.email, href: `mailto:${SITE.email}` },
+      ' or visit our ',
+      { text: 'Contact page', href: '/contact/' },
+      ' to say hello.',
+    ],
+  },
+  {
+    question: 'Is the event accessible?',
+    answer: [
+      'Yes — the entire ',
+      { text: 'venue', href: '/venue/' },
+      ' is accessible, and ',
+      { text: 'accessibility', href: '/accessibility/' },
+      ' is at the heart of everything we do. Park in the church lot next door on Hendricks Avenue (overflow behind the church). Questions about your visit? Email ',
+      { text: SITE.email, href: `mailto:${SITE.email}` },
+      " and we'll help.",
+    ],
+  },
+  {
+    question: 'How can I sponsor or get involved?',
+    answer: [
+      'Head to our ',
+      { text: 'Sponsor page', href: '/sponsor/' },
+      ' to claim a named party area, or email ',
+      { text: SITE.email, href: `mailto:${SITE.email}` },
+      '. You can also grab merch at ',
+      { text: 'shop.thefashionpawty.com', href: SITE.shopUrl, external: true },
+      ' — every bit supports the cause.',
+    ],
+  },
 ];
 ---
 

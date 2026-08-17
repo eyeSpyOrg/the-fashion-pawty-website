@@ -86,7 +86,7 @@ export const SITE = {
   // Only PUBLIC identifiers belong here. Secrets go in env vars.
   integrations: {
     ga4Id: 'G-G5XJTT1PX2',
-    hubspotPortalId: '',
+    hubspotPortalId: '42383838',
     stripePublishableKey: '',
   },
 };
