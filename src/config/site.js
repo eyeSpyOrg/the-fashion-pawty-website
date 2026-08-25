@@ -39,8 +39,8 @@ export const SITE = {
   socials: [
     { label: 'Facebook', icon: 'facebook', url: 'https://www.facebook.com/eyespyorg' },
     { label: 'Instagram', icon: 'instagram', url: 'https://www.instagram.com/eyespyorg' },
-    { label: 'YouTube', icon: 'youtube', url: 'https://www.youtube.com/@eyespyorg' },
-    { label: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/company/eyespyorg' },
+    { label: 'YouTube', icon: 'youtube', url: 'https://www.youtube.com/channel/UCz-CtgD_OM3u7OECnma4KAw' },
+    { label: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/company/eyespyfoundation' },
     { label: 'TikTok', icon: 'tiktok', url: 'https://www.tiktok.com/@eyespyorg' },
     { label: 'X', icon: 'x', url: 'https://x.com/eyespyorg' },
   ],
