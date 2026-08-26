@@ -76,6 +76,7 @@ const readableTime = eventDate.toLocaleTimeString('en-US', {
     // auto-updating content someone can't get away from.
     const intervalMs = reduceMotion ? 5 * 60_000 : 60_000;
     const tick = () => { if (!render()) clearInterval(id); };
+    render();
     const id = setInterval(tick, intervalMs);
   }
 </script>
