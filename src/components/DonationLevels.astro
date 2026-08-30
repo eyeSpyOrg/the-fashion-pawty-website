@@ -1,0 +1,55 @@
+---
+/**
+ * DonationLevels.astro — the "Support" section shared by /donate and
+ * /pawtners: one pool-framing line above one column of stacked levels
+ * (no org grouping). `variant` picks the level title and CTA verb per
+ * page tone; the level data itself never differs.
+ */
+import DonationLevelCard from './DonationLevelCard.astro';
+import { levels, trustLinks } from '../data/donationTiers.js';
+
+interface Props {
+  variant: 'donate' | 'pawtners';
+}
+const { variant } = Astro.props;
+---
+
+<section class="band" aria-labelledby="support-h">
+  <div class="container container--narrow">
+    <div class="section-head section-head--center">
+      <p class="eyebrow">Where Your Gift Goes</p>
+      <h2 id="support-h">Make an Impact</h2>
+      <p class="prose mx-auto">
+        Every gift goes into one pool — shared between{' '}
+        <a href={trustLinks.eyeSpy.url} target="_blank" rel="noopener">{trustLinks.eyeSpy.label}</a> and{' '}
+        <a href={trustLinks.leaderDogs.url} target="_blank" rel="noopener">{trustLinks.leaderDogs.label}</a>{' '}
+        based on what the event needs most.
+      </p>
+    </div>
+
+    <ul class="level-list">
+      {levels.map((level) => (
+        <DonationLevelCard
+          title={variant === 'pawtners' ? level.titlePawtners : level.titleDonate}
+          description={level.description}
+          bullets={level.bullets}
+          priceLabel={level.priceLabel}
+          buttonText={variant === 'pawtners' ? level.ctaPawtners : level.ctaDonate}
+          stripeUrl={level.stripeUrl}
+          imageAlt={level.imageAlt}
+        />
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .level-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+    list-style: none;
+    margin: var(--space-m) 0 0;
+    padding: 0;
+  }
+</style>

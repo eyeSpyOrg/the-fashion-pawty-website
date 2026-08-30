@@ -1,0 +1,88 @@
+---
+/**
+ * Donate — local Jacksonville / event-facing donation page. Transactional
+ * tone is fine here; these are people already inclined to give. Shares its
+ * level data and structure with /pawtners (src/data/donationTiers.js,
+ * DonationLevels/DonationLevelCard) — only CTA wording and two level
+ * titles differ.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import DonationLevels from '../components/DonationLevels.astro';
+import SwagSection from '../components/SwagSection.astro';
+import ShareSection from '../components/ShareSection.astro';
+import { SITE } from '../config/site.js';
+
+const eventDate = new Date(SITE.event.startDate).toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+---
+
+<BaseLayout
+  title="Support The PAWty — Donate Today"
+  description="Donate to The Fashion PAWty and support Eye Spy Foundation and Leader Dogs for the Blind — see exactly how your gift builds community and connection."
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Style. Paws. Purpose.</p>
+          <h1>Support The PAWty</h1>
+          <p class="prose lead">
+            Help create community for the blind and low vision community
+            while supporting Eye Spy Foundation and Leader Dogs for the
+            Blind. Whether you're attending or simply want to help, your
+            support makes a difference.
+          </p>
+          <a class="btn btn--primary btn--lg" href="#support-h">See How You Can Help</a>
+        </div>
+        <ImagePlaceholder
+          label="Guests and dogs celebrating together on the orange carpet"
+          policy="ai"
+          ratio="4 / 3"
+          icon="🐾"
+          tone="teal"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ATTEND — no pricing here, ticketing owns its own flow ══ -->
+  <section class="band band--gold band--tight" aria-labelledby="attend-h">
+    <div class="container container--narrow">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Join Us In Person</p>
+        <h2 id="attend-h">Come to The Fashion PAWty</h2>
+        <p class="prose mx-auto">
+          {eventDate} at {SITE.event.venueName} in Jacksonville — a doggie
+          fashion show, food, and mocktails along the orange carpet. Grab
+          your ticket to be there.
+        </p>
+        <a class="btn btn--primary btn--lg" href="/tickets/">Get Tickets</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SUPPORT — pooled-funds line + 5 levels ══ -->
+  <DonationLevels variant="donate" />
+
+  <!-- ══ SWAG ══ -->
+  <SwagSection />
+
+  <!-- ══ SHARE WITH A FRIEND ══ -->
+  <ShareSection />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
+</style>

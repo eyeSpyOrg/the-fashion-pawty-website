@@ -1,0 +1,83 @@
+---
+/**
+ * PAWtners — out-of-town / can't-attend audience. Reads as joining a
+ * movement, not a transaction: "support," "join," and "PAWtner" instead of
+ * "donate." No Attend/ticket section — not relevant to this audience.
+ * Shares level data and structure with /donate
+ * (src/data/donationTiers.js, DonationLevels/DonationLevelCard) — only
+ * CTA wording and two level titles differ.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import DonationLevels from '../components/DonationLevels.astro';
+import SwagSection from '../components/SwagSection.astro';
+import ShareSection from '../components/ShareSection.astro';
+---
+
+<BaseLayout
+  title="Become a PAWtner — Support From Anywhere"
+  description="Become a PAWtner and support The Fashion PAWty from anywhere — your gift helps Eye Spy Foundation and Leader Dogs for the Blind build community and confidence."
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <h1>Become a PAWtner</h1>
+          <p class="hero-kicker">Join the Mission From Anywhere</p>
+          <p class="prose lead">
+            You don't have to attend The Fashion PAWty to make a
+            difference. By becoming a PAWtner, you're helping create
+            community for the blind and low vision community through Eye
+            Spy Foundation while supporting the life-changing work of
+            Leader Dogs for the Blind. Whether you're a friend, family
+            member, dog lover, or supporter across the country, your
+            impact matters.
+          </p>
+          <p class="hero-tagline">Style. Paws. Purpose.</p>
+        </div>
+        <ImagePlaceholder
+          label="A supporter joining the celebration from afar with their dog"
+          policy="ai"
+          ratio="4 / 3"
+          icon="💌"
+          tone="gold"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SUPPORT — pooled-funds line + 5 levels ══ -->
+  <DonationLevels variant="pawtners" />
+
+  <!-- ══ SWAG ══ -->
+  <SwagSection />
+
+  <!-- ══ SHARE WITH A FRIEND ══ -->
+  <ShareSection />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
+
+  .hero-kicker {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-1);
+    color: var(--color-accent);
+    margin: 0;
+  }
+  .hero-tagline {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--color-text-muted);
+  }
+</style>

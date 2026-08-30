@@ -1,0 +1,66 @@
+---
+/**
+ * ShareSection.astro — "Share the PAWty" block, identical on both pages.
+ * Copy-link button + share intents (SMS, email, Facebook, X) — plain
+ * links/buttons, no backend. Share intent platforms are a first pass
+ * (open item in the brief); swap or add more as confirmed.
+ */
+import { SITE } from '../config/site.js';
+
+const shareUrl = new URL(Astro.url.pathname, SITE.url).href;
+const shareText = 'Join me at The Fashion PAWty — help support the blind and low vision community and Leader Dogs for the Blind.';
+
+const smsHref = `sms:?&body=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;
+const emailHref = `mailto:?subject=${encodeURIComponent('Join me at The Fashion PAWty')}&body=${encodeURIComponent(`${shareText}\n\n${shareUrl}`)}`;
+const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+---
+
+<section class="band" aria-labelledby="share-h">
+  <div class="container container--narrow">
+    <div class="section-head section-head--center">
+      <p class="eyebrow">Spread the Word</p>
+      <h2 id="share-h">Share the PAWty</h2>
+      <p class="prose mx-auto">Know someone who'd love this? Pass it on.</p>
+    </div>
+
+    <div class="share-actions">
+      <button type="button" class="btn btn--secondary" data-copy-link data-url={shareUrl}>
+        Copy Link
+      </button>
+      <a class="btn btn--secondary" href={smsHref}>Text a Friend</a>
+      <a class="btn btn--secondary" href={emailHref}>Email</a>
+      <a class="btn btn--secondary" href={facebookHref} target="_blank" rel="noopener">Share on Facebook</a>
+      <a class="btn btn--secondary" href={xHref} target="_blank" rel="noopener">Share on X</a>
+    </div>
+    <p class="sr-only" role="status" data-copy-status></p>
+  </div>
+</section>
+
+<style>
+  .share-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((btn) => {
+    const status = btn.closest('section')?.querySelector<HTMLElement>('[data-copy-status]');
+    const originalLabel = btn.textContent;
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.url ?? '';
+      try {
+        await navigator.clipboard.writeText(url);
+        if (status) status.textContent = 'Link copied to clipboard.';
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = originalLabel; }, 2000);
+      } catch {
+        if (status) status.textContent = 'Could not copy automatically — copy the link from the address bar.';
+      }
+    });
+  });
+</script>

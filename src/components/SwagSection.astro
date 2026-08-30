@@ -1,0 +1,71 @@
+---
+/**
+ * SwagSection.astro — "Wear Your Support" SWAG block, identical on both
+ * /donate and /pawtners. Three product photos in a row, no per-item
+ * copy — the shop itself carries the descriptions.
+ */
+import { SITE } from '../config/site.js';
+
+const products = [
+  'Placeholder — Fashion PAWty t-shirt photo goes here',
+  'Placeholder — Fashion PAWty tote bag photo goes here',
+  'Placeholder — Fashion PAWty dog bandana photo goes here',
+];
+---
+
+<section class="band band--gold" aria-labelledby="swag-h">
+  <div class="container container--narrow">
+    <div class="section-head section-head--center">
+      <p class="eyebrow">SWAG</p>
+      <h2 id="swag-h">Wear Your Support</h2>
+      <p class="prose mx-auto">Every piece you wear helps spread the word.</p>
+    </div>
+
+    <ul class="swag-row">
+      {products.map((alt) => (
+        <li>
+          <img
+            src="/images/sponsors/sponsor-placeholder.webp"
+            alt={alt}
+            width="1000"
+            height="1000"
+            loading="lazy"
+          />
+        </li>
+      ))}
+    </ul>
+
+    <p class="swag-cta">
+      <a class="btn btn--primary btn--lg" href={SITE.shopUrl} target="_blank" rel="noopener">
+        Shop the Collection
+      </a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .swag-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-s);
+    list-style: none;
+    margin: var(--space-m) 0 0;
+    padding: 0;
+  }
+  @media (max-width: 30rem) {
+    .swag-row { grid-template-columns: 1fr; max-width: 16rem; margin-inline: auto; }
+  }
+  .swag-row img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    display: block;
+  }
+
+  .swag-cta {
+    text-align: center;
+    margin-top: var(--space-m);
+  }
+</style>
