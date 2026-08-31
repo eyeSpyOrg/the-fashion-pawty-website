@@ -161,11 +161,13 @@ const faqs = [
               height="1000"
               loading="lazy"
             />
-            <h3>{g.title}</h3>
-            <p>{g.blurb}</p>
-            <a class="btn btn--primary give-card__cta" href="/donate/">
-              {g.cta}
-            </a>
+            <div class="give-card__body">
+              <h3>{g.title}</h3>
+              <p>{g.blurb}</p>
+              <a class="btn btn--primary give-card__cta" href="/donate/">
+                {g.cta}
+              </a>
+            </div>
           </li>
         ))}
       </ul>
@@ -207,23 +209,27 @@ const faqs = [
   .ticket-card__cta { width: 100%; margin-top: var(--space-s); }
   .ticket-card__note { font-size: 0.85rem; color: var(--color-text-muted); }
 
-  .give-grid {
-    list-style: none;
-    margin: var(--space-l) 0 0;
+  .give-grid { list-style: none; margin: var(--space-l) 0 0; padding: 0; }
+  .give-card {
+    display: flex;
+    flex-direction: column;
     padding: 0;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    overflow: hidden;
   }
-  @media (min-width: 48rem) {
-    .give-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  .give-card { display: flex; flex-direction: column; gap: 0.5rem; }
   .give-card__photo {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: var(--radius);
+    display: block;
   }
-  .give-card h3 { margin: 0; }
-  .give-card p { margin: 0; }
-  .give-card__cta { margin-top: auto; width: 100%; }
+  .give-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: var(--space-m);
+    flex: 1;
+  }
+  .give-card__body h3 { margin: 0; }
+  .give-card__body p { margin: 0; flex: 1; }
+  .give-card__cta { margin-top: var(--space-2xs); width: 100%; }
 </style>
