@@ -5,19 +5,16 @@
  * tiers from src/data/donationTiers.js so amounts never drift from /donate.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import EventSchema from '../components/schema/EventSchema.astro';
 import FAQ from '../components/FAQ.astro';
 import { SITE } from '../config/site.js';
 import { levels } from '../data/donationTiers.js';
 
 const benefits = [
-  'General admission to the doggie fashion show',
-  'A take-home doggie tote bag',
-  'Delicious food from Ole Mexican Restaurant',
-  'Unlimited MockTAILS',
-  'Live music performances',
-  'Support for a future guide dog puppy',
+  'Admission to the show',
+  'Take-home doggie tote bag',
+  'Food, Live Music, MockTAILS',
+  'Family Fun and Kids Under 12 admitted for free',
 ];
 
 const findLevel = (id) => levels.find((l) => l.id === id);
@@ -27,21 +24,24 @@ const giveCards = [
     title: 'Give a Toy & a Treat',
     blurb: 'A treat and a toy go a long way for a future guide dog puppy in training.',
     cta: 'Throw a Puppy PAWty',
-    icon: '🧸',
+    image: '/images/tickets/toy-and-treat.webp',
+    imageAlt: 'A future Leader Dog puppy in training wearing a "Future Leader Dog" bandana',
   },
   {
     ...findLevel('pawty-pass-pair'),
     title: 'PASS It Forward',
     blurb: 'Purchase a PAWty Pass for a blind or low-vision community member.',
     cta: 'Give a PAWty Pass',
-    icon: '🎟️',
+    image: '/images/tickets/pawty-pass.webp',
+    imageAlt: 'The Fashion PAWty logo on a PAWty Pass donation card',
   },
   {
     ...findLevel('navigator-support'),
     title: 'Help Us Navigate',
     blurb: 'Give a one-on-one Eye Spy Navigator session to help create independence.',
-    cta: 'Empower a Community Member',
-    icon: '🧭',
+    cta: 'Support the Community',
+    image: '/images/tickets/navigator-support.webp',
+    imageAlt: 'A man wearing headphones works at a desk with a white cane resting nearby',
   },
 ];
 
@@ -114,9 +114,9 @@ const faqs = [
           <p class="prose lead">
             The first annual Fashion PAWty is hosted by the Eye Spy
             Foundation, celebrating dogs, community, and purpose. Proceeds
-            support Eye Spy Foundation, with a portion benefiting Leader Dogs
-            for the Blind — helping blind and low-vision individuals navigate
-            the world with confidence, online and on the street.
+            support Eye Spy Foundation and Leader Dogs for the Blind, helping
+            blind and low-vision individuals navigate the world with
+            confidence.
           </p>
         </div>
         <div class="panel ticket-card ticket-card--hero">
@@ -153,17 +153,17 @@ const faqs = [
       <ul class="grid grid--3 give-grid">
         {giveCards.map((g) => (
           <li class="card card--accent give-card">
-            <ImagePlaceholder
-              label={g.imageAlt}
-              policy="ai"
-              ratio="4 / 3"
-              icon={g.icon}
-              tone="teal"
+            <img
+              class="give-card__photo"
+              src={g.image}
+              alt={g.imageAlt}
+              width="1000"
+              height="1000"
+              loading="lazy"
             />
-            <p class="give-card__price">{g.priceLabel}</p>
             <h3>{g.title}</h3>
             <p>{g.blurb}</p>
-            <a class="btn btn--primary give-card__cta" href={g.stripeUrl} target="_blank" rel="noopener">
+            <a class="btn btn--primary give-card__cta" href="/donate/">
               {g.cta}
             </a>
           </li>
@@ -191,7 +191,7 @@ const faqs = [
   }
   h1 { text-wrap: balance; }
 
-  .ticket-card { max-width: 32rem; }
+  .ticket-card { max-width: 32rem; padding: clamp(1.25rem, 1rem + 1.5vw, 2rem); }
   .ticket-card > * + * { margin-top: var(--space-s); }
   .ticket-card__price { margin: 0; }
   .ticket-card__amt {
@@ -201,19 +201,27 @@ const faqs = [
     color: var(--color-accent);
     line-height: 1;
   }
-  .ticket-card__h { margin-top: var(--space-m); }
-  .ticket-list { margin: 0; padding-left: 1.25rem; }
-  .ticket-list li { margin-bottom: 0.5rem; }
-  .ticket-card__cta { width: 100%; margin-top: var(--space-m); }
-  .ticket-card__note { font-size: 0.9rem; color: var(--color-text-muted); }
+  .ticket-card__h { margin-top: var(--space-s); }
+  .ticket-list { margin: 0; padding-left: 1.25rem; list-style: disc; }
+  .ticket-list li { margin-bottom: 0.4rem; }
+  .ticket-card__cta { width: 100%; margin-top: var(--space-s); }
+  .ticket-card__note { font-size: 0.85rem; color: var(--color-text-muted); }
 
-  .give-grid { list-style: none; margin: var(--space-l) 0 0; padding: 0; }
+  .give-grid {
+    list-style: none;
+    margin: var(--space-l) 0 0;
+    padding: 0;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+  @media (min-width: 48rem) {
+    .give-grid { grid-template-columns: repeat(3, 1fr); }
+  }
   .give-card { display: flex; flex-direction: column; gap: 0.5rem; }
-  .give-card__price {
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: var(--color-accent);
-    margin: 0;
+  .give-card__photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
   }
   .give-card h3 { margin: 0; }
   .give-card p { margin: 0; }
