@@ -140,7 +140,7 @@ const faqs = [
   </section>
 
   <section class="band band--gold" aria-labelledby="cant-make-it-h">
-    <div class="container container--narrow">
+    <div class="container">
       <div class="section-head section-head--center">
         <p class="eyebrow">Support From Anywhere</p>
         <h2 id="cant-make-it-h">Can't Make It? Out of Towner?</h2>
@@ -209,7 +209,15 @@ const faqs = [
   .ticket-card__cta { width: 100%; margin-top: var(--space-s); }
   .ticket-card__note { font-size: 0.85rem; color: var(--color-text-muted); }
 
-  .give-grid { list-style: none; margin: var(--space-l) 0 0; padding: 0; }
+  .give-grid {
+    list-style: none;
+    margin: var(--space-l) 0 0;
+    padding: 0;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 60rem) {
+    .give-grid { grid-template-columns: repeat(3, 1fr); }
+  }
   .give-card {
     display: flex;
     flex-direction: column;
