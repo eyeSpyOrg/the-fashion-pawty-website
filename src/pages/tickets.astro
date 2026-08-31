@@ -1,17 +1,103 @@
 ---
 /**
- * Tickets — $30 PAWty Pass. Copy from PAGE_COPY.md; Event schema.
+ * Tickets — $30 PAWty Pass. Copy adapted from user brief 2026-08-31;
+ * Event schema. "Can't make it?" strip reuses the $20/$60/$90 donation
+ * tiers from src/data/donationTiers.js so amounts never drift from /donate.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import EventSchema from '../components/schema/EventSchema.astro';
+import FAQ from '../components/FAQ.astro';
 import { SITE } from '../config/site.js';
+import { levels } from '../data/donationTiers.js';
 
-const included = [
-  'Entry to the doggie fashion show on the orange carpet',
-  'Food',
-  'Mocktails',
-  'Games, music, and a whole lot of tail wags',
+const benefits = [
+  'General admission to the doggie fashion show',
+  'A take-home doggie tote bag',
+  'Delicious food from Ole Mexican Restaurant',
+  'Unlimited MockTAILS',
+  'Live music performances',
+  'Support for a future guide dog puppy',
+];
+
+const findLevel = (id) => levels.find((l) => l.id === id);
+const giveCards = [
+  {
+    ...findLevel('puppy-pawty'),
+    title: 'Give a Toy & a Treat',
+    blurb: 'A treat and a toy go a long way for a future guide dog puppy in training.',
+    cta: 'Throw a Puppy PAWty',
+    icon: '🧸',
+  },
+  {
+    ...findLevel('pawty-pass-pair'),
+    title: 'PASS It Forward',
+    blurb: 'Purchase a PAWty Pass for a blind or low-vision community member.',
+    cta: 'Give a PAWty Pass',
+    icon: '🎟️',
+  },
+  {
+    ...findLevel('navigator-support'),
+    title: 'Help Us Navigate',
+    blurb: 'Give a one-on-one Eye Spy Navigator session to help create independence.',
+    cta: 'Empower a Community Member',
+    icon: '🧭',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is The Fashion PAWty?',
+    answer: [
+      'It’s a doggie fashion show and community celebration — "A Navigation Celebration" — hosted by the Eye Spy Foundation. Dogs strut the orange carpet while the community enjoys mocktails, food, games, and music, all to support ',
+      { text: 'the blind and low vision community and Leader Dogs for the Blind', href: '/beneficiaries/' },
+      '.',
+    ],
+  },
+  {
+    question: 'When and where is it?',
+    answer: [
+      'Saturday, September 26, 2026, from 4 to 7 PM at ',
+      { text: 'Happy Brew', href: '/venue/' },
+      ', 3200 Hendricks Ave, Jacksonville, FL 32207.',
+    ],
+  },
+  {
+    question: "How much are tickets and what's included?",
+    answer: [
+      'Tickets are $30 and include general admission, a take-home tote, food, unlimited mocktails, and live music. ',
+      { text: 'Get Your PAWty Pass', href: SITE.event.ticketUrl, external: true },
+    ],
+  },
+  {
+    question: 'Who does the event benefit?',
+    answer: [
+      { text: 'The Eye Spy Foundation and Leader Dogs for the Blind', href: '/beneficiaries/' },
+      '. Eye Spy is also sponsoring one Leader Dogs puppy this year.',
+    ],
+  },
+  {
+    question: 'Can I bring my dog?',
+    answer:
+      'To ensure a safe and enjoyable event for everyone, only dogs participating in the fashion show may attend. We love all pups, but space and safety considerations require us to limit attendance to registered runway participants.',
+  },
+  {
+    question: 'Is the event accessible?',
+    answer: [
+      'Yes — the entire ',
+      { text: 'venue', href: '/venue/' },
+      ' is accessible, and ',
+      { text: 'accessibility', href: '/accessibility/' },
+      ' is at the heart of everything we do. Questions about your visit? Email ',
+      { text: SITE.email, href: `mailto:${SITE.email}` },
+      " and we'll help.",
+    ],
+  },
+  {
+    question: "I can't make it — can I still help?",
+    answer:
+      'Absolutely. Scroll down to the "Can\'t make it?" section below for three easy ways to support the cause from anywhere.',
+  },
 ];
 ---
 
@@ -26,50 +112,69 @@ const included = [
           <p class="eyebrow">About Getting Tickets</p>
           <h1>Get Your Tickets</h1>
           <p class="prose lead">
-            One ticket, one great afternoon, one very good cause. Your $30 gets
-            you into the show, food, and mocktails — hosted by the Eye Spy
-            Foundation — and helps the blind and low vision community
-            navigate life with more confidence.
+            The first annual Fashion PAWty is hosted by the Eye Spy
+            Foundation, celebrating dogs, community, and purpose. Proceeds
+            support Eye Spy Foundation, with a portion benefiting Leader Dogs
+            for the Blind — helping blind and low-vision individuals navigate
+            the world with confidence, online and on the street.
           </p>
-          <div class="panel ticket-card ticket-card--hero">
-            <p class="eyebrow">PAWty Pass</p>
-            <p class="ticket-card__price"><span class="ticket-card__amt">$30</span></p>
-            <h2 class="ticket-card__h">What's included</h2>
-            <ul class="ticket-list">
-              {included.map((i) => <li>{i}</li>)}
-            </ul>
-            <a class="btn btn--primary btn--lg ticket-card__cta" href={SITE.event.ticketUrl} target="_blank" rel="noopener">
-              Buy Tickets — $30
-            </a>
-            <p class="ticket-card__note">
-              Processed securely through the Eye Spy Foundation's Stripe account.
-              Proceeds support the blind and low vision community and Leader Dogs
-              for the Blind.
-            </p>
-          </div>
         </div>
-        <ImagePlaceholder
-          label="Guests toasting with mocktails as a dog struts past"
-          policy="ai"
-          ratio="3 / 4"
-          icon="🥂"
-          tone="gold"
-        />
+        <div class="panel ticket-card ticket-card--hero">
+          <p class="eyebrow">PAWty Pass</p>
+          <p class="ticket-card__price"><span class="ticket-card__amt">$30</span></p>
+          <h2 class="ticket-card__h">Benefits</h2>
+          <ul class="ticket-list">
+            {benefits.map((b) => <li>{b}</li>)}
+          </ul>
+          <a class="btn btn--primary btn--lg ticket-card__cta" href={SITE.event.ticketUrl} target="_blank" rel="noopener">
+            Join the PAWty
+          </a>
+          <p class="ticket-card__note">
+            Processed securely through the Eye Spy Foundation's Stripe
+            account. Proceeds support the blind and low vision community and
+            Leader Dogs for the Blind.
+          </p>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <section class="band band--gold" aria-labelledby="cant-make-it-h">
+    <div class="container container--narrow">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Support From Anywhere</p>
+        <h2 id="cant-make-it-h">Can't Make It? Out of Towner?</h2>
+        <p class="prose mx-auto">
+          Don't worry — you can still support the cause! Pick a way to give
+          below.
+        </p>
+      </div>
+
+      <ul class="grid grid--3 give-grid">
+        {giveCards.map((g) => (
+          <li class="card card--accent give-card">
+            <ImagePlaceholder
+              label={g.imageAlt}
+              policy="ai"
+              ratio="4 / 3"
+              icon={g.icon}
+              tone="teal"
+            />
+            <p class="give-card__price">{g.priceLabel}</p>
+            <h3>{g.title}</h3>
+            <p>{g.blurb}</p>
+            <a class="btn btn--primary give-card__cta" href={g.stripeUrl} target="_blank" rel="noopener">
+              {g.cta}
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
   <section class="band">
     <div class="container container--narrow">
-      <div class="section-head">
-        <p class="eyebrow">Good to Know</p>
-        <h2>About the dogs</h2>
-      </div>
-      <p class="prose">
-        The runway features a curated lineup of dogs for the show — so you can
-        relax and enjoy the strut. We love pups, but this is a people-first
-        celebration (we're hoping to welcome around 100 guests).
-      </p>
+      <FAQ faqs={faqs} heading="PAWty questions, answered" />
     </div>
   </section>
 
@@ -82,15 +187,11 @@ const included = [
   .split { display: grid; gap: var(--space-l); align-items: flex-start; }
   .split__text > * + * { margin-top: var(--space-s); }
   @media (min-width: 52rem) {
-    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+    .split { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
   }
   h1 { text-wrap: balance; }
 
-  .ticket-grid { display: grid; gap: var(--space-l); align-items: start; }
-  @media (min-width: 52rem) {
-    .ticket-grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-xl); }
-  }
-  .ticket-card { max-width: 32rem; margin-top: var(--space-m); }
+  .ticket-card { max-width: 32rem; }
   .ticket-card > * + * { margin-top: var(--space-s); }
   .ticket-card__price { margin: 0; }
   .ticket-card__amt {
@@ -105,4 +206,16 @@ const included = [
   .ticket-list li { margin-bottom: 0.5rem; }
   .ticket-card__cta { width: 100%; margin-top: var(--space-m); }
   .ticket-card__note { font-size: 0.9rem; color: var(--color-text-muted); }
+
+  .give-grid { list-style: none; margin: var(--space-l) 0 0; padding: 0; }
+  .give-card { display: flex; flex-direction: column; gap: 0.5rem; }
+  .give-card__price {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-accent);
+    margin: 0;
+  }
+  .give-card h3 { margin: 0; }
+  .give-card p { margin: 0; }
+  .give-card__cta { margin-top: auto; width: 100%; }
 </style>
