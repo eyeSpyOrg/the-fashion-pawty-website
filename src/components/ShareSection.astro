@@ -1,19 +1,24 @@
 ---
 /**
  * ShareSection.astro — "Share the PAWty" block, identical on both pages.
- * Copy-link button + share intents (SMS, email, Facebook, X) — plain
- * links/buttons, no backend. Share intent platforms are a first pass
- * (open item in the brief); swap or add more as confirmed.
+ * Three share intents only (SMS, email, Facebook) — plain links, no
+ * backend. The Facebook quote is prefilled with on-brand copy naming both
+ * beneficiaries; Eye Spy is @-tagged with its verified handle (SITE.socials).
+ * No verified Leader Dogs for the Blind social handle exists in site.js,
+ * so it's named in full rather than guessed at.
  */
 import { SITE } from '../config/site.js';
 
 const shareUrl = new URL(Astro.url.pathname, SITE.url).href;
 const shareText = 'Join me at The Fashion PAWty — help support the blind and low vision community and Leader Dogs for the Blind.';
 
+const eyeSpyFacebookUrl = SITE.socials.find((s) => s.icon === 'facebook')?.url;
+const eyeSpyFacebookHandle = eyeSpyFacebookUrl ? new URL(eyeSpyFacebookUrl).pathname.replace(/\//g, '') : 'eyespyorg';
+const fbShareText = `I just supported The Fashion PAWty 🐾 — a doggie fashion show benefiting @${eyeSpyFacebookHandle} and Leader Dogs for the Blind, helping the blind and low vision community navigate the world with more confidence.`;
+
 const smsHref = `sms:?&body=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;
 const emailHref = `mailto:?subject=${encodeURIComponent('Join me at The Fashion PAWty')}&body=${encodeURIComponent(`${shareText}\n\n${shareUrl}`)}`;
-const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(fbShareText)}`;
 ---
 
 <section class="band" aria-labelledby="share-h">
@@ -25,15 +30,10 @@ const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareT
     </div>
 
     <div class="share-actions">
-      <button type="button" class="btn btn--secondary" data-copy-link data-url={shareUrl}>
-        Copy Link
-      </button>
-      <a class="btn btn--secondary" href={smsHref}>Text a Friend</a>
-      <a class="btn btn--secondary" href={emailHref}>Email</a>
-      <a class="btn btn--secondary" href={facebookHref} target="_blank" rel="noopener">Share on Facebook</a>
-      <a class="btn btn--secondary" href={xHref} target="_blank" rel="noopener">Share on X</a>
+      <a class="btn btn--secondary" href={emailHref}>Email a Friend</a>
+      <a class="btn btn--secondary" href={smsHref}>Text Someone</a>
+      <a class="btn btn--secondary" href={facebookHref} target="_blank" rel="noopener">Post on Facebook</a>
     </div>
-    <p class="sr-only" role="status" data-copy-status></p>
   </div>
 </section>
 
@@ -46,21 +46,3 @@ const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareT
     margin-top: var(--space-m);
   }
 </style>
-
-<script>
-  document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((btn) => {
-    const status = btn.closest('section')?.querySelector<HTMLElement>('[data-copy-status]');
-    const originalLabel = btn.textContent;
-    btn.addEventListener('click', async () => {
-      const url = btn.dataset.url ?? '';
-      try {
-        await navigator.clipboard.writeText(url);
-        if (status) status.textContent = 'Link copied to clipboard.';
-        btn.textContent = 'Copied!';
-        setTimeout(() => { btn.textContent = originalLabel; }, 2000);
-      } catch {
-        if (status) status.textContent = 'Could not copy automatically — copy the link from the address bar.';
-      }
-    });
-  });
-</script>

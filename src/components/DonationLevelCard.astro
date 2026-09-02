@@ -7,6 +7,7 @@
  * here — that only shows up once, in the pool-framing line above the list.
  */
 interface Props {
+  id?: string;
   title: string;
   description: string;
   bullets: string[];
@@ -14,8 +15,10 @@ interface Props {
   buttonText: string;
   stripeUrl: string;
   imageAlt: string;
+  featured?: boolean;
 }
 const {
+  id,
   title,
   description,
   bullets,
@@ -23,10 +26,12 @@ const {
   buttonText,
   stripeUrl,
   imageAlt,
+  featured = false,
 } = Astro.props;
 ---
 
-<li class="level-card">
+<li id={id} class:list={['level-card', { 'level-card--featured': featured }]}>
+  {featured && <p class="level-card__badge">Most Popular</p>}
   <div class="level-card__header">
     <div class="level-card__image">
       <img
@@ -68,10 +73,32 @@ const {
     gap: var(--space-s);
     padding: var(--space-m);
     transition: box-shadow 150ms ease, transform 150ms ease;
+    scroll-margin-top: 6rem;
   }
   .level-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
   html[data-a11y-motion='off'] .level-card:hover { transform: none; }
   @media (prefers-reduced-motion: reduce) { .level-card:hover { transform: none; } }
+
+  /* Spotlighted level — same card, an accent border and a badge to draw
+     the eye without relying on color alone (the badge carries the text). */
+  .level-card--featured {
+    border: 2px solid var(--color-accent);
+    box-shadow: var(--shadow);
+  }
+  .level-card__badge {
+    align-self: flex-start;
+    margin: 0;
+    padding: 0.25rem 0.7rem;
+    background: var(--color-accent);
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-sm);
+  }
+  html[data-a11y-contrast='high'] .level-card__badge { background: var(--color-text); }
 
   .level-card__header {
     display: flex;

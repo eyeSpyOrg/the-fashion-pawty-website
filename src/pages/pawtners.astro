@@ -8,7 +8,6 @@
  * CTA wording and two level titles differ.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import DonationLevels from '../components/DonationLevels.astro';
 import SwagSection from '../components/SwagSection.astro';
 import ShareSection from '../components/ShareSection.astro';
@@ -27,21 +26,19 @@ import ShareSection from '../components/ShareSection.astro';
           <p class="hero-kicker">Join the Mission From Anywhere</p>
           <p class="prose lead">
             You don't have to attend The Fashion PAWty to make a
-            difference. By becoming a PAWtner, you're helping create
-            community for the blind and low vision community through Eye
-            Spy Foundation while supporting the life-changing work of
-            Leader Dogs for the Blind. Whether you're a friend, family
-            member, dog lover, or supporter across the country, your
-            impact matters.
+            difference. Become a PAWtner and help Eye Spy Foundation and
+            Leader Dogs for the Blind build community and confidence —
+            from anywhere.
           </p>
-          <p class="hero-tagline">Style. Paws. Purpose.</p>
+          <a class="btn btn--primary" href="#puppy-pawty">See PAWtner Levels</a>
         </div>
-        <ImagePlaceholder
-          label="A supporter joining the celebration from afar with their dog"
-          policy="ai"
-          ratio="4 / 3"
-          icon="💌"
-          tone="gold"
+        <img
+          class="hero-photo"
+          src="/images/schedule/runway-hero.webp"
+          alt="The Fashion PAWty runway backdrop with a puppy in glasses and a Future Leader Dog bandana"
+          width="1600"
+          height="1200"
+          fetchpriority="high"
         />
       </div>
     </div>
@@ -74,10 +71,12 @@ import ShareSection from '../components/ShareSection.astro';
     color: var(--color-accent);
     margin: 0;
   }
-  .hero-tagline {
-    font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--color-text-muted);
+
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
   }
 </style>

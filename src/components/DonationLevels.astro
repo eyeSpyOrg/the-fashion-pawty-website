@@ -30,6 +30,7 @@ const { variant } = Astro.props;
     <ul class="level-list">
       {levels.map((level) => (
         <DonationLevelCard
+          id={level.id}
           title={variant === 'pawtners' ? level.titlePawtners : level.titleDonate}
           description={level.description}
           bullets={level.bullets}
@@ -37,6 +38,7 @@ const { variant } = Astro.props;
           buttonText={variant === 'pawtners' ? level.ctaPawtners : level.ctaDonate}
           stripeUrl={level.stripeUrl}
           imageAlt={level.imageAlt}
+          featured={level.featured}
         />
       ))}
     </ul>
