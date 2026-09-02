@@ -66,6 +66,7 @@ export const SITE = {
   nav: [
     { label: 'Home', href: '/' },
     { label: 'Sponsor', href: '/sponsor/' },
+    { label: 'Partners', href: '/partners/' },
     { label: 'Beneficiaries', href: '/beneficiaries/' },
     { label: 'Schedule', href: '/schedule/' },
     { label: 'Venue', href: '/venue/' },

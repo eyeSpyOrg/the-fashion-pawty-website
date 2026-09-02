@@ -1,0 +1,37 @@
+---
+/**
+ * Organization schema for one partner's own page (e.g. /partners/<slug>/).
+ * Reusable across every partner page — pass the matching record from
+ * src/data/partners.js so schema can never drift from the visible NAP.
+ */
+import { SITE } from '../../config/site.js';
+import JsonLd from './JsonLd.astro';
+
+interface Address {
+  streetAddress: string;
+  addressLocality: string;
+  addressRegion: string;
+  postalCode: string;
+  addressCountry: string;
+}
+interface Props {
+  name: string;
+  url: string;
+  telephone: string;
+  address: Address;
+}
+const { name, url, telephone, address } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name,
+  url,
+  telephone,
+  address: {
+    '@type': 'PostalAddress',
+    ...address,
+  },
+};
+---
+<JsonLd schema={schema} />

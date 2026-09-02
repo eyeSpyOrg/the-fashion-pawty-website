@@ -17,6 +17,12 @@ interface Props {
   buttonText: string;
   stripeUrl: string;
   image?: string;
+  /** This tier is claimed — swap the price/buy button for a "Sponsored By" credit. */
+  sold?: boolean;
+  soldByName?: string;
+  soldByLogo?: string;
+  soldByHref?: string;
+  soldByButtonText?: string;
 }
 const {
   title,
@@ -27,6 +33,11 @@ const {
   buttonText,
   stripeUrl,
   image = '/images/sponsors/sponsor-placeholder.webp',
+  sold = false,
+  soldByName,
+  soldByLogo,
+  soldByHref,
+  soldByButtonText,
 } = Astro.props;
 const money = (n: number) => `$${n.toLocaleString('en-US')}`;
 const isPlaceholder = image === '/images/sponsors/sponsor-placeholder.webp';
@@ -63,10 +74,29 @@ const isPlaceholder = image === '/images/sponsors/sponsor-placeholder.webp';
     </div>
 
     <div class="sponsor-card__action">
-      <p class="sponsor-card__price">{money(price)}</p>
-      <a class="btn btn--primary" href={stripeUrl} target="_blank" rel="noopener">
-        {buttonText}
-      </a>
+      {sold ? (
+        <div class="sponsor-card__sold">
+          <p class="sponsor-card__sold-label">Sponsored By:</p>
+          <img
+            class="sponsor-card__sold-logo"
+            src={soldByLogo}
+            alt={soldByName}
+            width="600"
+            height="600"
+            loading="lazy"
+          />
+          <a class="btn btn--secondary" href={soldByHref}>
+            {soldByButtonText}
+          </a>
+        </div>
+      ) : (
+        <>
+          <p class="sponsor-card__price">{money(price)}</p>
+          <a class="btn btn--primary" href={stripeUrl} target="_blank" rel="noopener">
+            {buttonText}
+          </a>
+        </>
+      )}
     </div>
   </div>
 </li>
@@ -211,5 +241,36 @@ const isPlaceholder = image === '/images/sponsors/sponsor-placeholder.webp';
   }
   @media (min-width: 40rem) {
     .sponsor-card__action .btn { width: auto; }
+  }
+
+  /* Sold tier: "Sponsored By" credit instead of price + buy button. */
+  .sponsor-card__sold {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2xs);
+    width: 100%;
+  }
+  @media (min-width: 40rem) {
+    .sponsor-card__sold { width: auto; min-width: 11rem; }
+  }
+  .sponsor-card__sold-label {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-text-muted);
+  }
+  .sponsor-card__sold-logo {
+    width: 6rem;
+    height: 6rem;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+  }
+  .sponsor-card__sold .btn { width: 100%; }
+  @media (min-width: 40rem) {
+    .sponsor-card__sold .btn { width: auto; }
   }
 </style>

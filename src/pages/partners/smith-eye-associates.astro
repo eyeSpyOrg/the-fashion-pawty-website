@@ -1,0 +1,194 @@
+---
+/**
+ * Smith Eye Associates — individual partner page.
+ * Verified facts only (smitheyeassociates.com). No quote, no low-vision
+ * clinical claim, no invented numbers — see BRAND.md § image policy.
+ * First-year sponsor — no "since <year>" line yet.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PartnerSchema from '../../components/schema/PartnerSchema.astro';
+import { PARTNERS } from '../../data/partners.js';
+
+const partner = PARTNERS.find((p) => p.id === 'smith-eye-associates');
+const fullAddress = `${partner.address.streetAddress}, ${partner.address.addressLocality}, ${partner.address.addressRegion} ${partner.address.postalCode}`;
+---
+
+<BaseLayout
+  title="Smith Eye Associates — Fashion PAWty Partner"
+  description="Smith Eye Associates, an optometry practice in Ponte Vedra Beach, is the Photo Booth sponsor of The Fashion PAWty benefiting Eye Spy Foundation."
+  canonical="/partners/smith-eye-associates/"
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Fashion PAWty Partner</p>
+          <h1>Smith Eye Associates</h1>
+          <p class="prose lead">
+            An optometry practice in Ponte Vedra Beach caring for families
+            across St. Johns County, and the Photo Booth sponsor of The
+            Fashion PAWty.
+          </p>
+          <a
+            class="btn btn--primary"
+            href={partner.website}
+            rel="sponsored"
+            target="_blank"
+          >
+            Book an Appointment
+          </a>
+        </div>
+        <img
+          class="hero-photo"
+          src={partner.logo}
+          alt=""
+          width="600"
+          height="600"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT: one-column copy, two images 50/50 below ══ -->
+  <section class="band band--tight" aria-labelledby="why-h">
+    <div class="container container--narrow">
+      <h2 id="why-h">Why They're Part of This</h2>
+      <p class="prose">
+        They're an independent, locally rooted practice — the kind
+        that stays in the neighborhood instead of getting bought up
+        and changed by a corporation — and that same neighborly
+        instinct is why they stood behind this cause. Sponsoring the
+        Photo Booth was their way of showing up for Eye Spy Foundation
+        and Leader Dogs for the Blind, the same way they've shown up
+        for St. Johns County families for years.
+      </p>
+
+      <h2 id="what-h">What They Do</h2>
+      <p class="prose">
+        Smith Eye Associates is a proudly independent optometry
+        practice at 120 A1A N #101 in Ponte Vedra Beach, continuing a
+        legacy built by Drs. Wood, Lanier, and Bowman, formerly known
+        as Bowman Optometry. Today the practice is home to Dr. William
+        &quot;Will&quot; Smith, Dr. Stephen Pullen, Dr. Brett O'Connor,
+        and Dr. Dawson Hey, who handle a wide range of specialties —
+        including pediatric patients — with advanced technology.
+      </p>
+      <p class="prose">
+        Services include comprehensive eye exams, custom contact
+        lenses, myopia management, dry eye treatment, and spectacle
+        lenses. The practice also curates one of the most
+        fashion-forward eyewear collections around, with unique,
+        quality frames rather than whatever's standard.
+      </p>
+
+      <div class="about-photos">
+        <img
+          class="photo-slot"
+          src="/images/partners/smith-eye-associates-team.webp"
+          alt="The Smith Eye Associates team gathered outside their Ponte Vedra Beach office"
+          width="980"
+          height="750"
+          loading="lazy"
+        />
+        <img
+          class="photo-slot"
+          src="/images/partners/smith-eye-associates-office.webp"
+          srcset="/images/partners/smith-eye-associates-office@640.webp 640w,
+                  /images/partners/smith-eye-associates-office.webp 980w"
+          sizes="(max-width: 40rem) 100vw, 50vw"
+          alt="The Smith Eye Associates entrance sign at 120 A1A North in Ponte Vedra Beach"
+          width="980"
+          height="750"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHERE TO FIND THEM ══ -->
+  <section class="band band--teal band--tight" aria-labelledby="find-h">
+    <div class="container container--narrow">
+      <div class="find-row">
+        <div>
+          <h2 id="find-h">Where to Find Them</h2>
+          <p class="prose">
+            {fullAddress}
+            <br />
+            <a href={`tel:${partner.telephone}`}>{partner.phone}</a>
+          </p>
+        </div>
+        <a
+          class="btn btn--primary find-row__btn"
+          href={partner.website}
+          rel="sponsored"
+          target="_blank"
+        >
+          Book an Appointment
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <PartnerSchema
+    name={partner.name}
+    url={partner.website}
+    telephone={partner.telephone}
+    address={partner.address}
+  />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    max-width: 20rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    background: var(--color-surface);
+    padding: var(--space-l);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-inline: auto;
+  }
+  @media (min-width: 52rem) {
+    .hero-photo { max-width: none; }
+  }
+
+  /* Two photos, 50/50 side by side below the copy; stack on mobile */
+  .about-photos {
+    display: grid;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .about-photos { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  .photo-slot {
+    width: 100%;
+    aspect-ratio: 980 / 750;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .find-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .find-row { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .find-row__btn { flex-shrink: 0; }
+</style>

@@ -13,6 +13,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SponsorCard from '../components/SponsorCard.astro';
 import SponsorshipSchema from '../components/schema/SponsorshipSchema.astro';
+import { PARTNERS } from '../data/partners.js';
+
+const smithEye = PARTNERS.find((p) => p.id === 'smith-eye-associates');
 
 const mainSponsor = [
   {
@@ -101,13 +104,13 @@ const topDog = [
 
 const pawtyAnimal = [
   {
-    title: 'Photo Wall',
-    fullName: 'PAWty Animal: Photo Wall Sponsor',
+    title: 'Photo Booth',
+    fullName: 'PAWty Animal: Photo Booth Sponsor',
     price: 1000,
     qty: 1,
-    shortCopy: "Strike a pose as sponsor of the Photo Wall, where your brand gets woven into every guest's favorite PAWty memory.",
+    shortCopy: "Strike a pose as sponsor of the Photo Booth, where your brand gets woven into every guest's favorite PAWty memory.",
     benefits: [
-      'Exclusive sponsor for the Fashion PAWty Photo Wall',
+      'Exclusive sponsor for the Fashion PAWty Photo Booth',
       'Social media shout-out, email inclusion, and website placement',
       'Exclusive Fashion PAWty Runway Sponsor',
       'PAWty Passes (2)',
@@ -119,6 +122,11 @@ const pawtyAnimal = [
     stripeUrl: 'https://buy.stripe.com/7sYeVc6Te1t7g436b4ejK06',
     icon: '📸',
     image: '/images/sponsors/photo-wall.webp',
+    sold: true,
+    soldByName: smithEye.name,
+    soldByLogo: smithEye.logo,
+    soldByHref: smithEye.href,
+    soldByButtonText: smithEye.buttonText,
   },
   {
     title: 'Merch Shop',
@@ -201,8 +209,11 @@ const pawtyAnimal = [
   },
 ];
 
-/* One flat list drives the structured data — same tiers rendered above. */
-const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal].map((t) => ({
+/* One flat list drives the structured data — same tiers rendered above.
+   Sold tiers are excluded: they're no longer an offer for sale. */
+const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal]
+  .filter((t) => !t.sold)
+  .map((t) => ({
   name: t.fullName,
   price: t.price,
   qty: t.qty,

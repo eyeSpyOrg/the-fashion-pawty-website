@@ -1,0 +1,65 @@
+---
+/**
+ * ApprovalPlaceholder.astro — a visually loud stand-in for content that
+ * must NOT ship without a named human's sign-off (a quote, a claim not in
+ * the verified fact list, a photo not yet taken). Unlike ImagePlaceholder
+ * (a quiet production note visitors never see), this is deliberately
+ * obvious in the rendered page so it cannot go live by accident — paired
+ * with an HTML comment for anyone reading source.
+ *
+ * Not color alone: the label text and icon carry the meaning, the amber
+ * treatment is a reinforcement.
+ */
+interface Props {
+  /** Who needs to sign off, e.g. "NEEDS NICK'S APPROVAL" */
+  label: string;
+  /** What kind of placeholder — shown as a small kicker, e.g. "Quote pending" */
+  kind?: string;
+}
+const { label, kind = 'Placeholder' } = Astro.props;
+---
+
+<!-- TODO: NEEDS NICK'S APPROVAL — do not publish this block as-is -->
+<div class="approval-ph" role="note">
+  <p class="approval-ph__kicker">
+    <span aria-hidden="true">⚠️</span> {kind} — {label}
+  </p>
+  <div class="approval-ph__body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .approval-ph {
+    border: 3px dashed #7a5200;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--color-gold-tint),
+      var(--color-gold-tint) 10px,
+      #fff8e6 10px,
+      #fff8e6 20px
+    );
+    border-radius: var(--radius);
+    padding: var(--space-m);
+    margin-block: var(--space-m);
+  }
+  .approval-ph__kicker {
+    margin: 0 0 var(--space-2xs);
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: 0.85rem;
+    color: #7a5200;
+  }
+  .approval-ph__body {
+    color: var(--color-text);
+  }
+  .approval-ph__body :global(p:last-child) { margin-bottom: 0; }
+
+  html[data-a11y-contrast='high'] .approval-ph {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+  }
+  html[data-a11y-contrast='high'] .approval-ph__kicker { color: var(--color-text); }
+</style>

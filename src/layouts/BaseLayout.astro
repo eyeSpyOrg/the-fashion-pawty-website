@@ -32,8 +32,10 @@ interface Props {
   image?: string;
   type?: string;
   noindex?: boolean;
+  /** Override the self-referencing canonical — redirect stubs only. */
+  canonical?: string;
 }
-const { title, description, image, type, noindex } = Astro.props;
+const { title, description, image, type, noindex, canonical } = Astro.props;
 ---
 
 <!doctype html>
@@ -50,9 +52,10 @@ const { title, description, image, type, noindex } = Astro.props;
     <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
 
-    <SEO {title} {description} {image} {type} {noindex} />
+    <SEO {title} {description} {image} {type} {noindex} {canonical} />
     <OrganizationSchema />
     <Analytics />
+    <slot name="head" />
 
     <!-- Apply saved accessibility preferences before first paint -->
     <script is:inline>

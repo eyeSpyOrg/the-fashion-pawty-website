@@ -10,6 +10,7 @@ import PawDonationMeter from '../components/PawDonationMeter.astro';
 import SizzleReel from '../components/SizzleReel.astro';
 import EventSchema from '../components/schema/EventSchema.astro';
 import { SITE } from '../config/site.js';
+import { PARTNERS } from '../data/partners.js';
 
 const facts = [
   { icon: '📍', label: 'Where', value: 'Happy Brew Coffee Shop, Jacksonville, FL' },
@@ -211,7 +212,7 @@ const pageDescription =
       </div>
       {/* TODO: update `raised` as sponsorships/donations come in — that's
           the only value that needs to change to move the meter. */}
-      <PawDonationMeter goal={25000} raised={1250} />
+      <PawDonationMeter goal={25000} raised={2300} />
     </div>
   </section>
 
@@ -415,7 +416,7 @@ const pageDescription =
     </div>
   </section>
 
-  <EventSchema />
+  <EventSchema sponsors={PARTNERS} />
 </BaseLayout>
 
 <style>

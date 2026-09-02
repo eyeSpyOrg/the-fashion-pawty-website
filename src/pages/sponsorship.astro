@@ -1,0 +1,27 @@
+---
+/**
+ * /sponsorship/ — redirect stub. People will guess this variant of
+ * /sponsor/; this catches them. Canonical points at the real page.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Sponsor the PAWty"
+  description="This page has moved to /sponsor/ — see sponsorship packages for The Fashion PAWty."
+  noindex={true}
+  canonical="/sponsor/"
+>
+  <Fragment slot="head">
+    <meta http-equiv="refresh" content="0; url=/sponsor/" />
+  </Fragment>
+  <section class="band band--tight">
+    <div class="container container--narrow">
+      <h1>Sponsor the PAWty Has Moved</h1>
+      <p class="prose">
+        This page has moved. If you are not redirected automatically,
+        <a href="/sponsor/">visit Sponsor the PAWty</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

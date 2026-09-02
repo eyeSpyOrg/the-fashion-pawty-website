@@ -22,6 +22,9 @@ interface Props {
   /** ISO date strings, for articles */
   publishedTime?: string;
   modifiedTime?: string;
+  /** Override the self-referencing canonical — only for redirect stubs
+      (e.g. /sponsors/ → /partners/) that point canonical at the real page. */
+  canonical?: string;
 }
 
 const {
@@ -32,10 +35,13 @@ const {
   noindex = false,
   publishedTime,
   modifiedTime,
+  canonical: canonicalOverride,
 } = Astro.props;
 
 const fullTitle = SITE.titleTemplate.replace('%s', title);
-const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const canonical = canonicalOverride
+  ? new URL(canonicalOverride, SITE.url).href
+  : new URL(Astro.url.pathname, SITE.url).href;
 const imageURL = new URL(image, SITE.url).href;
 ---
 

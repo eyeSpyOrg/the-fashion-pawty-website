@@ -4,9 +4,18 @@
  * SITE.address (single source — BRAND.md § 2.7), so the schema can never
  * drift from the visible dates, venue, and price.
  * Used on: /, /tickets/, /schedule/, /venue/.
+ *
+ * `sponsors` is optional — pass matching records from src/data/partners.js
+ * (homepage only, per BRAND.md's single-source discipline) to add
+ * schema.org `sponsor` entries without hand-typing name/url twice.
  */
 import { SITE } from '../../config/site.js';
 import JsonLd from './JsonLd.astro';
+
+interface Props {
+  sponsors?: { name: string; website: string }[];
+}
+const { sponsors = [] } = Astro.props;
 
 const e = SITE.event;
 const schema = {
@@ -45,6 +54,13 @@ const schema = {
     name: SITE.legalName,
     url: SITE.url,
   },
+  ...(sponsors.length > 0 && {
+    sponsor: sponsors.map((s) => ({
+      '@type': 'Organization',
+      name: s.name,
+      url: s.website,
+    })),
+  }),
 };
 ---
 <JsonLd schema={schema} />

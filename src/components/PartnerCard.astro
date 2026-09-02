@@ -1,0 +1,83 @@
+---
+/**
+ * PartnerCard.astro — one signed sponsor on /partners/. Reusable pattern:
+ * logo left, H3 name, two-sentence blurb, one CTA button. No prices —
+ * this is a thank-you page, not the selling page (that's /sponsor/).
+ */
+interface Props {
+  name: string;
+  subtitle?: string;
+  logo: string;
+  logoAlt?: string;
+  blurb: string;
+  href: string;
+  buttonText: string;
+}
+const { name, subtitle, logo, logoAlt = '', blurb, href, buttonText } = Astro.props;
+---
+
+<li class="partner-card">
+  <img
+    class="partner-card__logo"
+    src={logo}
+    alt={logoAlt}
+    width="600"
+    height="600"
+    loading="lazy"
+  />
+  <div class="partner-card__body">
+    <h3 class="partner-card__name">{name}</h3>
+    {subtitle && <p class="partner-card__subtitle">{subtitle}</p>}
+    <p class="partner-card__blurb">{blurb}</p>
+    <a class="btn btn--secondary" href={href}>{buttonText}</a>
+  </div>
+</li>
+
+<style>
+  .partner-card {
+    background: var(--color-surface);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-s);
+    padding: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .partner-card {
+      flex-direction: row;
+      text-align: left;
+      align-items: center;
+    }
+  }
+
+  .partner-card__logo {
+    flex-shrink: 0;
+    width: 9rem;
+    height: 9rem;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+  }
+
+  .partner-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  @media (min-width: 40rem) {
+    .partner-card__body { align-items: flex-start; }
+  }
+
+  .partner-card__name { margin: 0; font-size: var(--step-1); }
+  .partner-card__subtitle {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+  .partner-card__blurb { margin: 0; color: var(--color-text-muted); }
+</style>

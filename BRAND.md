@@ -255,7 +255,9 @@ placement, and VIP seating for 2. Frame the page around the $25K goal.
 | PAWty Animal | $50 | Bronze | PAWty Pass ticket + tailgate chair |
 
 **Claimed / not for sale:**
-- **Photo Booth — Lions Club of Jacksonville Beach.** Show as a thank-you.
+- **Photo Booth — Smith Eye Associates.** Shown as a thank-you on /sponsor/
+  (sold-tier credit) and recognized on /partners/smith-eye-associates/.
+  Sponsor data lives in `src/data/partners.js`, single source of truth.
 
 Note: the printed sponsor sheet and flyer QR use "FashionPAWty.org" and the
 phrase "low-vision individuals." For the WEBSITE, follow the voice rules
@@ -271,7 +273,7 @@ mismatch to the team but don't replicate the print wording on the site.
 - [ ] Event schema validates in Google Rich Results Test (date, location, $30 offer)
 - [ ] VideoObject valid; YouTube embed has captions and no autoplay-with-sound
 - [ ] $30 ticket pay button live from /tickets and homepage
-- [ ] Photo Booth shown as Lions Club-claimed; other areas in inquiry state
+- [ ] Photo Booth shown as Smith Eye Associates-claimed; other areas in inquiry state
 - [ ] Merch button → shop.thefashionpawty.com
 - [ ] AI imagery limited to atmosphere/objects; real photos for people/guide dogs; all marked for post-event replacement
 - [ ] llms.txt + FAQ updated from Key Facts

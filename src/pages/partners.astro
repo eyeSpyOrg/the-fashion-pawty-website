@@ -1,0 +1,140 @@
+---
+/**
+ * Partners — recognition page. Thanks sponsors who have signed; it is
+ * NOT the selling page (that's /sponsor/, where prices and Stripe links
+ * live). Cards are grouped under tier headings in PARTNER_TIER_ORDER;
+ * a heading only renders if at least one partner occupies it, so this
+ * page grows quietly as more sponsors sign without ever showing an
+ * empty section.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PartnerCard from '../components/PartnerCard.astro';
+import { PARTNERS, PARTNER_TIER_ORDER } from '../data/partners.js';
+
+const tiers = PARTNER_TIER_ORDER.map((tier) => ({
+  tier,
+  partners: PARTNERS.filter((p) => p.tier === tier),
+})).filter((group) => group.partners.length > 0);
+---
+
+<BaseLayout
+  title="Our Partners"
+  description="Meet the businesses partnering with The Fashion PAWty to support Eye Spy Foundation and Leader Dogs for the Blind — see who's sponsoring this year."
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Thank You</p>
+          <h1>Our Partners</h1>
+          <p class="prose lead">
+            The Fashion PAWty is only possible because of the businesses
+            who partner with us. Thank you to every sponsor below for
+            supporting Eye Spy Foundation and Leader Dogs for the Blind.
+          </p>
+        </div>
+        <img
+          class="hero-photo"
+          src="/images/schedule/runway-hero.webp"
+          alt="The Fashion PAWty runway backdrop with a puppy in glasses and a Future Leader Dog bandana"
+          width="1600"
+          height="1200"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TIERS ══ -->
+  {tiers.map((group) => (
+    <section class="band band--tight" aria-labelledby={`tier-${group.tier.toLowerCase().replace(/\s+/g, '-')}-h`}>
+      <div class="container container--narrow">
+        <h2 id={`tier-${group.tier.toLowerCase().replace(/\s+/g, '-')}-h`}>{group.tier}</h2>
+        <ul class="partner-grid">
+          {group.partners.map((p) => (
+            <PartnerCard
+              name={p.name}
+              subtitle={p.sponsoredArea ? `${p.sponsoredArea} Sponsor` : undefined}
+              logo={p.logo}
+              logoAlt=""
+              blurb={p.blurb}
+              href={p.href}
+              buttonText={p.buttonText}
+            />
+          ))}
+        </ul>
+      </div>
+    </section>
+  ))}
+
+  <!-- ══ CLOSING CTA ══ -->
+  <section class="band band--dark band--pattern band--tight">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Want to Join Them?</h2>
+        <p class="prose">
+          See sponsorship packages and pricing on our sponsor page.
+        </p>
+        <a class="btn btn--onDark btn--lg" href="/sponsor/">See Sponsorship Packages</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  h1 { text-wrap: balance; }
+
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .partner-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+    list-style: none;
+    margin: var(--space-m) 0 0;
+    padding: 0;
+  }
+
+  .band--pattern {
+    background-color: #000000;
+    background-image: url('/assets/patterns/pattern-fullcolordark.png');
+    background-size: 14rem;
+    background-repeat: repeat;
+  }
+  html[data-a11y-contrast='high'] .band--pattern { background-image: none; }
+
+  .cta-box {
+    background: var(--color-dark);
+    color: #ffffff;
+    text-align: center;
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: var(--space-l) var(--space-m);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    display: grid;
+    gap: var(--space-s);
+  }
+  .cta-box h2 { margin: 0; }
+  .cta-box .prose { margin: 0; }
+  .cta-box .btn { justify-self: center; }
+  html[data-a11y-contrast='high'] .cta-box {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 2px solid var(--color-border);
+  }
+</style>
