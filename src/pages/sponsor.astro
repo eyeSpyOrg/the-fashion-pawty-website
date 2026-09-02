@@ -2,9 +2,9 @@
 /**
  * Sponsor — sponsorship packages for The Fashion PAWty.
  *
- * Tiers are grouped into four sections that mirror the physical packages:
+ * Tiers are grouped into three sections that mirror the physical packages:
  *   Main Sponsor (1, full-width) > Top Dog Sponsorships (3, signature zones) >
- *   PAWty Animal Sponsorships (5 activity areas) > Media Sponsorships (2).
+ *   PAWty Animal Sponsorships (5 activity areas).
  *
  * Each group feeds both the visible cards and SponsorshipSchema, so the
  * structured data can never drift from what a visitor actually reads
@@ -26,6 +26,8 @@ const mainSponsor = [
       'Exclusive Fashion PAWty Runway Sponsor',
       '4 PAWty Passes & VIP runway seats',
       'Food, MockTAILS, and a tote bag for 4',
+      'Sponsorship dog entry into the Fashion PAWty show',
+      'Premium placement in the Vendor tent area in the Kennel Club',
     ],
     buttonText: 'Become a Sponsor',
     stripeUrl: 'https://buy.stripe.com/8x2dR85Pa1t72dd2YSejK02',
@@ -47,6 +49,8 @@ const topDog = [
       'Exclusive Fashion PAWty Runway Sponsor',
       'PAWty Passes & VIP runway seats (2)',
       'Food, MockTAILS, and a tote bag (2)',
+      'Sponsorship dog entry into the Fashion PAWty show',
+      'Premium placement in the Vendor tent area in the Kennel Club',
     ],
     buttonText: 'Sponsor the Jams',
     stripeUrl: 'https://buy.stripe.com/cNibJ0cdy1t7g430QKejK03',
@@ -65,6 +69,8 @@ const topDog = [
       'Exclusive Fashion PAWty Runway Sponsor',
       'PAWty Passes & VIP runway seats (2)',
       'Food, MockTAILS, and a tote bag (2)',
+      'Sponsorship dog entry into the Fashion PAWty show',
+      'Premium placement in the Vendor tent area in the Kennel Club',
     ],
     buttonText: 'Sponsor the Treats',
     stripeUrl: 'https://buy.stripe.com/4gM4gy3H21t79FFgPIejK04',
@@ -83,6 +89,8 @@ const topDog = [
       'Exclusive Fashion PAWty Runway Sponsor',
       'PAWty Passes & VIP runway seats (2)',
       'Food, MockTAILS, and a tote bag (2)',
+      'Sponsorship dog entry into the Fashion PAWty show',
+      'Premium placement in the Vendor tent area in the Kennel Club',
     ],
     buttonText: 'Sponsor the Drinks',
     stripeUrl: 'https://buy.stripe.com/aFa4gy6Te2xbcRRdDwejK05',
@@ -104,6 +112,8 @@ const pawtyAnimal = [
       'Exclusive Fashion PAWty Runway Sponsor',
       'PAWty Passes (2)',
       'Food, MockTAILS, and a tote bag (2)',
+      'Sponsorship dog entry into the Fashion PAWty show',
+      'Premium placement in the Vendor tent area in the Kennel Club',
     ],
     buttonText: 'Sponsor the Snaps',
     stripeUrl: 'https://buy.stripe.com/7sYeVc6Te1t7g436b4ejK06',
@@ -122,6 +132,8 @@ const pawtyAnimal = [
       'Exclusive Fashion PAWty Runway Sponsor',
       'PAWty Passes (2)',
       'Food, MockTAILS, and a tote bag (2)',
+      'Sponsorship dog entry into the Fashion PAWty show',
+      'Premium placement in the Vendor tent area in the Kennel Club',
     ],
     buttonText: 'Sponsor the Merch',
     stripeUrl: 'https://buy.stripe.com/9B614m91m9ZD7xx2YSejK07',
@@ -140,6 +152,8 @@ const pawtyAnimal = [
       'Exclusive Fashion PAWty Runway Sponsor',
       'PAWty Passes (2)',
       'Food, MockTAILS, and a tote bag (2)',
+      'Sponsorship dog entry into the Fashion PAWty show',
+      'Premium placement in the Vendor tent area in the Kennel Club',
     ],
     buttonText: 'Sponsor the Knowledge',
     stripeUrl: 'https://buy.stripe.com/dRm7sKfpKfjX4ll6b4ejK08',
@@ -158,6 +172,8 @@ const pawtyAnimal = [
       'Exclusive Fashion PAWty Runway Sponsor',
       'PAWty Passes (2)',
       'Food, MockTAILS, and a tote bag (2)',
+      'Sponsorship dog entry into the Fashion PAWty show',
+      'Premium placement in the Vendor tent area in the Kennel Club',
     ],
     buttonText: 'Sponsor the DJ',
     stripeUrl: 'https://buy.stripe.com/8x28wO0uQfjX3hh570ejK09',
@@ -175,6 +191,8 @@ const pawtyAnimal = [
       'Social media shout-out, email inclusion, and website placement',
       'PAWty Passes (2)',
       'Food, MockTAILS, and a tote bag (2)',
+      'Sponsorship dog entry into the Fashion PAWty show',
+      'Premium placement in the Vendor tent area in the Kennel Club',
     ],
     buttonText: 'Sponsor the Games',
     stripeUrl: 'https://buy.stripe.com/9B628q91m6Nr5pp0QKejK0a',
@@ -183,44 +201,8 @@ const pawtyAnimal = [
   },
 ];
 
-const media = [
-  {
-    title: 'The Fashion PAWty Newsletter',
-    subtitle: 'Email Sponsor',
-    fullName: 'The Fashion PAWty Newsletter: Email Sponsor',
-    price: 200,
-    qty: 5,
-    shortCopy: 'Land your brand straight in inboxes as sponsor of The Fashion PAWty Newsletter, our official PAWty email to supporters.',
-    benefits: [
-      'Inclusion in an official Fashion PAWty email',
-      'Website placement',
-      'PAWty Passes (2)',
-      'Food, MockTAILS, and a tote bag (2)',
-    ],
-    buttonText: 'Sponsor an Email',
-    stripeUrl: 'https://buy.stripe.com/eVqdR8fpK7Rv8BBbvoejK0c',
-    icon: '📬',
-  },
-  {
-    title: 'PAWty Post',
-    subtitle: 'Social Media Sponsor',
-    fullName: 'PAWty Post: Social Media Sponsor',
-    price: 150,
-    qty: 10,
-    shortCopy: 'Get tails wagging on social as sponsor of the PAWty Post, a dedicated shoutout to our most engaged followers.',
-    benefits: [
-      'Inclusion in an Eye Spy Foundation social media post (Facebook, Instagram, X, TikTok)',
-      'PAWty Passes (2)',
-      'Food, MockTAILS, and a tote bag (2)',
-    ],
-    buttonText: 'Sponsor a Post',
-    stripeUrl: 'https://buy.stripe.com/dRmfZga5q4FjdVV0QKejK0d',
-    icon: '📣',
-  },
-];
-
 /* One flat list drives the structured data — same tiers rendered above. */
-const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...media].map((t) => ({
+const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal].map((t) => ({
   name: t.fullName,
   price: t.price,
   qty: t.qty,
@@ -336,25 +318,6 @@ const allTiers = [...mainSponsor, ...topDog, ...pawtyAnimal, ...media].map((t) =
 
       <ul class="tier-grid">
         {pawtyAnimal.map((tier) => <SponsorCard {...tier} />)}
-      </ul>
-    </div>
-  </section>
-
-  <!-- ══ 4. MEDIA SPONSORSHIPS ══ -->
-  <section class="band band--gold" aria-labelledby="media-h">
-    <div class="container container--narrow">
-      <div class="section-head section-head--center">
-        <p class="eyebrow">Before, During &amp; After</p>
-        <h2 id="media-h">Media Sponsorships</h2>
-        <p class="prose">
-          Reach our audience before, during, and after the PAWty. Every
-          package includes channel placement plus PAWty Passes with food and
-          mocktails included.
-        </p>
-      </div>
-
-      <ul class="tier-grid">
-        {media.map((tier) => <SponsorCard {...tier} />)}
       </ul>
     </div>
   </section>
