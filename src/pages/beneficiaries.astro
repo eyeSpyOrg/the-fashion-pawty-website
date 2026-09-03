@@ -148,22 +148,13 @@ import { SITE } from '../config/site.js';
 </BaseLayout>
 
 <style>
-  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
-  .split { display: grid; gap: var(--space-l); align-items: center; }
-  .split__text > * + * { margin-top: var(--space-s); }
-  @media (min-width: 52rem) {
-    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
-  }
-  h1 { text-wrap: balance; }
-
+  /* Hero photo here is a logo lockup, not a scene photo — contain (not
+     the shared cover) so the logo is never cropped, on its own surface
+     so it doesn't bleed into the teal band behind it. */
   .hero-photo {
-    width: 100%;
-    aspect-ratio: 4 / 3;
     object-fit: contain;
     background: var(--color-surface);
     padding: var(--space-l);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
   }
 
   /* Eye Spy Foundation and Leader Dogs sections share this exact layout —

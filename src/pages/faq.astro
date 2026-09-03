@@ -134,7 +134,6 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
   .faq-help {
     display: flex; gap: var(--space-s); align-items: center;
     margin-top: var(--space-l); background: var(--color-teal-tint);
@@ -142,19 +141,4 @@ const faqs = [
   .faq-help__icon { font-size: 2rem; line-height: 1; }
   .faq-help p { margin: 0; }
   :global(html[data-a11y-contrast='high']) .faq-help { background: var(--color-surface); }
-
-  .split { display: grid; gap: var(--space-l); align-items: center; }
-  .split__text > * + * { margin-top: var(--space-s); }
-  @media (min-width: 52rem) {
-    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
-  }
-  h1 { text-wrap: balance; }
-
-  .hero-photo {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-  }
 </style>

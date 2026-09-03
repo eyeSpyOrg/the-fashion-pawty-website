@@ -148,9 +148,32 @@ h1, h2, h3, h4 {
   text-wrap: balance;
   color: var(--color-text);
 }
-h1 { font-size: var(--step-3); letter-spacing: -0.01em; }
+h1 { font-size: var(--step-3); letter-spacing: -0.01em; text-wrap: balance; }
 h2 { font-size: var(--step-2); }
 h3 { font-size: var(--step-1); }
+
+/* Intro paragraph under a hero/section heading — larger, muted */
+.lead { font-size: var(--step-1); color: var(--color-text-muted); }
+
+/* ── Split: text beside media — the page-hero layout used across
+   /donate, /pawtners, /sponsor, /schedule, /venue, /beneficiaries, /faq,
+   /contact, /partners, plus mid-page text+photo sections. Pages needing a
+   different ratio (e.g. /tickets' 1fr/1fr) override locally — Astro's
+   scoped styles win over this by specificity. ── */
+.split { display: grid; gap: var(--space-l); align-items: center; }
+.split__text > * + * { margin-top: var(--space-s); }
+@media (min-width: 52rem) {
+  .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+}
+
+/* Large photo tile — hero images and other full-width feature photos */
+.hero-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
 
 /* ── Vertical rhythm: predictable, generous spacing ─────────
    Sections breathe; nothing is cramped. Uses the spacing scale. */

@@ -22,15 +22,15 @@ import ShareSection from '../components/ShareSection.astro';
     <div class="container">
       <div class="split">
         <div class="split__text">
+          <p class="eyebrow">Join the Mission From Anywhere</p>
           <h1>Become a PAWtner</h1>
-          <p class="hero-kicker">Join the Mission From Anywhere</p>
           <p class="prose lead">
             You don't have to attend The Fashion PAWty to make a
             difference. Become a PAWtner and help Eye Spy Foundation and
             Leader Dogs for the Blind build community and confidence —
             from anywhere.
           </p>
-          <a class="btn btn--primary" href="#puppy-pawty">See PAWtner Levels</a>
+          <a class="btn btn--primary btn--lg" href="#puppy-pawty">See PAWtner Levels</a>
         </div>
         <img
           class="hero-photo"
@@ -53,30 +53,3 @@ import ShareSection from '../components/ShareSection.astro';
   <!-- ══ SHARE WITH A FRIEND ══ -->
   <ShareSection />
 </BaseLayout>
-
-<style>
-  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
-
-  .split { display: grid; gap: var(--space-l); align-items: center; }
-  .split__text > * + * { margin-top: var(--space-s); }
-  @media (min-width: 52rem) {
-    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
-  }
-  h1 { text-wrap: balance; }
-
-  .hero-kicker {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--step-1);
-    color: var(--color-accent);
-    margin: 0;
-  }
-
-  .hero-photo {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-  }
-</style>

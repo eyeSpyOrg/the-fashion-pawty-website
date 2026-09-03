@@ -184,14 +184,13 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
-
-  .split { display: grid; gap: var(--space-l); align-items: flex-start; }
-  .split__text > * + * { margin-top: var(--space-s); }
+  /* This hero pairs text with a pricing panel (not a photo), so it keeps
+     its own narrower ratio and top alignment rather than the shared
+     .split default. */
+  .split { align-items: flex-start; }
   @media (min-width: 52rem) {
-    .split { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+    .split { grid-template-columns: 1fr 1fr; }
   }
-  h1 { text-wrap: balance; }
 
   .ticket-card { max-width: 32rem; padding: clamp(1.25rem, 1rem + 1.5vw, 2rem); }
   .ticket-card > * + * { margin-top: var(--space-s); }
