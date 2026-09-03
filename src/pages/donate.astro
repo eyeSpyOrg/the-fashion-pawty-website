@@ -7,9 +7,8 @@
  * titles differ.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import DonationLevels from '../components/DonationLevels.astro';
-import SwagSection from '../components/SwagSection.astro';
+// import SwagSection from '../components/SwagSection.astro';
 import ShareSection from '../components/ShareSection.astro';
 import { SITE } from '../config/site.js';
 
@@ -39,12 +38,13 @@ const eventDate = new Date(SITE.event.startDate).toLocaleDateString('en-US', {
           </p>
           <a class="btn btn--primary btn--lg" href="#support-h">See How You Can Help</a>
         </div>
-        <ImagePlaceholder
-          label="Guests and dogs celebrating together on the orange carpet"
-          policy="ai"
-          ratio="4 / 3"
-          icon="🐾"
-          tone="teal"
+        <img
+          class="hero-photo"
+          src="/images/schedule/runway-hero.webp"
+          alt="The Fashion PAWty runway backdrop with a puppy in glasses and a Future Leader Dog bandana"
+          width="1600"
+          height="1200"
+          fetchpriority="high"
         />
       </div>
     </div>
@@ -67,10 +67,10 @@ const eventDate = new Date(SITE.event.startDate).toLocaleDateString('en-US', {
   </section>
 
   <!-- ══ SUPPORT — pooled-funds line + 5 levels ══ -->
-  <DonationLevels variant="donate" />
+  <DonationLevels variant="pawtners" />
 
   <!-- ══ SWAG ══ -->
-  <SwagSection />
+  <!-- <SwagSection /> -->
 
   <!-- ══ SHARE WITH A FRIEND ══ -->
   <ShareSection />
@@ -85,4 +85,12 @@ const eventDate = new Date(SITE.event.startDate).toLocaleDateString('en-US', {
     .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
   }
   h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
 </style>

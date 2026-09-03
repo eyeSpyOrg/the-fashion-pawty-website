@@ -37,8 +37,10 @@ const { variant } = Astro.props;
           priceLabel={level.priceLabel}
           buttonText={variant === 'pawtners' ? level.ctaPawtners : level.ctaDonate}
           stripeUrl={level.stripeUrl}
+          image={level.image}
           imageAlt={level.imageAlt}
           featured={level.featured}
+          tone={level.id === 'make-your-own-impact' ? 'gold' : undefined}
         />
       ))}
     </ul>

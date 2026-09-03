@@ -14,8 +14,10 @@ interface Props {
   priceLabel: string;
   buttonText: string;
   stripeUrl: string;
+  image: string;
   imageAlt: string;
   featured?: boolean;
+  tone?: 'gold';
 }
 const {
   id,
@@ -25,17 +27,19 @@ const {
   priceLabel,
   buttonText,
   stripeUrl,
+  image,
   imageAlt,
   featured = false,
+  tone,
 } = Astro.props;
 ---
 
-<li id={id} class:list={['level-card', { 'level-card--featured': featured }]}>
+<li id={id} class:list={['level-card', { 'level-card--featured': featured, 'level-card--gold': tone === 'gold' }]}>
   {featured && <p class="level-card__badge">Most Popular</p>}
   <div class="level-card__header">
     <div class="level-card__image">
       <img
-        src="/images/sponsors/sponsor-placeholder.webp"
+        src={image}
         alt={imageAlt}
         width="1000"
         height="1000"
@@ -84,6 +88,15 @@ const {
   .level-card--featured {
     border: 2px solid var(--color-accent);
     box-shadow: var(--shadow);
+  }
+
+  /* "Any Amount" level — a warm gold wash sets it apart from the priced
+     tiers above it; text colors are unchanged so contrast stays the same
+     as the rest of the list (--color-gold-tint is already verified for
+     body text in band--gold sections). */
+  .level-card--gold {
+    background: var(--color-gold-tint);
+    border-color: var(--color-gold-highlight);
   }
   .level-card__badge {
     align-self: flex-start;
