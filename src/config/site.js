@@ -77,8 +77,6 @@ export const SITE = {
   // currently hidden (commented out) rather than deleted. Kept here so
   // those sections are a one-line uncomment once the store launches.
   shopUrl: 'https://shop.thefashionpawty.com',
-  // Donate URL reused by the header "Donate" button
-  donateUrl: 'https://donate.stripe.com/dRmcN43H25Jng43eHAejK00',
   footerNav: [
     { label: 'Accessibility Statement', href: '/accessibility/' },
     { label: 'Privacy Policy', href: '/privacy/' },
