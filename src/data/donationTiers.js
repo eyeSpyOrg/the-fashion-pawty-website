@@ -31,7 +31,7 @@ export const levels = [
     ctaPawtners: "It's PAWty Time",
     image: '/images/donations/puppy-pawty.webp',
     imageAlt: 'A tennis ball and a bone',
-    stripeUrl: STRIPE_PLACEHOLDER,
+    stripeUrl: 'https://buy.stripe.com/9B6eVccdyc7L2dd9ngejK0f',
   },
   {
     id: 'support-a-volunteer',
@@ -49,7 +49,7 @@ export const levels = [
     ctaPawtners: 'Support the PAWty',
     image: '/images/donations/support-a-volunteer.webp',
     imageAlt: 'A group of people standing together with arms raised',
-    stripeUrl: STRIPE_PLACEHOLDER,
+    stripeUrl: 'https://buy.stripe.com/7sYfZg6Te1t78BBeHAejK0g',
   },
   {
     id: 'pawty-pass-pair',
@@ -67,7 +67,7 @@ export const levels = [
     ctaPawtners: 'Give Two Passes',
     image: '/images/donations/pawty-pass-pair.webp',
     imageAlt: 'Two event tickets',
-    stripeUrl: STRIPE_PLACEHOLDER,
+    stripeUrl: 'https://buy.stripe.com/14A5kC4L60p34llczsejK0h',
     featured: true,
   },
   {
