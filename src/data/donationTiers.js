@@ -102,6 +102,6 @@ export const levels = [
     ctaPawtners: 'Make an Impact',
     image: '/images/donations/make-your-own-impact.webp',
     imageAlt: 'A heart resting above an open hand',
-    stripeUrl: STRIPE_PLACEHOLDER,
+    stripeUrl: 'https://buy.stripe.com/cNi4gy1yU7Rv9FF2YSejK0i',
   },
 ];
