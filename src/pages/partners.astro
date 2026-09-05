@@ -14,7 +14,7 @@ import { PARTNERS, PARTNER_TIER_ORDER } from '../data/partners.js';
 const tiers = PARTNER_TIER_ORDER.map((tier) => ({
   tier,
   partners: PARTNERS.filter((p) => p.tier === tier),
-})).filter((group) => group.partners.length > 0);
+}));
 ---
 
 <BaseLayout
@@ -63,6 +63,20 @@ const tiers = PARTNER_TIER_ORDER.map((tier) => ({
               buttonText={p.buttonText}
             />
           ))}
+          {group.partners.length === 0 && (
+            <li class="available-card">
+              <div class="available-card__icon" aria-hidden="true">🐾</div>
+              <div class="available-card__body">
+                <p class="available-card__heading">Sponsorship Still Available</p>
+                <p class="available-card__blurb">
+                  This tier is open. Join our sponsors and help Eye Spy
+                  Foundation reach its $25,000 goal for Leader Dogs for the
+                  Blind.
+                </p>
+                <a class="btn btn--secondary" href="/sponsor/">See Sponsorship Packages</a>
+              </div>
+            </li>
+          )}
         </ul>
       </div>
     </section>
@@ -99,6 +113,49 @@ const tiers = PARTNER_TIER_ORDER.map((tier) => ({
     background-repeat: repeat;
   }
   html[data-a11y-contrast='high'] .band--pattern { background-image: none; }
+
+  .available-card {
+    background: var(--color-surface);
+    border: 2px dashed var(--border-hairline);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-s);
+    padding: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .available-card {
+      flex-direction: row;
+      text-align: left;
+      align-items: center;
+    }
+  }
+  .available-card__icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+    width: 9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .available-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  @media (min-width: 40rem) {
+    .available-card__body { align-items: flex-start; }
+  }
+  .available-card__heading {
+    margin: 0;
+    font-size: var(--step-1);
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+  .available-card__blurb { margin: 0; color: var(--color-text-muted); }
 
   .cta-box {
     background: var(--color-dark);

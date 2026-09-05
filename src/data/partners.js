@@ -11,10 +11,6 @@ export const PARTNER_TIER_ORDER = [
   'Best in Show',
   'Top Dog',
   'PAWty Animal',
-  'Kennel Club',
-  'The Doggie Dispatch',
-  'PAWty Post',
-  'Media Sponsor',
 ];
 
 export const PARTNERS = [
