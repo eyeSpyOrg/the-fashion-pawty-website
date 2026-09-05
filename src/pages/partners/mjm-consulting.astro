@@ -1,0 +1,166 @@
+---
+/**
+ * MJM Consulting — partner page.
+ * Bark-star / Bone Up Station sponsor.
+ * Led by Meredyth Mason; only public link is LinkedIn.
+ * No street address, no phone number — connect via LinkedIn only.
+ * No fabricated people photos; logo-only image in hero.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JsonLd from '../../components/schema/JsonLd.astro';
+import { PARTNERS } from '../../data/partners.js';
+
+const partner = PARTNERS.find((p) => p.id === 'mjm-consulting');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: partner.name,
+  url: partner.website,
+  sameAs: [partner.website],
+};
+---
+
+<BaseLayout
+  title="MJ Mason Consulting — Fashion PAWty Partner"
+  description="MJ Mason Consulting is a disabled woman-owned small business providing strategic marketing and communications services, shaped by lived experience with blindness and low vision — and the Bone Up Station sponsor of The Fashion PAWty."
+  canonical="/partners/mjm-consulting/"
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Fashion PAWty Partner</p>
+          <h1>MJ Mason Consulting</h1>
+          <p class="prose lead">
+            A disabled woman-owned small business providing strategic
+            marketing, communications, and advisory services — with a
+            perspective shaped by lived experience with blindness and low
+            vision, and the Bone Up Station sponsor of The Fashion PAWty.
+          </p>
+          <a
+            class="btn btn--primary"
+            href={partner.website}
+            rel="sponsored"
+            target="_blank"
+          >
+            Connect on LinkedIn
+          </a>
+        </div>
+        <img
+          class="hero-photo"
+          src={partner.logo}
+          alt=""
+          width="600"
+          height="600"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="band band--tight" aria-labelledby="why-h">
+    <div class="container container--narrow">
+      <h2 id="why-h">Why They're Part of This</h2>
+      <p class="prose">
+        MJ Mason Consulting isn't just an ally to the blind and low vision
+        community — it's a living example of what the community can
+        accomplish when given the opportunity and the right support. The
+        firm's work demonstrates that disability does not limit the ability
+        to lead, innovate, and succeed, which is exactly the spirit Eye Spy
+        Foundation and Leader Dogs for the Blind exist to build on. More
+        trained guide dogs mean more independence, more careers, and more
+        stories like Meredyth's.
+      </p>
+
+      <h2 id="what-h">What They Do</h2>
+      <p class="prose">
+        MJ Mason Consulting is a disabled woman-owned small business
+        providing strategic marketing, communications, and advisory services
+        to organizations that want to strengthen their brand, expand their
+        reach, and achieve their goals. The firm brings a perspective shaped
+        by lived experience with blindness and low vision — and uses that
+        perspective to serve as a tangible example to the blind and low
+        vision community that, with opportunity and support, individuals can
+        pursue their goals, build successful careers, and thrive.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ WHERE TO FIND THEM ══ -->
+  <section class="band band--teal band--tight" aria-labelledby="find-h">
+    <div class="container container--narrow">
+      <div class="find-row">
+        <div>
+          <h2 id="find-h">Where to Find Them</h2>
+          <p class="prose">
+            Connect with Meredyth Mason directly on LinkedIn.
+          </p>
+        </div>
+        <a
+          class="btn btn--primary find-row__btn"
+          href={partner.website}
+          rel="sponsored"
+          target="_blank"
+        >
+          Connect on LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EVENT CTA ══ -->
+  <section class="band band--dark band--tight" aria-labelledby="event-h">
+    <div class="container container--narrow">
+      <p class="prose">
+        The Fashion PAWty is September 26, 2026. Every ticket helps Eye Spy
+        Foundation reach its $25,000 goal for Leader Dogs for the Blind.
+        Thank you, MJ Mason Consulting, for sponsoring the Bone Up Station and
+        helping make it happen.
+      </p>
+    </div>
+  </section>
+
+  <JsonLd schema={schema} />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    max-width: 20rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    background: var(--color-surface);
+    padding: var(--space-l);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-inline: auto;
+  }
+  @media (min-width: 52rem) {
+    .hero-photo { max-width: none; }
+  }
+
+  .find-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .find-row { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .find-row__btn { flex-shrink: 0; }
+
+  .band--dark { background: var(--color-dark); color: #fff; }
+  .band--dark .prose { margin: 0; max-width: 52ch; }
+</style>

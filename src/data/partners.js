@@ -19,6 +19,42 @@ export const PARTNER_TIER_ORDER = [
 
 export const PARTNERS = [
   {
+    id: 'jacksonville-river-city-lions-club',
+    name: 'Jacksonville River City Lions Club',
+    tier: 'Best in Show',
+    sponsoredArea: 'Runway / Orange Carpet',
+    blurb:
+      'Jacksonville River City Lions Club serves the First Coast through vision programs, youth initiatives, and humanitarian outreach guided by the Lions motto "We Serve." They are the Best in Show and Runway / Orange Carpet sponsor of The Fashion PAWty.',
+    logo: '/images/partners/jacksonville-river-city-lions-club-logo.webp',
+    href: '/partners/jacksonville-river-city-lions-club/',
+    buttonText: 'Meet Jacksonville River City Lions Club',
+    website: 'https://e-clubhouse.org/sites/jacksonville_river_city/',
+  },
+  {
+    id: 'mjm-consulting',
+    name: 'MJ Mason Consulting',
+    tier: 'PAWty Animal',
+    sponsoredArea: 'Bone Up Station',
+    blurb:
+      'MJ Mason Consulting is a disabled woman-owned small business providing strategic marketing, communications, and advisory services — with a perspective shaped by lived experience with blindness and low vision. They are the Bone Up Station sponsor of The Fashion PAWty.',
+    logo: '/images/partners/mjm-consulting-logo.webp',
+    href: '/partners/mjm-consulting/',
+    buttonText: 'Meet MJ Mason Consulting',
+    website: 'https://www.linkedin.com/in/meredythsauter/',
+  },
+  {
+    id: 'jacksonville-beach-lions-club',
+    name: 'Lions Club Jacksonville Beach',
+    tier: 'PAWty Animal',
+    sponsoredArea: 'Merch Shop',
+    blurb:
+      'Lions Club Jacksonville Beach has served the First Coast since 1938 through vision programs, hearing assistance, and community outreach. They are the Merch Shop sponsor of The Fashion PAWty.',
+    logo: '/images/partners/jacksonville-beach-lions-club-logo.webp',
+    href: '/partners/jacksonville-beach-lions-club/',
+    buttonText: 'Meet Lions Club Jacksonville Beach',
+    website: 'https://jaxbeachlions.org/',
+  },
+  {
     id: 'smith-eye-associates',
     name: 'Smith Eye Associates',
     tier: 'PAWty Animal',

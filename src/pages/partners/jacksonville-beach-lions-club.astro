@@ -1,0 +1,203 @@
+---
+/**
+ * Lions Club Jacksonville Beach — partner page.
+ * Bark-star / Merch Shop station sponsor.
+ * Source: jaxbeachlions.org
+ * No quote, no invented stats, no street address (service club, not retail).
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JsonLd from '../../components/schema/JsonLd.astro';
+import { PARTNERS } from '../../data/partners.js';
+
+const partner = PARTNERS.find((p) => p.id === 'jacksonville-beach-lions-club');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: partner.name,
+  url: partner.website,
+  foundingDate: '1938',
+  sameAs: [partner.website],
+};
+---
+
+<BaseLayout
+  title="Lions Club Jacksonville Beach — Fashion PAWty Partner"
+  description="Lions Club Jacksonville Beach has served the First Coast since 1938 through vision programs, hearing assistance, and community outreach — and is the Merch Shop sponsor of The Fashion PAWty."
+  canonical="/partners/jacksonville-beach-lions-club/"
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Fashion PAWty Partner</p>
+          <h1>Lions Club Jacksonville Beach</h1>
+          <p class="prose lead">
+            A community service organization that has served the First Coast
+            since 1938 through vision programs, hearing assistance, and
+            charitable outreach — and the Merch Shop sponsor of The Fashion
+            PAWty.
+          </p>
+          <a
+            class="btn btn--primary"
+            href={partner.website}
+            rel="sponsored"
+            target="_blank"
+          >
+            Visit Their Website
+          </a>
+        </div>
+        <img
+          class="hero-photo"
+          src={partner.logo}
+          alt=""
+          width="600"
+          height="600"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="band band--tight" aria-labelledby="why-h">
+    <div class="container container--narrow">
+      <h2 id="why-h">Why They're Part of This</h2>
+      <p class="prose">
+        Lions Clubs have been champions of vision health for more than a
+        century — it's woven into the fabric of what Lions do. For the
+        Jacksonville Beach chapter, sponsoring The Fashion PAWty was a natural
+        yes: the event's mission of growing guide dog services for the blind and
+        low vision community lines up directly with the Lions International
+        legacy in vision care. This is a club that has been showing up for
+        First Coast families since 1938, and The Fashion PAWty is one more
+        meaningful way they're doing exactly that.
+      </p>
+
+      <h2 id="what-h">What They Do</h2>
+      <p class="prose">
+        Lions Club Jacksonville Beach is a chapter of Lions Clubs International,
+        one of the world's largest and most respected community service
+        organizations. Since their founding in 1938, the Jacksonville Beach
+        Lions have served local families and neighbors through vision screenings,
+        eyeglass collection, hearing assistance, youth programs, and charitable
+        outreach across the First Coast. Their motto — "We Serve" — isn't
+        marketing copy. It's a job description. The club meets regularly and
+        welcomes new members who want to make a meaningful difference close
+        to home.
+      </p>
+
+      <div class="about-photos">
+        <img
+          class="photo-slot"
+          src="/images/partners/jacksonville-beach-lions-club-team.webp"
+          alt="Members of Lions Club Jacksonville Beach gathered at a club event, many wearing the distinctive gold Lions Club vests"
+          width="980"
+          height="750"
+          loading="lazy"
+        />
+        <img
+          class="photo-slot"
+          src="/images/partners/jacksonville-beach-lions-club-building.webp"
+          alt="Exterior of the Lions Club Jacksonville Beach meeting location, a brick building with palm trees and an American flag"
+          width="980"
+          height="750"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHERE TO FIND THEM ══ -->
+  <section class="band band--teal band--tight" aria-labelledby="find-h">
+    <div class="container container--narrow">
+      <div class="find-row">
+        <div>
+          <h2 id="find-h">Where to Find Them</h2>
+          <p class="prose">
+            Club meetings, events, and service opportunities are posted at
+            their website.
+          </p>
+        </div>
+        <a
+          class="btn btn--primary find-row__btn"
+          href={partner.website}
+          rel="sponsored"
+          target="_blank"
+        >
+          Visit Their Website
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EVENT CTA ══ -->
+  <section class="band band--dark band--tight" aria-labelledby="event-h">
+    <div class="container container--narrow">
+      <p class="prose">
+        The Fashion PAWty is September 26, 2026. Every ticket helps Eye Spy
+        Foundation reach its $25,000 goal for Leader Dogs for the Blind.
+        Thank you, Lions Club Jacksonville Beach, for being part of this.
+      </p>
+    </div>
+  </section>
+
+  <JsonLd schema={schema} />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    max-width: 20rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    background: var(--color-surface);
+    padding: var(--space-l);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-inline: auto;
+  }
+  @media (min-width: 52rem) {
+    .hero-photo { max-width: none; }
+  }
+
+  .about-photos {
+    display: grid;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .about-photos { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  .photo-slot {
+    width: 100%;
+    aspect-ratio: 980 / 750;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .find-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .find-row { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .find-row__btn { flex-shrink: 0; }
+
+  .band--dark { background: var(--color-dark); color: #fff; }
+  .band--dark .prose { margin: 0; max-width: 52ch; }
+</style>

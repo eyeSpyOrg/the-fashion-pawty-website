@@ -1,0 +1,204 @@
+---
+/**
+ * Jacksonville River City Lions Club — partner page.
+ * Best in Show / Runway + Orange Carpet sponsor.
+ * Source: e-clubhouse.org/sites/jacksonville_river_city/
+ * No quote, no invented stats, no physical address (service club, not retail).
+ * Image slots marked; replace with real photos before publishing.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JsonLd from '../../components/schema/JsonLd.astro';
+import { PARTNERS } from '../../data/partners.js';
+
+const partner = PARTNERS.find((p) => p.id === 'jacksonville-river-city-lions-club');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: partner.name,
+  url: partner.website,
+  sameAs: [partner.website],
+};
+---
+
+<BaseLayout
+  title="Jacksonville River City Lions Club — Fashion PAWty Partner"
+  description="Jacksonville River City Lions Club serves the First Coast through vision programs, youth initiatives, and volunteer service — and is the Best in Show sponsor of The Fashion PAWty."
+  canonical="/partners/jacksonville-river-city-lions-club/"
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Fashion PAWty Partner</p>
+          <h1>Jacksonville River City Lions Club</h1>
+          <p class="prose lead">
+            A community service organization serving the First Coast through
+            vision programs, youth initiatives, and humanitarian outreach —
+            and the Best in Show and Runway / Orange Carpet sponsor of The
+            Fashion PAWty.
+          </p>
+          <a
+            class="btn btn--primary"
+            href={partner.website}
+            rel="sponsored"
+            target="_blank"
+          >
+            Visit Their Website
+          </a>
+        </div>
+        <img
+          class="hero-photo"
+          src={partner.logo}
+          alt=""
+          width="600"
+          height="600"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="band band--tight" aria-labelledby="why-h">
+    <div class="container container--narrow">
+      <h2 id="why-h">Why They're Part of This</h2>
+      <p class="prose">
+        Jacksonville River City Lions Club didn't just show up for The Fashion
+        PAWty — they showed up as the Best in Show sponsor, the highest level
+        of support available. That commitment reflects a deep alignment between
+        what Lions do and what this event is trying to accomplish: putting more
+        trained guide dogs into the hands of the blind and low vision community
+        right here in Northeast Florida. Lions Clubs International has
+        championed vision care and independence for more than a century, and the
+        River City chapter carries that legacy forward on the First Coast every
+        single week.
+      </p>
+
+      <h2 id="what-h">What They Do</h2>
+      <p class="prose">
+        Jacksonville River City Lions Club is an active chapter of Lions Clubs
+        International — one of the world's largest and most respected
+        volunteer-driven service organizations. The club serves the Jacksonville
+        community through vision programs, youth initiatives, volunteer service,
+        and humanitarian outreach guided by the Lions motto "We Serve." Members
+        show up week after week to make a real difference in the lives of their
+        neighbors, and the club has a longstanding commitment to Leader Dogs for
+        the Blind, the organization that trains guide dogs transforming lives
+        across the country.
+      </p>
+
+      <div class="about-photos">
+        <img
+          class="photo-slot"
+          src="/images/partners/jacksonville-river-city-lions-club-team.webp"
+          alt="Jacksonville River City Lions Club members gathered at a meeting, many wearing the distinctive gold Lions Club vests"
+          width="980"
+          height="750"
+          loading="lazy"
+        />
+        <img
+          class="photo-slot"
+          src="/images/partners/jacksonville-river-city-lions-club-donation.webp"
+          alt="Jacksonville River City Lions Club members presenting a donation check to a community organization at a service event"
+          width="980"
+          height="750"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHERE TO FIND THEM ══ -->
+  <section class="band band--teal band--tight" aria-labelledby="find-h">
+    <div class="container container--narrow">
+      <div class="find-row">
+        <div>
+          <h2 id="find-h">Where to Find Them</h2>
+          <p class="prose">
+            Club information, meeting schedules, and service opportunities are
+            all at their e-clubhouse page.
+          </p>
+        </div>
+        <a
+          class="btn btn--primary find-row__btn"
+          href={partner.website}
+          rel="sponsored"
+          target="_blank"
+        >
+          Visit Their Website
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EVENT CTA ══ -->
+  <section class="band band--dark band--tight" aria-labelledby="event-h">
+    <div class="container container--narrow">
+      <p class="prose">
+        The Fashion PAWty is September 26, 2026, and every ticket sold helps
+        Eye Spy Foundation reach its $25,000 goal for Leader Dogs for the Blind.
+        Thank you, Jacksonville River City Lions Club, for leading the way.
+      </p>
+    </div>
+  </section>
+
+  <JsonLd schema={schema} />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    max-width: 20rem;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    background: var(--color-surface);
+    padding: var(--space-l);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-inline: auto;
+  }
+  @media (min-width: 52rem) {
+    .hero-photo { max-width: none; }
+  }
+
+  .about-photos {
+    display: grid;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .about-photos { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  .photo-slot {
+    width: 100%;
+    aspect-ratio: 980 / 750;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .find-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .find-row { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .find-row__btn { flex-shrink: 0; }
+
+  .band--dark { background: var(--color-dark); color: #fff; }
+  .band--dark .prose { margin: 0; max-width: 52ch; }
+</style>
