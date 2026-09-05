@@ -18,9 +18,9 @@ export const PARTNERS = [
     id: 'jacksonville-river-city-lions-club',
     name: 'Jacksonville River City Lions Club',
     tier: 'Best in Show',
-    sponsoredArea: 'Runway / Orange Carpet',
+    sponsoredArea: 'Fashion Show Runway',
     blurb:
-      'Jacksonville River City Lions Club serves the First Coast through vision programs, youth initiatives, and humanitarian outreach guided by the Lions motto "We Serve." They are the Best in Show and Runway / Orange Carpet sponsor of The Fashion PAWty.',
+      'Jacksonville River City Lions Club serves the First Coast through vision programs, youth initiatives, and humanitarian outreach guided by the Lions motto "We Serve." They are the Best in Show and Fashion Show Runway sponsor of The Fashion PAWty.',
     logo: '/images/partners/jacksonville-river-city-lions-club-logo.webp',
     href: '/partners/jacksonville-river-city-lions-club/',
     buttonText: 'Meet Jacksonville River City Lions Club',
@@ -54,9 +54,9 @@ export const PARTNERS = [
     id: 'smith-eye-associates',
     name: 'Smith Eye Associates',
     tier: 'PAWty Animal',
-    sponsoredArea: 'Photo Booth',
+    sponsoredArea: 'Photo Wall',
     blurb:
-      "Smith Eye Associates is an optometry practice in Ponte Vedra Beach caring for families across St. Johns County. They are the Photo Booth sponsor of The Fashion PAWty.",
+      "Smith Eye Associates is an optometry practice in Ponte Vedra Beach caring for families across St. Johns County. They are the Photo Wall sponsor of The Fashion PAWty.",
     logo: '/images/partners/smith-eye-associates-logo.webp',
     href: '/partners/smith-eye-associates/',
     buttonText: 'Meet Smith Eye Associates',

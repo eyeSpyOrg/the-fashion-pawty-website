@@ -28,21 +28,27 @@ const ICONS: Record<string, string> = {
 
 <footer class="site-footer">
   <div class="footer-newsletter">
-    <div class="footer-newsletter__copy">
-      <p class="eyebrow">Stay Connected</p>
-      <p class="prose">
+    <div class="footer-newsletter__promo">
+      <p class="footer-newsletter__eyebrow">Stay Connected</p>
+      <p class="footer-newsletter__headline">Join the PAWty!</p>
+      <p class="footer-newsletter__prize">
+        🏆 Sign up and enter to win <strong>$100 in the Merch Shop</strong>
+      </p>
+      <p class="footer-newsletter__sub">
         Get event updates, dog spotlights, sponsor announcements, and
         PAWty news delivered to your inbox.
       </p>
     </div>
-    <HubSpotForm
-      formGuid="f5e66067-3e39-4296-a279-263ce554aff4"
-      heading="The Fashion PAWty Newsletter"
-      submitLabel="Sign Me Up"
-      fields={[
-        { name: 'email', label: 'Email address', type: 'email', required: true, autocomplete: 'email' },
-      ]}
-    />
+    <div class="footer-newsletter__form-wrap">
+      <HubSpotForm
+        formGuid="f5e66067-3e39-4296-a279-263ce554aff4"
+        heading="The Fashion PAWty Newsletter"
+        submitLabel="Sign Me Up"
+        fields={[
+          { name: 'email', label: 'Email address', type: 'email', required: true, autocomplete: 'email' },
+        ]}
+      />
+    </div>
   </div>
   <div class="site-footer__inner">
     <div>
@@ -91,36 +97,89 @@ const ICONS: Record<string, string> = {
     padding: 2.5rem 1rem 1.5rem;
   }
 
-  /* Newsletter strip — a rounded card in the same teal/gold/radius
-     language as the rest of the site (see .band--teal, .cta-box), sitting
-     above the NAP/nav/social grid so it reads as part of the footer, not
-     bolted on. */
+  /* Newsletter — bold promotional band above the footer grid */
   .footer-newsletter {
     max-width: 72rem;
-    margin: 0 auto 2rem;
-    padding: var(--space-m) var(--space-l);
-    background: var(--color-teal-tint);
-    border: 2px solid var(--color-border);
+    margin: 0 auto 2.5rem;
+    padding: var(--space-l) var(--space-l);
+    background: var(--color-dark);
+    color: #ffffff;
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow);
     display: grid;
-    gap: var(--space-m);
+    gap: var(--space-l);
     align-items: center;
   }
   @media (min-width: 48rem) {
     .footer-newsletter {
-      grid-template-columns: 1.2fr 1fr;
+      grid-template-columns: 1.1fr 1fr;
       gap: var(--space-xl);
-      padding: var(--space-l) var(--space-xl);
+      padding: var(--space-xl) var(--space-xl);
     }
   }
-  .footer-newsletter__copy .eyebrow { margin-bottom: 0.35rem; }
-  .footer-newsletter__copy .prose { margin: 0; max-width: 34rem; color: var(--color-text); }
-  .footer-newsletter :global(.hs-form) { max-width: 26rem; }
-  .footer-newsletter :global(.hs-form h2) { font-size: var(--step-0); margin: 0 0 0.75rem; }
+
+  .footer-newsletter__eyebrow {
+    margin: 0 0 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold-highlight);
+  }
+
+  .footer-newsletter__headline {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.05;
+    color: #ffffff;
+  }
+
+  .footer-newsletter__prize {
+    margin: 0 0 0.75rem;
+    font-size: var(--step-0);
+    color: #ffffff;
+    background: rgba(0,0,0,0.2);
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+  }
+  .footer-newsletter__prize strong { color: var(--color-gold-highlight); }
+
+  .footer-newsletter__sub {
+    margin: 0;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.85);
+    max-width: 34rem;
+  }
+
+  .footer-newsletter__form-wrap :global(.hs-form) { max-width: 26rem; }
+  .footer-newsletter__form-wrap :global(.hs-form h2) {
+    font-size: var(--step-0);
+    margin: 0 0 0.75rem;
+    color: #ffffff;
+  }
+  .footer-newsletter__form-wrap :global(label) { color: rgba(255,255,255,0.9); }
+  .footer-newsletter__form-wrap :global(input[type="email"]) {
+    background: rgba(255,255,255,0.95);
+    border-color: rgba(255,255,255,0.5);
+    color: var(--color-text);
+  }
+  .footer-newsletter__form-wrap :global(.hs-form__submit:hover) {
+    background: var(--color-gold-highlight);
+    color: var(--color-text);
+  }
+
   html[data-a11y-contrast='high'] .footer-newsletter {
     background: var(--color-surface);
+    color: var(--color-text);
+    border: 2px solid var(--color-border);
   }
+  html[data-a11y-contrast='high'] .footer-newsletter__headline,
+  html[data-a11y-contrast='high'] .footer-newsletter__sub { color: var(--color-text); }
+  html[data-a11y-contrast='high'] .footer-newsletter__eyebrow,
+  html[data-a11y-contrast='high'] .footer-newsletter__prize strong { color: var(--color-accent); }
   .site-footer__inner {
     max-width: 72rem;
     margin-inline: auto;

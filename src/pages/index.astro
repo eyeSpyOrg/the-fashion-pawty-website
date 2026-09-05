@@ -170,6 +170,21 @@ const pageDescription =
     </div>
   </section>
 
+  <!-- ══ REMOTE SUPPORT STRIP ══ -->
+  <section class="band band--dark band--tight remote-strip" aria-labelledby="remote-h">
+    <div class="container">
+      <p class="eyebrow remote-strip__eyebrow">Support From Anywhere</p>
+      <h2 id="remote-h" class="remote-strip__heading">Can't Make the PAWty?</h2>
+      <p class="remote-strip__sub">Not local — or just can't attend? There are lots of ways to support the PAWty.</p>
+      <ul class="remote-strip__btns">
+        <li><a class="btn btn--onDark" href="/pawtners/#puppy-pawty">Buy a Toy &amp; a Treat</a></li>
+        <li><a class="btn btn--onDark" href="/pawtners/#support-a-volunteer">Support a Volunteer</a></li>
+        <li><a class="btn btn--onDark" href="/pawtners/#pawty-pass-pair">Donate PAWty Passes</a></li>
+        <li><a class="btn btn--onDark" href="/pawtners/#navigator-support">Support a Navigator</a></li>
+      </ul>
+    </div>
+  </section>
+
   <!-- ══ IMPACT ══ -->
   <section class="band band--teal" aria-labelledby="about-heading">
     <div class="container split">
@@ -302,9 +317,8 @@ const pageDescription =
           <p>
             Eye Spy Foundation helps the blind and low vision community
             discover resources, build connections, and grow confidence
-            through technology, education, and support. We're creating a
-            more connected future while welcoming everyone with a hug, a
-            handshake, and a sense of belonging.
+            through technology, education, and support. Welcoming everyone
+            with a hug, a handshake, and a sense of belonging.
           </p>
           <p><a href="/beneficiaries/">Meet Eye Spy Foundation</a></p>
         </article>
@@ -467,6 +481,30 @@ const pageDescription =
   @media (min-width: 52rem) {
     .split { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
     .split--center { align-items: center; }
+  }
+
+  /* Remote support strip */
+  .remote-strip { text-align: center; }
+  .remote-strip .eyebrow { justify-content: center; }
+  .remote-strip__eyebrow { color: var(--color-gold-highlight); }
+  .remote-strip__heading {
+    margin: 0.25rem 0 0.5rem;
+    color: #ffffff;
+    font-size: var(--step-2);
+  }
+  .remote-strip__sub {
+    margin: 0 auto var(--space-m);
+    color: rgba(255,255,255,0.85);
+    max-width: 40rem;
+  }
+  .remote-strip__btns {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    justify-content: center;
   }
 
   .swag-cta { text-align: center; }

@@ -14,7 +14,7 @@ const shareText = 'Join me at The Fashion PAWty — help support the blind and l
 
 const eyeSpyFacebookUrl = SITE.socials.find((s) => s.icon === 'facebook')?.url;
 const eyeSpyFacebookHandle = eyeSpyFacebookUrl ? new URL(eyeSpyFacebookUrl).pathname.replace(/\//g, '') : 'eyespyorg';
-const fbShareText = `I just supported The Fashion PAWty 🐾 — a doggie fashion show benefiting @${eyeSpyFacebookHandle} and Leader Dogs for the Blind, helping the blind and low vision community navigate the world with more confidence.`;
+const fbShareText = `I joined the PAWty! 🐾 Support @${eyeSpyFacebookHandle} and @leaderdogs as they help guide the blind and low vision community to a more empowering life. ${shareUrl} #EyeSpy #Blindness #LowVision #LeaderDogs`;
 
 const smsHref = `sms:?&body=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;
 const emailHref = `mailto:?subject=${encodeURIComponent('Join me at The Fashion PAWty')}&body=${encodeURIComponent(`${shareText}\n\n${shareUrl}`)}`;

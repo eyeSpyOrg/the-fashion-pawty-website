@@ -148,14 +148,7 @@ import { SITE } from '../config/site.js';
 </BaseLayout>
 
 <style>
-  /* Hero photo here is a logo lockup, not a scene photo — contain (not
-     the shared cover) so the logo is never cropped, on its own surface
-     so it doesn't bleed into the teal band behind it. */
-  .hero-photo {
-    object-fit: contain;
-    background: var(--color-surface);
-    padding: var(--space-l);
-  }
+  .hero-photo { object-fit: cover; }
 
   /* Eye Spy Foundation and Leader Dogs sections share this exact layout —
      text on the left, two stacked photos on the right — so the two causes

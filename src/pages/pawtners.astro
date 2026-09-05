@@ -50,6 +50,68 @@ import ShareSection from '../components/ShareSection.astro';
   <!-- ══ SWAG ══ -->
   <!-- <SwagSection /> -->
 
+  <!-- ══ STYLE. PAWS. PURPOSE. ══ -->
+  <section class="band band--teal band--tight spp-section" aria-labelledby="spp-h">
+    <div class="container">
+      <div class="spp-grid">
+        <div class="spp-text">
+          <p class="eyebrow">About the Events</p>
+          <h2 id="spp-h">Style. Paws. Purpose.</h2>
+          <p class="spp-sub">Every Pawstep Makes a Difference</p>
+          <p class="prose">
+            Every ticket, sponsorship, and tail wag helps <a href="https://eyespyfoundation.org" target="_blank" rel="noopener">Eye Spy Foundation</a>
+            support programs that connect the blind and low vision community
+            with resources, technology, and opportunities — while helping
+            train future guide dogs through <a href="https://www.leaderdog.org/" target="_blank" rel="noopener">Leader Dogs for the Blind</a>.
+          </p>
+          <a class="btn btn--primary" href="/beneficiaries/">View the Beneficiaries</a>
+        </div>
+        <img
+          class="spp-photo"
+          src="/images/schedule/runway-hero.webp"
+          alt="A golden retriever puppy wearing a Future Leader Dog bandana"
+          width="1600"
+          height="1200"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
   <!-- ══ SHARE WITH A FRIEND ══ -->
   <ShareSection />
+<style>
+  .spp-grid {
+    display: grid;
+    gap: var(--space-l);
+    align-items: center;
+  }
+  @media (min-width: 52rem) {
+    .spp-grid { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+  }
+
+  .spp-text { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+  .spp-sub {
+    margin: 0;
+    font-size: var(--step-1);
+    font-weight: 700;
+    color: var(--color-gold-highlight);
+  }
+
+  .spp-grab {
+    margin: var(--space-s) 0 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--step-2);
+  }
+
+  .spp-photo {
+    width: 100%;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+  }
+</style>
 </BaseLayout>
