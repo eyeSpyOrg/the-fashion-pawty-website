@@ -15,7 +15,7 @@ const blocks = [
   { time: '5:30 PM', name: 'Runway Show', detail: 'Our four-legged models take the stage and strut for independence down the orange carpet.', icon: '🐾' },
   { time: '6:45 PM', name: 'Raffle & Blind Box Auction', detail: 'Raffle and Blind Box Auction winners announced — fingers crossed!', icon: '🏆' },
   { time: '7:00 PM', name: 'PAWty Concludes', detail: 'Thank you for supporting accessibility, mobility, and freedom.', icon: '👋' },
-  { time: '7:15 PM', name: 'The After PAWty', detail: 'PAWty continues at the Posting House. Keep the PAWty going with a BOGO house bubbles / lager — mix and match welcome!', icon: '🥂' },
+  { time: '7:15 PM', name: 'The After PAWty Party', detailHtml: 'PAWty continues at <a href="https://www.posting.house/" target="_blank" rel="noopener">The Posting House</a>. Keep the PAWty going with a BOGO house bubbles / lager — mix and match welcome!', icon: '🥂' },
 ];
 ---
 
@@ -33,6 +33,10 @@ const blocks = [
             Here's how the afternoon unfolds — three hours of tail-wagging fun
             with a heartfelt mission at its center.
           </p>
+          <div class="hero__ctas">
+            <a class="btn btn--primary btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Get Your PAWty Pass</a>
+            <a class="btn btn--secondary" href="/beneficiaries/">Who the PAWty Helps</a>
+          </div>
         </div>
         <img
           class="hero-photo"
@@ -56,7 +60,10 @@ const blocks = [
             <div class="tl__body card">
               <p class="tl__time">{b.time}</p>
               <h3 class="tl__name">{b.name}</h3>
-              <p class="tl__detail">{b.detail}</p>
+              {b.detailHtml
+                ? <p class="tl__detail" set:html={b.detailHtml} />
+                : <p class="tl__detail">{b.detail}</p>
+              }
             </div>
           </li>
         ))}
@@ -64,19 +71,11 @@ const blocks = [
     </div>
   </section>
 
-  <!-- Link strip: satisfies internal + external SEO linking requirement -->
-  <section class="band band--tight">
-    <div class="container container--narrow schedule-links">
-      <a class="btn btn--primary btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Get Your PAWty Pass</a>
-      <a class="btn btn--secondary" href="/beneficiaries/">Who the PAWty Helps</a>
-    </div>
-  </section>
-
   <EventSchema />
 </BaseLayout>
 
 <style>
-  .schedule-links { display: flex; gap: var(--space-s); flex-wrap: wrap; justify-content: center; }
+  .hero__ctas { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-m); }
   .timeline { list-style: none; margin: 0; padding: 0; }
   .tl {
     display: grid;
