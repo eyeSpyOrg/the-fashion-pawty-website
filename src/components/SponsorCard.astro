@@ -45,14 +45,24 @@ const isPlaceholder = image === '/images/sponsors/sponsor-placeholder.webp';
 
 <li class="sponsor-card">
   <div class="sponsor-card__header">
-    <div class="sponsor-card__image">
-      <img
-        src={image}
-        alt={isPlaceholder ? `Placeholder — ${title} sponsor logo goes here` : `${title} sponsorship`}
-        width="1000"
-        height="1000"
-        loading="lazy"
-      />
+    <div class={`sponsor-card__image${sold ? ' sponsor-card__image--sold' : ''}`}>
+      {sold ? (
+        <img
+          src={soldByLogo}
+          alt={soldByName}
+          width="600"
+          height="600"
+          loading="lazy"
+        />
+      ) : (
+        <img
+          src={image}
+          alt={isPlaceholder ? `Placeholder — ${title} sponsor logo goes here` : `${title} sponsorship`}
+          width="1000"
+          height="1000"
+          loading="lazy"
+        />
+      )}
     </div>
     <div class="sponsor-card__intro">
       <h3 class="sponsor-card__title">{title}</h3>
@@ -71,33 +81,24 @@ const isPlaceholder = image === '/images/sponsors/sponsor-placeholder.webp';
           </ul>
         </>
       )}
-    </div>
 
-    <div class="sponsor-card__action">
-      {sold ? (
+      {sold && (
         <div class="sponsor-card__sold">
-          <p class="sponsor-card__sold-label">Sponsored By:</p>
-          <img
-            class="sponsor-card__sold-logo"
-            src={soldByLogo}
-            alt={soldByName}
-            width="600"
-            height="600"
-            loading="lazy"
-          />
           <a class="btn btn--secondary" href={soldByHref}>
             {soldByButtonText}
           </a>
         </div>
-      ) : (
-        <>
-          <p class="sponsor-card__price">{money(price)}</p>
-          <a class="btn btn--primary" href={stripeUrl} target="_blank" rel="noopener">
-            {buttonText}
-          </a>
-        </>
       )}
     </div>
+
+    {!sold && (
+      <div class="sponsor-card__action">
+        <p class="sponsor-card__price">{money(price)}</p>
+        <a class="btn btn--primary" href={stripeUrl} target="_blank" rel="noopener">
+          {buttonText}
+        </a>
+      </div>
+    )}
   </div>
 </li>
 
@@ -144,6 +145,10 @@ const isPlaceholder = image === '/images/sponsors/sponsor-placeholder.webp';
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+  .sponsor-card__image--sold img {
+    object-fit: contain;
+    padding: 0.25rem;
   }
 
   .sponsor-card__intro {
@@ -243,33 +248,18 @@ const isPlaceholder = image === '/images/sponsors/sponsor-placeholder.webp';
     .sponsor-card__action .btn { width: auto; }
   }
 
-  /* Sold tier: "Sponsored By" credit instead of price + buy button. */
+  /* Sold tier: "Sponsored By" label + button below the benefits list. */
   .sponsor-card__sold {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-2xs);
+    margin-top: var(--space-s);
+    padding-top: var(--space-s);
+    border-top: 1px solid var(--border-hairline);
     width: 100%;
   }
-  @media (min-width: 40rem) {
-    .sponsor-card__sold { width: auto; min-width: 11rem; }
-  }
-  .sponsor-card__sold-label {
-    margin: 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--color-text-muted);
-  }
-  .sponsor-card__sold-logo {
-    width: 6rem;
-    height: 6rem;
-    object-fit: contain;
-    border-radius: var(--radius-sm);
-  }
-  .sponsor-card__sold .btn { width: 100%; }
+  .sponsor-card__sold .btn { align-self: center; width: 100%; }
   @media (min-width: 40rem) {
     .sponsor-card__sold .btn { width: auto; }
   }
