@@ -16,6 +16,9 @@ import SponsorshipSchema from '../components/schema/SponsorshipSchema.astro';
 import { PARTNERS } from '../data/partners.js';
 
 const smithEye = PARTNERS.find((p) => p.id === 'smith-eye-associates');
+const riverCity = PARTNERS.find((p) => p.id === 'jacksonville-river-city-lions-club');
+const jaxBeach = PARTNERS.find((p) => p.id === 'jacksonville-beach-lions-club');
+const mjm = PARTNERS.find((p) => p.id === 'mjm-consulting');
 
 const mainSponsor = [
   {
@@ -36,6 +39,11 @@ const mainSponsor = [
     stripeUrl: 'https://buy.stripe.com/8x2dR85Pa1t72dd2YSejK02',
     icon: '🏆',
     image: '/images/sponsors/best-in-show.webp',
+    sold: true,
+    soldByName: riverCity.name,
+    soldByLogo: riverCity.logo,
+    soldByHref: riverCity.href,
+    soldByButtonText: riverCity.buttonText,
   },
 ];
 
@@ -147,6 +155,11 @@ const pawtyAnimal = [
     stripeUrl: 'https://buy.stripe.com/9B614m91m9ZD7xx2YSejK07',
     icon: '🧢',
     image: '/images/sponsors/merch-shop.webp',
+    sold: true,
+    soldByName: jaxBeach.name,
+    soldByLogo: jaxBeach.logo,
+    soldByHref: jaxBeach.href,
+    soldByButtonText: jaxBeach.buttonText,
   },
   {
     title: 'Bone Up Station',
@@ -167,6 +180,11 @@ const pawtyAnimal = [
     stripeUrl: 'https://buy.stripe.com/dRm7sKfpKfjX4ll6b4ejK08',
     icon: '🦴',
     image: '/images/sponsors/bone-up-station.webp',
+    sold: true,
+    soldByName: mjm.name,
+    soldByLogo: mjm.logo,
+    soldByHref: mjm.href,
+    soldByButtonText: mjm.buttonText,
   },
   {
     title: 'DJ PAWty',
