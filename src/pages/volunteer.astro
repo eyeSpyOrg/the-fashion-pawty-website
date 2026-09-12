@@ -7,44 +7,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubSpotForm from '../components/HubSpotForm.astro';
 import { SITE } from '../config/site.js';
-
-const roles = [
-  {
-    icon: '📋',
-    title: 'Check-In & Guest Welcome',
-    copy: 'Be the first smile guests see. Scan tickets, hand out programs, and make sure everyone feels at home from the moment they arrive.',
-  },
-  {
-    icon: '🎤',
-    title: 'Runway Coordinator',
-    copy: 'Keep the show running on time. Help line up competitors, cue the announcer, and make sure every dog gets their moment in the spotlight.',
-  },
-  {
-    icon: '🔧',
-    title: 'Setup & Breakdown',
-    copy: 'Early in, last out. Set up tables, signage, and the vendor area before the doors open, then help us put it all back after the fun.',
-  },
-  {
-    icon: '🛒',
-    title: 'Vendor Row Support',
-    copy: 'Be the point of contact for our vendors — help them get settled, answer questions, and keep things running smoothly in the Kennel Club.',
-  },
-  {
-    icon: '📸',
-    title: 'Social Media Crew',
-    copy: 'Capture the night. Snap photos, grab short videos, and share the best moments live on our social channels.',
-  },
-  {
-    icon: '🐾',
-    title: 'General PAWty Crew',
-    copy: "Not sure where you fit? We'll put your energy to good use wherever we need it most. All paws on deck welcome.",
-  },
-];
 ---
 
 <BaseLayout
   title="Volunteer at The Fashion PAWty"
-  description="Help us pull off Jacksonville's most fun Saturday. The Fashion PAWty needs volunteers for check-in, runway coordination, vendor support, and more — sign up today."
+  description="Volunteer at The Fashion PAWty on Sep 26 in Jacksonville. Join our crew and help raise funds for the blind and low vision community through the Eye Spy Foundation."
 >
   <!-- ══ HERO ══ -->
   <section class="band band--teal band--tight">
@@ -54,10 +21,19 @@ const roles = [
           <p class="eyebrow">Get Involved</p>
           <h1>Lend a Paw</h1>
           <p class="prose lead">
-            Help us pull off the most fun Saturday Jacksonville has seen.
-            The Fashion PAWty needs a crew — and we'd love to have you on it.
+            Every volunteer who shows up on September 26 is helping the Eye Spy
+            Foundation reach more people in the blind and low vision community.
+            This event is how we fund that work — and it doesn't happen without
+            people like you. Join our crew and be part of something that matters.
           </p>
-          <a class="btn btn--primary btn--lg" href="#volunteer-form">Sign Up to Volunteer</a>
+          <div class="hero-actions">
+            <a class="btn btn--primary btn--lg" href="#volunteer-form">Sign Up to Volunteer</a>
+          </div>
+          <p class="pass-note">
+            Volunteers who plan to eat and enjoy mocktails are asked to purchase
+            a <a href={SITE.event.ticketUrl} target="_blank" rel="noopener">$30 event pass</a> to help us cover costs.
+            Your support goes directly to the cause.
+          </p>
         </div>
         <div class="glance-panel" role="list" aria-label="Volunteer details">
           <div class="glance-item" role="listitem">
@@ -66,7 +42,7 @@ const roles = [
           </div>
           <div class="glance-item" role="listitem">
             <span class="glance-label">Volunteer Hours</span>
-            <span class="glance-value">2:30 PM – 8:00 PM ET</span>
+            <span class="glance-value">3:00 PM – 7:30 PM ET</span>
           </div>
           <div class="glance-item" role="listitem">
             <span class="glance-label">Venue</span>
@@ -74,53 +50,10 @@ const roles = [
           </div>
           <div class="glance-item" role="listitem">
             <span class="glance-label">Commitment</span>
-            <span class="glance-value">~5 hours (setup, event, and brief breakdown)</span>
+            <span class="glance-value">~4.5 hours (setup through event close)</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ══ ROLES ══ -->
-  <section class="band" aria-labelledby="roles-h">
-    <div class="container">
-      <div class="section-head section-head--center">
-        <p class="eyebrow">Volunteer Roles</p>
-        <h2 id="roles-h">Pick Your PAWt to Play</h2>
-        <p class="prose">
-          There are plenty of ways to get involved. Choose the role that fits your
-          style — or just tell us you're in and we'll find the perfect spot for you.
-        </p>
-      </div>
-      <ul class="grid grid--3 role-list" role="list">
-        {roles.map((role) => (
-          <li class="card card--accent stack">
-            <span class="role-icon" aria-hidden="true">{role.icon}</span>
-            <h3>{role.title}</h3>
-            <p>{role.copy}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  <!-- ══ PERKS ══ -->
-  <section class="band band--gold" aria-labelledby="perks-h">
-    <div class="container container--narrow">
-      <p class="eyebrow">What You Get</p>
-      <h2 id="perks-h">We Take Care of Our Crew</h2>
-      <p class="prose">
-        Volunteering isn't just about giving — you get a great experience too.
-        Every volunteer receives a complimentary event ticket (stay after your
-        shift and enjoy the show), a volunteer T-shirt, and the warm glow of
-        knowing you helped make Jacksonville a more connected community.
-      </p>
-      <ul class="perks-list">
-        <li><span aria-hidden="true">🎟️</span> Complimentary event ticket — stay and enjoy the PAWty</li>
-        <li><span aria-hidden="true">👕</span> Official Fashion PAWty volunteer T-shirt</li>
-        <li><span aria-hidden="true">🍹</span> Food and mocktails during your shift</li>
-        <li><span aria-hidden="true">🤝</span> Direct connection to Eye Spy Foundation's mission</li>
-      </ul>
     </div>
   </section>
 
@@ -139,7 +72,7 @@ const roles = [
             { name: 'lastname', label: 'Last name', type: 'text', required: true, autocomplete: 'family-name' },
             { name: 'email', label: 'Email address', type: 'email', required: true },
             { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
-            { name: 'volunteer_role', label: 'Preferred role', type: 'text' },
+            { name: 'volunteer_role', label: 'Preferred role (optional)', type: 'text' },
             { name: 'message', label: 'Anything else we should know?', type: 'textarea' },
           ]}
         />
@@ -152,6 +85,21 @@ const roles = [
 </BaseLayout>
 
 <style>
+  .hero-actions { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-m); }
+
+  .pass-note {
+    margin-top: var(--space-s);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    max-width: 42ch;
+  }
+  .pass-note a {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+  .pass-note a:hover { text-decoration: underline; }
+
   /* Glance panel — event-at-a-glance on the hero right column */
   .glance-panel {
     background: var(--color-surface);
@@ -173,26 +121,6 @@ const roles = [
     color: var(--color-accent);
   }
   .glance-value { font-weight: 600; font-size: var(--step-0); }
-
-  .role-list { list-style: none; margin: 0; padding: 0; }
-  .role-icon { font-size: 2rem; line-height: 1; }
-
-  /* Perks list */
-  .perks-list {
-    list-style: none;
-    margin: var(--space-m) 0 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
-  .perks-list li {
-    display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-    font-weight: 600;
-    font-size: var(--step-0);
-  }
 
   /* Form panel */
   .form-wrap {

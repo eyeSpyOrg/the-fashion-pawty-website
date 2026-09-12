@@ -20,12 +20,12 @@
     class="a11y-bar__toggle"
     aria-expanded="false"
     aria-controls="a11y-panel"
+    aria-label="Accessibility options"
     data-a11y-toggle
   >
     <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2Z"/>
     </svg>
-    Accessibility
   </button>
 
   <div id="a11y-panel" class="a11y-bar__panel" hidden>
@@ -66,7 +66,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.65rem 1rem;
+    padding: 0.65rem;
     background: var(--color-accent);
     color: #ffffff;
     border: 2px solid transparent;

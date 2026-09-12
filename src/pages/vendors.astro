@@ -7,46 +7,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HubSpotForm from '../components/HubSpotForm.astro';
 import { SITE } from '../config/site.js';
 
-const tiers = [
-  {
-    icon: '🏠',
-    name: 'Dog House',
-    price: '$200',
-    tagline: 'Prime placement. Full setup. Maximum visibility.',
-    benefits: [
-      'Premium table placement in the Kennel Club',
-      '6-foot table + 2 chairs provided',
-      'Logo on event signage and website',
-      'Social media shout-out before the event',
-    ],
-    accent: 'var(--color-gold-highlight)',
-  },
-  {
-    icon: '📸',
-    name: 'PAW-parazzi',
-    price: '$100',
-    tagline: 'A great spot to meet Jacksonville dog lovers.',
-    benefits: [
-      'Standard table placement in the Kennel Club',
-      '6-foot table + 2 chairs provided',
-      'Name listed on event website',
-    ],
-    accent: 'var(--color-accent)',
-  },
-  {
-    icon: '🐾',
-    name: 'PAWty Animal',
-    price: '$50',
-    tagline: 'Perfect for small businesses and makers.',
-    benefits: [
-      'Table space in the Kennel Club',
-      '6-foot table provided',
-      'Name listed on event website',
-    ],
-    accent: 'var(--color-border)',
-  },
-];
-
 const audienceTags = [
   '🐕 Dog owners', '👨‍👩‍👧 Families', '📸 Photography fans', '🌿 Local shoppers',
   '❤️ Animal lovers', '♿ Accessibility advocates', '🎉 Community supporters',
@@ -78,7 +38,7 @@ const audienceTags = [
             <span class="glance-value">Saturday, September 26, 2026</span>
           </div>
           <div class="glance-item" role="listitem">
-            <span class="glance-label">Time</span>
+            <span class="glance-label">Event Hours</span>
             <span class="glance-value">4:00 – 7:00 PM ET</span>
           </div>
           <div class="glance-item" role="listitem">
@@ -86,52 +46,16 @@ const audienceTags = [
             <span class="glance-value">Happy Brew · 3200 Hendricks Ave · Jacksonville, FL</span>
           </div>
           <div class="glance-item" role="listitem">
-            <span class="glance-label">Setup Time</span>
-            <span class="glance-value">Doors open for vendors at 2:30 PM</span>
+            <span class="glance-label">Vendor Setup</span>
+            <span class="glance-value">Arrive by 3:30 PM to set up</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ TIERS ══ -->
-  <section class="band" aria-labelledby="tiers-h">
-    <div class="container">
-      <div class="section-head section-head--center">
-        <p class="eyebrow">Vendor Packages</p>
-        <h2 id="tiers-h">Pick Your Spot in the Kennel Club</h2>
-        <p class="prose">
-          Every package includes a table and chairs. Select the tier that fits
-          your budget and visibility goals — then apply below and we'll confirm
-          availability.
-        </p>
-      </div>
-      <ul class="tier-list" role="list">
-        {tiers.map((tier) => (
-          <li class="tier-card" style={`--tier-accent: ${tier.accent}`}>
-            <span class="tier-icon" aria-hidden="true">{tier.icon}</span>
-            <div class="tier-body">
-              <div class="tier-header">
-                <h3 class="tier-name">{tier.name}</h3>
-                <span class="tier-price">{tier.price}</span>
-              </div>
-              <p class="tier-tagline">{tier.tagline}</p>
-              <ul class="tier-benefits" aria-label={`${tier.name} package benefits`}>
-                {tier.benefits.map((b) => <li>{b}</li>)}
-              </ul>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <p class="tier-note">
-        <strong>Note:</strong> The Lions Club Photo Booth station is already claimed.
-        All other vendor spots are available on a first-come, first-confirmed basis.
-      </p>
-    </div>
-  </section>
-
   <!-- ══ AUDIENCE ══ -->
-  <section class="band band--gold" aria-labelledby="audience-h">
+  <section class="band" aria-labelledby="audience-h">
     <div class="container container--narrow">
       <p class="eyebrow">Who You'll Reach</p>
       <h2 id="audience-h">Your Crowd at the PAWty</h2>
@@ -147,7 +71,7 @@ const audienceTags = [
   </section>
 
   <!-- ══ FORM ══ -->
-  <section class="band band--teal" aria-labelledby="vendor-form">
+  <section class="band" aria-labelledby="vendor-form">
     <div class="container container--narrow">
       <div class="form-wrap">
         <p class="eyebrow">Apply</p>
@@ -162,7 +86,6 @@ const audienceTags = [
             { name: 'email', label: 'Email address', type: 'email', required: true },
             { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
             { name: 'company', label: 'Business name', type: 'text', required: true },
-            { name: 'vendor_tier', label: 'Preferred package (Dog House $200 / PAW-parazzi $100 / PAWty Animal $50)', type: 'text' },
             { name: 'products_description', label: 'What will you be selling or promoting?', type: 'textarea', required: true },
             { name: 'message', label: 'Anything else we should know?', type: 'textarea' },
           ]}
@@ -198,67 +121,6 @@ const audienceTags = [
   }
   .glance-value { font-weight: 600; font-size: var(--step-0); }
 
-  /* Tier cards */
-  .tier-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-m);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .tier-card {
-    display: flex;
-    gap: var(--space-m);
-    align-items: flex-start;
-    background: var(--color-surface);
-    border: 2px solid var(--color-border);
-    border-left: 5px solid var(--tier-accent, var(--color-accent));
-    border-radius: var(--radius);
-    padding: var(--space-m);
-    box-shadow: var(--shadow-sm);
-  }
-  .tier-icon { font-size: 2.5rem; line-height: 1; flex-shrink: 0; }
-  .tier-body { flex: 1; min-width: 0; }
-  .tier-header {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-s);
-    flex-wrap: wrap;
-    margin-bottom: var(--space-2xs);
-  }
-  .tier-name { margin: 0; font-size: var(--step-1); }
-  .tier-price {
-    font-family: var(--font-display);
-    font-size: var(--step-1);
-    font-weight: 700;
-    color: var(--color-accent);
-    white-space: nowrap;
-  }
-  .tier-tagline { color: var(--color-text-muted); margin: 0 0 var(--space-xs); }
-  .tier-benefits {
-    margin: 0;
-    padding: 0 0 0 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-  .tier-benefits li { color: var(--color-text); }
-
-  .tier-note {
-    margin-top: var(--space-m);
-    padding: var(--space-s);
-    background: var(--color-teal-tint);
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    font-size: 0.9rem;
-  }
-  html[data-a11y-contrast='high'] .tier-note { background: var(--color-surface); }
-
-  @media (max-width: 34rem) {
-    .tier-card { flex-direction: column; }
-  }
-
   /* Audience tags */
   .audience-tags {
     display: flex;
@@ -276,7 +138,6 @@ const audienceTags = [
     font-weight: 600;
     font-size: 0.9rem;
   }
-  html[data-a11y-contrast='high'] .audience-tags li { background: var(--color-surface); }
 
   /* Form panel */
   .form-wrap {
