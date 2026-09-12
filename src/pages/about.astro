@@ -1,0 +1,230 @@
+---
+/**
+ * About — hub page for The Fashion PAWty.
+ * Hero + mission copy + four hub cards linking to key sub-pages.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config/site.js';
+---
+
+<BaseLayout
+  title="About the Event"
+  description="The Fashion PAWty is a dog fashion show and community celebration on Sep 26, 2026 at Happy Brew, Jacksonville — benefiting the Eye Spy Foundation and Leader Dogs for the Blind."
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">About The Fashion PAWty</p>
+          <h1>A dog fashion show with a purpose.</h1>
+          <p class="prose lead">
+            On September 26, 2026, Happy Brew in Jacksonville rolls out the orange
+            carpet for a one-of-a-kind night — dogs in costume, mocktails in hand,
+            music in the air, and a community united around making the world more
+            accessible for the blind and low vision community.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn--primary btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">
+              Get Tickets — $30
+            </a>
+            <a class="btn btn--secondary" href="/beneficiaries/">Our Causes</a>
+          </div>
+        </div>
+        <img
+          class="hero-photo"
+          src="/images/contact/lets-pawty.webp"
+          alt="'Let's PAWty' graphic on a pattern of palm trees, sunglasses, bow ties, and paw prints"
+          width="1600"
+          height="1200"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MISSION ══ -->
+  <section class="band" aria-labelledby="mission-h">
+    <div class="container container--narrow">
+      <p class="eyebrow">Our Mission</p>
+      <h2 id="mission-h">Why we throw this PAWty</h2>
+      <p class="prose">
+        The Eye Spy Foundation helps the blind and low vision community navigate
+        community resources so they can live a better low vision lifestyle. The
+        Fashion PAWty is how we bring Jacksonville together to celebrate that
+        mission — and fund it. Every ticket, every sponsorship, every vendor
+        booth helps us reach our $25,000 fundraising goal.
+      </p>
+      <p class="prose">
+        This year, The Fashion PAWty also benefits Leader Dogs for the Blind —
+        a guide dog school that pairs people with trusted navigation partners.
+        When you come to the PAWty, you help raise a future guide dog.
+      </p>
+      <p class="prose">
+        Tickets include entry, food, and mocktails — so come hungry, come
+        stylish, and bring your four-legged best friend if they've got an outfit
+        to show off.
+      </p>
+      <p>
+        <a class="btn btn--secondary" href="/beneficiaries/">Meet the causes we support</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ HUB CARDS ══ -->
+  <section class="band band--teal" aria-labelledby="hub-h">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Get Involved</p>
+        <h2 id="hub-h">How to be part of the PAWty</h2>
+      </div>
+
+      <ul class="hub-grid" role="list">
+        <li>
+          <a class="hub-card" href="/volunteer/">
+            <span class="hub-card__icon" aria-hidden="true">🐾</span>
+            <h3 class="hub-card__title">Volunteer</h3>
+            <p class="hub-card__copy">Lend a paw. We need a crew for check-in, runway coordination, vendor support, and more.</p>
+            <span class="hub-card__cta">Sign up to volunteer →</span>
+          </a>
+        </li>
+        <li>
+          <a class="hub-card" href="/sponsor/">
+            <span class="hub-card__icon" aria-hidden="true">🏆</span>
+            <h3 class="hub-card__title">Become a Sponsor</h3>
+            <p class="hub-card__copy">Put your brand at the center of the orange carpet. Packages from $75 to $5,000.</p>
+            <span class="hub-card__cta">View sponsorship packages →</span>
+          </a>
+        </li>
+        <li>
+          <a class="hub-card" href="/beneficiaries/">
+            <span class="hub-card__icon" aria-hidden="true">👁️</span>
+            <h3 class="hub-card__title">Our Causes</h3>
+            <p class="hub-card__copy">The Fashion PAWty benefits the Eye Spy Foundation and Leader Dogs for the Blind.</p>
+            <span class="hub-card__cta">Meet who we help →</span>
+          </a>
+        </li>
+        <li>
+          <a class="hub-card" href="/vendors/">
+            <span class="hub-card__icon" aria-hidden="true">🛍️</span>
+            <h3 class="hub-card__title">Become a Vendor</h3>
+            <p class="hub-card__copy">Set up a table in the Kennel Club vendor area and reach a crowd of dog lovers.</p>
+            <span class="hub-card__cta">Apply to vend →</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ EVENT STRIP ══ -->
+  <section class="band band--dark" aria-label="Event details">
+    <div class="container">
+      <div class="event-strip">
+        <div class="event-strip__facts">
+          <div class="event-fact">
+            <span class="event-fact__label">Date</span>
+            <span class="event-fact__value">Saturday, September 26, 2026</span>
+          </div>
+          <div class="event-fact">
+            <span class="event-fact__label">Time</span>
+            <span class="event-fact__value">4:00 – 7:00 PM ET</span>
+          </div>
+          <div class="event-fact">
+            <span class="event-fact__label">Venue</span>
+            <span class="event-fact__value">Happy Brew · 3200 Hendricks Ave · Jacksonville, FL</span>
+          </div>
+          <div class="event-fact">
+            <span class="event-fact__label">Tickets</span>
+            <span class="event-fact__value">$30 — includes entry, food &amp; mocktails</span>
+          </div>
+        </div>
+        <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">
+          Get Tickets
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-actions { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-m); }
+
+  /* ── Hub grid — 2×2 on desktop, stacked on mobile ── */
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: var(--space-m);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hub-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-top: 5px solid var(--color-gold-highlight);
+    border-radius: var(--radius);
+    padding: var(--space-m);
+    text-decoration: none;
+    color: var(--color-text);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .hub-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  @media (prefers-reduced-motion: reduce) { .hub-card:hover { transform: none; } }
+  :global(html[data-a11y-motion='off']) .hub-card:hover { transform: none; }
+
+  .hub-card__icon { font-size: 2.5rem; line-height: 1; }
+  .hub-card__title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    margin: 0;
+    color: var(--color-text);
+  }
+  .hub-card__copy {
+    font-size: var(--step-0);
+    color: var(--color-text-muted);
+    flex: 1;
+    margin: 0;
+  }
+  .hub-card__cta {
+    font-weight: 700;
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    margin-top: var(--space-2xs);
+  }
+
+  /* ── Event strip ── */
+  .event-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+    flex-wrap: wrap;
+  }
+  .event-strip__facts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .event-fact { display: flex; flex-direction: column; }
+  .event-fact__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-gold-highlight);
+  }
+  .event-fact__value {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: var(--step-0);
+  }
+</style>
