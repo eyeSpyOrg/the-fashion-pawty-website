@@ -1,7 +1,7 @@
 ---
 /**
  * About — hub page for The Fashion PAWty.
- * Hero + mission copy + four hub cards linking to key sub-pages.
+ * Hero + mission copy + three hub cards + FAQ replacing event strip.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../config/site.js';
@@ -31,10 +31,11 @@ import { SITE } from '../config/site.js';
             <a class="btn btn--secondary" href="/beneficiaries/">Our Causes</a>
           </div>
         </div>
+        <!-- Replace with real Eye Spy Foundation event photo after Sep 26 -->
         <img
           class="hero-photo"
-          src="/images/contact/lets-pawty.webp"
-          alt="'Let's PAWty' graphic on a pattern of palm trees, sunglasses, bow ties, and paw prints"
+          src="/images/about/eye-spy-foundation.webp"
+          alt="Eye Spy Foundation — helping the blind and low vision community navigate resources and live a fuller life"
           width="1600"
           height="1200"
           fetchpriority="high"
@@ -56,8 +57,11 @@ import { SITE } from '../config/site.js';
         booth helps us reach our $25,000 fundraising goal.
       </p>
       <p class="prose">
-        This year, The Fashion PAWty also benefits Leader Dogs for the Blind —
-        a guide dog school that pairs people with trusted navigation partners.
+        This year, The Fashion PAWty also benefits{' '}
+        <a href="https://www.leaderdog.org/" target="_blank" rel="noopener noreferrer">
+          Leader Dogs for the Blind
+        </a>{' '}
+        — a guide dog school that pairs people with trusted navigation partners.
         When you come to the PAWty, you help raise a future guide dog.
       </p>
       <p class="prose">
@@ -71,7 +75,7 @@ import { SITE } from '../config/site.js';
     </div>
   </section>
 
-  <!-- ══ HUB CARDS ══ -->
+  <!-- ══ HUB CARDS — 3 across ══ -->
   <section class="band band--teal" aria-labelledby="hub-h">
     <div class="container">
       <div class="section-head section-head--center">
@@ -92,22 +96,14 @@ import { SITE } from '../config/site.js';
           <a class="hub-card" href="/sponsor/">
             <span class="hub-card__icon" aria-hidden="true">🏆</span>
             <h3 class="hub-card__title">Become a Sponsor</h3>
-            <p class="hub-card__copy">Put your brand at the center of the orange carpet. Packages from $75 to $5,000.</p>
+            <p class="hub-card__copy">Put your brand at the center of the runway show. Packages from $75 to $5,000.</p>
             <span class="hub-card__cta">View sponsorship packages →</span>
-          </a>
-        </li>
-        <li>
-          <a class="hub-card" href="/beneficiaries/">
-            <span class="hub-card__icon" aria-hidden="true">👁️</span>
-            <h3 class="hub-card__title">Our Causes</h3>
-            <p class="hub-card__copy">The Fashion PAWty benefits the Eye Spy Foundation and Leader Dogs for the Blind.</p>
-            <span class="hub-card__cta">Meet who we help →</span>
           </a>
         </li>
         <li>
           <a class="hub-card" href="/vendors/">
             <span class="hub-card__icon" aria-hidden="true">🛍️</span>
-            <h3 class="hub-card__title">Become a Vendor</h3>
+            <h3 class="hub-card__title">Vendors</h3>
             <p class="hub-card__copy">Set up a table in the Kennel Club vendor area and reach a crowd of dog lovers.</p>
             <span class="hub-card__cta">Apply to vend →</span>
           </a>
@@ -116,47 +112,102 @@ import { SITE } from '../config/site.js';
     </div>
   </section>
 
-  <!-- ══ EVENT STRIP ══ -->
-  <section class="band band--dark" aria-label="Event details">
-    <div class="container">
-      <div class="event-strip">
-        <div class="event-strip__facts">
-          <div class="event-fact">
-            <span class="event-fact__label">Date</span>
-            <span class="event-fact__value">Saturday, September 26, 2026</span>
-          </div>
-          <div class="event-fact">
-            <span class="event-fact__label">Time</span>
-            <span class="event-fact__value">4:00 – 7:00 PM ET</span>
-          </div>
-          <div class="event-fact">
-            <span class="event-fact__label">Venue</span>
-            <span class="event-fact__value">Happy Brew · 3200 Hendricks Ave · Jacksonville, FL</span>
-          </div>
-          <div class="event-fact">
-            <span class="event-fact__label">Tickets</span>
-            <span class="event-fact__value">$30 — includes entry, food &amp; mocktails</span>
-          </div>
+  <!-- ══ FAQ ══ -->
+  <section class="band" aria-labelledby="faq-h">
+    <div class="container container--narrow">
+      <p class="eyebrow">Questions &amp; Answers</p>
+      <h2 id="faq-h">About the Eye Spy Foundation</h2>
+
+      <dl class="faq-list">
+
+        <div class="faq-item">
+          <dt>What is the Eye Spy Foundation?</dt>
+          <dd>
+            The <a href="https://www.eyespy.org/" target="_blank" rel="noopener noreferrer">Eye Spy Foundation (ESF)</a>
+            is a Jacksonville-based nonprofit dedicated to helping the blind and low vision community
+            navigate community resources and live a fuller, more independent life. ESF connects people
+            with services, tools, and support so they can thrive — at home, at work, and in their community.
+          </dd>
         </div>
-        <a class="btn btn--onDark btn--lg" href={SITE.event.ticketUrl} target="_blank" rel="noopener">
-          Get Tickets
-        </a>
-      </div>
+
+        <div class="faq-item">
+          <dt>What is EyeSpy.org?</dt>
+          <dd>
+            <a href="https://www.eyespy.org/" target="_blank" rel="noopener noreferrer">EyeSpy.org</a> is the
+            home of the Eye Spy Foundation online. You'll find information about the foundation's programs,
+            resources for the blind and low vision community, and ways to get involved — from volunteering
+            to donating. The Fashion PAWty is one of the foundation's signature fundraising events.
+          </dd>
+        </div>
+
+        <div class="faq-item">
+          <dt>Where do the funds raised go?</dt>
+          <dd>
+            Every dollar raised through The Fashion PAWty supports two organizations. The majority of
+            proceeds benefit the <a href="https://www.eyespy.org/" target="_blank" rel="noopener noreferrer">Eye Spy Foundation</a>,
+            funding programs that connect the blind and low vision community with navigation resources
+            and lifestyle support. A portion of proceeds also benefits
+            <a href="https://www.leaderdog.org/" target="_blank" rel="noopener noreferrer">Leader Dogs for the Blind</a>,
+            which trains and places guide dogs with people who are blind or have low vision.
+            Our fundraising goal is $25,000. <a href="/beneficiaries/">Learn more about who we help →</a>
+          </dd>
+        </div>
+
+        <div class="faq-item">
+          <dt>Who is Leader Dogs for the Blind?</dt>
+          <dd>
+            <a href="https://www.leaderdog.org/" target="_blank" rel="noopener noreferrer">Leader Dogs for the Blind</a>
+            is a Michigan-based nonprofit that has been training guide dogs and providing orientation and
+            mobility services since 1939. They pair people who are blind or have low vision with
+            highly trained guide dogs — at no cost to the client. By attending The Fashion PAWty,
+            you help fund the next generation of guide dogs.
+          </dd>
+        </div>
+
+        <div class="faq-item">
+          <dt>How does the Eye Spy Foundation help the blind and low vision community?</dt>
+          <dd>
+            ESF focuses on navigation — helping people find and access the community resources,
+            services, and tools that make low vision life more manageable and more connected. This
+            includes everything from technology resources to community programs. The Fashion PAWty
+            directly funds that work. <a href="https://www.eyespy.org/" target="_blank" rel="noopener noreferrer">Visit EyeSpy.org to learn more →</a>
+          </dd>
+        </div>
+
+        <div class="faq-item">
+          <dt>How can I get involved beyond buying a ticket?</dt>
+          <dd>
+            There are several ways to make a bigger impact: <a href="/volunteer/">volunteer</a> on event
+            day, <a href="/sponsor/">become a sponsor</a> with packages starting at $75, or
+            <a href="/vendors/">set up a vendor table</a> in our Kennel Club vendor area. You can
+            also <a href="https://www.eyespy.org/" target="_blank" rel="noopener noreferrer">follow the Eye Spy Foundation</a>
+            year-round. Every bit of support helps us serve the blind and low vision community in Jacksonville and beyond.
+          </dd>
+        </div>
+
+      </dl>
     </div>
   </section>
+
 </BaseLayout>
 
 <style>
   .hero-actions { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-m); }
 
-  /* ── Hub grid — 2×2 on desktop, stacked on mobile ── */
+  /* ── Hub grid — 3 across on desktop, stacked on mobile ── */
   .hub-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-m);
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+  @media (max-width: 48rem) {
+    .hub-grid { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 30rem) and (max-width: 48rem) {
+    .hub-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   .hub-card {
@@ -200,31 +251,32 @@ import { SITE } from '../config/site.js';
     margin-top: var(--space-2xs);
   }
 
-  /* ── Event strip ── */
-  .event-strip {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-m);
-    flex-wrap: wrap;
-  }
-  .event-strip__facts {
+  /* ── FAQ ── */
+  .faq-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
+    gap: var(--space-m);
+    margin-top: var(--space-m);
   }
-  .event-fact { display: flex; flex-direction: column; }
-  .event-fact__label {
+  .faq-item {
+    border-left: 4px solid var(--color-gold-highlight);
+    padding-left: var(--space-s);
+  }
+  .faq-item dt {
     font-family: var(--font-display);
+    font-size: var(--step-1);
     font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-gold-highlight);
+    color: var(--color-text);
+    margin-bottom: var(--space-2xs);
   }
-  .event-fact__value {
+  .faq-item dd {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+  .faq-item dd a {
+    color: var(--color-accent);
     font-weight: 600;
-    color: #ffffff;
-    font-size: var(--step-0);
   }
+  .faq-item dd a:hover { text-decoration: underline; }
 </style>

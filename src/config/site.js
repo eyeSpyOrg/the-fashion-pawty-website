@@ -57,7 +57,7 @@ export const SITE = {
     ticketPrice: '30',
     ticketUrl: 'https://buy.stripe.com/7sY3cugtO6NrdVV8jcejK01',
     description:
-      'A doggie fashion show down the orange carpet with mocktails, games, music, and merch — benefiting the blind and low vision community and Leader Dogs for the Blind.',
+      'A doggie fashion show with mocktails, games, music, and merch — benefiting the blind and low vision community and Leader Dogs for the Blind.',
   },
 
   // ── Navigation (drives Header + Footer) ────────────────────
