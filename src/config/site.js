@@ -65,19 +65,20 @@ export const SITE = {
   // buttons, so they are not repeated as nav links.
   nav: [
     { label: 'Home', href: '/' },
-    { label: 'Runway', href: '/runway/' },
+    { label: 'Sponsor', href: '/sponsor/' },
+    { label: 'Partners', href: '/partners/' },
+    { label: 'Beneficiaries', href: '/beneficiaries/' },
     {
       label: 'About',
       children: [
-        { label: 'About the Event', href: '/about/' },
+        { label: 'About Us', href: '/about/' },
         { label: 'Volunteer', href: '/volunteer/' },
-        { label: 'Become a Sponsor', href: '/sponsor/' },
+        { label: 'Sponsor', href: '/sponsor/' },
         { label: 'Causes', href: '/beneficiaries/' },
-        { label: 'Become a Vendor', href: '/vendors/' },
+        { label: 'Vendors', href: '/vendors/' },
         { label: 'Venue', href: '/venue/' },
       ],
     },
-    { label: 'Partners', href: '/partners/' },
     { label: 'Schedule', href: '/schedule/' },
     { label: 'FAQ', href: '/faq/' },
     { label: 'Contact', href: '/contact/' },
