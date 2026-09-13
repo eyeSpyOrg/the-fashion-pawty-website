@@ -49,6 +49,40 @@ import { SITE } from '../config/site.js';
     </div>
   </section>
 
+  <!-- ══ WHY VEND ══ -->
+  <section class="band band--tight" aria-labelledby="why-vend-h">
+    <div class="container">
+      <h2 id="why-vend-h" class="sr-only">Why become a vendor</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <p class="why-icon" aria-hidden="true">🐾</p>
+          <h3>Your Vendor PAWty Pass includes</h3>
+          <ul class="why-list">
+            <li>Designated vendor space in the Kennel Club area</li>
+            <li>Admission for up to 2 vendor representatives</li>
+            <li>Business listing on thefashionpawty.com</li>
+            <li>Opportunity to promote and sell your products or services</li>
+          </ul>
+        </div>
+        <div class="why-card">
+          <p class="why-icon" aria-hidden="true">📋</p>
+          <h3>Before you apply</h3>
+          <ul class="why-list">
+            <li>Vendors must provide their own tent, tables, chairs, and display materials</li>
+            <li>Electricity is not available</li>
+            <li>Space is limited — applications are subject to approval</li>
+            <li>We encourage family-friendly and dog-friendly displays</li>
+          </ul>
+        </div>
+        <div class="why-card">
+          <p class="why-icon" aria-hidden="true">❤️</p>
+          <h3>Support a meaningful cause</h3>
+          <p>Every vendor at The Fashion PAWty helps us raise funds for Leader Dogs for the Blind and the blind and low-vision community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ══ FORM ══ -->
   <section class="band band--tight" aria-labelledby="vendor-form">
     <div class="container container--narrow">
@@ -120,6 +154,44 @@ import { SITE } from '../config/site.js';
   }
   .glance-value { font-weight: 600; font-size: var(--step-0); }
 
+  /* Why-vend grid */
+  .why-grid {
+    display: grid;
+    gap: var(--space-m);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 48rem) {
+    .why-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .why-card {
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-m);
+  }
+  .why-icon { font-size: 1.75rem; margin: 0 0 0.5rem; }
+  .why-card h3 { font-size: var(--step-0); margin: 0 0 0.75rem; }
+  .why-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .why-list li {
+    padding-left: 1.25rem;
+    position: relative;
+    font-size: 0.95rem;
+  }
+  .why-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
   /* Form panel */
   .form-wrap {
     background: var(--color-surface);
@@ -130,6 +202,9 @@ import { SITE } from '../config/site.js';
   }
   .form-wrap :global(.hs-form) { max-width: none; }
   .form-wrap :global(.hs-form h2) { margin-top: 0; }
+  .form-wrap :global(input),
+  .form-wrap :global(select),
+  .form-wrap :global(textarea) { max-width: none; }
   .form-note {
     margin-top: var(--space-m);
     font-size: 0.9rem;
