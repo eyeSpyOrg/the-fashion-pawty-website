@@ -7,11 +7,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HubSpotForm from '../components/HubSpotForm.astro';
 import { SITE } from '../config/site.js';
 
-const audienceTags = [
-  '🐕 Dog owners', '👨‍👩‍👧 Families', '📸 Photography fans', '🌿 Local shoppers',
-  '❤️ Animal lovers', '♿ Accessibility advocates', '🎉 Community supporters',
-  '🛍️ Boutique hunters',
-];
 ---
 
 <BaseLayout
@@ -54,24 +49,8 @@ const audienceTags = [
     </div>
   </section>
 
-  <!-- ══ AUDIENCE ══ -->
-  <section class="band" aria-labelledby="audience-h">
-    <div class="container container--narrow">
-      <p class="eyebrow">Who You'll Reach</p>
-      <h2 id="audience-h">Your Crowd at the PAWty</h2>
-      <p class="prose">
-        The Fashion PAWty draws an engaged, community-minded crowd — people who
-        care about local businesses, love their dogs, and show up to support a
-        good cause. This is not a big-box crowd. These are your people.
-      </p>
-      <ul class="audience-tags" aria-label="Audience types at The Fashion PAWty">
-        {audienceTags.map((tag) => <li>{tag}</li>)}
-      </ul>
-    </div>
-  </section>
-
   <!-- ══ FORM ══ -->
-  <section class="band" aria-labelledby="vendor-form">
+  <section class="band band--tight" aria-labelledby="vendor-form">
     <div class="container container--narrow">
       <div class="form-wrap">
         <p class="eyebrow">Apply</p>
@@ -120,24 +99,6 @@ const audienceTags = [
     color: var(--color-accent);
   }
   .glance-value { font-weight: 600; font-size: var(--step-0); }
-
-  /* Audience tags */
-  .audience-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    list-style: none;
-    margin: var(--space-m) 0 0;
-    padding: 0;
-  }
-  .audience-tags li {
-    background: var(--color-surface);
-    border: 2px solid var(--color-border);
-    border-radius: 50px;
-    padding: 0.4rem 1rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
 
   /* Form panel */
   .form-wrap {
