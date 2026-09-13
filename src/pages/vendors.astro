@@ -1,38 +1,88 @@
 ---
-/**
- * Vendors — interest page for prospective Kennel Club vendors.
- * TODO: Replace formGuid with the real HubSpot Vendor Interest form GUID.
- */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubSpotForm from '../components/HubSpotForm.astro';
 import { SITE } from '../config/site.js';
 
-const audienceTags = [
-  '🐕 Dog owners', '👨‍👩‍👧 Families', '📸 Photography fans', '🌿 Local shoppers',
-  '❤️ Animal lovers', '♿ Accessibility advocates', '🎉 Community supporters',
-  '🛍️ Boutique hunters',
+const benefits = [
+  { icon: '🐾', text: 'Designated vendor space in the Kennel Club area' },
+  { icon: '🎟️', text: 'Admission for up to 2 vendor representatives' },
+  { icon: '🌐', text: `Business listing on ${SITE.url.replace('https://', '')}` },
+  { icon: '🛍️', text: 'Opportunity to promote and sell your products or services' },
+];
+
+const requirements = [
+  { icon: '⛺', text: 'Vendors must provide their own tent, tables, chairs, and display materials.' },
+  { icon: '🔌', text: 'Electricity is not available.' },
+  { icon: '📍', text: 'Space is limited and applications are subject to approval.' },
+  { icon: '🐕', text: 'We encourage displays and experiences that are family-friendly and dog-friendly.' },
+];
+
+const reasons = [
+  {
+    icon: '🎉',
+    heading: 'Connect with your community',
+    body: 'Meet local families and dog lovers who show up for good causes and support the businesses that make Jacksonville special.',
+  },
+  {
+    icon: '📸',
+    heading: 'Gain real visibility',
+    body: 'Put your brand in front of an engaged, community-minded crowd that actually shops local — not a big-box crowd. These are your people.',
+  },
+  {
+    icon: '❤️',
+    heading: 'Support a meaningful cause',
+    body: `Every vendor at ${SITE.name} helps us raise funds for Leader Dogs for the Blind and the blind and low-vision community.`,
+  },
+];
+
+const venuePhotos = [
+  {
+    src: '/images/vendors/venue-patio.webp',
+    alt: 'The Happy Brew outdoor patio area with concrete surface, garden planters, and bench seating against the brick building',
+    width: 1920,
+    height: 1080,
+  },
+  {
+    src: '/images/vendors/venue-pavilion.webp',
+    alt: 'View from the covered pavilion at Happy Brew looking out at the artificial turf field with picnic tables and string lights overhead, cornhole boards set up for play',
+    width: 1920,
+    height: 1080,
+  },
+  {
+    src: '/images/vendors/venue-outdoor.webp',
+    alt: 'Wide view of the Happy Brew outdoor venue with lush artificial turf, multiple picnic tables, covered porch areas, and string lights on a sunny day',
+    width: 1920,
+    height: 1080,
+  },
 ];
 ---
 
 <BaseLayout
-  title="Become a Vendor — Kennel Club"
-  description="Set up a table in the Kennel Club vendor area at The Fashion PAWty. Connect with Jacksonville dog lovers and community supporters on September 26 at Happy Brew."
+  title="Become a Vendor — The Fashion PAWty"
+  description="Join The Fashion PAWty as a Kennel Club vendor on Sep 26 at Happy Brew. Connect with Jacksonville dog lovers, promote your business, and support Leader Dogs for the Blind."
 >
+
   <!-- ══ HERO ══ -->
   <section class="band band--teal band--tight">
     <div class="container">
       <div class="split">
         <div class="split__text">
-          <p class="eyebrow">The Kennel Club Vendor Area</p>
-          <h1>Sell, Share, and Show Up.</h1>
+          <p class="eyebrow">Kennel Club Vendor Area</p>
+          <h1>Become a Vendor at {SITE.name}</h1>
           <p class="prose lead">
-            The Fashion PAWty's Kennel Club is your stage. Set up a table, meet
-            Jacksonville's community of dog lovers, and put your brand in front
-            of an engaged crowd that actually shops local.
+            Ready to put your business in the spotlight? ✨ Join us for
+            {SITE.name}, Jacksonville's most stylish dog-friendly fundraiser,
+            where pups strut the runway, families make memories, and our
+            community comes together to support Leader Dogs for the Blind.
+          </p>
+          <p class="prose">
+            Whether you're a pet brand, local maker, boutique, nonprofit,
+            artist, or community business, we'd love to have you at the PAWty!
+            🎉🐶
           </p>
           <a class="btn btn--primary btn--lg" href="#vendor-form">Apply to Vend</a>
         </div>
-        <div class="glance-panel" role="list" aria-label="Event details">
+        <div class="glance-panel" role="list" aria-label="Event at a glance">
           <div class="glance-item" role="listitem">
             <span class="glance-label">Date</span>
             <span class="glance-value">Saturday, September 26, 2026</span>
@@ -54,48 +104,126 @@ const audienceTags = [
     </div>
   </section>
 
-  <!-- ══ AUDIENCE ══ -->
-  <section class="band" aria-labelledby="audience-h">
+  <!-- ══ WHAT'S INCLUDED ══ -->
+  <section class="band" aria-labelledby="includes-h">
     <div class="container container--narrow">
-      <p class="eyebrow">Who You'll Reach</p>
-      <h2 id="audience-h">Your Crowd at the PAWty</h2>
+      <p class="eyebrow">Your Vendor PAWty Pass</p>
+      <h2 id="includes-h">What Your Vendor PAWty Pass Includes</h2>
       <p class="prose">
-        The Fashion PAWty draws an engaged, community-minded crowd — people who
-        care about local businesses, love their dogs, and show up to support a
-        good cause. This is not a big-box crowd. These are your people.
+        Every approved vendor receives a Vendor PAWty Pass that covers
+        everything you need to set up, show up, and get seen.
       </p>
-      <ul class="audience-tags" aria-label="Audience types at The Fashion PAWty">
-        {audienceTags.map((tag) => <li>{tag}</li>)}
+      <ul class="benefit-list" aria-label="Vendor PAWty Pass benefits">
+        {benefits.map((b) => (
+          <li class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true">{b.icon}</span>
+            <span>{b.text}</span>
+          </li>
+        ))}
       </ul>
     </div>
   </section>
 
-  <!-- ══ FORM ══ -->
-  <section class="band" aria-labelledby="vendor-form">
+  <!-- ══ BEFORE YOU APPLY ══ -->
+  <section class="band band--muted" aria-labelledby="before-h">
     <div class="container container--narrow">
+      <p class="eyebrow">Good to Know</p>
+      <h2 id="before-h">Before You Apply</h2>
+      <p class="prose">
+        Review these logistics before submitting your application so you're
+        set up for success on event day.
+      </p>
+      <ul class="req-list" aria-label="Vendor requirements">
+        {requirements.map((r) => (
+          <li class="req-item">
+            <span class="req-icon" aria-hidden="true">{r.icon}</span>
+            <span>{r.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ WHY JOIN ══ -->
+  <section class="band" aria-labelledby="why-h">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Why Vendors Love the PAWty</p>
+        <h2 id="why-h">Why Join the PAWty?</h2>
+      </div>
+      <div class="grid grid--3">
+        {reasons.map((r) => (
+          <div class="card card--accent stack">
+            <span class="reason-icon" aria-hidden="true">{r.icon}</span>
+            <h3>{r.heading}</h3>
+            <p>{r.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FORM ══ -->
+  <section class="band band--muted" id="vendor-form" aria-labelledby="form-intro-h">
+    <div class="container container--narrow">
+      <p class="eyebrow">Join the Pack</p>
+      <h2 id="form-intro-h">Ready to Join the Pack?</h2>
+      <p class="prose">
+        Fill out the application below and tell us about your business. Once
+        approved, you'll receive instructions to purchase your Vendor PAWty
+        Pass and officially reserve your spot. 🐶✨ Style. Paws. Purpose.
+      </p>
       <div class="form-wrap">
-        <p class="eyebrow">Apply</p>
-        {/* TODO: Replace this GUID with the real HubSpot Vendor Interest form GUID */}
         <HubSpotForm
-          formGuid="00000000-0000-0000-0000-000000000002"
-          heading="Vendor Interest Form"
+          formGuid="58d73a8e-9450-4042-9d03-622a374c0aa9"
+          heading="Vendor Application"
           submitLabel="Submit Vendor Application"
           fields={[
-            { name: 'firstname', label: 'Contact first name', type: 'text', required: true, autocomplete: 'given-name' },
-            { name: 'lastname', label: 'Contact last name', type: 'text', required: true, autocomplete: 'family-name' },
-            { name: 'email', label: 'Email address', type: 'email', required: true },
-            { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
-            { name: 'company', label: 'Business name', type: 'text', required: true },
-            { name: 'products_description', label: 'What will you be selling or promoting?', type: 'textarea', required: true },
-            { name: 'message', label: 'Anything else we should know?', type: 'textarea' },
+            { name: 'firstname',           label: 'First name',                            type: 'text',     required: true,  autocomplete: 'given-name' },
+            { name: 'lastname',            label: 'Last name',                             type: 'text',     required: true,  autocomplete: 'family-name' },
+            { name: 'email',               label: 'Email address',                         type: 'email',    required: true,  autocomplete: 'email' },
+            { name: 'phone',               label: 'Phone number',                          type: 'tel',                       autocomplete: 'tel' },
+            { name: 'company',             label: 'Business name',                         type: 'text',     required: true,  autocomplete: 'organization' },
+            { name: 'website',             label: 'Business website',                      type: 'url',                       autocomplete: 'url' },
+            { name: 'products_description',label: 'What will you be selling or promoting?',type: 'textarea', required: true },
+            { name: 'message',             label: 'Anything else we should know?',         type: 'textarea' },
           ]}
         />
         <p class="form-note">
-          Questions about vendor logistics? Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we'll get back to you quickly.
+          Questions? Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we'll get back to you quickly.
         </p>
       </div>
     </div>
   </section>
+
+  <!-- ══ VENUE PHOTOS ══ -->
+  <section class="band" aria-labelledby="venue-photos-h">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">The Space</p>
+        <h2 id="venue-photos-h">Your Stage at Happy Brew</h2>
+        <p class="prose section-intro">
+          The Kennel Club vendor area lives in the outdoor grounds of Happy
+          Brew — a welcoming, open-air setting with artificial turf, string
+          lights, and plenty of foot traffic from the runway and lawn games.
+        </p>
+      </div>
+      <div class="photo-grid">
+        {venuePhotos.map((photo) => (
+          <figure class="venue-photo">
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              loading="lazy"
+            />
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
 
 <style>
@@ -121,23 +249,34 @@ const audienceTags = [
   }
   .glance-value { font-weight: 600; font-size: var(--step-0); }
 
-  /* Audience tags */
-  .audience-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
+  /* Benefit list */
+  .benefit-list, .req-list {
     list-style: none;
     margin: var(--space-m) 0 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
   }
-  .audience-tags li {
+  .benefit-item, .req-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
     background: var(--color-surface);
     border: 2px solid var(--color-border);
-    border-radius: 50px;
-    padding: 0.4rem 1rem;
+    border-radius: var(--radius);
+    padding: var(--space-s) var(--space-m);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: var(--step-0);
   }
+  .benefit-icon, .req-icon {
+    font-size: 1.4rem;
+    line-height: 1.4;
+    flex-shrink: 0;
+  }
+
+  /* Reason cards */
+  .reason-icon { font-size: 2rem; line-height: 1; }
 
   /* Form panel */
   .form-wrap {
@@ -153,5 +292,31 @@ const audienceTags = [
     margin-top: var(--space-m);
     font-size: 0.9rem;
     color: var(--color-text-muted);
+  }
+
+  /* Venue photos */
+  .section-intro { max-width: 52ch; margin-inline: auto; text-align: center; }
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-s);
+    margin-top: var(--space-l);
+  }
+  .venue-photo {
+    margin: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 2px solid var(--color-border);
+  }
+  .venue-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+  }
+
+  @media (max-width: 700px) {
+    .photo-grid { grid-template-columns: 1fr; }
   }
 </style>
