@@ -57,16 +57,36 @@ import { SITE } from '../config/site.js';
         {/* TODO: Replace this GUID with the real HubSpot Vendor Interest form GUID */}
         <HubSpotForm
           formGuid="00000000-0000-0000-0000-000000000002"
-          heading="Vendor Interest Form"
-          submitLabel="Submit Vendor Application"
+          heading="Vendor Application"
+          submitLabel="Submit"
           fields={[
-            { name: 'firstname', label: 'Contact first name', type: 'text', required: true, autocomplete: 'given-name' },
-            { name: 'lastname', label: 'Contact last name', type: 'text', required: true, autocomplete: 'family-name' },
-            { name: 'email', label: 'Email address', type: 'email', required: true },
+            { name: 'company', label: 'Company name', type: 'text', required: true, autocomplete: 'organization' },
+            { name: 'firstname', label: 'First name', type: 'text', required: true, autocomplete: 'given-name' },
+            { name: 'lastname', label: 'Last name', type: 'text', required: true, autocomplete: 'family-name' },
+            { name: 'email', label: 'Email', type: 'email', required: true },
+            { name: 'mobilephone', label: 'Mobile phone', type: 'tel', autocomplete: 'tel' },
+            { name: 'divider-biz', label: 'Business Information', type: 'divider' },
+            { name: 'website', label: 'Website URL', type: 'url', autocomplete: 'url', placeholder: 'https://yourwebsite.com' },
             { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
-            { name: 'company', label: 'Business name', type: 'text', required: true },
-            { name: 'products_description', label: 'What will you be selling or promoting?', type: 'textarea', required: true },
-            { name: 'message', label: 'Anything else we should know?', type: 'textarea' },
+            { name: 'business_email', label: 'Business email', type: 'email' },
+            { name: 'business_description', label: 'Tell us about your business', type: 'textarea', required: true },
+            { name: 'vendor_type', label: 'Fashion PAWty vendor type', type: 'select', required: true, options: [
+              { value: 'retail', label: 'Retail / Product' },
+              { value: 'food_beverage', label: 'Food & Beverage' },
+              { value: 'service', label: 'Service / Experiences' },
+              { value: 'nonprofit', label: 'Nonprofit / Cause' },
+              { value: 'art_craft', label: 'Art & Craft' },
+              { value: 'pet_products', label: 'Pet Products' },
+              { value: 'other', label: 'Other' },
+            ]},
+            { name: 'divider-social', label: 'Social Media', type: 'divider' },
+            { name: 'facebook_company_page', label: 'Facebook page', type: 'url', placeholder: 'https://facebook.com/yourbusiness' },
+            { name: 'instagram_company_page', label: 'Instagram', type: 'url', placeholder: 'https://instagram.com/yourbusiness' },
+            { name: 'linkedin_company_page', label: 'LinkedIn', type: 'url', placeholder: 'https://linkedin.com/company/yourbusiness' },
+            { name: 'twitterhandle', label: 'X / Twitter handle', type: 'text', placeholder: '@yourbusiness' },
+            { name: 'divider-agree', label: 'Agreement', type: 'divider' },
+            { name: 'vendor_liability_agreement', label: 'I agree to the vendor liability terms and will provide my own tent, tables, chairs, and display materials.', type: 'checkbox', required: true },
+            { name: 'newsletter_opt_in', label: 'Subscribe to The Fashion PAWty newsletter for event updates and announcements.', type: 'checkbox' },
           ]}
         />
         <p class="form-note">
@@ -105,7 +125,7 @@ import { SITE } from '../config/site.js';
     background: var(--color-surface);
     border: 2px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: var(--space-l);
+    padding: var(--space-m);
     box-shadow: var(--shadow-sm);
   }
   .form-wrap :global(.hs-form) { max-width: none; }
