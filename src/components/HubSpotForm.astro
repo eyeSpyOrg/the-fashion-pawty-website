@@ -48,7 +48,7 @@ const formId = `hsf-${formGuid.slice(0, 8)}`;
   <h2 id={`${formId}-heading`}>{heading}</h2>
 
   <!-- Announced to screen readers on success/failure -->
-  <p class="hs-form__status" role="status" aria-live="polite" data-hs-status></p>
+  <p class="hs-form__status" role="status" aria-live="polite" data-hs-status tabindex="-1"></p>
 
   {fields.map((f) => {
     if (f.type === 'divider') {
@@ -169,7 +169,32 @@ const formId = `hsf-${formGuid.slice(0, 8)}`;
   .hs-form__submit:hover { background: var(--color-accent-hover); }
   :global(html[data-a11y-contrast='high']) .hs-form__submit { color: #000000; }
   .hs-form__status:empty { display: none; }
-  .hs-form__status { font-weight: 700; margin: 0 0 1rem; }
+  .hs-form__status {
+    font-weight: 600;
+    margin: 0 0 1rem;
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    outline: none;
+  }
+  .hs-form__status:not(:empty) {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    border: 2px solid var(--color-accent);
+  }
+  .hs-form__status[data-error='true'] {
+    background: color-mix(in srgb, #dc2626 10%, transparent);
+    border-color: #dc2626;
+    color: #991b1b;
+  }
+  .hs-status__icon { font-size: 1.5rem; }
+
+  /* Hide form fields after successful submission */
+  .hs-form[data-submitted='true'] .hs-form__field,
+  .hs-form[data-submitted='true'] .hs-form__field--check,
+  .hs-form[data-submitted='true'] .hs-form__divider,
+  .hs-form[data-submitted='true'] .hs-form__submit { display: none; }
 </style>
 
 <script>
@@ -180,9 +205,21 @@ const formId = `hsf-${formGuid.slice(0, 8)}`;
 
   document.querySelectorAll<HTMLFormElement>('[data-hs-form]').forEach((form) => {
     const status = form.querySelector<HTMLElement>('[data-hs-status]')!;
+    let submitting = false;
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      // Prevent duplicate submissions while in flight or already completed
+      if (submitting || form.hasAttribute('data-submitted')) return;
+      submitting = true;
+
+      // Auto-prepend https:// to URL fields so bare "website.com" values pass validation
+      form.querySelectorAll<HTMLInputElement>('input[type="url"]').forEach((input) => {
+        const v = input.value.trim();
+        if (v && !/^https?:\/\//i.test(v)) {
+          input.value = 'https://' + v;
+        }
+      });
 
       // Client validation with accessible errors
       let firstInvalid: HTMLElement | null = null;
@@ -219,6 +256,7 @@ const formId = `hsf-${formGuid.slice(0, 8)}`;
 
       const submitBtn = form.querySelector<HTMLButtonElement>('[type="submit"]')!;
       submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
 
       try {
         const res = await fetch(
@@ -230,15 +268,29 @@ const formId = `hsf-${formGuid.slice(0, 8)}`;
           }
         );
         if (!res.ok) throw new Error(String(res.status));
-        status.textContent = 'Thank you — your submission was received.';
-        form.reset();
+
+        // Hide all fields and the submit button, show full thank-you state
+        form.setAttribute('data-submitted', 'true');
+        status.innerHTML = `
+          <span class="hs-status__icon" aria-hidden="true">🐾</span>
+          <strong>Application received — thank you!</strong>
+          <span>We'll review your submission and be in touch soon. Keep an eye on <em>${
+            Array.from(new FormData(form).entries()).find(([n]) => n === 'email')?.[1] ?? 'your inbox'
+          }</em> for next steps.</span>
+        `;
+        status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        status.focus();
+
         // Forward to GA4 if loaded
         (window as any).gtag?.('event', 'form_submit', { form_guid: formGuid });
       } catch {
         status.textContent =
-          'Something went wrong sending the form. Please try again or email us directly.';
-      } finally {
+          'Something went wrong sending your application. Please try again or email us directly.';
+        status.setAttribute('data-error', 'true');
+        status.scrollIntoView({ behavior: 'smooth', block: 'center' });
         submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit';
+        submitting = false;
       }
     });
   });

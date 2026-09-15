@@ -50,4 +50,17 @@
   status = 301
   force = true
 
+# Old Jacksonville Beach Lions Club URL → corrected Jacksonville Beaches slug
+[[redirects]]
+  from = "/partners/jacksonville-beach-lions-club"
+  to = "/partners/jacksonville-beaches-lions-club/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/partners/jacksonville-beach-lions-club/"
+  to = "/partners/jacksonville-beaches-lions-club/"
+  status = 301
+  force = true
+
 # Astro emits /404.html — Netlify serves it automatically for 404s.

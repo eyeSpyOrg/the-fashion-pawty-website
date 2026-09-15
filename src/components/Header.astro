@@ -90,6 +90,16 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
           )
         ))}
       </ul>
+
+      {/* Mobile CTA buttons — visible only when the menu is open */}
+      <div class="mobile-nav-ctas" aria-hidden="true">
+        <a class="mobile-nav-cta mobile-nav-cta--ticket" href={SITE.event.ticketUrl} target="_blank" rel="noopener">
+          Get Tickets
+        </a>
+        <a class="mobile-nav-cta mobile-nav-cta--donate" href="/donate/">
+          Donate
+        </a>
+      </div>
     </nav>
 
     <div class="site-header__actions">
@@ -262,6 +272,9 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
   /* ── Mobile CTA (hidden on desktop) ── */
   .site-header__mobile-cta { display: none; }
 
+  /* Mobile nav CTA buttons — desktop: hidden */
+  .mobile-nav-ctas { display: none; }
+
   /* ── Mobile collapse ── */
   @media (max-width: 60rem) {
     /* Row 1: logo + hamburger — flex, space-between */
@@ -293,6 +306,40 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
     .site-header__nav { display: none; width: 100%; order: 4; }
     .site-header__nav.is-open { display: block; }
     .site-header__nav > ul { flex-direction: column; }
+
+    /* Mobile CTA button row */
+    .mobile-nav-ctas {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1rem 1rem 1.25rem;
+      border-top: 1px solid var(--color-border);
+    }
+    .mobile-nav-cta {
+      flex: 1;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 44px;
+      padding: 0.6rem 1rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .mobile-nav-cta--ticket {
+      background: var(--color-accent);
+      color: #fff;
+      border: 2px solid var(--color-accent);
+    }
+    .mobile-nav-cta--ticket:hover { opacity: 0.9; }
+    .mobile-nav-cta--donate {
+      background: transparent;
+      color: var(--color-text);
+      border: 2px solid var(--color-border);
+    }
+    .mobile-nav-cta--donate:hover { background: var(--color-surface); }
     .site-header__nav a { width: 100%; }
 
     /* Hide desktop-only buttons */
@@ -323,16 +370,19 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
   // Mobile hamburger toggle
   const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const nav = document.querySelector<HTMLElement>('[data-menu]');
+  const mobileCtas = nav?.querySelector<HTMLElement>('.mobile-nav-ctas');
   if (menuBtn && nav) {
     menuBtn.addEventListener('click', () => {
       const open = menuBtn.getAttribute('aria-expanded') === 'true';
       menuBtn.setAttribute('aria-expanded', String(!open));
       nav.classList.toggle('is-open', !open);
+      if (mobileCtas) mobileCtas.setAttribute('aria-hidden', String(open));
     });
     nav.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && nav.classList.contains('is-open')) {
         nav.classList.remove('is-open');
         menuBtn.setAttribute('aria-expanded', 'false');
+        if (mobileCtas) mobileCtas.setAttribute('aria-hidden', 'true');
         menuBtn.focus();
       }
     });

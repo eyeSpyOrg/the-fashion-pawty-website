@@ -1,7 +1,6 @@
 ---
 /**
  * Vendors — interest page for prospective Kennel Club vendors.
- * TODO: Replace formGuid with the real HubSpot Vendor Interest form GUID.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubSpotForm from '../components/HubSpotForm.astro';
@@ -84,13 +83,13 @@ import { SITE } from '../config/site.js';
   </section>
 
   <!-- ══ FORM ══ -->
-  <section class="band band--tight" aria-labelledby="vendor-form">
+  <section id="vendor-form" class="band band--tight" aria-label="Vendor application form">
     <div class="container container--narrow">
       <div class="form-wrap">
         <p class="eyebrow">Apply</p>
-        {/* TODO: Replace this GUID with the real HubSpot Vendor Interest form GUID */}
+        
         <HubSpotForm
-          formGuid="00000000-0000-0000-0000-000000000002"
+          formGuid="58d73a8e-9450-4042-9d03-622a374c0aa9"
           heading="Vendor Application"
           submitLabel="Submit"
           fields={[

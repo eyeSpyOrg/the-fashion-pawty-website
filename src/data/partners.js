@@ -39,15 +39,15 @@ export const PARTNERS = [
     website: 'https://www.linkedin.com/in/meredythsauter/',
   },
   {
-    id: 'jacksonville-beach-lions-club',
-    name: 'Lions Club Jacksonville Beach',
+    id: 'jacksonville-beaches-lions-club',
+    name: 'Jacksonville Beaches Lions Club',
     tier: 'PAWty Animal',
     sponsoredArea: 'Merch Shop',
     blurb:
-      'Lions Club Jacksonville Beach has served the First Coast since 1938 through vision programs, hearing assistance, and community outreach. They are the Merch Shop sponsor of The Fashion PAWty.',
-    logo: '/images/partners/jacksonville-beach-lions-club-logo.webp',
-    href: '/partners/jacksonville-beach-lions-club/',
-    buttonText: 'Meet Lions Club Jacksonville Beach',
+      'Jacksonville Beaches Lions Club has served the First Coast since 1938 through vision programs, hearing assistance, and community outreach. They are the Merch Shop sponsor of The Fashion PAWty.',
+    logo: '/images/partners/jacksonville-beaches-lions-club-logo.webp',
+    href: '/partners/jacksonville-beaches-lions-club/',
+    buttonText: 'Meet Jacksonville Beaches Lions Club',
     website: 'https://jaxbeachlions.org/',
   },
   {
