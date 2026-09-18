@@ -3,7 +3,6 @@
  * Vendors — interest page for prospective Kennel Club vendors.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HubSpotForm from '../components/HubSpotForm.astro';
 import { SITE } from '../config/site.js';
 
 ---
@@ -86,42 +85,13 @@ import { SITE } from '../config/site.js';
   <section id="vendor-form" class="band band--tight" aria-label="Vendor application form">
     <div class="container container--narrow">
       <div class="form-wrap">
-        <p class="eyebrow">Apply</p>
-        
-        <HubSpotForm
-          formGuid="58d73a8e-9450-4042-9d03-622a374c0aa9"
-          heading="Vendor Application"
-          submitLabel="Submit"
-          fields={[
-            { name: 'company', label: 'Company name', type: 'text', required: true, autocomplete: 'organization' },
-            { name: 'firstname', label: 'First name', type: 'text', required: true, autocomplete: 'given-name' },
-            { name: 'lastname', label: 'Last name', type: 'text', required: true, autocomplete: 'family-name' },
-            { name: 'email', label: 'Email', type: 'email', required: true },
-            { name: 'mobilephone', label: 'Mobile phone', type: 'tel', autocomplete: 'tel' },
-            { name: 'divider-biz', label: 'Business Information', type: 'divider' },
-            { name: 'website', label: 'Website URL', type: 'url', autocomplete: 'url', placeholder: 'https://yourwebsite.com' },
-            { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
-            { name: 'business_email', label: 'Business email', type: 'email' },
-            { name: 'business_description', label: 'Tell us about your business', type: 'textarea', required: true },
-            { name: 'vendor_type', label: 'Fashion PAWty vendor type', type: 'select', required: true, options: [
-              { value: 'retail', label: 'Retail / Product' },
-              { value: 'food_beverage', label: 'Food & Beverage' },
-              { value: 'service', label: 'Service / Experiences' },
-              { value: 'nonprofit', label: 'Nonprofit / Cause' },
-              { value: 'art_craft', label: 'Art & Craft' },
-              { value: 'pet_products', label: 'Pet Products' },
-              { value: 'other', label: 'Other' },
-            ]},
-            { name: 'divider-social', label: 'Social Media', type: 'divider' },
-            { name: 'facebook_company_page', label: 'Facebook page', type: 'url', placeholder: 'https://facebook.com/yourbusiness' },
-            { name: 'instagram_company_page', label: 'Instagram', type: 'url', placeholder: 'https://instagram.com/yourbusiness' },
-            { name: 'linkedin_company_page', label: 'LinkedIn', type: 'url', placeholder: 'https://linkedin.com/company/yourbusiness' },
-            { name: 'twitterhandle', label: 'X / Twitter handle', type: 'text', placeholder: '@yourbusiness' },
-            { name: 'divider-agree', label: 'Agreement', type: 'divider' },
-            { name: 'vendor_liability_agreement', label: 'I agree to the vendor liability terms and will provide my own tent, tables, chairs, and display materials.', type: 'checkbox', required: true },
-            { name: 'newsletter_opt_in', label: 'Subscribe to The Fashion PAWty newsletter for event updates and announcements.', type: 'checkbox' },
-          ]}
-        />
+        <script src="https://js.hsforms.net/forms/embed/42383838.js" defer is:inline></script>
+        <div
+          class="hs-form-frame"
+          data-region="na1"
+          data-form-id="58d73a8e-9450-4042-9d03-622a374c0aa9"
+          data-portal-id="42383838"
+        ></div>
         <p class="form-note">
           Questions about vendor logistics? Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we'll get back to you quickly.
         </p>
