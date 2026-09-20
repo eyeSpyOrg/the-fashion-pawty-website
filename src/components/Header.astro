@@ -322,7 +322,7 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
     .site-header__inner { flex-wrap: wrap; padding-bottom: 0; }
     .site-header__actions { margin-left: auto; }
     .site-header__menu-btn { display: inline-flex; padding: 0.5rem 0.75rem; }
-    .menu-btn__label { display: none; }
+    .menu-btn__label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
     .site-header__nav { display: none; width: 100%; order: 4; }
     .site-header__nav.is-open { display: block; }

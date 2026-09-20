@@ -73,8 +73,6 @@ export const SITE = {
       children: [
         { label: 'About Us', href: '/about/' },
         { label: 'Volunteer', href: '/volunteer/' },
-        { label: 'Sponsor', href: '/sponsor/' },
-        { label: 'Causes', href: '/beneficiaries/' },
         { label: 'Vendors', href: '/vendors/' },
         { label: 'Venue', href: '/venue/' },
       ],
