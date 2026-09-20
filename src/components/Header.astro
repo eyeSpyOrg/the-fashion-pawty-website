@@ -91,15 +91,6 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
         ))}
       </ul>
 
-      {/* Mobile CTA buttons — visible only when the menu is open */}
-      <div class="mobile-nav-ctas" aria-hidden="true">
-        <a class="mobile-nav-cta mobile-nav-cta--ticket" href={SITE.event.ticketUrl} target="_blank" rel="noopener">
-          Get Tickets
-        </a>
-        <a class="mobile-nav-cta mobile-nav-cta--donate" href="/donate/">
-          Donate
-        </a>
-      </div>
     </nav>
 
     <div class="site-header__actions">
@@ -119,10 +110,15 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
       </button>
     </div>
 
-    {/* Mobile full-width Get Tickets — direct flex child so it can span 100% */}
-    <a class="site-header__mobile-cta" href={SITE.event.ticketUrl} target="_blank" rel="noopener">
-      Get Tickets
-    </a>
+    {/* Mobile row 2: two pill buttons — direct flex child so they span full width */}
+    <div class="site-header__mobile-pills">
+      <a class="mobile-pill mobile-pill--ticket" href={SITE.event.ticketUrl} target="_blank" rel="noopener">
+        🎟️ Tickets
+      </a>
+      <a class="mobile-pill mobile-pill--donate" href="/donate/">
+        🐾 Donate
+      </a>
+    </div>
   </div>
 </header>
 
@@ -152,7 +148,8 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
     align-items: center;
     min-height: 44px;
   }
-  .site-header__logo { height: 48px; width: auto; }
+  .site-header__logo { height: 48px; width: auto; flex-shrink: 0; }
+  .site-header__brand { flex-shrink: 0; }
   .site-header__logo--hc { display: none; }
   :global(html[data-a11y-contrast='high']) .site-header__logo--color { display: none; }
   :global(html[data-a11y-contrast='high']) .site-header__logo--hc { display: inline; }
@@ -269,84 +266,74 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
     box-shadow: none;
   }
 
-  /* ── Mobile CTA (hidden on desktop) ── */
-  .site-header__mobile-cta { display: none; }
+  /* Pill row — hidden above 480px */
+  .site-header__mobile-pills { display: none; }
 
-  /* Mobile nav CTA buttons — desktop: hidden */
-  .mobile-nav-ctas { display: none; }
-
-  /* ── Mobile collapse ── */
-  @media (max-width: 60rem) {
-    /* Row 1: logo + hamburger — flex, space-between */
-    .site-header__inner {
-      flex-wrap: wrap;
-      padding-bottom: 0;
-    }
-    .site-header__brand { flex: 1; }
-    .site-header__menu-btn { display: inline-flex; }
-
-    /* Row 2: full-width Get Tickets strip */
-    .site-header__mobile-cta {
+  /* ── Mobile phones only (≤480px) ── */
+  @media (max-width: 30rem) {
+    .site-header__mobile-pills {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      gap: 0.5rem;
       width: 100%;
       order: 3;
-      background: var(--color-accent);
-      color: #fff;
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 0.7rem 1rem;
-      text-decoration: none;
+      padding: 0.5rem 0;
       border-top: 1px solid var(--color-border);
     }
-    .site-header__mobile-cta:hover { opacity: 0.92; }
-
-    /* Nav: below the CTA strip */
-    .site-header__nav { display: none; width: 100%; order: 4; }
-    .site-header__nav.is-open { display: block; }
-    .site-header__nav > ul { flex-direction: column; }
-
-    /* Mobile CTA button row */
-    .mobile-nav-ctas {
-      display: flex;
-      gap: 0.75rem;
-      padding: 1rem 1rem 1.25rem;
-      border-top: 1px solid var(--color-border);
-    }
-    .mobile-nav-cta {
+    .mobile-pill {
       flex: 1;
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      min-height: 44px;
-      padding: 0.6rem 1rem;
+      gap: 0.3rem;
+      padding: 0.55rem 1rem;
       border-radius: 9999px;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       text-decoration: none;
-      text-align: center;
-      white-space: nowrap;
+      min-height: 44px;
     }
-    .mobile-nav-cta--ticket {
+    .mobile-pill--ticket {
       background: var(--color-accent);
       color: #fff;
       border: 2px solid var(--color-accent);
     }
-    .mobile-nav-cta--ticket:hover { opacity: 0.9; }
-    .mobile-nav-cta--donate {
+    .mobile-pill--ticket:hover { opacity: 0.9; }
+    .mobile-pill--donate {
       background: transparent;
       color: var(--color-text);
       border: 2px solid var(--color-border);
     }
-    .mobile-nav-cta--donate:hover { background: var(--color-surface); }
+    .mobile-pill--donate:hover { background: var(--color-surface); }
+  }
+
+  /* Donate button: a touch more breathing room on the right */
+  .site-header__donate { padding-right: 1.4rem !important; }
+
+  /* ── Mid-desktop: tighten spacing only (no font-size change) at ~960–1150px ── */
+  @media (min-width: 60rem) and (max-width: 72rem) {
+    .site-header__inner { gap: 0.4rem; padding-inline: 0.75rem; }
+    .site-header__nav > ul { gap: 0; }
+    .site-header__nav a,
+    .nav-dropdown-toggle { padding-left: 0.35rem; padding-right: 0.35rem; }
+  }
+
+  /* ── Hamburger breakpoint (≤60rem: tablet + mobile) ── */
+  @media (max-width: 60rem) {
+    .site-header__inner { flex-wrap: wrap; padding-bottom: 0; }
+    .site-header__actions { margin-left: auto; }
+    .site-header__menu-btn { display: inline-flex; padding: 0.5rem 0.75rem; }
+    .menu-btn__label { display: none; }
+
+    .site-header__nav { display: none; width: 100%; order: 4; }
+    .site-header__nav.is-open { display: block; }
+    .site-header__nav > ul { flex-direction: column; }
     .site-header__nav a { width: 100%; }
 
     /* Hide desktop-only buttons */
     .site-header__donate,
     .site-header__tickets { display: none; }
 
-    /* Mobile dropdown: inline below the toggle, not a floating panel */
+    /* Mobile dropdown: inline, not floating */
     .nav-dropdown-toggle { width: 100%; justify-content: space-between; }
     .nav-dropdown {
       position: static;
@@ -359,30 +346,22 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
     }
     .has-dropdown[data-open='true'] .nav-dropdown { display: block; }
   }
-  @media (max-width: 60rem) {
-    .menu-btn__label { display: none; }
-    .site-header__menu-btn { padding: 0.5rem 0.75rem; }
-    .site-header__inner { padding-bottom: 0.5rem; }
-  }
 </style>
 
 <script>
   // Mobile hamburger toggle
   const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const nav = document.querySelector<HTMLElement>('[data-menu]');
-  const mobileCtas = nav?.querySelector<HTMLElement>('.mobile-nav-ctas');
   if (menuBtn && nav) {
     menuBtn.addEventListener('click', () => {
       const open = menuBtn.getAttribute('aria-expanded') === 'true';
       menuBtn.setAttribute('aria-expanded', String(!open));
       nav.classList.toggle('is-open', !open);
-      if (mobileCtas) mobileCtas.setAttribute('aria-hidden', String(open));
     });
     nav.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && nav.classList.contains('is-open')) {
         nav.classList.remove('is-open');
         menuBtn.setAttribute('aria-expanded', 'false');
-        if (mobileCtas) mobileCtas.setAttribute('aria-hidden', 'true');
         menuBtn.focus();
       }
     });

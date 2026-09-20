@@ -1,0 +1,214 @@
+---
+/**
+ * The Community Foundation for Northeast Florida — partner page.
+ * Top Dog / Music Stage sponsor.
+ * Supported Eye Spy Foundation via Small Organization Grant.
+ * Source: jaxcf.org
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JsonLd from '../../components/schema/JsonLd.astro';
+import { PARTNERS } from '../../data/partners.js';
+
+const partner = PARTNERS.find((p) => p.id === 'the-community-foundation-for-northeast-florida');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: partner.name,
+  url: partner.website,
+  sameAs: [partner.website],
+};
+---
+
+<BaseLayout
+  title="The Community Foundation for Northeast Florida — Fashion PAWty Partner"
+  description="The Community Foundation for Northeast Florida awarded Eye Spy Foundation a Small Organization Grant — and is now the Music Stage sponsor of The Fashion PAWty, keeping the First Coast moving."
+  canonical="/partners/the-community-foundation-for-northeast-florida/"
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Fashion PAWty Partner</p>
+          <h1>The Community Foundation for Northeast Florida</h1>
+          <p class="prose lead">
+            One of Jacksonville's most trusted philanthropic institutions,
+            the Community Foundation connects donors with the nonprofits
+            shaping a stronger First Coast — and is the Music Stage sponsor
+            of The Fashion PAWty.
+          </p>
+          <a
+            class="btn btn--primary"
+            href={partner.website}
+            rel="sponsored"
+            target="_blank"
+          >
+            Visit Their Website
+          </a>
+          <a class="btn btn--secondary" href="/partners/">View All Partners</a>
+        </div>
+        <img
+          class="hero-photo"
+          src={partner.logo}
+          alt=""
+          width="1200"
+          height="1200"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="band band--tight" aria-labelledby="why-h">
+    <div class="container container--narrow">
+      <h2 id="why-h">Why They're Part of This</h2>
+      <p class="prose">
+        The Community Foundation for Northeast Florida didn't just show up for
+        The Fashion PAWty — they helped make it possible. Through their Small
+        Organization Grants program, the Foundation awarded funding to Eye Spy
+        Foundation that enabled the event to grow into the celebration it is
+        today. That kind of early-stage support from an established philanthropic
+        institution is rare and deeply meaningful: it signals confidence in the
+        mission, opens doors with other funders, and lets a small team focus on
+        doing the work rather than scrambling for resources. The Fashion PAWty
+        Music Stage carries their name because they helped build the foundation
+        that made the whole PAWty possible.
+      </p>
+
+      <h2 id="what-h">What They Do</h2>
+      <p class="prose">
+        The Community Foundation for Northeast Florida has served as the region's
+        philanthropic backbone for decades, managing endowments, connecting
+        donors with causes, and running grant programs that invest in nonprofits
+        across Duval, St. Johns, Clay, Nassau, and Baker counties. Their Small
+        Organization Grants are specifically designed to support newer and smaller
+        nonprofits — organizations doing meaningful work that may not yet have
+        the infrastructure to attract larger funders. By investing in Eye Spy
+        Foundation at an early stage, the Community Foundation is doing exactly
+        what it was built to do: building a stronger, more equitable Northeast
+        Florida, one grant at a time.
+      </p>
+
+      <div class="about-photos">
+        <img
+          class="photo-slot"
+          src="/images/partners/community-foundation-nefl-staff.webp"
+          alt="The Community Foundation for Northeast Florida staff and community members at a grant event"
+          width="1920"
+          height="1080"
+          loading="lazy"
+        />
+        <img
+          class="photo-slot"
+          src="/images/partners/community-foundation-nefl-map.webp"
+          alt="Map showing the Community Foundation's service area across Northeast Florida counties"
+          width="1920"
+          height="1080"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SMALL ORG GRANTS ══ -->
+  <section class="band band--teal band--tight" aria-labelledby="grants-h">
+    <div class="container container--narrow">
+      <div class="find-row">
+        <div>
+          <h2 id="grants-h">Small Organization Grants</h2>
+          <p class="prose">
+            The Small Organization Grants program supports nonprofits with
+            smaller budgets doing impactful work across Northeast Florida.
+            Learn more about the program that helped Eye Spy Foundation get here.
+          </p>
+        </div>
+        <a
+          class="btn btn--primary find-row__btn"
+          href="https://www.jaxcf.org/grants/small-organization-grants/"
+          rel="sponsored"
+          target="_blank"
+        >
+          Learn About the Grants
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHERE TO FIND THEM ══ -->
+  <section class="band band--tight" aria-labelledby="find-h">
+    <div class="container container--narrow">
+      <div class="find-row">
+        <div>
+          <h2 id="find-h">Where to Find Them</h2>
+          <p class="prose">
+            Grant programs, donor services, and the full story of the Community
+            Foundation's work across Northeast Florida are all at their website.
+          </p>
+        </div>
+        <a
+          class="btn btn--primary find-row__btn"
+          href={partner.website}
+          rel="sponsored"
+          target="_blank"
+        >
+          Visit Their Website
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <JsonLd schema={schema} />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    max-width: 20rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-inline: auto;
+  }
+  @media (min-width: 52rem) {
+    .hero-photo { max-width: none; }
+  }
+
+  .about-photos {
+    display: grid;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .about-photos { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  .photo-slot {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .find-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .find-row { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .find-row__btn { flex-shrink: 0; }
+</style>

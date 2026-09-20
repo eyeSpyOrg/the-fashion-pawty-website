@@ -1,0 +1,189 @@
+---
+/**
+ * Southern Glazers Wine and Spirits — partner page.
+ * Top Dog / MockTAIL Bar sponsor.
+ * In-kind donation of Ritual Whiskey, Tequila, and Bourbon.
+ * Source: southernglazers.com
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JsonLd from '../../components/schema/JsonLd.astro';
+import { PARTNERS } from '../../data/partners.js';
+
+const partner = PARTNERS.find((p) => p.id === 'southern-glazers-wine-and-spirits');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: partner.name,
+  url: partner.website,
+  sameAs: [partner.website],
+};
+---
+
+<BaseLayout
+  title="Southern Glazers Wine and Spirits — Fashion PAWty Partner"
+  description="Southern Glazers Wine and Spirits donated Ritual Whiskey, Tequila, and Bourbon in-kind to power the MockTAIL Bar at The Fashion PAWty — keeping the First Coast sipping for a great cause."
+  canonical="/partners/southern-glazers-wine-and-spirits/"
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Fashion PAWty Partner</p>
+          <h1>Southern Glazers Wine and Spirits</h1>
+          <p class="prose lead">
+            One of North America's leading wine and spirits distributors,
+            Southern Glazers graciously donated Ritual Whiskey, Tequila, and
+            Bourbon in-kind — making every sip at the MockTAIL Bar a toast
+            to the blind and low vision community.
+          </p>
+          <a
+            class="btn btn--primary"
+            href={partner.website}
+            rel="sponsored"
+            target="_blank"
+          >
+            Visit Their Website
+          </a>
+          <a class="btn btn--secondary" href="/partners/">View All Partners</a>
+        </div>
+        <img
+          class="hero-photo"
+          src={partner.logo}
+          alt=""
+          width="1200"
+          height="1200"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="band band--tight" aria-labelledby="why-h">
+    <div class="container container--narrow">
+      <h2 id="why-h">Why They're Part of This</h2>
+      <p class="prose">
+        Southern Glazers Wine and Spirits didn't write a check — they went
+        deeper. By donating Ritual Whiskey, Tequila, and Bourbon in-kind,
+        Southern Glazers directly powered the MockTAIL Bar experience at The
+        Fashion PAWty, turning every crafted mocktail into a tangible expression
+        of their commitment to community. That kind of in-kind generosity is
+        often more impactful than a monetary donation: it covers a real event
+        cost, and it brings the expertise and product quality of a world-class
+        distributor directly to the guests. Every sip at the MockTAIL Bar is
+        a sip in support of the Eye Spy Foundation's mission to create a more
+        accessible world for the blind and low vision community.
+      </p>
+
+      <h2 id="what-h">What They Do</h2>
+      <p class="prose">
+        Southern Glazers Wine and Spirits is one of the largest wine and spirits
+        distributors in North America, operating across 44 states and serving
+        thousands of restaurants, retailers, and venues. Beyond distribution,
+        Southern Glazers has a long track record of community investment —
+        partnering with nonprofits, supporting local events, and using its
+        industry reach to amplify causes that matter. Their portfolio includes
+        premium spirits brands from around the world, and their in-kind
+        contribution of Ritual non-alcoholic spirits to The Fashion PAWty
+        ensures guests of all backgrounds can enjoy the MockTAIL Bar experience.
+      </p>
+
+      <div class="about-photos">
+        <img
+          class="photo-slot"
+          src="/images/partners/southern-glazers-ritual.webp"
+          alt="Bottles of Ritual non-alcoholic whiskey, tequila, and bourbon donated by Southern Glazers for The Fashion PAWty MockTAIL Bar"
+          width="1920"
+          height="1080"
+          loading="lazy"
+        />
+        <img
+          class="photo-slot"
+          src="/images/partners/southern-glazers-drinks.webp"
+          alt="MockTAIL drinks crafted with Ritual spirits at The Fashion PAWty bar station"
+          width="1920"
+          height="1080"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHERE TO FIND THEM ══ -->
+  <section class="band band--teal band--tight" aria-labelledby="find-h">
+    <div class="container container--narrow">
+      <div class="find-row">
+        <div>
+          <h2 id="find-h">Where to Find Them</h2>
+          <p class="prose">
+            Learn more about Southern Glazers Wine and Spirits, their portfolio,
+            and their community work at their website.
+          </p>
+        </div>
+        <a
+          class="btn btn--primary find-row__btn"
+          href={partner.website}
+          rel="sponsored"
+          target="_blank"
+        >
+          Visit Their Website
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <JsonLd schema={schema} />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    max-width: 20rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-inline: auto;
+  }
+  @media (min-width: 52rem) {
+    .hero-photo { max-width: none; }
+  }
+
+  .about-photos {
+    display: grid;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .about-photos { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  .photo-slot {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .find-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .find-row { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .find-row__btn { flex-shrink: 0; }
+</style>

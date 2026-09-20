@@ -19,6 +19,10 @@ const smithEye = PARTNERS.find((p) => p.id === 'smith-eye-associates');
 const riverCity = PARTNERS.find((p) => p.id === 'jacksonville-river-city-lions-club');
 const jaxBeach = PARTNERS.find((p) => p.id === 'jacksonville-beaches-lions-club');
 const mjm = PARTNERS.find((p) => p.id === 'mjm-consulting');
+const commFoundation = PARTNERS.find((p) => p.id === 'the-community-foundation-for-northeast-florida');
+const southernGlazers = PARTNERS.find((p) => p.id === 'southern-glazers-wine-and-spirits');
+const eyeSpyCommunity = PARTNERS.find((p) => p.id === 'eye-spy-community');
+const walmart = PARTNERS.find((p) => p.id === 'walmart-spark-for-good');
 
 const mainSponsor = [
   {
@@ -66,6 +70,11 @@ const topDog = [
     stripeUrl: 'https://buy.stripe.com/cNibJ0cdy1t7g430QKejK03',
     icon: '🎵',
     image: '/images/sponsors/music-stage.webp',
+    sold: true,
+    soldByName: commFoundation.name,
+    soldByLogo: commFoundation.logo,
+    soldByHref: commFoundation.href,
+    soldByButtonText: commFoundation.buttonText,
   },
   {
     title: 'Chow Down Station',
@@ -85,6 +94,11 @@ const topDog = [
     stripeUrl: 'https://buy.stripe.com/4gM4gy3H21t79FFgPIejK04',
     icon: '🍔',
     image: '/images/sponsors/chow-down-station.webp',
+    sold: true,
+    soldByName: eyeSpyCommunity.name,
+    soldByLogo: eyeSpyCommunity.logo,
+    soldByHref: eyeSpyCommunity.href,
+    soldByButtonText: eyeSpyCommunity.buttonText,
   },
   {
     title: 'MockTAIL Bar',
@@ -104,6 +118,11 @@ const topDog = [
     stripeUrl: 'https://buy.stripe.com/aFa4gy6Te2xbcRRdDwejK05',
     icon: '🍹',
     image: '/images/sponsors/mocktail-bar.webp',
+    sold: true,
+    soldByName: southernGlazers.name,
+    soldByLogo: southernGlazers.logo,
+    soldByHref: southernGlazers.href,
+    soldByButtonText: southernGlazers.buttonText,
   },
 ];
 
@@ -217,6 +236,11 @@ const pawtyAnimal = [
     stripeUrl: 'https://buy.stripe.com/9B628q91m6Nr5pp0QKejK0a',
     icon: '🧩',
     image: '/images/sponsors/sensory-games.webp',
+    sold: true,
+    soldByName: walmart.name,
+    soldByLogo: walmart.logo,
+    soldByHref: walmart.href,
+    soldByButtonText: walmart.buttonText,
   },
 ];
 

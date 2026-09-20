@@ -1,0 +1,279 @@
+---
+/**
+ * Walmart Spark for Good — partner page.
+ * PAWty Animal / Sensory Games sponsor.
+ * Two stores participating: Macclenny and Jacksonville (Atlantic Blvd).
+ * Source: walmart.com/nonprofits
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JsonLd from '../../components/schema/JsonLd.astro';
+import { PARTNERS } from '../../data/partners.js';
+
+const partner = PARTNERS.find((p) => p.id === 'walmart-spark-for-good');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: partner.name,
+  url: partner.website,
+  sameAs: [partner.website],
+};
+---
+
+<BaseLayout
+  title="Walmart Spark for Good — Fashion PAWty Partner"
+  description="Two Northeast Florida Walmart Supercenters are sponsoring the Sensory Games at The Fashion PAWty through Walmart Spark for Good — connecting community giving with the blind and low vision community."
+  canonical="/partners/walmart-spark-for-good/"
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Fashion PAWty Partner</p>
+          <h1>Walmart Spark for Good</h1>
+          <p class="prose lead">
+            Two Northeast Florida Walmart Supercenters are lighting up the
+            Sensory Games at The Fashion PAWty through Walmart Spark for Good
+            — the program that helps communities give back to causes that matter.
+          </p>
+          <a
+            class="btn btn--primary"
+            href={partner.website}
+            rel="sponsored"
+            target="_blank"
+          >
+            Visit Walmart Spark for Good
+          </a>
+          <a class="btn btn--secondary" href="/partners/">View All Partners</a>
+        </div>
+        <img
+          class="hero-photo"
+          src={partner.logo}
+          alt=""
+          width="1200"
+          height="1200"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="band band--tight" aria-labelledby="why-h">
+    <div class="container container--narrow">
+      <h2 id="why-h">Why They're Part of This</h2>
+      <p class="prose">
+        Walmart Spark for Good is how Walmart turns everyday shopping into
+        community impact — connecting nonprofit causes with the customers,
+        associates, and neighbors who want to help. For The Fashion PAWty,
+        that means two participating Walmart Supercenters in Northeast Florida
+        stepped up to sponsor the Sensory Games station, an inclusive activity
+        zone designed so every guest can fully participate in the fun. Sponsoring
+        sensory-inclusive experiences is a natural fit: Walmart has long invested
+        in accessibility across its stores, and the Sensory Games bring that
+        same spirit of inclusion to the runway.
+      </p>
+
+      <h2 id="what-h">What They Do</h2>
+      <p class="prose">
+        Walmart Spark for Good is Walmart's platform for community giving,
+        enabling customers to donate directly to vetted nonprofits at the
+        register or online. The program has channeled hundreds of millions of
+        dollars to causes across education, hunger relief, disaster response,
+        and local community organizations. At the store level, participating
+        Supercenters engage their local communities through in-kind support,
+        associate volunteerism, and cause-marketing campaigns — exactly what the
+        Macclenny and Jacksonville Atlantic Boulevard locations are doing by
+        sponsoring the Sensory Games at The Fashion PAWty.
+      </p>
+
+      <div class="about-photos">
+        <img
+          class="photo-slot"
+          src="/images/partners/walmart-spark-for-good-donate.webp"
+          alt="Walmart Spark for Good donation display helping customers give to local nonprofits"
+          width="1920"
+          height="1080"
+          loading="lazy"
+        />
+        <img
+          class="photo-slot"
+          src="/images/partners/walmart-spark-for-good-box.webp"
+          alt="Walmart Spark for Good collection box supporting community causes"
+          width="1920"
+          height="1080"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PARTICIPATING STORES ══ -->
+  <section class="band band--teal band--tight" aria-labelledby="stores-h">
+    <div class="container container--narrow">
+      <h2 id="stores-h">Participating Stores</h2>
+      <p class="prose">
+        Two Northeast Florida Walmart Supercenters are proudly participating
+        in The Fashion PAWty through Walmart Spark for Good. Visit either
+        location to support the community all year long.
+      </p>
+
+      <div class="store-photos">
+        <img
+          class="photo-slot"
+          src="/images/partners/walmart-spark-for-good-jacksonville.webp"
+          alt="Jacksonville Atlantic Blvd Supercenter"
+          width="1920"
+          height="1080"
+          loading="lazy"
+        />
+        <img
+          class="photo-slot"
+          src="/images/partners/walmart-spark-for-good-macclenny.webp"
+          alt="Macclenny Supercenter"
+          width="1920"
+          height="1080"
+          loading="lazy"
+        />
+      </div>
+
+      <ul class="store-list">
+        {partner.stores.map((store) => (
+          <li class="store-card">
+            <div class="store-card__body">
+              <p class="store-card__name">{store.name}</p>
+            </div>
+            <a
+              class="btn btn--primary store-card__btn"
+              href={store.url}
+              rel="sponsored"
+              target="_blank"
+            >
+              View Store
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ WHERE TO FIND THEM ══ -->
+  <section class="band band--tight" aria-labelledby="find-h">
+    <div class="container container--narrow">
+      <div class="find-row">
+        <div>
+          <h2 id="find-h">Learn More About Spark for Good</h2>
+          <p class="prose">
+            Explore how Walmart Spark for Good connects communities with
+            nonprofits making a difference.
+          </p>
+        </div>
+        <a
+          class="btn btn--primary find-row__btn"
+          href={partner.website}
+          rel="sponsored"
+          target="_blank"
+        >
+          Visit Walmart Nonprofits
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <JsonLd schema={schema} />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    max-width: 20rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-inline: auto;
+  }
+  @media (min-width: 52rem) {
+    .hero-photo { max-width: none; }
+  }
+
+  .about-photos {
+    display: grid;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .about-photos { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  .photo-slot {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .store-photos {
+    display: grid;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .store-photos { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  .store-list {
+    list-style: none;
+    margin: var(--space-m) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+  }
+
+  .store-card {
+    background: var(--color-surface);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius);
+    padding: var(--space-m);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    align-items: flex-start;
+  }
+  @media (min-width: 40rem) {
+    .store-card {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .store-card__name {
+    margin: 0;
+    font-size: var(--step-1);
+    font-weight: 700;
+  }
+  .store-card__btn { flex-shrink: 0; }
+
+  .find-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .find-row { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .find-row__btn { flex-shrink: 0; }
+</style>

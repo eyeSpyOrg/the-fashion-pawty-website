@@ -27,6 +27,42 @@ export const PARTNERS = [
     website: 'https://e-clubhouse.org/sites/jacksonville_river_city/',
   },
   {
+    id: 'the-community-foundation-for-northeast-florida',
+    name: 'The Community Foundation for Northeast Florida',
+    tier: 'Top Dog',
+    sponsoredArea: 'Music Stage',
+    blurb:
+      'The Community Foundation for Northeast Florida connects donors with high-impact nonprofits across the First Coast — including a Small Organization Grant that helped Eye Spy Foundation bring The Fashion PAWty to life.',
+    logo: '/images/partners/community-foundation-nefl-logo.webp',
+    href: '/partners/the-community-foundation-for-northeast-florida/',
+    buttonText: 'Meet the Community Foundation',
+    website: 'https://www.jaxcf.org/',
+  },
+  {
+    id: 'southern-glazers-wine-and-spirits',
+    name: 'Southern Glazers Wine and Spirits',
+    tier: 'Top Dog',
+    sponsoredArea: 'MockTAIL Bar',
+    blurb:
+      'Southern Glazers Wine and Spirits graciously donated Ritual Whiskey, Tequila, and Bourbon in-kind to power a delicious MockTAIL Bar experience at The Fashion PAWty.',
+    logo: '/images/partners/southern-glazers-logo.webp',
+    href: '/partners/southern-glazers-wine-and-spirits/',
+    buttonText: 'Meet Southern Glazers',
+    website: 'https://www.southernglazers.com/',
+  },
+  {
+    id: 'eye-spy-community',
+    name: 'Eye Spy Community',
+    tier: 'Top Dog',
+    sponsoredArea: 'Chow Down Station',
+    blurb:
+      'The Eye Spy Community — friends, family, advocates, business owners, and supporters from near and far — is feeding the heart of The Fashion PAWty through the Chow Down Station, keeping volunteers, dog handlers, vendors, and PAWty goers fueled all day.',
+    logo: '/images/partners/eye-spy-community-logo.webp',
+    href: '/partners/eye-spy-community/',
+    buttonText: 'Meet Eye Spy Community',
+    website: 'https://eyespyfoundation.org',
+  },
+  {
     id: 'mjm-consulting',
     name: 'MJ Mason Consulting',
     tier: 'PAWty Animal',
@@ -70,5 +106,27 @@ export const PARTNERS = [
       postalCode: '32082',
       addressCountry: 'US',
     },
+  },
+  {
+    id: 'walmart-spark-for-good',
+    name: 'Walmart Spark for Good',
+    tier: 'PAWty Animal',
+    sponsoredArea: 'Sensory Games',
+    blurb:
+      'Walmart Spark for Good connects communities with the causes they care about — and two Northeast Florida Walmart Supercenters are bringing their giving spirit to the Sensory Games station at The Fashion PAWty.',
+    logo: '/images/partners/walmart-spark-for-good-logo.webp',
+    href: '/partners/walmart-spark-for-good/',
+    buttonText: 'Meet Walmart Spark for Good',
+    website: 'https://www.walmart.com/nonprofits',
+    stores: [
+      {
+        name: 'Jacksonville Atlantic Blvd Supercenter',
+        url: 'https://www.walmart.com/store/5054-jacksonville-fl',
+      },
+      {
+        name: 'Macclenny Supercenter',
+        url: 'https://www.walmart.com/store/1205-macclenny-fl',
+      },
+    ],
   },
 ];

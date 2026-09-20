@@ -1,0 +1,191 @@
+---
+/**
+ * Eye Spy Community — partner page.
+ * Top Dog / Chow Down Station sponsor.
+ * The broader community of friends, family, advocates, and supporters
+ * who have rallied around Eye Spy Foundation.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JsonLd from '../../components/schema/JsonLd.astro';
+import { PARTNERS } from '../../data/partners.js';
+
+const partner = PARTNERS.find((p) => p.id === 'eye-spy-community');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: partner.name,
+  url: partner.website,
+  sameAs: [partner.website],
+};
+---
+
+<BaseLayout
+  title="Eye Spy Community — Fashion PAWty Partner"
+  description="The Eye Spy Community — friends, family, advocates, and supporters from near and far — is fueling The Fashion PAWty's Chow Down Station, feeding the volunteers, dog handlers, vendors, and PAWty goers who make it all happen."
+  canonical="/partners/eye-spy-community/"
+>
+  <!-- ══ HERO ══ -->
+  <section class="band band--teal band--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="eyebrow">Fashion PAWty Partner</p>
+          <h1>Eye Spy Community</h1>
+          <p class="prose lead">
+            The Eye Spy Community is the collective heartbeat behind this entire
+            event — friends, family, advocates, business owners, and supporters
+            from near and far who have rallied around the mission to create a
+            more accessible world. At The Fashion PAWty, they're showing up in
+            the most nourishing way possible: as the Chow Down Station sponsor.
+          </p>
+          <a
+            class="btn btn--primary"
+            href={partner.website}
+            rel="noopener"
+            target="_blank"
+          >
+            Visit Eye Spy Foundation
+          </a>
+          <a class="btn btn--secondary" href="/partners/">View All Partners</a>
+        </div>
+        <img
+          class="hero-photo"
+          src={partner.logo}
+          alt=""
+          width="1200"
+          height="1200"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="band band--tight" aria-labelledby="why-h">
+    <div class="container container--narrow">
+      <h2 id="why-h">Why They're Part of This</h2>
+      <p class="prose">
+        Every movement needs its people — the ones who believe before there's
+        proof, who share before there's a crowd, who give before there's a
+        spotlight. The Eye Spy Community is exactly that for Eye Spy Foundation.
+        These are the individuals who've supported the cause from near and far:
+        spreading the word on social media, attending events, volunteering their
+        time, and donating when they could. Naming the Chow Down Station in
+        their honor isn't just a thank-you — it's a recognition that none of
+        this exists without the people who showed up first and kept showing up.
+        They feed us in every sense of the word.
+      </p>
+
+      <h2 id="what-h">Who They Are</h2>
+      <p class="prose">
+        The Eye Spy Community is not a single organization — it's everyone who
+        has ever cheered for Eye Spy Foundation, shared a post, attended a
+        fundraiser, volunteered at an event, or simply believed that the blind
+        and low vision community deserves more visibility, more support, and
+        more access to trained guide dogs and life-changing resources. They are
+        friends, family members, business owners, advocates, dog lovers, and
+        neighbors. They are the reason The Fashion PAWty exists, and through
+        the Chow Down Station, they are literally keeping the people who make
+        this event happen well-fed and energized — volunteers, dog handlers,
+        vendors, Eye Spy staff, and every PAWty goer who comes through the gate.
+      </p>
+
+      <div class="about-photos">
+        <img
+          class="photo-slot"
+          src="/images/partners/eye-spy-community-guide-dog.webp"
+          alt="A guide dog user navigating with their trained guide dog — a symbol of the independence Eye Spy Foundation works to support"
+          width="1920"
+          height="1080"
+          loading="lazy"
+        />
+        <img
+          class="photo-slot"
+          src="/images/partners/eye-spy-community-social.webp"
+          alt="Eye Spy Community supporters gathered together at an Eye Spy Foundation event"
+          width="1920"
+          height="1080"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ JOIN THE COMMUNITY ══ -->
+  <section class="band band--teal band--tight" aria-labelledby="join-h">
+    <div class="container container--narrow">
+      <div class="find-row">
+        <div>
+          <h2 id="join-h">Become Part of the Community</h2>
+          <p class="prose">
+            Want to be part of the Eye Spy Community? Follow Eye Spy Foundation,
+            share the mission, volunteer, donate, or simply show up. Every action
+            matters — and the Chow Down Station at The Fashion PAWty is proof.
+          </p>
+        </div>
+        <a
+          class="btn btn--primary find-row__btn"
+          href={partner.website}
+          rel="noopener"
+          target="_blank"
+        >
+          Visit Eye Spy Foundation
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <JsonLd schema={schema} />
+</BaseLayout>
+
+<style>
+  .lead { font-size: var(--step-1); color: var(--color-text-muted); }
+  .split { display: grid; gap: var(--space-l); align-items: center; }
+  .split__text > * + * { margin-top: var(--space-s); }
+  @media (min-width: 52rem) {
+    .split { grid-template-columns: 1.5fr 1fr; gap: var(--space-xl); }
+  }
+  h1 { text-wrap: balance; }
+
+  .hero-photo {
+    width: 100%;
+    max-width: 20rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-inline: auto;
+  }
+  @media (min-width: 52rem) {
+    .hero-photo { max-width: none; }
+  }
+
+  .about-photos {
+    display: grid;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .about-photos { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  .photo-slot {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .find-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+  @media (min-width: 40rem) {
+    .find-row { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .find-row__btn { flex-shrink: 0; }
+</style>
