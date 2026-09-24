@@ -166,6 +166,10 @@ const pageDescription =
           </li>
         ))}
       </ul>
+      <ul class="facts-notes" role="list">
+        <li>🎟️ Kids 12 and under are free. Ages 13 and older should have a <a href={SITE.event.ticketUrl} target="_blank" rel="noopener">PAWty Pass</a>.</li>
+        <li>🐾 We love our pups, but only runway dogs will be allowed at this private event. Dogs not participating in the show will not be allowed in for the safety of our guests and show participants.</li>
+      </ul>
     </div>
   </section>
 
@@ -226,7 +230,7 @@ const pageDescription =
       </div>
       {/* TODO: update `raised` as sponsorships/donations come in — that's
           the only value that needs to change to move the meter. */}
-      <PawDonationMeter goal={25000} raised={9000} />
+      <PawDonationMeter goal={25000} raised={10000} />
     </div>
   </section>
 
@@ -466,6 +470,12 @@ const pageDescription =
   /* Facts: icon + label + value cards */
   .facts { list-style: none; margin: 0; padding: 0; }
   .fact { display: grid; gap: 0.35rem; }
+  .facts-notes {
+    list-style: none; margin: var(--space-m) 0 0; padding: 0;
+    display: flex; flex-direction: column; gap: var(--space-xs);
+  }
+  .facts-notes li { font-size: 0.95rem; line-height: 1.5; }
+  .facts-notes a { color: var(--color-accent); text-decoration: underline; }
   .fact__icon { font-size: 2rem; line-height: 1; }
   .fact__label {
     font-family: var(--font-display);

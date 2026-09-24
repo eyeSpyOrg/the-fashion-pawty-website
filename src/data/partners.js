@@ -108,6 +108,18 @@ export const PARTNERS = [
     },
   },
   {
+    id: 'jacksonville-arlington-lions-club',
+    name: 'Jacksonville Arlington Lions Club',
+    tier: 'PAWty Animal',
+    sponsoredArea: 'DJ PAWty',
+    blurb:
+      'Jacksonville Arlington Lions Club has served the First Coast since 1938 through vision programs, hearing assistance, and community outreach. They are the DJ PAWty sponsor of The Fashion PAWty, keeping the energy up with music and shoutouts all event long.',
+    logo: '/images/partners/jacksonville-arlington-lions-club-logo.webp',
+    href: '/partners/jacksonville-arlington-lions-club/',
+    buttonText: 'Meet Jacksonville Arlington Lions Club',
+    website: 'https://e-clubhouse.org/sites/jacksonvillearlington/',
+  },
+  {
     id: 'walmart-spark-for-good',
     name: 'Walmart Spark for Good',
     tier: 'PAWty Animal',

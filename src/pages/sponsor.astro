@@ -23,6 +23,7 @@ const commFoundation = PARTNERS.find((p) => p.id === 'the-community-foundation-f
 const southernGlazers = PARTNERS.find((p) => p.id === 'southern-glazers-wine-and-spirits');
 const eyeSpyCommunity = PARTNERS.find((p) => p.id === 'eye-spy-community');
 const walmart = PARTNERS.find((p) => p.id === 'walmart-spark-for-good');
+const arlington = PARTNERS.find((p) => p.id === 'jacksonville-arlington-lions-club');
 
 const mainSponsor = [
   {
@@ -217,6 +218,11 @@ const pawtyAnimal = [
     stripeUrl: 'https://buy.stripe.com/8x28wO0uQfjX3hh570ejK09',
     icon: '🎧',
     image: '/images/sponsors/dj-pawty.webp',
+    sold: true,
+    soldByName: arlington.name,
+    soldByLogo: arlington.logo,
+    soldByHref: arlington.href,
+    soldByButtonText: arlington.buttonText,
   },
   {
     title: 'Sensory Games',
