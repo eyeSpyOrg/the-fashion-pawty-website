@@ -166,9 +166,10 @@ const pageDescription =
           </li>
         ))}
       </ul>
+      <p class="facts-notes__heading">Know Before You Go</p>
       <ul class="facts-notes" role="list">
         <li>🎟️ Kids 12 and under are free. Ages 13 and older should have a <a href={SITE.event.ticketUrl} target="_blank" rel="noopener">PAWty Pass</a>.</li>
-        <li>🐾 We love our pups, but only runway dogs will be allowed at this private event. Dogs not participating in the show will not be allowed in for the safety of our guests and show participants.</li>
+        <li>🐾 Only runway dogs are allowed at this private event — no outside pets, please.</li>
       </ul>
     </div>
   </section>
@@ -470,8 +471,18 @@ const pageDescription =
   /* Facts: icon + label + value cards */
   .facts { list-style: none; margin: 0; padding: 0; }
   .fact { display: grid; gap: 0.35rem; }
+  .facts-notes__heading {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-top: var(--space-m);
+    margin-bottom: 0.25rem;
+  }
   .facts-notes {
-    list-style: none; margin: var(--space-m) 0 0; padding: 0;
+    list-style: none; margin: 0; padding: 0;
     display: flex; flex-direction: column; gap: var(--space-xs);
   }
   .facts-notes li { font-size: 0.95rem; line-height: 1.5; }
