@@ -72,6 +72,7 @@ export const SITE = {
       label: 'About',
       children: [
         { label: 'About Us', href: '/about/' },
+        { label: 'Enter the Runway', href: '/runway/' },
         { label: 'Volunteer', href: '/volunteer/' },
         { label: 'Vendors', href: '/vendors/' },
         { label: 'Venue', href: '/venue/' },
