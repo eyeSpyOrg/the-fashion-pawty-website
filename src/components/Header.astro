@@ -94,7 +94,6 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
     </nav>
 
     <div class="site-header__actions">
-      <a class="btn btn--ticket site-header__tickets" href={SITE.event.ticketUrl} target="_blank" rel="noopener">Buy Tickets</a>
       <a class="btn btn--secondary site-header__donate" href="/donate/">
         Donate
       </a>
@@ -112,9 +111,6 @@ const groupActive = (children: NavChild[]) => children.some((c) => isActive(c.hr
 
     {/* Mobile row 2: two pill buttons — direct flex child so they span full width */}
     <div class="site-header__mobile-pills">
-      <a class="mobile-pill mobile-pill--ticket" href={SITE.event.ticketUrl} target="_blank" rel="noopener">
-        🎟️ Tickets
-      </a>
       <a class="mobile-pill mobile-pill--donate" href="/donate/">
         🐾 Donate
       </a>
