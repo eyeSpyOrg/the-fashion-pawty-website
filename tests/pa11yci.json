@@ -24,6 +24,8 @@
     "http://localhost:4321/contact/",
     "http://localhost:4321/accessibility/",
     "http://localhost:4321/privacy/",
-    "http://localhost:4321/404.html"
+    "http://localhost:4321/404.html",
+    "http://localhost:4321/gallery/",
+    "http://localhost:4321/gallery/2026/"
   ]
 }

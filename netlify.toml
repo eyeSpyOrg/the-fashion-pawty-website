@@ -63,4 +63,23 @@
   status = 301
   force = true
 
+# Post-event redirects — tickets/register now go to donate, bare /2026 → /2026/
+[[redirects]]
+  from = "/tickets"
+  to = "/donate/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/register"
+  to = "/donate/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/2026"
+  to = "/2026/"
+  status = 301
+  force = true
+
 # Astro emits /404.html — Netlify serves it automatically for 404s.

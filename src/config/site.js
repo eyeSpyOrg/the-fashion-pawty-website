@@ -51,8 +51,8 @@ export const SITE = {
   // ── Event facts (feeds Event schema + pages — one source) ──
   event: {
     name: 'The Fashion PAWty — A Navigation Celebration',
-    startDate: '2026-09-26T16:00:00-04:00',
-    endDate: '2026-09-26T19:00:00-04:00',
+    startDate: '2027-09-25T16:00:00-04:00',
+    endDate: '2027-09-25T19:00:00-04:00',
     venueName: 'Happy Brew',
     ticketPrice: '30',
     ticketUrl: 'https://buy.stripe.com/7sY3cugtO6NrdVV8jcejK01',
@@ -72,14 +72,14 @@ export const SITE = {
       label: 'About',
       children: [
         { label: 'About Us', href: '/about/' },
+        { label: 'FAQ', href: '/faq/' },
         { label: 'Enter the Runway', href: '/runway/' },
         { label: 'Volunteer', href: '/volunteer/' },
         { label: 'Vendors', href: '/vendors/' },
         { label: 'Venue', href: '/venue/' },
       ],
     },
-    { label: 'Schedule', href: '/schedule/' },
-    { label: 'FAQ', href: '/faq/' },
+    { label: 'Gallery', href: '/gallery/' },
     { label: 'Contact', href: '/contact/' },
   ],
   // Shop URL — the merch store isn't live yet; every reference to it is

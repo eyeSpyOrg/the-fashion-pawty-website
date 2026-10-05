@@ -1,0 +1,372 @@
+---
+/**
+ * /gallery/2026/ — The Fashion PAWty 2026 photo gallery.
+ * 49 WebP images across 4 categories, PhotoSwipe v5 lightbox.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JsonLd from '../../components/schema/JsonLd.astro';
+import { SITE } from '../../config/site.js';
+import { GALLERY_SECTIONS, IMAGE_BASE } from '../../data/gallery2026.js';
+
+const PAGE_TITLE = 'Fashion PAWty 2026 Photo Gallery';
+const PAGE_DESC =
+  "Photos from The Fashion PAWty 2026 — Jacksonville's dog fashion show and community fundraiser benefiting Eye Spy Foundation and Leader Dogs for the Blind.";
+const CANONICAL = `${SITE.url}/gallery/2026/`;
+const totalPhotos = GALLERY_SECTIONS.reduce((n, s) => n + s.photos.length, 0);
+
+const imageGallerySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: 'The Fashion PAWty 2026 Photo Gallery',
+  description: PAGE_DESC,
+  url: CANONICAL,
+  dateCreated: '2026-09-26',
+  author: { '@type': 'Organization', name: SITE.legalName, url: SITE.url },
+  image: GALLERY_SECTIONS.flatMap(section =>
+    section.photos.map(photo => ({
+      '@type': 'ImageObject',
+      name: photo.caption,
+      description: photo.alt,
+      url: `${SITE.url}${IMAGE_BASE}${photo.src}`,
+      contentUrl: `${SITE.url}${IMAGE_BASE}${photo.src}`,
+    }))
+  ),
+};
+---
+
+<BaseLayout
+  title={PAGE_TITLE}
+  description={PAGE_DESC}
+  canonical={CANONICAL}
+  image={`${IMAGE_BASE}runway-luna-winner.webp`}
+>
+  <link
+    slot="head"
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.css"
+  />
+
+  <JsonLd schema={imageGallerySchema} />
+
+  <!-- ══ HERO + FILTER (combined teal section) ══ -->
+  <section class="band band--teal gallery-hero">
+    <div class="container">
+      <h1>The Fashion PAWty 2026 — Event Photo Gallery</h1>
+      <p class="lead">
+        "A Navigation Celebration" — {totalPhotos} photos from the runway, the crowd,
+        and everything in between at Happy Brew, Jacksonville, FL.
+      </p>
+
+      <nav class="gallery-filter" aria-label="Jump to gallery section">
+        <ul role="list">
+          {GALLERY_SECTIONS.map(section => (
+            <li role="listitem">
+              <a
+                href={`#${section.id}`}
+                class="gallery-filter__btn"
+                aria-label={`Jump to ${section.title} — ${section.photos.length} photos`}
+              >
+                {section.title}
+                <span class="gallery-filter__count" aria-hidden="true">({section.photos.length})</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ══ GALLERY SECTIONS ══ -->
+  {GALLERY_SECTIONS.map((section, sIdx) => (
+    <section
+      id={section.id}
+      class="band gallery-section"
+      role="region"
+      aria-labelledby={section.headingId}
+    >
+      <div class="container">
+        <div class="gallery-section__header">
+          <div>
+            <h2 id={section.headingId}>{section.title}</h2>
+            <p class="gallery-section__desc">{section.description}</p>
+          </div>
+          <p class="gallery-section__count" aria-label={`${section.photos.length} photos in this section`}>
+            {section.photos.length} photos
+          </p>
+        </div>
+
+        <ul
+          class="gallery-grid"
+          role="list"
+          aria-label={`${section.title} photos`}
+          data-gallery-id={section.id}
+        >
+          {section.photos.map((photo, pIdx) => {
+            const isAboveFold = sIdx === 0 && pIdx < 4;
+            const src = `${IMAGE_BASE}${photo.src}`;
+            return (
+              <li class="gallery-card" role="listitem">
+                <figure class="gallery-card__figure">
+                  <a
+                    href={src}
+                    class="gallery-item__link"
+                    data-pswp-width={photo.width}
+                    data-pswp-height={photo.height}
+                    aria-label={`Open full-size photo: ${photo.caption}`}
+                  >
+                    <img
+                      src={src}
+                      alt={photo.alt}
+                      width={photo.width}
+                      height={photo.height}
+                      loading={isAboveFold ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
+                  </a>
+                  <figcaption class="gallery-card__caption">{photo.caption}</figcaption>
+                </figure>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
+  ))}
+
+  <!-- ══ BOTTOM NAV ══ -->
+  <nav class="band band--tight band--teal gallery-footer-nav" aria-label="Gallery navigation">
+    <div class="container">
+      <a href="/gallery/" class="btn btn--primary">← All galleries</a>
+    </div>
+  </nav>
+</BaseLayout>
+
+<script is:inline type="module">
+  let initialized = false;
+
+  async function initLightbox() {
+    if (initialized) return;
+    initialized = true;
+
+    const { default: PhotoSwipeLightbox } = await import(
+      'https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe-lightbox.esm.min.js'
+    );
+
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '[data-gallery-id]',
+      children: 'a.gallery-item__link',
+      pswpModule: () =>
+        import('https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.esm.min.js'),
+    });
+
+    // Accessible prev/next labels
+    lightbox.on('uiRegister', () => {
+      lightbox.pswp.on('change', () => {
+        const pswp = lightbox.pswp;
+        const alt = pswp.currSlide?.data.element?.querySelector('img')?.alt || 'photo';
+        pswp.element?.querySelector('.pswp__button--arrow--prev')
+          ?.setAttribute('aria-label', 'Previous photo');
+        pswp.element?.querySelector('.pswp__button--arrow--next')
+          ?.setAttribute('aria-label', `Next photo: ${alt}`);
+      });
+
+      // Download button
+      lightbox.pswp.ui.registerElement({
+        name: 'download-button',
+        order: 8,
+        isButton: true,
+        tagName: 'a',
+        html: {
+          isCustomSVG: true,
+          inner: '<path d="M50 15v45m0 0l-20-20m20 20l20-20M20 80h60" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+          outlineID: 'pswp__icn-download',
+        },
+        onInit(el, pswp) {
+          el.setAttribute('download', '');
+          el.setAttribute('target', '_blank');
+          el.setAttribute('rel', 'noopener');
+          el.setAttribute('aria-label', 'Download full-size photo');
+          pswp.on('change', () => { el.href = pswp.currSlide?.data.src || ''; });
+        },
+      });
+
+      // Share button (Web Share API → X/Twitter fallback)
+      lightbox.pswp.ui.registerElement({
+        name: 'share-button',
+        order: 9,
+        isButton: true,
+        html: {
+          isCustomSVG: true,
+          inner: '<circle cx="75" cy="20" r="10" fill="currentColor"/><circle cx="25" cy="50" r="10" fill="currentColor"/><circle cx="75" cy="80" r="10" fill="currentColor"/><path d="M65 30L35 45M35 55L65 70" stroke="currentColor" stroke-width="5" fill="none"/>',
+          outlineID: 'pswp__icn-share',
+        },
+        onInit(el, pswp) {
+          el.setAttribute('aria-label', 'Share this photo');
+          el.addEventListener('click', () => {
+            const alt = pswp.currSlide?.data.element?.querySelector('img')?.alt || '';
+            const url = pswp.currSlide?.data.src || window.location.href;
+            const text = `${alt} — The Fashion PAWty 2026, benefiting Eye Spy Foundation and Leader Dogs for the Blind. #FashionPAWty`;
+            if (navigator.share) {
+              navigator.share({ title: 'The Fashion PAWty 2026', text, url }).catch(() => {});
+            } else {
+              window.open(
+                `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
+                '_blank', 'noopener,noreferrer'
+              );
+            }
+          });
+        },
+      });
+    });
+
+    lightbox.init();
+  }
+
+  // Lazy-init on first gallery link click
+  document.querySelectorAll('a.gallery-item__link').forEach(link => {
+    link.addEventListener('click', async e => {
+      if (!initialized) {
+        e.preventDefault();
+        await initLightbox();
+        link.click();
+      }
+    }, { once: true });
+  });
+</script>
+
+<style>
+  /* ── Hero ── */
+  .gallery-hero { padding-block: var(--space-s) var(--space-m); }
+  .gallery-hero h1 { margin-bottom: var(--space-2xs); font-size: clamp(1.4rem, 3vw, 2rem); }
+  .gallery-hero .lead { margin-bottom: var(--space-s); font-size: 1rem; }
+
+  /* ── Filter (inside teal hero) ── */
+  .gallery-filter ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+  }
+  .gallery-filter__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.5rem 1rem;
+    min-height: 44px;
+    border: 1.5px solid var(--color-accent);
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    background: transparent;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .gallery-filter__btn:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  .gallery-filter__btn:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+  .gallery-filter__count { color: var(--color-text-muted); font-weight: 400; font-size: 0.8rem; }
+  .gallery-filter__btn:hover .gallery-filter__count { color: rgba(255,255,255,0.85); }
+
+  /* ── Gallery sections ── */
+  .gallery-section { padding-block: var(--space-m); }
+  .gallery-section + .gallery-section { border-top: 1px solid var(--border-hairline); }
+
+  /* ── Section header ── */
+  .gallery-section__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-m);
+  }
+  .gallery-section__header h2 { margin: 0; }
+  .gallery-section__desc { margin: 0.4rem 0 0; color: var(--color-text-muted); }
+  .gallery-section__count {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-1);
+    color: var(--color-accent);
+    white-space: nowrap;
+    margin: 0;
+    padding-top: 0.25rem;
+  }
+
+  /* ── Grid ── */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: start;
+  }
+
+  /* ── Card + figure ── */
+  .gallery-card { border-radius: var(--radius); overflow: hidden; }
+
+  .gallery-card__figure {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .gallery-item__link {
+    display: block;
+    text-decoration: none;
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: var(--color-teal-tint);
+    flex-shrink: 0;
+  }
+  .gallery-item__link:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .gallery-item__link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.25s ease;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .gallery-item__link:hover img { transform: scale(1.04); }
+  }
+
+  /* Caption below image — descriptive, visually consistent */
+  .gallery-card__caption {
+    padding: 0.6rem 0.75rem 0.7rem;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--border-hairline);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    display: block;
+  }
+
+  /* ── Bottom nav button ── */
+  .gallery-footer-nav .btn { margin-block: 0; }
+
+  /* ── High-contrast overrides ── */
+  :global(html[data-a11y-contrast='high']) .gallery-card__caption {
+    background: var(--color-bg);
+    border-color: currentColor;
+  }
+  :global(.pswp__bg) { background: #000; }
+  :global(.pswp--open) { z-index: 999999; }
+</style>

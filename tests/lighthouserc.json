@@ -15,7 +15,9 @@
         "/contact/index.html",
         "/accessibility/index.html",
         "/privacy/index.html",
-        "/404.html"
+        "/404.html",
+        "/gallery/index.html",
+        "/gallery/2026/index.html"
       ],
       "numberOfRuns": 2
     },
