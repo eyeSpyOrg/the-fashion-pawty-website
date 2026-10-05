@@ -1,7 +1,7 @@
 ---
 /**
  * /gallery/2026/ — The Fashion PAWty 2026 photo gallery.
- * 49 WebP images across 4 categories, PhotoSwipe v5 lightbox.
+ * WebP images across 4 categories, PhotoSwipe v5 lightbox.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import JsonLd from '../../components/schema/JsonLd.astro';
@@ -25,8 +25,8 @@ const imageGallerySchema = {
   image: GALLERY_SECTIONS.flatMap(section =>
     section.photos.map(photo => ({
       '@type': 'ImageObject',
-      name: photo.caption,
-      description: photo.alt,
+      name: photo.alt,
+      description: photo.caption,
       url: `${SITE.url}${IMAGE_BASE}${photo.src}`,
       contentUrl: `${SITE.url}${IMAGE_BASE}${photo.src}`,
     }))
@@ -38,7 +38,7 @@ const imageGallerySchema = {
   title={PAGE_TITLE}
   description={PAGE_DESC}
   canonical={CANONICAL}
-  image={`${IMAGE_BASE}runway-luna-winner.webp`}
+  image={`${IMAGE_BASE}runway-white-pomeranian-pose.webp`}
 >
   <link
     slot="head"
@@ -112,7 +112,7 @@ const imageGallerySchema = {
                     class="gallery-item__link"
                     data-pswp-width={photo.width}
                     data-pswp-height={photo.height}
-                    aria-label={`Open full-size photo: ${photo.caption}`}
+                    aria-label={`Open full-size photo: ${photo.alt}`}
                   >
                     <img
                       src={src}
@@ -121,6 +121,7 @@ const imageGallerySchema = {
                       height={photo.height}
                       loading={isAboveFold ? 'eager' : 'lazy'}
                       decoding="async"
+                      style={photo.focus ? `object-position: ${photo.focus}` : undefined}
                     />
                   </a>
                   <figcaption class="gallery-card__caption">{photo.caption}</figcaption>
