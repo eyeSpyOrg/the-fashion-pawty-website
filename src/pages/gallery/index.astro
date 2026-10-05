@@ -5,9 +5,6 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../config/site.js';
-import { GALLERY_SECTIONS } from '../../data/gallery2026.js';
-
-const totalPhotos = GALLERY_SECTIONS.reduce((n, s) => n + s.photos.length, 0);
 ---
 
 <BaseLayout
@@ -33,8 +30,8 @@ const totalPhotos = GALLERY_SECTIONS.reduce((n, s) => n + s.photos.length, 0);
               <h3 class="gallery-hub__card-title">The Fashion PAWty 2026</h3>
               <p class="gallery-hub__card-meta">September 26 · Happy Brew, Jacksonville, FL</p>
               <p class="gallery-hub__card-desc">
-                "A Navigation Celebration" — {totalPhotos} photos from the runway, the crowd,
-                live music, and the dogs who stole the show.
+                "A Navigation Celebration" — the runway, the crowd, live music,
+                and the dogs who stole the show.
               </p>
               <span class="gallery-hub__card-cta btn btn--primary">View Gallery →</span>
             </div>

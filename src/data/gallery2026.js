@@ -13,7 +13,7 @@ export const GALLERY_SECTIONS = [
     id: 'on-the-runway',
     headingId: 'h-on-the-runway',
     title: 'On the Runway',
-    description: 'Dogs strutting their finest looks down the Fashion PAWty carpet.',
+    description: 'Paws on the carpet, tails in the air. These fur-bulous fashionistas strutted, sashayed, and stole the show.',
     photos: [
       {
         src: 'runway-carpet-wide-banner.webp',
@@ -104,7 +104,7 @@ export const GALLERY_SECTIONS = [
     id: 'the-dogs',
     headingId: 'h-the-dogs',
     title: 'The Dogs',
-    description: 'Up-close portraits of every runway contestant in their show-stopping looks.',
+    description: 'The PAWty animals who made The Fashion PAWty come alive. Meet the good dogs behind the glamour.',
     photos: [
       {
         src: 'dogs-white-pomeranian-front-facing.webp',
@@ -259,7 +259,7 @@ export const GALLERY_SECTIONS = [
     id: 'the-community',
     headingId: 'h-the-community',
     title: 'The Community',
-    description: 'The owners, volunteers, guests, and neighbors who made it a celebration.',
+    description: 'Neighbors, families, and friends from across Jacksonville came together to celebrate blind and low vision navigation.',
     photos: [
       {
         src: 'community-lions-group-formal-with-dogs.webp',
@@ -367,7 +367,7 @@ export const GALLERY_SECTIONS = [
     id: 'the-lions-club',
     headingId: 'h-the-lions-club',
     title: 'The Lions Club',
-    description: 'Lions Club members in their gold vests, who volunteered, poured mocktails, and cheered on every dog.',
+    description: 'The Lions Club\'s dedication to service and to supporting the blind and low vision community shows in everything they do.',
     photos: [
       {
         src: 'lions-two-members-photo-wall.webp',
@@ -431,7 +431,7 @@ export const GALLERY_SECTIONS = [
     id: 'performers-and-venue',
     headingId: 'h-performers-and-venue',
     title: 'Performers & Venue',
-    description: 'Live music, mocktails, and the Happy Brew venue that hosted it all.',
+    description: 'The people who brought the PAWty alive: the musicians, hosts, and mocktail makers at Happy Brew.',
     photos: [
       {
         src: 'venue-nick-speaking.webp',

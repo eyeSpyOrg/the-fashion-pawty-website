@@ -12,7 +12,7 @@ const PAGE_TITLE = 'Fashion PAWty 2026 Photo Gallery';
 const PAGE_DESC =
   "Photos from The Fashion PAWty 2026 — Jacksonville's dog fashion show and community fundraiser benefiting Eye Spy Foundation and Leader Dogs for the Blind.";
 const CANONICAL = `${SITE.url}/gallery/2026/`;
-const totalPhotos = GALLERY_SECTIONS.reduce((n, s) => n + s.photos.length, 0);
+const EVENT_DATE = 'September 26, 2026';
 
 const imageGallerySchema = {
   '@context': 'https://schema.org',
@@ -53,8 +53,8 @@ const imageGallerySchema = {
     <div class="container">
       <h1>The Fashion PAWty 2026 — Event Photo Gallery</h1>
       <p class="lead">
-        "A Navigation Celebration" — {totalPhotos} photos from the runway, the crowd,
-        and everything in between at Happy Brew, Jacksonville, FL.
+        "A Navigation Celebration" — {EVENT_DATE} at Happy Brew in Jacksonville, FL,
+        benefiting the blind and low vision community and Leader Dogs for the Blind.
       </p>
 
       <nav class="gallery-filter" aria-label="Jump to gallery section">
@@ -64,10 +64,8 @@ const imageGallerySchema = {
               <a
                 href={`#${section.id}`}
                 class="gallery-filter__btn"
-                aria-label={`Jump to ${section.title} — ${section.photos.length} photos`}
               >
                 {section.title}
-                <span class="gallery-filter__count" aria-hidden="true">({section.photos.length})</span>
               </a>
             </li>
           ))}
@@ -90,9 +88,6 @@ const imageGallerySchema = {
             <h2 id={section.headingId}>{section.title}</h2>
             <p class="gallery-section__desc">{section.description}</p>
           </div>
-          <p class="gallery-section__count" aria-label={`${section.photos.length} photos in this section`}>
-            {section.photos.length} photos
-          </p>
         </div>
 
         <ul
@@ -274,8 +269,6 @@ const imageGallerySchema = {
     outline: 3px solid var(--color-focus);
     outline-offset: 2px;
   }
-  .gallery-filter__count { color: var(--color-text-muted); font-weight: 400; font-size: 0.8rem; }
-  .gallery-filter__btn:hover .gallery-filter__count { color: rgba(255,255,255,0.85); }
 
   /* ── Gallery sections ── */
   .gallery-section { padding-block: var(--space-m); }
@@ -292,15 +285,6 @@ const imageGallerySchema = {
   }
   .gallery-section__header h2 { margin: 0; }
   .gallery-section__desc { margin: 0.4rem 0 0; color: var(--color-text-muted); }
-  .gallery-section__count {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--step-1);
-    color: var(--color-accent);
-    white-space: nowrap;
-    margin: 0;
-    padding-top: 0.25rem;
-  }
 
   /* ── Grid ── */
   .gallery-grid {
